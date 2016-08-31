@@ -1,0 +1,113 @@
+
+@IBOutlet weak var someView: UIView!
+
+
+
+1. install podfile
+2. "import Vuukle"  add this line to your controller
+3. create VuukleCommentsBuilder object in viewDidLoad method
+4. need to call all required methods
+
+
+firstVuukleTag ("firstTag") / secondVuukleTag ("secondTag")
+
+TAG will be unique for each page where comment box opens.
+TAG will be unique for each page where comment box opens.
+For example:You are on the main app page with articles list -> you are choosing article -> it opens
+and our library should have unique properties for each article like URL, TAGS, TITLE.
+These properties You need to fill by yourself.
+URL - will be article url from your domain/website to the article,
+Tags - You need to paste tags separated by comma for each article(like you have on website/domain),
+same for TITLE - title of the article on which library is now.
+
+
+
+setVuukleApiKey()
+
+Required field
+Set your API key for API. To get API KEY you need :
+1) Sign in to dashboard thouth vuukle.com
+2) Navigate to domain from home page of dashboard (first page after signing in)
+3) Choose in menu Integration, then API Docs from the dropdown
+4) Then you will be able to see API and secret keys
+---- or ----
+1) Sign in to dashboard thouth vuukle.com
+2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
+
+
+setVuukleArticleId("ARTICLE_ID")  -    get id from Vuukle site. Every article has unique id
+
+
+setVuukleArticleTitle()
+setVuukleUrl()
+
+
+Required field
+URL will be unique for each page where comment box opens.
+For example:You are on the main app page with articles list -> you are choosing article -> it opens
+and our library should have unique properties for each article like URL, TAGS, TITLE.
+These properties You need to fill by yourself.
+URL - will be article url from your domain/website to the article,
+Tags - You need to paste tags separated by comma for each article(like you have on website/domain),
+same for TITLE - title of the article on which library is now.
+
+
+setVuukleEmoteVisible()  - set true for visible emote rating
+setVuukleHost()
+
+Required field
+Set host for Api. Host - this is domain of the publisher’s site(e.g. indianexpress.com, thehindu.com etc.).
+For example: You are the owner of indianexpress.com and have own app where want’s to setup this library,
+so when library installed on your app, You should paste domain for ‘host’ property without http:// or https:// or www.
+
+
+setVuukleSecretKey("SECRET_KEY")
+
+
+Required field
+Set your API key for API. To get SECRET KEY you need :
+1) Sign in to dashboard through vuukle.com
+2) Navigate to domain from home page of dashboard (first page after signing in)
+3) Choose in menu Integration, then API Docs from the dropdown
+4) Then you will be able to see api and SECRET keys
+---- or ----
+1) Sign in to dashboard thouth vuukle.com
+2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
+
+
+
+setVuukleTimeZone()
+
+
+Set time zone (for API)
+@param timeZone get timezone from this resource
+https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+setAppName()  - set your application name
+
+setArticleUrl() - set your article url
+
+setAppID()  - set your application id
+
+override func viewDidLoad() {
+
+super.viewDidLoad()
+var vuukle = VuukleCommentsBuilder()
+vuukle.firstVuukleTag("articleTag1")
+.secondVuukleTag("articleTag2")
+.setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894123e")
+.setVuukleArticleId("00048")
+.setVuukleArticleTitle("myArticleTitle")
+.setVuukleBaseUrl("https://vuukle.com/api.asmx/")
+.setVuukleEmoteVisible(true)
+.setVuukleHost("vuukle.com")
+.setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f123ee")
+.setVuukleTimeZone("Europe/Kiev")
+.setVuukleUrl("http://mysite.com/article101")
+.setVuukleTitle("Title")
+.setAppName("myAppName")
+.setArticleUrl("myArticleUrl")
+.setAppID("myApId")
+.buildVuukle(someView)
+}
