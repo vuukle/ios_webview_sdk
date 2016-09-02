@@ -7,7 +7,7 @@ public class VuukleCommentsBuilder {
     public init() { }
     
     /**
-        Set true for visible emote rating!
+     Set true for visible emote rating!
      */
     public func setVuukleEmoteVisible(bool : Bool) -> VuukleCommentsBuilder {
         Global.showEmoticonCell = bool
@@ -15,9 +15,9 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-        Required field !
+     Required field !
      
-        For example: "https://vuukle.com/api.asmx/"
+     For example: "https://vuukle.com/api.asmx/"
      */
     public func setVuukleBaseUrl(url : String) -> VuukleCommentsBuilder {
         Global.baseURL = url
@@ -33,13 +33,13 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-      Required field !
+     Required field !
      
-      Set host for Api. Host - this is domain of the publisher’s site(e.g. indianexpress.com, thehindu.com etc.).
+     Set host for Api. Host - this is domain of the publisher’s site(e.g. indianexpress.com, thehindu.com etc.).
      
      For example: You are the owner of indianexpress.com and have own app where want’s to setup this library,
      so when library installed on your app, You should paste domain for ‘host’ property without http:// or https:// or www.
-
+     
      */
     public func setVuukleHost(host : String) -> VuukleCommentsBuilder{
         Global.host = host
@@ -56,7 +56,7 @@ public class VuukleCommentsBuilder {
      3) Choose in menu Integration, then API Docs from the dropdown
      4) Then you will be able to see API and secret keys
      
-      ---- or ----
+     ---- or ----
      
      1) Sign in to dashboard thouth vuukle.com
      2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
@@ -68,7 +68,7 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-      Required field!
+     Required field!
      
      Set your API key for API. To get SECRET KEY you need :
      
@@ -77,24 +77,24 @@ public class VuukleCommentsBuilder {
      3) Choose in menu Integration, then API Docs from the dropdown
      4) Then you will be able to see api and SECRET keys
      
-       ---- or ----
+     ---- or ----
      
      1) Sign in to dashboard thouth vuukle.com
      2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
-
+     
      */
     public func setVuukleSecretKey(secretKey : String) -> VuukleCommentsBuilder{
         Global.secret_key = secretKey
         return self
     }
     
-
+    
     /**
-      Required field!
+     Required field!
      
-      Timezone from this resource:
+     Timezone from this resource:
      
-      <url>https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</url>
+     <url>https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</url>
      */
     public func setVuukleTimeZone(timeZone : String) -> VuukleCommentsBuilder{
         Global.time_zone = timeZone
@@ -105,7 +105,7 @@ public class VuukleCommentsBuilder {
      Required field!
      
      First Tag will be unique for each page where comment box opens.
-
+     
      These properties You need to fill by yourself.
      
      For example: You are on the main app page with articles list ->
@@ -166,9 +166,9 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-        Required field!
+     Required field!
      
-        Set your application name.
+     Set your application name.
      */
     public func setAppName (appName : String) -> VuukleCommentsBuilder{
         Global.appName = appName
@@ -176,9 +176,9 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-        Required field!
+     Required field!
      
-        Set your article url.
+     Set your article url.
      */
     public func setArticleUrl (articleUrl : String) -> VuukleCommentsBuilder{
         Global.articleUrl = articleUrl
@@ -186,9 +186,9 @@ public class VuukleCommentsBuilder {
     }
     
     /**
-        Required field!
+     Required field!
      
-        Set your application id.
+     Set your application id.
      */
     public func setAppID (appID : String) -> VuukleCommentsBuilder{
         Global.appId = appID
@@ -196,9 +196,19 @@ public class VuukleCommentsBuilder {
     }
     
     /**
+     Optional field!
+     
+     By default, 10 items!
+     */
+    public func setVuuklePaginationCount(paginationCount : Int) -> VuukleCommentsBuilder{
+        Global.countLoadCommentsInPagination = paginationCount
+        return self
+    }
+    
+    /**
      Required field!
      
-     Set your View name.For example: "myView"
+     Set your View name!For example: "myView".
      
      ---- or ----
      

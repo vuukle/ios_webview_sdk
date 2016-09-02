@@ -10,6 +10,8 @@ protocol CommentCellDelegate {
     func replyButtonPressed(tableCell : CommentCell ,replyButtonPressed replyButton : AnyObject )
     func moreButtonPressed(tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
     func showReplyButtonPressed(tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
+    func firstShareButtonPressed(tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
+    func secondShareButtonPressed(tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
 }
 
 class CommentCell: UITableViewCell {
@@ -53,7 +55,14 @@ class CommentCell: UITableViewCell {
     @IBAction func showReplyButton(sender: AnyObject) {
         self.delegate?.showReplyButtonPressed(self , showReplyButtonPressed: sender)
     }
-
+    @IBAction func shareButton(sender: AnyObject) {
+        self.delegate?.firstShareButtonPressed(self, shareButtonPressed: sender)
+    }
+    @IBAction func secondShareButton(sender: AnyObject) {
+        self.delegate?.secondShareButtonPressed(self, shareButtonPressed: sender)
+    }
+    
+   
     var request: Request?
     
     var imageForCell: String? {

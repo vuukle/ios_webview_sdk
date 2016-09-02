@@ -2,11 +2,10 @@
 
 import UIKit
 import Alamofire
+import Social
 
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate{
-    
-    
-
+    static let sharedInstance = Global()
     var sortedComment = [GetCommentsFeed]()
     var commentFeed = [GetCommentsFeed]()
     var rating = EmoteRating()
@@ -46,10 +45,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     var loadReply = true
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         if Global.sharedInstance.checkAllParameters() == true {
             let bundleCommentCell = NSBundle(forClass: CommentCell.self)
             let bundleAddCommentCell = NSBundle(forClass: CommentCell.self)
@@ -67,6 +66,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             let nibLoadMoreCell = UINib(nibName: "LoadMoreCell", bundle: bundleLoadMoreCell)
             self.tableView.registerNib(nibLoadMoreCell, forCellReuseIdentifier: "LoadMoreCell")
+            
+            let nibWebViewCell = UINib(nibName: "WebViewCell", bundle: bundleLoadMoreCell)
+            self.tableView.registerNib(nibWebViewCell, forCellReuseIdentifier: "WebViewCell")
             
             self.tableView.estimatedRowHeight = 180
             
@@ -99,32 +101,36 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     //MARK: - Table view data source
     
-     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if Global.sharedInstance.checkAllParameters() == true {
-            return sortedComment.count + 2
+            return sortedComment.count + 3
         } else {
             return 0
         }
         
     }
     
-     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-        let cell = tableView.dequeueReusableCellWithIdentifier("EmoticonCell", forIndexPath: indexPath) as! EmoticonCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("WebViewCell", forIndexPath: indexPath) as! WebViewCell
+            return cell
+        }
+        if indexPath.row == 1 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("EmoticonCell", forIndexPath: indexPath) as! EmoticonCell
             cell.delegate = self
             return CellForRowAtIndex.sharedInstance.returnEmoticonCell(cell, firstCount: firstCount, secondCount: secondCount, thirdCount: thirdCount, fourthCount: fourthCount, fifthCount: fifthCount, sixthCount: sixthCount, firstPercent: first, secondPercent: second, thirdPercent: third, fourthPercent: fourth, fifthPercent: fifth, sixthPercent: sixth)
         }
-        if indexPath.row == 1 {
+        if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCellWithIdentifier("AddCommentCell", forIndexPath: indexPath) as! AddCommentCell
             cell.delegate = self
             cell.tag = indexPath.row
             return CellForRowAtIndex.sharedInstance.returnAddCommentCellForComment(cell, totalComentsCount: totalComentsCount)
         }
-        let index = indexPath.row - 2
+        let index = indexPath.row - 3
         let comment = sortedComment[index]
         let decodingComment = comment.comment!.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         let newComment = decodingComment.stringByReplacingOccurrencesOfString("<br/>", withString: "\n", options: NSStringCompareOptions.LiteralSearch, range: nil)
@@ -133,20 +139,21 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         comment.initials = output
         var date = NSDate()
         if comment.ts != "" {
-        let dateString:String = comment.ts!
-        let dateFormat = NSDateFormatter.init()
-        dateFormat.dateStyle = .FullStyle
-        dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        date = dateFormat.dateFromString(dateString)!
+            let dateString:String = comment.ts!
+            let dateFormat = NSDateFormatter.init()
+            dateFormat.dateStyle = .FullStyle
+            dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            date = dateFormat.dateFromString(dateString)!
         }
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell", forIndexPath: indexPath) as! CommentCell
-            cell.commentLabel.text = nil
-            cell.upvoteCountLabel.text = nil
-            cell.upvoteCountLabel.text = nil
-            cell.dateLabel.text = nil
-            cell.countLabel.text = nil
-            cell.replyCount.text = nil
+        cell.commentLabel.text = nil
+        cell.upvoteCountLabel.text = nil
+        cell.upvoteCountLabel.text = nil
+        cell.dateLabel.text = nil
+        cell.countLabel.text = nil
+        cell.replyCount.text = nil
         if comment.replies > 0 {
+            
             cell.showButtonWidth.constant = 32
             cell.countReplyWidth.constant = 15
         } else {
@@ -191,23 +198,55 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
-
-  //MARK: CommentCellDelegate
+    
+    //MARK: CommentCellDelegate
+    
+    func secondShareButtonPressed(tableCell: CommentCell, shareButtonPressed shareButton: AnyObject) {
+        let textToshare = sortedComment[tableCell.tag - 3].comment!.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let urlToShare = Global.articleUrl
+        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook){
+            let vc = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+            vc.setInitialText("\(textToshare)")
+            vc.addURL(NSURL(string: "\(Global.articleUrl)"))
+            presentViewController(vc, animated: true, completion: nil)
+        } else {
+            var alert = UIAlertController(title: "Accounts", message: "Please login to a Facebook account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func firstShareButtonPressed(tableCell: CommentCell, shareButtonPressed shareButton: AnyObject) {
+        let textToshare = sortedComment[tableCell.tag - 3].comment!.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let urlToShare = Global.articleUrl
+        
+        if SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter){
+            let vc = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+            vc.setInitialText("\(textToshare)")
+            vc.addURL(NSURL(string: "\(Global.articleUrl)"))
+            presentViewController(vc, animated: true, completion: nil)
+        } else {
+            var alert = UIAlertController(title: "Accounts", message: "Please login to a Twitter account to share.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
     
     func showReplyButtonPressed(tableCell: CommentCell, showReplyButtonPressed showReplyButton: AnyObject) {
-
-        if sortedComment[tableCell.tag - 2].level! >= sortedComment[tableCell.tag - 1].level! && loadReply == true{
+        
+        if sortedComment[tableCell.tag - 3].level! >= sortedComment[tableCell.tag - 2].level! && loadReply == true{
             loadReply = false
-            getReplies(tableCell.tag - 1, comment: sortedComment[tableCell.tag - 2])
+            getReplies(tableCell.tag - 2, comment: sortedComment[tableCell.tag - 3])
         } else if sortedComment[tableCell.tag - 1].name != "More" {
-            removeObjectFromSortedArray(tableCell.tag - 2)
+            removeObjectFromSortedArray(tableCell.tag - 3)
         }
     }
     
     func upvoteButtonPressed(tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
         
-        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 2].comment_id)") as? String == nil{
-            let lcomment = sortedComment[tableCell.tag - 2]
+        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 3].comment_id)") as? String == nil{
+            let lcomment = sortedComment[tableCell.tag - 3]
             var mail = ""
             if self.defaults.objectForKey("email") as? String != nil {
                 mail = (self.defaults.objectForKey("email") as! String).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
@@ -215,25 +254,26 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             } else {
                 mail = "no email"
             }
+            let name = lcomment.name!.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
             
             lcomment.up_votes! += 1
-            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 2].comment_id)", forKey: "\(self.sortedComment[tableCell.tag - 2].comment_id)")
+            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 3].comment_id)", forKey: "\(self.sortedComment[tableCell.tag - 3].comment_id)")
             self.defaults.synchronize()
             self.tableView.reloadData()
             
-            NetworkManager.sharedInstance.setCommentVote(lcomment.name!, email: mail, comment_id: lcomment.comment_id!, up_down: "1", completion: { (string , error) in
+            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: lcomment.comment_id!, up_down: "1", completion: { (string , error) in
                 if error == nil {
                     if string == "error" {
                         lcomment.up_votes! -= 1
-                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 2].comment_id)")
+                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
                         self.defaults.synchronize()
                         self.tableView.reloadData()
                     }
                 } else {
-                    NetworkManager.sharedInstance.setCommentVote(lcomment.name!, email: mail, comment_id: lcomment.comment_id!, up_down: "1", completion: { (string , error) in
+                    NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: lcomment.comment_id!, up_down: "1", completion: { (string , error) in
                         if string == "error" {
                             lcomment.up_votes! -= 1
-                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 2].comment_id)")
+                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
                             self.defaults.synchronize()
                             self.tableView.reloadData()
                         }
@@ -248,8 +288,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func downvoteButtonPressed(tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
         
-        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 2].comment_id)") as? String == nil{
-            let lcomment = sortedComment[tableCell.tag - 2]
+        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 3].comment_id)") as? String == nil{
+            let lcomment = sortedComment[tableCell.tag - 3]
             var mail = ""
             if self.defaults.objectForKey("email") as? String != nil {
                 mail = (self.defaults.objectForKey("email") as! String).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
@@ -258,7 +298,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             }
             
             lcomment.down_votes! += 1
-            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 2].comment_id)", forKey: "\(self.sortedComment[tableCell.tag - 2].comment_id)")
+            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 3].comment_id)", forKey: "\(self.sortedComment[tableCell.tag - 3].comment_id)")
             self.defaults.synchronize()
             self.tableView.reloadData()
             
@@ -266,7 +306,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if error == nil{
                     if string == "error" {
                         lcomment.down_votes! -= 1
-                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 2].comment_id)")
+                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
                         self.defaults.synchronize()
                         self.tableView.reloadData()
                     }
@@ -274,7 +314,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     NetworkManager.sharedInstance.setCommentVote(lcomment.name!, email: mail, comment_id: lcomment.comment_id!, up_down: "-1", completion: { (string , error) in
                         if string == "error" {
                             lcomment.down_votes! -= 1
-                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 2].comment_id)")
+                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
                             self.defaults.synchronize()
                             self.tableView.reloadData()
                         }
@@ -295,19 +335,19 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func replyButtonPressed(tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
         if showRepleiCell == -1 {
             let addComment = PrivetFunctions.sharedInstance.addComment("", name: "No name", ts: "", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: false ,level : 1000)
-            showRepleiCell = tableCell.tag - 1
+            showRepleiCell = tableCell.tag - 2
             sortedComment.insert(addComment, atIndex: showRepleiCell)
             self.tableView.reloadData()
-        } else if tableCell.tag != showRepleiCell + 1 && showRepleiCell != tableCell.tag - 1 {
+        } else if tableCell.tag != showRepleiCell + 2 && showRepleiCell != tableCell.tag - 2 {
             let addComment = PrivetFunctions.sharedInstance.addComment("", name: "No name", ts: "", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: false , level : 1000)
             sortedComment.removeAtIndex(showRepleiCell)
-            showRepleiCell = tableCell.tag - 2
-            if tableCell.tag == 2 {
-                showRepleiCell = 1
+            showRepleiCell = tableCell.tag - 3
+            if tableCell.tag == 3 {
+                showRepleiCell = 2
             }
             sortedComment.insert(addComment, atIndex: showRepleiCell)
             self.tableView.reloadData()
-        } else if showRepleiCell == tableCell.tag - 1 {
+        } else if showRepleiCell == tableCell.tag - 2 {
             sortedComment.removeAtIndex(showRepleiCell)
             showRepleiCell = -1
             tableView.reloadData()
@@ -376,7 +416,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         })
     }
     
-   //MARK: remove/create object in "sortedArray"
+    //MARK: remove/create object in "sortedArray"
     
     func createSortedArray(indexInsert : Int , object : GetCommentsFeed) {
         if commentFeed.count != 0 {
@@ -406,12 +446,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             tableView.reloadData()
         }
     }
-
+    
     //MARK: AddCommentCellDelegate
     
     func postButtonPressed(tableCell: AddCommentCell, postButtonPressed postButton: AnyObject) {
         
-        if tableCell.tag == 1 {
+        if tableCell.tag == 2 {
             if morePost == true {
                 let date = NSDate()
                 let dateFormat = NSDateFormatter.init()
@@ -455,7 +495,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 }
             }
-
+            
         } else {
             if morePost == true {
                 let indexPath = NSIndexPath.init(forRow: tableCell.tag, inSection: 0)
@@ -467,35 +507,33 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     let comment = cell.commentTextView.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
                     morePost = false
                     
-                    NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: sortedComment[tableCell.tag - 3].comment_id!) { (responce ,error) in
+                    NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: sortedComment[tableCell.tag - 4].comment_id!) { (responce ,error) in
                         if error == nil {
-                            //Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
                             let date = NSDate()
                             let dateFormat = NSDateFormatter.init()
                             dateFormat.dateStyle = .FullStyle
                             dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
                             let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
                             let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
-                            self.sortedComment[tableCell.tag - 3].replies! += 1
-                            self.sortedComment.removeAtIndex(tableCell.tag - 2)
-                            self.sortedComment.insert(addComment, atIndex: tableCell.tag - 2)
+                            self.sortedComment[tableCell.tag - 4].replies! += 1
+                            self.sortedComment.removeAtIndex(tableCell.tag - 3)
+                            self.sortedComment.insert(addComment, atIndex: tableCell.tag - 3)
                             self.showRepleiCell = -1
                             self.tableView.reloadData()
                             cell.commentTextView.text = "Please write a comment..."
                             cell.commentTextView.textColor = UIColor.lightGrayColor()
                             self.morePost = true
                         } else {
-                            NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: self.sortedComment[tableCell.tag - 3].comment_id!) { (responce ,error) in
-                                Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
+                            NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: self.sortedComment[tableCell.tag - 4].comment_id!) { (responce ,error) in
                                 let date = NSDate()
                                 let dateFormat = NSDateFormatter.init()
                                 dateFormat.dateStyle = .FullStyle
                                 dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
                                 let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
                                 let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
-                                self.sortedComment[tableCell.tag - 3].replies! += 1
-                                self.sortedComment.removeAtIndex(tableCell.tag - 2)
-                                self.sortedComment.insert(addComment, atIndex: tableCell.tag - 2)
+                                self.sortedComment[tableCell.tag - 4].replies! += 1
+                                self.sortedComment.removeAtIndex(tableCell.tag - 3)
+                                self.sortedComment.insert(addComment, atIndex: tableCell.tag - 3)
                                 self.showRepleiCell = -1
                                 self.tableView.reloadData()
                                 cell.commentTextView.text = "Please write a comment..."
@@ -506,68 +544,68 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 }
             }
-            }
+        }
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell, logOutButtonPressed logOutButton: AnyObject) {
         tableCell.nameTextField.text = ""
         tableCell.emailTextField.text = ""
-            Saver.sharedInstance.removeWhenLogOutbuttonPressed()
-            NetworkManager.sharedInstance.logOut()
+        Saver.sharedInstance.removeWhenLogOutbuttonPressed()
+        NetworkManager.sharedInstance.logOut()
         
         tableView.reloadData()
     }
     
     //MARK : LoadMoreCell delegate
-
+    
     func loadMoreButtonPressed(tableCell: LoadMoreCell, loadMoreButtonPressed loadMoreButton: AnyObject) {
         if canGetCommentsFeed == true {
             canGetCommentsFeed = false
             from_count += Global.countLoadCommentsInPagination + 1
-            to_count += Global.countLoadCommentsInPagination + 1
-        NetworkManager.sharedInstance.getMoreCommentsFeed(from_count, to_count: to_count, completion: { (array ,error) in
-            
-            if error == nil {
-                self.sortedComment.removeLast()
-                for r in array! {
-                    self.sortedComment.append(r)
-                }
-                self.canLoadmore = true
-                self.canGetCommentsFeed = true
+            to_count += Global.countLoadCommentsInPagination
+            NetworkManager.sharedInstance.getMoreCommentsFeed(from_count, to_count: to_count, completion: { (array ,error) in
                 
-                if self.totalComentsCount > self.to_count{
-                    let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : 0)
-                    self.sortedComment.append(addComment)
-                } else {
-                    let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : -1)
-                    self.sortedComment.append(addComment)
-                }
-                self.tableView.reloadData()
-            } else {
-                NetworkManager.sharedInstance.getMoreCommentsFeed(self.from_count, to_count: self.to_count, completion: { (array ,error) in
-                        self.sortedComment.removeLast()
-                        for r in array! {
-                            self.sortedComment.append(r)
-                        }
-                        self.canLoadmore = true
-                        self.canGetCommentsFeed = true
-                    if self.totalComentsCount > self.to_count{
+                if error == nil {
+                    self.sortedComment.removeLast()
+                    for r in array! {
+                        self.sortedComment.append(r)
+                    }
+                    self.canLoadmore = true
+                    self.canGetCommentsFeed = true
+                    
+                    if array?.count >= Global.countLoadCommentsInPagination{
                         let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : 0)
                         self.sortedComment.append(addComment)
                     } else {
                         let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : -1)
                         self.sortedComment.append(addComment)
                     }
+                    self.tableView.reloadData()
+                } else {
+                    NetworkManager.sharedInstance.getMoreCommentsFeed(self.from_count, to_count: self.to_count, completion: { (array ,error) in
+                        self.sortedComment.removeLast()
+                        for r in array! {
+                            self.sortedComment.append(r)
+                        }
+                        self.canLoadmore = true
+                        self.canGetCommentsFeed = true
+                        if array?.count >= Global.countLoadCommentsInPagination{
+                            let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : 0)
+                            self.sortedComment.append(addComment)
+                        } else {
+                            let addComment = PrivetFunctions.sharedInstance.addComment("", name: "More", ts: "2016/08/05 11:32:23", email: "", up_votes: 0, down_votes: 0, comment_id: "", replies: 0, user_id: "", avatar_url: "", parent_id: "More", user_points: 0, myComment: true, isReplie: false ,level : -1)
+                            self.sortedComment.append(addComment)
+                        }
                         self.tableView.reloadData()
-                })
-            }
-        })
-    }
+                    })
+                }
+            })
+        }
     }
     func openVuukleButtonButtonPressed(tableCell: LoadMoreCell, openVuukleButtonPressed openVuukleButton: AnyObject) {
         UIApplication.sharedApplication().openURL(NSURL(string: Global.websiteUrl)!)
     }
-
+    
     //Mark: EmoticonCellDelegate
     
     func firstEmoticonButtonPressed(tableCell: EmoticonCell, firstEmoticonButtonPressed firstEmoticonButton: AnyObject) {
@@ -623,7 +661,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func setRate(article_id : String ,emote : Int) {
-    
+        
         if  self.defaults.objectForKey("\(article_id)") as? String == nil{
             
             switch emote {
@@ -710,4 +748,5 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             moreView.alpha = 1
         }
     }
+    
 }
