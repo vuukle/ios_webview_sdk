@@ -35,6 +35,7 @@ s.source = { :git => "https://github.com/vuukle/vuukle_iOS_SDK.git", :tag => "#{
 
 # 7
 s.framework = "UIKit"
+s.framework = "Social"
 s.dependency 'Alamofire', '~> 3.4'
 s.dependency 'AlamofireImage', '~> 2.0'
 
