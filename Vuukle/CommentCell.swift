@@ -14,7 +14,7 @@ protocol CommentCellDelegate {
     func secondShareButtonPressed(tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
 }
 
-class CommentCell: UITableViewCell {
+ class CommentCell: UITableViewCell {
     
     var delegate : CommentCellDelegate?
     var leftCostraint = 16

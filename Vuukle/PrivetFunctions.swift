@@ -56,4 +56,11 @@ class PrivetFunctions {
         return allFill
     }
     
+    func removeDecimal(value : Double) -> String{
+        let formatter = NSNumberFormatter()
+        formatter.minimumFractionDigits = 0
+        return formatter.stringFromNumber(value)!
+        
+    }
+    
 }

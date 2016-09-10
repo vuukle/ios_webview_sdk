@@ -39,8 +39,8 @@ class WebViewCell: UITableViewCell ,UIWebViewDelegate {
             } else {
                 let url = "\(myHTMLString)"
                 let firstUrl = url.stringByReplacingOccurrencesOfString("[{PAGEURL}]", withString: "\(Global.articleUrl)", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                var secondUrl = firstUrl.stringByReplacingOccurrencesOfString("[{APPID}]", withString: "\(Global.appId)", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                var newUrl = secondUrl.stringByReplacingOccurrencesOfString("[{APPNAME}]", withString: "\(Global.appName)", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                let secondUrl = firstUrl.stringByReplacingOccurrencesOfString("[{APPID}]", withString: "\(Global.appId)", options: NSStringCompareOptions.LiteralSearch, range: nil)
+                let newUrl = secondUrl.stringByReplacingOccurrencesOfString("[{APPNAME}]", withString: "\(Global.appName)", options: NSStringCompareOptions.LiteralSearch, range: nil)
                 
                 let file = "non_secure.html"
                 

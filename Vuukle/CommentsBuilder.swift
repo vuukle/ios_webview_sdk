@@ -4,7 +4,7 @@ import UIKit
 
 public class VuukleCommentsBuilder : NSObject {
     
-    override public init() { }
+   public override init() { }
     
     /**
      Set true for visible emote rating!

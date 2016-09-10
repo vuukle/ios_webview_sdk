@@ -265,7 +265,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if error == nil {
                     if string == "error" {
                         lcomment.up_votes! -= 1
-                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
+                        self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id!)")
                         self.defaults.synchronize()
                         self.tableView.reloadData()
                     }
@@ -273,7 +273,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: lcomment.comment_id!, up_down: "1", completion: { (string , error) in
                         if string == "error" {
                             lcomment.up_votes! -= 1
-                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id)")
+                            self.defaults.removeObjectForKey("\(self.sortedComment[tableCell.tag - 3].comment_id!)")
                             self.defaults.synchronize()
                             self.tableView.reloadData()
                         }
@@ -288,7 +288,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func downvoteButtonPressed(tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
         
-        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 3].comment_id)") as? String == nil{
+        if  self.defaults.objectForKey("\(sortedComment[tableCell.tag - 3].comment_id!)") as? String == nil{
             let lcomment = sortedComment[tableCell.tag - 3]
             var mail = ""
             if self.defaults.objectForKey("email") as? String != nil {
@@ -298,7 +298,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             }
             
             lcomment.down_votes! += 1
-            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 3].comment_id)", forKey: "\(self.sortedComment[tableCell.tag - 3].comment_id)")
+            self.defaults.setObject("\(self.sortedComment[tableCell.tag - 3].comment_id!)", forKey: "\(self.sortedComment[tableCell.tag - 3].comment_id!)")
             self.defaults.synchronize()
             self.tableView.reloadData()
             
@@ -470,7 +470,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     NetworkManager.sharedInstance.posComment(name!, email: email!, comment: comment!) { (respon , error) in
                         if (error == nil) {
                             Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
-                            let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: respon!.comment_id!, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, isReplie: true , level : 0)
+                            let addComment = PrivetFunctions.sharedInstance.addComment(comment!, name: name!, ts: stringOfDateInNewFornat, email: email!, up_votes: 0, down_votes: 0, comment_id: respon!.comment_id!, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, isReplie: true , level : 0)
                             self.sortedComment.insert(addComment, atIndex: 0 )
                             self.totalComentsCount += 1
                             self.tableView.reloadData()
@@ -482,7 +482,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             NetworkManager.sharedInstance.posComment(name!, email: email!, comment: comment!) { (respon , error) in
                                 if error == nil {
                                     Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
-                                    let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: respon!.comment_id!, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, isReplie: true , level : 0)
+                                    let addComment = PrivetFunctions.sharedInstance.addComment(comment!, name: name!, ts: stringOfDateInNewFornat, email: email!, up_votes: 0, down_votes: 0, comment_id: respon!.comment_id!, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, isReplie: true , level : 0)
                                     self.sortedComment.insert(addComment, atIndex: 0 )
                                     self.totalComentsCount += 1
                                     self.tableView.reloadData()
@@ -505,16 +505,17 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     let name = cell.nameTextField.text!.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
                     let email = cell.emailTextField.text!.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
                     let comment = cell.commentTextView.text.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+                    let date = NSDate()
+                    let dateFormat = NSDateFormatter.init()
+                    dateFormat.dateStyle = .FullStyle
+                    dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
+                    let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
                     morePost = false
                     
                     NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: sortedComment[tableCell.tag - 4].comment_id!) { (responce ,error) in
                         if error == nil {
-                            let date = NSDate()
-                            let dateFormat = NSDateFormatter.init()
-                            dateFormat.dateStyle = .FullStyle
-                            dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
-                            let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
-                            let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
+
+                            let addComment = PrivetFunctions.sharedInstance.addComment(comment!, name: name!, ts: stringOfDateInNewFornat, email: email!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
                             self.sortedComment[tableCell.tag - 4].replies! += 1
                             self.sortedComment.removeAtIndex(tableCell.tag - 3)
                             self.sortedComment.insert(addComment, atIndex: tableCell.tag - 3)
@@ -525,12 +526,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             self.morePost = true
                         } else {
                             NetworkManager.sharedInstance.postReplyForComment(name!, email: email!, comment: comment!, comment_id: self.sortedComment[tableCell.tag - 4].comment_id!) { (responce ,error) in
-                                let date = NSDate()
-                                let dateFormat = NSDateFormatter.init()
-                                dateFormat.dateStyle = .FullStyle
-                                dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
-                                let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
-                                let addComment = PrivetFunctions.sharedInstance.addComment(cell.commentTextView.text, name: cell.nameTextField.text!, ts: stringOfDateInNewFornat, email: cell.emailTextField.text!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
+
+                                let addComment = PrivetFunctions.sharedInstance.addComment(comment!, name: name!, ts: stringOfDateInNewFornat, email: email!, up_votes: 0, down_votes: 0, comment_id: responce!.result!, replies: 0, user_id: "", avatar_url: "", parent_id: "", user_points: 0, myComment: true, isReplie: true , level : self.sortedComment[tableCell.tag - 3].level! + 1)
                                 self.sortedComment[tableCell.tag - 4].replies! += 1
                                 self.sortedComment.removeAtIndex(tableCell.tag - 3)
                                 self.sortedComment.insert(addComment, atIndex: tableCell.tag - 3)

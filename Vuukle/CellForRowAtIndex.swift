@@ -45,12 +45,12 @@ public class  CellForRowAtIndex{
         cell.countFifthEmoticonLabel.text = "\(fifthCount)"
         cell.countSixthEmoticonLabel.text = "\(sixthCount)"
         
-        cell.firstEmoticonLabel.text = "\(Int(firstPercent))%"
-        cell.secondEmoticonLabel.text = "\(Int(secondPercent))%"
-        cell.thirdEmoticonLabel.text = "\(Int(thirdPercent))%"
-        cell.fourthEmoticonLabel.text = "\(Int(fourthPercent))%"
-        cell.fifthEmoticonLabel.text = "\(Int(fifthPercent))%"
-        cell.sixthEmoticonLabel.text = "\(Int(sixthPercent))%"
+        cell.firstEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(fifthPercent))%"
+        cell.secondEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(secondPercent))%"
+        cell.thirdEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(thirdPercent))%"
+        cell.fourthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(fourthPercent))%"
+        cell.fifthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(fifthPercent))%"
+        cell.sixthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(sixthPercent))%"
         
         return cell
     }

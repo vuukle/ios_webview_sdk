@@ -8,8 +8,7 @@
 
 
         target ‘My Project Name’ do
-        # Comment this line if you're not using Swift and don't want to use dynamic frameworks
-        use_frameworks!
+            use_frameworks!
 
         pod ‘Vuukle’, :path => '/Users/.../Desktop/Vuukle’
 
@@ -24,7 +23,7 @@
 
 
         target ‘VuuklecommentObjective’ do
-        # Comment this line if you're not using Swift and don't want to use dynamic frameworks
+        
         pod ‘Vuukle’, :path => '/Users/orest/Desktop/Vuukle’
 
         end
