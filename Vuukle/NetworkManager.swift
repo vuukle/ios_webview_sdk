@@ -19,7 +19,7 @@ class NetworkManager {
                 
                 if let JSON = response.result.value as? NSArray{
                     let data : NSArray = JSON
-                    print("JSON: \(JSON)")
+
                     var responseArray = [GetCommentsFeed]()
                     
                     for objectDict in data  {
@@ -41,7 +41,7 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+
                     
                     self.jsonArray = JSON as? NSDictionary
 
@@ -69,12 +69,15 @@ class NetworkManager {
     // MARK: Post Comment
     
     func posComment(name : String ,email : String ,comment : String,completion : (ResponseToComment? , NSError?) -> Void) {
-
-        Alamofire.request(.GET, "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&url=\(Global.url)&tags=\(Global.tag1),\(Global.tag2)&title=\(Global.title)")
+        
+        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&url=\(Global.url)&tags=\(Global.tag1),\(Global.tag2)&title=\(Global.title)"
+        let encodedUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        
+        Alamofire.request(.GET, encodedUrl)
             .responseJSON { response in
 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -113,13 +116,14 @@ class NetworkManager {
     
     func postReplyForComment(name : String ,email : String ,comment : String ,comment_id : String,completion : (ResponseToComment? , NSError?) -> Void) {
         
-        print("https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)")
-        
-        Alamofire.request(.GET, "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)")
+        let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)"
+        let encodedUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+  
+        Alamofire.request(.GET, encodedUrl)
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -142,8 +146,6 @@ class NetworkManager {
         let url = "\(Global.baseURL)setCommentVote?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&up_down=\(up_down)&name=\(name)&email=\(email)"
         
         let newUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        print(newUrl)
         
         Alamofire.request(.GET, newUrl)
             .responseJSON { response in
@@ -168,8 +170,7 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                    
+
                     self.jsonArray = JSON as? NSDictionary
                     
                     
