@@ -114,7 +114,7 @@ public class VuukleCommentsBuilder : NSObject {
      for each article like URL, TAGS, TITLE.
      */
     public func firstVuukleTag(tag : String) -> VuukleCommentsBuilder{
-        Global.tag1 = tag
+        Global.tag1 = tag.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         return self
     }
     
@@ -130,17 +130,17 @@ public class VuukleCommentsBuilder : NSObject {
      it opens and our library should have unique properties
      for each article like URL, TAGS, TITLE.
      */
-    public func secondVuukleTag(tag : String) -> VuukleCommentsBuilder{
-        Global.tag2 = tag
+    @available(*, deprecated=1.0, obsoleted=2.0, message="deprecated !")  public func secondVuukleTag(tag : String) -> VuukleCommentsBuilder{
+        Global.tag2 = tag.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         return self
     }
     
     /**
      Required field!
      
-     For example: "http://vuukle.com/test_files/test48.html"
+     For example: "http:vuukle.com/test_files/test48.html"
      */
-    public func setVuukleUrl(url : String) -> VuukleCommentsBuilder{
+    @available(*, deprecated=1.0, obsoleted=2.0, message="deprecated !")  public func setVuukleUrl(url : String) -> VuukleCommentsBuilder{
         Global.url = url
         return self
     }
@@ -151,7 +151,7 @@ public class VuukleCommentsBuilder : NSObject {
      Set your Title.
      */
     public func setVuukleTitle(title : String) -> VuukleCommentsBuilder{
-        Global.title = title
+        Global.title = title.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         return self
     }
     
@@ -161,7 +161,7 @@ public class VuukleCommentsBuilder : NSObject {
      Set your Article Title.
      */
     public func setVuukleArticleTitle (articleTitle : String) -> VuukleCommentsBuilder{
-        Global.article_title = articleTitle
+        Global.article_title = articleTitle.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         return self
     }
     
@@ -171,7 +171,7 @@ public class VuukleCommentsBuilder : NSObject {
      Set your application name.
      */
     public func setAppName (appName : String) -> VuukleCommentsBuilder{
-        Global.appName = appName
+        Global.appName = appName.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         return self
     }
     

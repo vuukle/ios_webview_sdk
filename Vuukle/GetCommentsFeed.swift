@@ -18,11 +18,11 @@ class GetCommentsFeed {
     var myParent_id : String?
     var myComment : Bool?
     var isReplie : Bool?
-    var myCommentIndex : Int?
+    var myReplyFormIndex : Int?
     var initials : String?
     var level : Int?
     var myReplys : NSArray?
-        
+    
     static func getCommentsFeedWhithArray(pDict : NSDictionary) -> GetCommentsFeed {
         
         let lGetCommentsFeed = GetCommentsFeed()
@@ -39,12 +39,13 @@ class GetCommentsFeed {
         lGetCommentsFeed.parent_id = pDict["parent_id"] as? String ?? ""
         lGetCommentsFeed.email = pDict["email"] as? String ?? ""
         lGetCommentsFeed.myParent_id = ""
-        lGetCommentsFeed.myComment = false
-        lGetCommentsFeed.isReplie = true
-        lGetCommentsFeed.myCommentIndex = -1
+        lGetCommentsFeed.isReplie = false
+        if lGetCommentsFeed.parent_id != "-1" {
+            lGetCommentsFeed.isReplie = true
+        }
+        lGetCommentsFeed.myReplyFormIndex = -1
         lGetCommentsFeed.initials = ""
         lGetCommentsFeed.level = 0
-        lGetCommentsFeed.myReplys = []
         
         return lGetCommentsFeed
     }

@@ -14,7 +14,7 @@ protocol EmoticonCellDelegate {
 
 class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     
-     var delegate : EmoticonCellDelegate?
+    var delegate : EmoticonCellDelegate?
     let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var firstEmoticonImage: UIImageView!
@@ -31,7 +31,7 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var fifthEmoticonLabel: UILabel!
     @IBOutlet weak var sixthEmoticonLabel: UILabel!
     
-
+    
     @IBOutlet weak var countFirstEmoticonLabel: UILabel!
     @IBOutlet weak var countSecondEmoticonLabel: UILabel!
     @IBOutlet weak var countThirdEmoticonLabel: UILabel!
@@ -66,15 +66,15 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var fourthEmoticonImageHeight: NSLayoutConstraint!
     @IBOutlet weak var fifthEmoticonImageHeight: NSLayoutConstraint!
     @IBOutlet weak var sixthEmoticonImageHeight: NSLayoutConstraint!
-
-
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

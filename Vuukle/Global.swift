@@ -13,8 +13,6 @@ class Global {
     static var secret_key = ""
     static var time_zone = ""
     static var tag1 = ""
-    static var tag2 = ""
-    static var url = ""
     static var title = ""
     static var resource_id = ""
     static var article_title = ""
@@ -22,6 +20,8 @@ class Global {
     static var appName = ""
     static var articleUrl = ""
     static var appId = ""
+    static var url = ""
+    static var tag2 = ""
     static var defaultImageUrl = "http://3aa0b40d2aab024f527d-510de3faeb1a65410c7c889a906ce44e.r42.cf6.rackcdn.com/avatar.png"
     static var websiteUrl = "https://vuukle.com"
     
@@ -31,7 +31,7 @@ class Global {
     static let leftConstrainReplySize = 75
     
     func checkAllParameters() -> Bool{
-        if Global.baseURL != "" && Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.tag1 != "" && Global.tag2 != "" && Global.url != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
+        if Global.baseURL != "" && Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.tag1 != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
             return true
         } else {
             switch "" {
@@ -49,10 +49,6 @@ class Global {
                 print("You have not specified TimeZone!")
             case Global.tag1 :
                 print("You have not specified firstTag!")
-            case Global.tag2 :
-                print("You have not specified secondTag!")
-            case Global.url:
-                print("You have not specified Url!")
             case Global.title :
                 print("You have not specified Title!")
             case Global.article_title :

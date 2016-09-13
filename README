@@ -1,3 +1,5 @@
+This library works with Swift and Objective-C.
+
 1.Install the library to your project.
     Example Podfile - Swift:
 
@@ -10,7 +12,7 @@
         target ‘My Project Name’ do
             use_frameworks!
 
-        pod ‘Vuukle’, :path => '/Users/.../Desktop/Vuukle’
+        pod ‘Vuukle’, :path => 'path to vuukle library’   // example : '/Users/...Desktop/Vuukle'
 
         end
 ------------------------------------------------------------------
@@ -24,7 +26,7 @@
 
         target ‘VuuklecommentObjective’ do
         
-        pod ‘Vuukle’, :path => '/Users/orest/Desktop/Vuukle’
+        pod ‘Vuukle’, :path => 'path to vuukle library’   // example : '/Users/...Desktop/Vuukle'
 
         end
 _________________________________________________________________
@@ -48,16 +50,13 @@ _________________________________________________________________
     super.viewDidLoad()
 
     var vuukle = VuukleCommentsBuilder()
-    vuukle.firstVuukleTag("articleTag1").secondVuukleTag("articleTag2")
-                                        .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
+    vuukle.firstVuukleTag("articleTag1").setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
                                         .setVuukleArticleId("00048")
                                         .setVuukleArticleTitle("myArticleTitle")
-                                        .setVuukleBaseUrl("https://vuukle.com/api.asmx/")
                                         .setVuukleEmoteVisible(true)
                                         .setVuukleHost("vuukle.com")
                                         .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
                                         .setVuukleTimeZone("Europe/Kiev")
-                                        .setVuukleUrl("http://vuukle.com/test_files/test48.html")
                                         .setVuukleTitle("Title")
                                         .setAppName("myAppName")
                                         .setArticleUrl("myArticleUrl")
@@ -72,23 +71,22 @@ _________________________________________________________________
 
 
     VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
-    [[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
-    secondVuukleTag:@"articleTag2"]
-    setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
-    setVuukleArticleId:@"00048"]
-    setVuukleBaseUrl:@"https://vuukle.com/api.asmx/"]
-    setVuukleEmoteVisible:YES]
-    setVuukleHost:@"vuukle.com"]
-    setVuukleSecretKey:@"07115720-6848-11e5-9bc9-002590f371ee"]
-    setVuukleTimeZone:@"Europe/Kiev"]
-    setVuukleUrl:@"http://vuukle.com/test_files/test48.html"]
-    setVuukleTitle:@"Title"]
-    setAppName:@"myAppName"]
-    setArticleUrl:@"myArticleUrl"]
-    setAppID:@"myApId"]
-    buildVuukle:self.view];
+        [[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
+            setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
+            setVuukleArticleId:@"00048"]
+            setVuukleBaseUrl:@"https://vuukle.com/api.asmx/"]
+            setVuukleEmoteVisible:YES]
+            setVuukleHost:@"vuukle.com"]
+            setVuukleSecretKey:@"07115720-6848-11e5-9bc9-002590f371ee"]
+            setVuukleTimeZone:@"Europe/Kiev"]
+            setVuukleTitle:@"Title"]
+            setAppName:@"myAppName"]
+            setArticleUrl:@"myArticleUrl"]
+            setAppID:@"myApId"]
+            setVuukleArticleTitle:@"myTitle"]
+        buildVuukle:self.view];
 
-    }
+}
 
 4.Please add into "Info.plist" fields with values
 

@@ -11,7 +11,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
     let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     var indexRow = 1
-
+    
     @IBOutlet weak var commentTextView: UITextView!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -24,7 +24,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
     
     @IBOutlet weak var leftConstrainSize: NSLayoutConstraint!
     
-     @IBOutlet weak var totalCount: UILabel!
+    @IBOutlet weak var totalCount: UILabel!
     
     @IBOutlet weak var totalCountHeight: NSLayoutConstraint!
     
@@ -58,7 +58,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
         
         self.delegate?.postButtonPressed(self ,postButtonPressed : sender)
     }
-
+    
     @IBAction func logOutButton(sender: AnyObject) {
         self.delegate?.logOutButtonPressed(self, logOutButtonPressed: sender)
     }
@@ -67,7 +67,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-
+        
         
         background.layer.cornerRadius = 5
         postButtonOutlet.layer.cornerRadius = 5
@@ -90,7 +90,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
         commentTextView.text = "Please write a comment..."
         commentTextView.textColor = UIColor.lightGrayColor()
         commentTextView.delegate = self
-
+        
         let viewForDoneButtonOnKeyboard = UIToolbar()
         viewForDoneButtonOnKeyboard.sizeToFit()
         let btnDoneOnKeyboard = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddCommentCell.doneBtnFromKeyboardClicked(_:)))
@@ -102,9 +102,9 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
     }
     
     func doneBtnFromKeyboardClicked(sender : UIBarButtonItem) {
-         nameTextField.resignFirstResponder()
-         emailTextField.resignFirstResponder()
-         commentTextView.resignFirstResponder()
+        nameTextField.resignFirstResponder()
+        emailTextField.resignFirstResponder()
+        commentTextView.resignFirstResponder()
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -123,10 +123,10 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
             commentTextView.textColor = UIColor.lightGrayColor()
         }
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

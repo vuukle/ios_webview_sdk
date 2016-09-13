@@ -1,15 +1,9 @@
-//
-//  WebViewCell.swift
-//  Vuukle Comment
-//
-//  Created by Орест on 01.09.16.
-//  Copyright © 2016 Midgets. All rights reserved.
-//
+
 
 import UIKit
 
 class WebViewCell: UITableViewCell ,UIWebViewDelegate {
-
+    
     
     @IBOutlet weak var webView: UIWebView!
     
@@ -29,34 +23,23 @@ class WebViewCell: UITableViewCell ,UIWebViewDelegate {
     
     func getDataFromHtml () {
         let url1 = NSBundle(forClass: WebViewCell.self).URLForResource("non_secure", withExtension:"html")
+        let myHTMLString = try! NSString(contentsOfURL: url1!, encoding: NSUTF8StringEncoding)
+        let url = "\(myHTMLString)"
+        let firstUrl = url.stringByReplacingOccurrencesOfString("[{PAGEURL}]", withString: "\(Global.articleUrl)", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let secondUrl = firstUrl.stringByReplacingOccurrencesOfString("[{APPID}]", withString: "\(Global.appId)", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        let newUrl = secondUrl.stringByReplacingOccurrencesOfString("[{APPNAME}]", withString: "\(Global.appName)", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
-        if let myURL = url1 {
-            var error: NSError?
-            let myHTMLString = try! NSString(contentsOfURL: myURL, encoding: NSUTF8StringEncoding)
+        let file = "non_secure.html"
+        
+        let text = "\(newUrl)"
+        
+        if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+            let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
             
-            if let error = error {
-                print("Error : \(error)")
-            } else {
-                let url = "\(myHTMLString)"
-                let firstUrl = url.stringByReplacingOccurrencesOfString("[{PAGEURL}]", withString: "\(Global.articleUrl)", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                let secondUrl = firstUrl.stringByReplacingOccurrencesOfString("[{APPID}]", withString: "\(Global.appId)", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                let newUrl = secondUrl.stringByReplacingOccurrencesOfString("[{APPNAME}]", withString: "\(Global.appName)", options: NSStringCompareOptions.LiteralSearch, range: nil)
-                
-                let file = "non_secure.html"
-                
-                let text = "\(newUrl)"
-                
-                if let dir = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-                    let path = NSURL(fileURLWithPath: dir).URLByAppendingPathComponent(file)
-                    
-                    do {
-                        try text.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
-                    }
-                    catch {}
-                }
+            do {
+                try text.writeToURL(path, atomically: false, encoding: NSUTF8StringEncoding)
             }
-        } else {
-            print("Error: \(url1) doesn't  URL")
+            catch {}
         }
     }
     
@@ -80,10 +63,10 @@ class WebViewCell: UITableViewCell ,UIWebViewDelegate {
             return nil
         }
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

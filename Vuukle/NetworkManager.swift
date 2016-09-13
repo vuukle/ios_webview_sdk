@@ -14,12 +14,12 @@ class NetworkManager {
     //MARK: Get Replies For Comment
     
     func getRepliesForComment(comment_id : String ,parent_id : String ,completion: ([GetCommentsFeed]?, NSError?) -> Void) {
+        
         Alamofire.request(.GET, "\(Global.baseURL)getReplyFeed?host=\(Global.host)&article_id=00048&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&article_id=\(Global.article_id)&parent_id=\(parent_id)&time_zone=\(Global.time_zone)" )
             .responseJSON { response in
                 
                 if let JSON = response.result.value as? NSArray{
                     let data : NSArray = JSON
-
                     var responseArray = [GetCommentsFeed]()
                     
                     for objectDict in data  {
@@ -34,17 +34,15 @@ class NetworkManager {
         }
     }
     
-    //MARK: Get Comment Feed 
+    //MARK: Get Comment Feed
     
     func getCommentsFeed(completion: ([GetCommentsFeed]?, NSError?) -> Void) {
+
         Alamofire.request(.GET, "\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-
-                    
                     self.jsonArray = JSON as? NSDictionary
-
                     
                     let commentFeedArray : NSArray = [self.jsonArray!["comment_feed"]!]
                     Global.resource_id = "\((self.jsonArray!["resource_id"] as? Int)!)"
@@ -62,7 +60,7 @@ class NetworkManager {
                     print("Status cod = \(response.response?.statusCode)")
                     completion(nil,response.result.error)
                 }
-
+                
         }
     }
     
@@ -70,14 +68,13 @@ class NetworkManager {
     
     func posComment(name : String ,email : String ,comment : String,completion : (ResponseToComment? , NSError?) -> Void) {
         
-        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&url=\(Global.url)&tags=\(Global.tag1),\(Global.tag2)&title=\(Global.title)"
-        let encodedUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&tags=\(Global.tag1)&title=\(Global.title)"
         
-        Alamofire.request(.GET, encodedUrl)
+        Alamofire.request(.GET, url)
             .responseJSON { response in
-
+                
                 if let JSON = response.result.value {
-
+                    
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -98,32 +95,31 @@ class NetworkManager {
     }
     
     //MARK: Images
-
+    
     func getImageWhihURL(imageURL: NSURL,completion: (UIImage?) -> Void) -> Request? {
         
-       return Alamofire.request(.GET, imageURL)
-                .responseImage { response in
+        return Alamofire.request(.GET, imageURL)
+            .responseImage { response in
+                
+                if let image = response.result.value {
                     
-                    if let image = response.result.value {
-                        
-                        completion(image)
-                    } else {
-                        print("Status cod = \(response)")
-                    }
-            }
+                    completion(image)
+                } else {
+                    print("Status cod = \(response)")
+                }
         }
+    }
     //MARK: Post Reply for Comment
     
     func postReplyForComment(name : String ,email : String ,comment : String ,comment_id : String,completion : (ResponseToComment? , NSError?) -> Void) {
         
         let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)"
-        let encodedUrl = url.stringByReplacingOccurrencesOfString(" ", withString: "").stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-  
-        Alamofire.request(.GET, encodedUrl)
+
+        Alamofire.request(.GET, url)
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-
+                    
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -137,7 +133,6 @@ class NetworkManager {
                     completion(nil,response.result.error)
                     print("Status cod = \(response.response?.statusCode)")
                 }
-
         }
     }
     //MARK : Set Comment Vote - Up/Down Vote
@@ -152,7 +147,6 @@ class NetworkManager {
                 
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
                     self.jsonArray = JSON as? NSDictionary
                     let respon = self.jsonArray!["result"] as? String
                     completion(respon! ,nil)
@@ -170,7 +164,7 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-
+                    
                     self.jsonArray = JSON as? NSDictionary
                     
                     
@@ -202,8 +196,6 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-   
                     let ratingDictionary = JSON["emotes"]! as! NSDictionary
                     let lRating = EmoteRating.EmoteRatingWhithDictionary(ratingDictionary )
                     
@@ -214,7 +206,7 @@ class NetworkManager {
                 }
                 if let error  = response.result.error?.code {
                     print("error:\(error)")
-
+                    
                 }
         }
     }
@@ -222,27 +214,25 @@ class NetworkManager {
     //MARK: Set rating
     
     func setRaring(article_id : String ,emote : Int,completion : ResponseToEmoteRating -> Void) {
-        Alamofire.request(.GET, "\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&url=\(Global.url)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
+        Alamofire.request(.GET, "\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
             .responseJSON { response in
                 
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                    
                     self.jsonArray = JSON as? NSDictionary
                     
                     let respon = ResponseToEmoteRating()
                     respon.result = self.jsonArray!["result"] as? Bool
                     
                     completion(respon)
-                   
+                    
                     
                 } else {
                     print("Status cod = \(response.response?.statusCode)")
                 }
                 if let error  = response.result.error?.code {
                     print("error:\(error)")
-
+                    
                 }
         }
     }
@@ -254,10 +244,9 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
                     
                     self.jsonArray = JSON as? NSDictionary
-
+                    
                     let respon = TotalCommentsCount()
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
@@ -269,7 +258,7 @@ class NetworkManager {
                 }
                 if let error  = response.result.error?.code {
                     print("error:\(error)")
-
+                    
                 }
         }
     }
@@ -283,14 +272,14 @@ class NetworkManager {
                 
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
-
+                    
                     
                 } else {
                     print("Status cod = \(response.response?.statusCode)")
                 }
                 if let error  = response.result.error?.code {
                     print("error:\(error)")
-
+                    
                 }
         }
     }

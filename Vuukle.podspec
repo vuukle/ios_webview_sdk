@@ -4,10 +4,10 @@ Pod::Spec.new do |s|
 s.platform = :ios
 s.ios.deployment_target = '9.0'
 s.name         = "Vuukle"
-s.summary      = "A short description of Vuukle."
+s.summary      = "Vuukle.com"
 
 # 2
-s.version      = "1.2.0"
+s.version      = "0.7.0"
 
 # 3
 s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -16,10 +16,10 @@ s.license      = { :type => "MIT", :file => "LICENSE" }
 s.author       = { "Vuukle.com" => "fedir@vuukle.com" }
 
 # 5
-s.homepage     = "https://github.com/Demkovskyi/VuukleComment"
+s.homepage     = "https://github.com/vuukle/vuukle_iOS_SDK"
 
 # 6
-s.source       = { :git => "https://github.com/Demkovskyi/VuukleComment.git", :tag => "#{s.version}"}
+s.source       = { :git => "https://github.com/vuukle/vuukle_iOS_SDK.git", :tag => "#{s.version}"}
 
 # 7
 s.framework    = "UIKit"
