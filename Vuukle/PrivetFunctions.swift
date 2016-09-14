@@ -102,11 +102,12 @@ class PrivetFunctions {
         return stringToDecoding
     }
     
-    func setRatePercentage (rating : EmoteRating, element : Int)  -> Double{
-        let sume : Double = Double(rating.first) + Double(rating.second) + Double(rating.third) + Double(rating.fourth) + Double(rating.fifth) + Double(rating.sixth)
-        let percent = round(Double(element * 100)/sume)
+    func setRatePercentage (rating : EmoteRating, element : Int)  -> Int{
+        let sume = rating.first + rating.second + rating.third + rating.fourth + rating.fifth + rating.sixth
+        let percent = (element * 100)/sume
         return percent
     }
+
     
     func searchUpperChracters(fullName: String) -> String{
         var output1 = ""

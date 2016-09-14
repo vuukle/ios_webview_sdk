@@ -7,7 +7,7 @@ s.name         = "Vuukle"
 s.summary      = "Vuukle.com"
 
 # 2
-s.version      = "0.7.0"
+s.version      = "0.8.0"
 
 # 3
 s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -19,7 +19,7 @@ s.author       = { "Vuukle.com" => "fedir@vuukle.com" }
 s.homepage     = "https://github.com/vuukle/vuukle_iOS_SDK"
 
 # 6
-s.source       = { :git => "https://github.com/vuukle/vuukle_iOS_SDK.git", :tag => "#{s.version}"}
+s.source       = { :git => "https://github.com/vuukle/vuukle_iOS_SDK.git", :tag => "#{s.version}" }
 
 # 7
 s.framework    = "UIKit"

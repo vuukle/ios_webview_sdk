@@ -73,12 +73,12 @@ public class  CellForRowAtIndex {
             cell.countFifthEmoticonLabel.text = "\(fifth)" ?? "0"
             cell.countSixthEmoticonLabel.text = "\(sixth)" ?? "0"
             
-            cell.firstEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.first)))%" ?? "0%"
-            cell.secondEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.second)))%" ?? "0%"
-            cell.thirdEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.third)))%" ?? "0%"
-            cell.fourthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.fourth)))%" ?? "0%"
-            cell.fifthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.fifth)))%" ?? "0%"
-            cell.sixthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.removeDecimal(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.sixth)))%" ?? "0%"
+            cell.firstEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.first))%" ?? "0%"
+            cell.secondEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.second))%" ?? "0%"
+            cell.thirdEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.third))%" ?? "0%"
+            cell.fourthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.fourth))%" ?? "0%"
+            cell.fifthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.fifth))%" ?? "0%"
+            cell.sixthEmoticonLabel.text = "\(PrivetFunctions.sharedInstance.setRatePercentage(votes, element: votes.sixth))%" ?? "0%"
             
         }
         

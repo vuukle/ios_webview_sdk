@@ -26,6 +26,7 @@ class Global {
     static var websiteUrl = "https://vuukle.com"
     
     static var showEmoticonCell = true
+    static var showRefreshControl = false
     static var countLoadCommentsInPagination = 9
     static let leftConstrainCommentSize = 16
     static let leftConstrainReplySize = 75

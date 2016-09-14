@@ -54,10 +54,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CommentViewController.dismissKeyboard)))
             
-            refreshControl = UIRefreshControl()
-            refreshControl!.addTarget(self, action: #selector(refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-            tableView.addSubview(refreshControl)
-            refresh(refreshControl!)
+            if Global.showRefreshControl == true {
+                refreshControl = UIRefreshControl()
+                refreshControl!.addTarget(self, action: #selector(refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+                tableView.addSubview(refreshControl)
+                refresh(refreshControl!)
+            }
             getComments()
             
             NSNotificationCenter.defaultCenter().addObserver(self,
@@ -97,8 +99,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        // var cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+
         let  cell = CellForRowAtIndex.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView)
         
         switch arrayObjectsForCell[indexPath.row] {
@@ -449,11 +450,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func sixthEmoticonButtonPressed(tableCell: EmoticonCell, sixthEmoticonButtonPressed sixthEmoticonButton: AnyObject) {
         PrivetFunctions.sharedInstance.setRate(Global.article_id, emote: 6, tableView: tableView)
     }
-    
-    //MARK: Emotion Cell get/set data
-    
-    
-    
+
     //MARK: Keyboard (Show/Hide/Dismiss)
     
     func keyboardWillShow(sender: NSNotification) {
@@ -467,39 +464,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func dismissKeyboard() {
         self.view.endEditing(true)
     }
-    
-    func saveCommentData(array : [GetCommentsFeed]) {
-        self.arrayObjectsForCell.removeAll()
-        self.refreshControl?.endRefreshing()
-        self.from_count = 0
-        self.to_count = Global.countLoadCommentsInPagination
-        if array.count >= Global.countLoadCommentsInPagination {
-            self.arrayObjectsForCell.append(WebView())
-            self.arrayObjectsForCell.append(Emoticon())
-            self.arrayObjectsForCell.append(AddComment())
-            for object in array {
-                self.arrayObjectsForCell.append(object)
-            }
-            let load = LoadMore()
-            load.showLoadMoreButton = true
-            self.arrayObjectsForCell.append(load)
-        } else {
-            self.arrayObjectsForCell.append(WebView())
-            self.arrayObjectsForCell.append(Emoticon())
-            self.arrayObjectsForCell.append(AddComment())
-            for object in array {
-                self.arrayObjectsForCell.append(object)
-            }
-            let load = LoadMore()
-            load.showLoadMoreButton = false
-            self.arrayObjectsForCell.append(load)
-        }
-        self.canGetCommentsFeed = true
-        self.canLoadmore = true
-        //self.count = self.commentFeed.count
-        self.tableView.reloadData()
-    }
-    
+
+    //MARK: Sharing to Facebook/Twitter
     func shareComment(index : Int , shareTo : String) {
         var socialservice = SLServiceTypeFacebook
         if shareTo == "Facebook" {
@@ -518,6 +484,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             PrivetFunctions.sharedInstance.showAlert("Accounts", message: "Please login to a \(shareTo) account to share.")
         }
     }
+    
+    //MARK: Addding local objects
     func addLocalPeplyObjectToTableView(cell : AddCommentCell, commentText : String,nameText : String , emailText : String , index : Int ,forObject : GetCommentsFeed , commentID : String) {
         let date = NSDate()
         let dateFormat = NSDateFormatter.init()
@@ -572,14 +540,35 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         self.tableView.reloadData()
     }
     
-    //    func moreView() {
-    //        let moreView = MoreView.loadViewFromNib()
-    //        moreView.frame = CGRectMake(0, 0, self.view.frame.width , self.view.frame.height )
-    //        self.view.addSubview(moreView)
-    //        moreView.alpha = 0
-    //        UIView.animateWithDuration(0.25) { () -> Void in
-    //            moreView.alpha = 1
-    //        }
-    //    }
+    func saveCommentData(array : [GetCommentsFeed]) {
+        self.arrayObjectsForCell.removeAll()
+        self.refreshControl?.endRefreshing()
+        self.from_count = 0
+        self.to_count = Global.countLoadCommentsInPagination
+        if array.count >= Global.countLoadCommentsInPagination {
+            self.arrayObjectsForCell.append(WebView())
+            self.arrayObjectsForCell.append(Emoticon())
+            self.arrayObjectsForCell.append(AddComment())
+            for object in array {
+                self.arrayObjectsForCell.append(object)
+            }
+            let load = LoadMore()
+            load.showLoadMoreButton = true
+            self.arrayObjectsForCell.append(load)
+        } else {
+            self.arrayObjectsForCell.append(WebView())
+            self.arrayObjectsForCell.append(Emoticon())
+            self.arrayObjectsForCell.append(AddComment())
+            for object in array {
+                self.arrayObjectsForCell.append(object)
+            }
+            let load = LoadMore()
+            load.showLoadMoreButton = false
+            self.arrayObjectsForCell.append(load)
+        }
+        self.canGetCommentsFeed = true
+        self.canLoadmore = true
+        self.tableView.reloadData()
+    }
     
 }

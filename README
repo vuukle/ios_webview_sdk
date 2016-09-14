@@ -12,7 +12,7 @@ This library works with Swift and Objective-C.
         target ‘My Project Name’ do
             use_frameworks!
 
-        pod ‘Vuukle’, :path => 'path to vuukle library’   // example : '/Users/...Desktop/Vuukle'
+        pod ‘Vuukle’,’~> 0.8.0’
 
         end
 ------------------------------------------------------------------
@@ -24,9 +24,9 @@ This library works with Swift and Objective-C.
         use_frameworks!
 
 
-        target ‘VuuklecommentObjective’ do
+        target ‘VuukleCommentObjective’ do
         
-        pod ‘Vuukle’, :path => 'path to vuukle library’   // example : '/Users/...Desktop/Vuukle'
+        pod ‘Vuukle’,’~> 0.8.0’
 
         end
 _________________________________________________________________
@@ -50,18 +50,20 @@ _________________________________________________________________
     super.viewDidLoad()
 
     var vuukle = VuukleCommentsBuilder()
-    vuukle.firstVuukleTag("articleTag1").setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
-                                        .setVuukleArticleId("00048")
-                                        .setVuukleArticleTitle("myArticleTitle")
-                                        .setVuukleEmoteVisible(true)
-                                        .setVuukleHost("vuukle.com")
-                                        .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
-                                        .setVuukleTimeZone("Europe/Kiev")
-                                        .setVuukleTitle("Title")
-                                        .setAppName("myAppName")
-                                        .setArticleUrl("myArticleUrl")
-                                        .setAppID("myApId")
-                                        .buildVuukle(someView)
+        vuukle.firstVuukleTag("articleTag1")
+					      .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
+					      .setVuukleArticleId("00048")
+					      .setVuukleArticleTitle("myArticleTitle")
+					      .setVuukleBaseUrl("https://vuukle.com/api.asmx/")
+					      .setVuukleEmoteVisible(true)
+					      .setVuukleHost("vuukle.com")
+					      .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
+					      .setVuukleTimeZone("Europe/Kiev").setVuukleTitle("Title")
+					      .setAppName("myAppName")
+					      .setArticleUrl("myArticleUrl")
+					      .setAppID("myApId")
+					      .setVuukleRefreshVisible(true)
+					      .buildVuukle(self.view)
     }
 ----------------------------------------------------------------
     For example (Objective-c):
@@ -71,7 +73,7 @@ _________________________________________________________________
 
 
     VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
-        [[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
+        [[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
             setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
             setVuukleArticleId:@"00048"]
             setVuukleBaseUrl:@"https://vuukle.com/api.asmx/"]
@@ -84,7 +86,8 @@ _________________________________________________________________
             setArticleUrl:@"myArticleUrl"]
             setAppID:@"myApId"]
             setVuukleArticleTitle:@"myTitle"]
-        buildVuukle:self.view];
+	    setVuukleRefreshVisible:YES]
+            buildVuukle:self.view];
 
 }
 

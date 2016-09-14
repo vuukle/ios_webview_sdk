@@ -9,8 +9,16 @@ public class VuukleCommentsBuilder : NSObject {
     /**
      Set true for visible emote rating!
      */
-    public func setVuukleEmoteVisible(bool : Bool) -> VuukleCommentsBuilder {
-        Global.showEmoticonCell = bool
+    public func setVuukleEmoteVisible(isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.showEmoticonCell = isVisible
+        return self
+    }
+    
+    /**
+     Set true for visible refres!
+     */
+    public func setVuukleRefreshVisible(isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.showRefreshControl = isVisible
         return self
     }
     
