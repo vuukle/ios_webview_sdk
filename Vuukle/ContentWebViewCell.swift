@@ -12,7 +12,7 @@ class ContentWebViewCell : UITableViewCell ,UIWebViewDelegate{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //let frameworkBundle = NSBundle(forClass: ContentWebViewCell.self)
+        let frameworkBundle = NSBundle(forClass: ContentWebViewCell.self)
         getDataFromURL()
 
         webView.scrollView.scrollEnabled = false
@@ -35,7 +35,7 @@ class ContentWebViewCell : UITableViewCell ,UIWebViewDelegate{
             print(height)
             self.webViewCellHeight.constant = height
             webView.frame.size = webView.sizeThatFits(CGSizeZero)
-            //webWiewHeight.constant = webView.scrollView.contentSize.height
+
             
         }
         

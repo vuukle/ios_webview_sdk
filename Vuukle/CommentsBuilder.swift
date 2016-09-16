@@ -118,7 +118,7 @@ public class VuukleCommentsBuilder : NSObject {
     }
     
     /**
-     Required field!
+     Optional field!
      
      First Tag will be unique for each page where comment box opens.
      

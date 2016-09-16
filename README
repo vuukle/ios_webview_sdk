@@ -63,7 +63,7 @@ _________________________________________________________________
 					      .setArticleUrl("myArticleUrl")
 					      .setAppID("myApId")
 					      .setVuukleRefreshVisible(true)
-					      .addWebViewArticleURL(true)
+					      .addWebViewArticleURL(false)
 					      .buildVuukle(self.view)
     }
 ----------------------------------------------------------------
@@ -88,7 +88,7 @@ _________________________________________________________________
             setAppID:@"myApId"]
             setVuukleArticleTitle:@"myTitle"]
 	    setVuukleRefreshVisible:YES]
-	    addWebViewArticleURL:YES]
+	    addWebViewArticleURL:NO]
             buildVuukle:self.view];
 
 }

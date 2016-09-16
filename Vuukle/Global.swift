@@ -33,7 +33,7 @@ class Global {
     static let leftConstrainReplySize = 75
     
     func checkAllParameters() -> Bool{
-        if Global.baseURL != "" && Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.tag1 != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
+        if Global.baseURL != "" && Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
             return true
         } else {
             switch "" {
@@ -49,8 +49,6 @@ class Global {
                 print("You have not specified SecretKey!")
             case Global.time_zone:
                 print("You have not specified TimeZone!")
-            case Global.tag1 :
-                print("You have not specified firstTag!")
             case Global.title :
                 print("You have not specified Title!")
             case Global.article_title :
