@@ -22,6 +22,7 @@ class Global {
     static var appId = ""
     static var url = ""
     static var tag2 = ""
+    static var setYourWebContent = false
     static var defaultImageUrl = "http://3aa0b40d2aab024f527d-510de3faeb1a65410c7c889a906ce44e.r42.cf6.rackcdn.com/avatar.png"
     static var websiteUrl = "https://vuukle.com"
     

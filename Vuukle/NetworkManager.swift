@@ -68,7 +68,8 @@ class NetworkManager {
     
     func posComment(name : String ,email : String ,comment : String,completion : (ResponseToComment? , NSError?) -> Void) {
         
-        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&tags=\(Global.tag1)&title=\(Global.title)"
+        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&tags=\(Global.tag1)&title=\(Global.title)&url=\(Global.articleUrl)"
+        print(url)
         
         Alamofire.request(.GET, url)
             .responseJSON { response in
@@ -113,7 +114,7 @@ class NetworkManager {
     
     func postReplyForComment(name : String ,email : String ,comment : String ,comment_id : String,completion : (ResponseToComment? , NSError?) -> Void) {
         
-        let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)"
+        let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
 
         Alamofire.request(.GET, url)
             .responseJSON { response in

@@ -23,6 +23,14 @@ public class VuukleCommentsBuilder : NSObject {
     }
     
     /**
+     Set true for visible your WebContent from Aticle URL!
+     */
+    public func addWebViewArticleURL(isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.setYourWebContent = isVisible
+        return self
+    }
+    
+    /**
      Required field !
      
      For example: "https://vuukle.com/api.asmx/"

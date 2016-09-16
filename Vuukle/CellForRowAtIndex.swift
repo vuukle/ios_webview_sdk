@@ -254,6 +254,7 @@ public class  CellForRowAtIndex {
         }
         return loadMoreCell
     }
+
     
     func returnCellForRow(object : AnyObject , tableView : UITableView) -> UITableViewCell{
         var cell = UITableViewCell()
@@ -276,6 +277,14 @@ public class  CellForRowAtIndex {
             cell = returnAddCommentCellForReply(cell, object: objectForcell)
             return cell
         } else if object is WebView {
+            let objectForcell : WebView = object as! WebView
+            if objectForcell.advertisingBanner == true {
+               let  cell = tableView.dequeueReusableCellWithIdentifier("WebViewCell") as! WebViewCell
+                return cell
+            } else {
+               let cell = tableView.dequeueReusableCellWithIdentifier("ContentWebViewCell") as! ContentWebViewCell
+                return cell
+            }
             cell = tableView.dequeueReusableCellWithIdentifier("WebViewCell") as! WebViewCell
         } else if object is GetCommentsFeed {
             let objectForcell : GetCommentsFeed = object as! GetCommentsFeed

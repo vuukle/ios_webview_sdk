@@ -3,13 +3,15 @@
 import UIKit
 
 class WebViewCell: UITableViewCell ,UIWebViewDelegate {
-    
+    var delegate : WebViewCell?
     
     @IBOutlet weak var webView: UIWebView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         let frameworkBundle = NSBundle(forClass: WebViewCell.self)
+        webView.scrollView.scrollEnabled = false
+        webView.scrollView.bounces = false
         
         let url1 = frameworkBundle.URLForResource("non_secure", withExtension:"html")
         if let htmlUrl = url1 {

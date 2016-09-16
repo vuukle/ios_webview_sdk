@@ -50,6 +50,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let nibWebViewCell = UINib(nibName: "WebViewCell", bundle: bundleLoadMoreCell)
             self.tableView.registerNib(nibWebViewCell, forCellReuseIdentifier: "WebViewCell")
             
+            let nibContentWebViewCell = UINib(nibName: "ContentWebViewCell", bundle: bundleLoadMoreCell)
+            self.tableView.registerNib(nibContentWebViewCell, forCellReuseIdentifier: "ContentWebViewCell")
+            
             self.tableView.estimatedRowHeight = 180
             
             self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CommentViewController.dismissKeyboard)))
@@ -189,6 +192,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
                 if error == nil {
+                    print(string)
                     commen.up_votes! += 1
                     self.defaults.setObject("\(commen.comment_id)", forKey: "\(commen.comment_id)")
                     self.defaults.synchronize()
@@ -284,11 +288,20 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func getComments() {
         if canGetCommentsFeed == true {
             canGetCommentsFeed = false
+            if Global.setYourWebContent == true && Global.articleUrl != ""{
+                var webView = WebView()
+                webView.advertisingBanner = false
+                self.arrayObjectsForCell.removeAll()
+                self.arrayObjectsForCell.append(webView)
+            }
+            tableView.reloadData()
             NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
                 if error == nil {
+                    self.refreshControl?.endRefreshing()
                     self.saveCommentData(array!)
                 } else {
                     NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
+                        self.refreshControl?.endRefreshing()
                         self.saveCommentData(array!)
                     }
                 }
@@ -340,7 +353,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func postButtonPressed(tableCell: AddCommentCell, postButtonPressed postButton: AnyObject) {
         
-        if tableCell.tag == 2 {
+        if arrayObjectsForCell[tableCell.tag] is AddComment {
+            let comment = arrayObjectsForCell[tableCell.tag] as! AddComment
+            if comment.addComment == true {
+               
             if morePost == true {
                 
                 let indexPath = NSIndexPath.init(forRow: tableCell.tag , inSection: 0)
@@ -354,19 +370,22 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     let comment = PrivetFunctions.sharedInstance.encodingString(cell.commentTextView.text!)
                     NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                         if (error == nil) {
-                            self.addLocalCommentObjectToTableView(cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)!)
+                            self.morePost = true
+                            self.addLocalCommentObjectToTableView(cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                         } else {
                             NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                                 if (error == nil) {
-                                    self.addLocalCommentObjectToTableView(cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)!)
-                                } 
+                                    self.addLocalCommentObjectToTableView(cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                } else {
+                                    self.morePost = true
+                                }
                             }
                         }
                     }
                 }
+              }
             }
-            
-        } else {
+        } else if arrayObjectsForCell[tableCell.tag] is AddReply {
             if morePost == true {
                 let indexPath = NSIndexPath.init(forRow: tableCell.tag, inSection: 0)
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! AddCommentCell
@@ -383,12 +402,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             
                         } else {
                             NetworkManager.sharedInstance.postReplyForComment(nameText, email: emailText, comment: commentText, comment_id: commen.comment_id!) { (responce ,error) in
-                                self.addLocalPeplyObjectToTableView(cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: commen.comment_id!)                            }
+                                self.addLocalPeplyObjectToTableView(cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: commen.comment_id!)
+                                }
+                            }
                         }
                     }
                 }
             }
-        }
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell, logOutButtonPressed logOutButton: AnyObject) {
@@ -502,15 +522,15 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         self.morePost = true
     }
     
-    func addLocalCommentObjectToTableView(cell : AddCommentCell, commentText : String,nameText : String , emailText : String , commentID : String) {
+    func addLocalCommentObjectToTableView(cell : AddCommentCell, commentText : String,nameText : String , emailText : String , commentID : String ,index : Int) {
         let date = NSDate()
         let dateFormat = NSDateFormatter.init()
         dateFormat.dateStyle = .FullStyle
         dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let stringOfDateInNewFornat = dateFormat.stringFromDate(date)
         Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
-        let addComment = PrivetFunctions.sharedInstance.addComment(commentText, name: nameText, ts: stringOfDateInNewFornat, email: emailText, up_votes: 0, down_votes: 0, comment_id: commentID, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, level : 0)
-        self.arrayObjectsForCell.insert(addComment, atIndex: 3)
+        let addComment = PrivetFunctions.sharedInstance.addComment(commentText, name: nameText, ts: stringOfDateInNewFornat, email: emailText, up_votes: 0, down_votes: 0, comment_id: commentID, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, level : 0 )
+        self.arrayObjectsForCell.insert(addComment, atIndex: index + 1)
         self.totalComentsCount += 1
         self.tableView.reloadData()
         cell.commentTextView.text = "Please write a comment..."
@@ -541,14 +561,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func saveCommentData(array : [GetCommentsFeed]) {
-        self.arrayObjectsForCell.removeAll()
-        self.refreshControl?.endRefreshing()
+
         self.from_count = 0
         self.to_count = Global.countLoadCommentsInPagination
         if array.count >= Global.countLoadCommentsInPagination {
+
             self.arrayObjectsForCell.append(WebView())
             self.arrayObjectsForCell.append(Emoticon())
-            self.arrayObjectsForCell.append(AddComment())
+            var addComment = AddComment()
+            addComment.addComment = true
+            self.arrayObjectsForCell.append(addComment)
             for object in array {
                 self.arrayObjectsForCell.append(object)
             }
@@ -556,6 +578,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             load.showLoadMoreButton = true
             self.arrayObjectsForCell.append(load)
         } else {
+            
             self.arrayObjectsForCell.append(WebView())
             self.arrayObjectsForCell.append(Emoticon())
             self.arrayObjectsForCell.append(AddComment())

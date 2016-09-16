@@ -52,6 +52,8 @@
 		04F201451D86FA2900F17A96 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2013F1D86FA2900F17A96 /* Emoticon.swift */; };
 		04F2016B1D86FE1D00F17A96 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F201691D86FE1D00F17A96 /* CommentCell.swift */; };
 		04F2016C1D86FE1D00F17A96 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F2016A1D86FE1D00F17A96 /* CommentCell.xib */; };
+		04F202501D8AD1C100F17A96 /* ContentWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2024F1D8AD1C100F17A96 /* ContentWebViewCell.swift */; };
+		04F202521D8AD1D100F17A96 /* ContentWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F202511D8AD1D100F17A96 /* ContentWebViewCell.xib */; };
 		04F2FF1E1D76EC9A00F17A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F2FF1D1D76EC9A00F17A96 /* Main.storyboard */; };
 		04F2FF621D7877E500F17A96 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2FF611D7877E500F17A96 /* WebViewCell.swift */; };
 		04F2FF641D7877F000F17A96 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F2FF631D7877F000F17A96 /* WebViewCell.xib */; };
@@ -107,6 +109,8 @@
 		04F2013F1D86FA2900F17A96 /* Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoticon.swift; sourceTree = "<group>"; };
 		04F201691D86FE1D00F17A96 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		04F2016A1D86FE1D00F17A96 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
+		04F2024F1D8AD1C100F17A96 /* ContentWebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentWebViewCell.swift; sourceTree = "<group>"; };
+		04F202511D8AD1D100F17A96 /* ContentWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentWebViewCell.xib; sourceTree = "<group>"; };
 		04F2FF1D1D76EC9A00F17A96 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		04F2FF611D7877E500F17A96 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
 		04F2FF631D7877F000F17A96 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
@@ -279,6 +283,7 @@
 		04114E581D75BBAF00113721 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				04F2024E1D8AD17D00F17A96 /* ContentWebViewCell */,
 				04F2FF601D7877CC00F17A96 /* WebViewCell */,
 				04114E5D1D75BE5700113721 /* CommentCell */,
 				04114E5C1D75BE4400113721 /* AddCommentCell */,
@@ -340,6 +345,15 @@
 				04114E731D75BEE800113721 /* CommentViewController.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		04F2024E1D8AD17D00F17A96 /* ContentWebViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				04F2024F1D8AD1C100F17A96 /* ContentWebViewCell.swift */,
+				04F202511D8AD1D100F17A96 /* ContentWebViewCell.xib */,
+			);
+			name = ContentWebViewCell;
 			sourceTree = "<group>";
 		};
 		04F2FF601D7877CC00F17A96 /* WebViewCell */ = {
@@ -438,6 +452,7 @@
 				04F201371D86F9D200F17A96 /* smile-excited.png in Resources */,
 				04F201321D86F9D200F17A96 /* vuukle_logo.jpg in Resources */,
 				04F2012E1D86F9D200F17A96 /* twitter.png in Resources */,
+				04F202521D8AD1D100F17A96 /* ContentWebViewCell.xib in Resources */,
 				04F201301D86F9D200F17A96 /* images.png in Resources */,
 				04F2012B1D86F9D200F17A96 /* non_secure.html in Resources */,
 				04F201311D86F9D200F17A96 /* thumb-down.png in Resources */,
@@ -453,6 +468,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04114E2F1D75BA9800113721 /* CellForRowAtIndex.swift in Sources */,
+				04F202501D8AD1C100F17A96 /* ContentWebViewCell.swift in Sources */,
 				04114E401D75BB3800113721 /* ResponseToComment.swift in Sources */,
 				04114E761D75BF3A00113721 /* AppDelegate.swift in Sources */,
 				04114E2D1D75BA8900113721 /* CommentsBuilder.swift in Sources */,
