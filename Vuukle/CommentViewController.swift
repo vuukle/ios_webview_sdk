@@ -4,7 +4,14 @@ import UIKit
 import Alamofire
 import Social
 
+public class Constants : NSObject {
+    static let ContentHeightDidChaingedNotification = "ContentHeightDidChaingedNotification"
+}
+
+
+
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate{
+    
     static let sharedInstance = Global()
     var arrayObjectsForCell = [AnyObject]()
     var rating = EmoteRating()
@@ -24,7 +31,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     var countOthetCell = 3
     var indexOfLastObject = -1
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet public weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +86,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 NetworkManager.sharedInstance.getEmoticonRating { (data) in
                     PrivetFunctions.sharedInstance.setEmoticonCountVotes(data)
                     self.tableView.reloadData()
+                }
+                if Global.scrolingTableView == false {
+                self.tableView.scrollEnabled = false
+                self.tableView.alwaysBounceVertical = false
+                } else {
+                    self.tableView.scrollEnabled = true
+                    self.tableView.alwaysBounceVertical = true
                 }
             }
         }
@@ -475,7 +489,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func keyboardWillShow(sender: NSNotification) {
         if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
-            self.view.frame.origin.y = -keyboardSize.height
+//            self.view.frame.origin.y = -keyboardSize.height
         }
     }
     func keyboardWillHide(sender: NSNotification) {
@@ -557,6 +571,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             self.arrayObjectsForCell.append(load)
             
         }
+        
         self.tableView.reloadData()
     }
     
@@ -594,4 +609,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         self.tableView.reloadData()
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
+            let myNumber = NSNumber(float: Float(tableView.contentSize.height))
+            
+            NSNotificationCenter.defaultCenter().postNotificationName(Constants.ContentHeightDidChaingedNotification, object: myNumber)
+            }
+    }   
 }

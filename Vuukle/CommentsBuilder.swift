@@ -2,15 +2,24 @@
 import Foundation
 import UIKit
 
+
+
+
 public class VuukleCommentsBuilder : NSObject {
     
-   public override init() { }
+
+   public override init() {
+    super.init()
+    
+    }
+    
     
     /**
      Set true for visible emote rating!
      */
     public func setVuukleEmoteVisible(isVisible : Bool) -> VuukleCommentsBuilder {
         Global.showEmoticonCell = isVisible
+        
         return self
     }
     
@@ -27,6 +36,11 @@ public class VuukleCommentsBuilder : NSObject {
      */
     public func addWebViewArticleURL(isVisible : Bool) -> VuukleCommentsBuilder {
         Global.setYourWebContent = isVisible
+        return self
+    }
+    
+    public func scrolingTableView(scrol : Bool) -> VuukleCommentsBuilder {
+        Global.scrolingTableView = scrol
         return self
     }
     
@@ -230,11 +244,17 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set : "self.view"
      */
-    public func buildVuukle(view : UIView){
+    public func buildVuukle(view : UIView) {
         let bundle = NSBundle(forClass: CommentViewController.self)
-        let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewControllerWithIdentifier("CommentViewController")
+        let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewControllerWithIdentifier("CommentViewController") as! CommentViewController
         view.frame = vc.view.frame
+        
+        
+        
         view.addSubview(vc.view)
+
+        
     }
     
+ 
 }

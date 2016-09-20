@@ -22,13 +22,14 @@ class Global {
     static var appId = ""
     static var url = ""
     static var tag2 = ""
+    static var scrolingTableView = false
     static var setYourWebContent = false
     static var defaultImageUrl = "http://3aa0b40d2aab024f527d-510de3faeb1a65410c7c889a906ce44e.r42.cf6.rackcdn.com/avatar.png"
     static var websiteUrl = "https://vuukle.com"
     
     static var showEmoticonCell = true
     static var showRefreshControl = false
-    static var countLoadCommentsInPagination = 9
+    static var countLoadCommentsInPagination = 20
     static let leftConstrainCommentSize = 16
     static let leftConstrainReplySize = 75
     
