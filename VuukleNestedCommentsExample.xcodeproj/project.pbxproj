@@ -1,0 +1,385 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		51428F6F1D926FBB002AED6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51428F6E1D926FBB002AED6D /* main.m */; };
+		51428F721D926FBB002AED6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51428F711D926FBB002AED6D /* AppDelegate.m */; };
+		51428F781D926FBB002AED6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51428F761D926FBB002AED6D /* Main.storyboard */; };
+		51428F7A1D926FBB002AED6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51428F791D926FBB002AED6D /* Assets.xcassets */; };
+		51428F7D1D926FBB002AED6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51428F7B1D926FBB002AED6D /* LaunchScreen.storyboard */; };
+		51428F861D9271C5002AED6D /* ExampleWebViewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 51428F851D9271C5002AED6D /* ExampleWebViewVC.m */; };
+		A82A980ADBB15B1E99E9A738 /* Pods_VuukleNestedCommentsExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02B0D9626B82BE0E490FD956 /* Pods_VuukleNestedCommentsExample.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		02B0D9626B82BE0E490FD956 /* Pods_VuukleNestedCommentsExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VuukleNestedCommentsExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C68D07BEEB7CE63AE6B4271 /* Pods-VuukleNestedCommentsExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VuukleNestedCommentsExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-VuukleNestedCommentsExample/Pods-VuukleNestedCommentsExample.release.xcconfig"; sourceTree = "<group>"; };
+		51428F6A1D926FBB002AED6D /* VuukleNestedCommentsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VuukleNestedCommentsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		51428F6E1D926FBB002AED6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		51428F701D926FBB002AED6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		51428F711D926FBB002AED6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		51428F771D926FBB002AED6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		51428F791D926FBB002AED6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51428F7C1D926FBB002AED6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		51428F7E1D926FBB002AED6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51428F841D9271C5002AED6D /* ExampleWebViewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleWebViewVC.h; sourceTree = "<group>"; };
+		51428F851D9271C5002AED6D /* ExampleWebViewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleWebViewVC.m; sourceTree = "<group>"; };
+		C3EA48A63CEA2998079482CD /* Pods-VuukleNestedCommentsExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VuukleNestedCommentsExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VuukleNestedCommentsExample/Pods-VuukleNestedCommentsExample.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		51428F671D926FBB002AED6D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A82A980ADBB15B1E99E9A738 /* Pods_VuukleNestedCommentsExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		262927B2CD3ACDE984553D45 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				02B0D9626B82BE0E490FD956 /* Pods_VuukleNestedCommentsExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		51428F611D926FBB002AED6D = {
+			isa = PBXGroup;
+			children = (
+				51428F6C1D926FBB002AED6D /* VuukleNestedCommentsExample */,
+				51428F6B1D926FBB002AED6D /* Products */,
+				C232E369453A252C7DDE4A6D /* Pods */,
+				262927B2CD3ACDE984553D45 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		51428F6B1D926FBB002AED6D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51428F6A1D926FBB002AED6D /* VuukleNestedCommentsExample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		51428F6C1D926FBB002AED6D /* VuukleNestedCommentsExample */ = {
+			isa = PBXGroup;
+			children = (
+				51428F701D926FBB002AED6D /* AppDelegate.h */,
+				51428F711D926FBB002AED6D /* AppDelegate.m */,
+				51428F841D9271C5002AED6D /* ExampleWebViewVC.h */,
+				51428F851D9271C5002AED6D /* ExampleWebViewVC.m */,
+				51428F761D926FBB002AED6D /* Main.storyboard */,
+				51428F791D926FBB002AED6D /* Assets.xcassets */,
+				51428F7B1D926FBB002AED6D /* LaunchScreen.storyboard */,
+				51428F7E1D926FBB002AED6D /* Info.plist */,
+				51428F6D1D926FBB002AED6D /* Supporting Files */,
+			);
+			path = VuukleNestedCommentsExample;
+			sourceTree = "<group>";
+		};
+		51428F6D1D926FBB002AED6D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				51428F6E1D926FBB002AED6D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C232E369453A252C7DDE4A6D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3EA48A63CEA2998079482CD /* Pods-VuukleNestedCommentsExample.debug.xcconfig */,
+				2C68D07BEEB7CE63AE6B4271 /* Pods-VuukleNestedCommentsExample.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51428F691D926FBB002AED6D /* VuukleNestedCommentsExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51428F811D926FBB002AED6D /* Build configuration list for PBXNativeTarget "VuukleNestedCommentsExample" */;
+			buildPhases = (
+				621B9FD5C091BDF272E6C2A2 /* [CP] Check Pods Manifest.lock */,
+				51428F661D926FBB002AED6D /* Sources */,
+				51428F671D926FBB002AED6D /* Frameworks */,
+				51428F681D926FBB002AED6D /* Resources */,
+				620EFBC50D87FA06EB523ABB /* [CP] Embed Pods Frameworks */,
+				AB09E948C6253EC782E99B91 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VuukleNestedCommentsExample;
+			productName = VuukleNestedCommentsExample;
+			productReference = 51428F6A1D926FBB002AED6D /* VuukleNestedCommentsExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		51428F621D926FBB002AED6D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Yuriy Lyubinets";
+				TargetAttributes = {
+					51428F691D926FBB002AED6D = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 51428F651D926FBB002AED6D /* Build configuration list for PBXProject "VuukleNestedCommentsExample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 51428F611D926FBB002AED6D;
+			productRefGroup = 51428F6B1D926FBB002AED6D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				51428F691D926FBB002AED6D /* VuukleNestedCommentsExample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		51428F681D926FBB002AED6D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51428F7D1D926FBB002AED6D /* LaunchScreen.storyboard in Resources */,
+				51428F7A1D926FBB002AED6D /* Assets.xcassets in Resources */,
+				51428F781D926FBB002AED6D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		620EFBC50D87FA06EB523ABB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VuukleNestedCommentsExample/Pods-VuukleNestedCommentsExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		621B9FD5C091BDF272E6C2A2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AB09E948C6253EC782E99B91 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-VuukleNestedCommentsExample/Pods-VuukleNestedCommentsExample-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		51428F661D926FBB002AED6D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51428F721D926FBB002AED6D /* AppDelegate.m in Sources */,
+				51428F6F1D926FBB002AED6D /* main.m in Sources */,
+				51428F861D9271C5002AED6D /* ExampleWebViewVC.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		51428F761D926FBB002AED6D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51428F771D926FBB002AED6D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		51428F7B1D926FBB002AED6D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51428F7C1D926FBB002AED6D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		51428F7F1D926FBB002AED6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		51428F801D926FBB002AED6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		51428F821D926FBB002AED6D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3EA48A63CEA2998079482CD /* Pods-VuukleNestedCommentsExample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VuukleNestedCommentsExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Vuukle.VuukleNestedCommentsExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		51428F831D926FBB002AED6D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C68D07BEEB7CE63AE6B4271 /* Pods-VuukleNestedCommentsExample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = VuukleNestedCommentsExample/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Vuukle.VuukleNestedCommentsExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		51428F651D926FBB002AED6D /* Build configuration list for PBXProject "VuukleNestedCommentsExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51428F7F1D926FBB002AED6D /* Debug */,
+				51428F801D926FBB002AED6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51428F811D926FBB002AED6D /* Build configuration list for PBXNativeTarget "VuukleNestedCommentsExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51428F821D926FBB002AED6D /* Debug */,
+				51428F831D926FBB002AED6D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 51428F621D926FBB002AED6D /* Project object */;
+}

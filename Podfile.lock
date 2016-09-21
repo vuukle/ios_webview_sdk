@@ -1,0 +1,23 @@
+PODS:
+  - Alamofire (3.4.1)
+  - AlamofireImage (2.4.0):
+    - Alamofire (~> 3.3)
+  - Vuukle (0.9.0):
+    - Alamofire (~> 3.4)
+    - AlamofireImage (~> 2.0)
+
+DEPENDENCIES:
+  - Vuukle (from `/Users/yuriylubinets/Documents/YuraDocuments/StarApps/VuukleNestedCommentsExample/Pods/vuukle_iOS_SDK-master-2`)
+
+EXTERNAL SOURCES:
+  Vuukle:
+    :path: /Users/yuriylubinets/Documents/YuraDocuments/StarApps/VuukleNestedCommentsExample/Pods/vuukle_iOS_SDK-master-2
+
+SPEC CHECKSUMS:
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  AlamofireImage: 87408b652e0f5ae5fe364035f15aea8b9b24c77e
+  Vuukle: 609d37f506a1f7fc99f0f108e3e131fd5a0208bd
+
+PODFILE CHECKSUM: 2689700fe81f680b5ca1730df6cf845be4a5a180
+
+COCOAPODS: 1.0.1
