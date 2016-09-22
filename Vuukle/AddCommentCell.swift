@@ -96,7 +96,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
         let btnDoneOnKeyboard = UIBarButtonItem(title: "Done",
                                                 style: .plain,
                                                 target: self,
-                                                action: #selector(doneBtnFromKeyboardClicked(sender:)))
+                                                action: #selector(doneBtnFromKeyboardClicked(_:)))
         viewForDoneButtonOnKeyboard.setItems([btnDoneOnKeyboard], animated: false)
         
         nameTextField.inputAccessoryView = viewForDoneButtonOnKeyboard
@@ -126,7 +126,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate {
             commentTextView.textColor = UIColor.lightGray
         }
     }
-
+    
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

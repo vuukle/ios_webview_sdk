@@ -9,7 +9,7 @@ class PrivetFunctions {
     static let sharedInstance = PrivetFunctions()
     let defaults : UserDefaults = UserDefaults.standard
     
-    func addComment(comment : String,name :String ,ts : String ,email : String ,up_votes : Int ,down_votes : Int ,comment_id : String ,replies : Int , user_id : String ,avatar_url : String ,parent_id : String , user_points : Int ,myComment : Bool, level : Int) -> GetCommentsFeed {
+    func addComment(_ comment : String,name :String ,ts : String ,email : String ,up_votes : Int ,down_votes : Int ,comment_id : String ,replies : Int , user_id : String ,avatar_url : String ,parent_id : String , user_points : Int ,myComment : Bool, level : Int) -> GetCommentsFeed {
         let addComment = GetCommentsFeed()
         
         addComment.comment = comment
@@ -31,7 +31,7 @@ class PrivetFunctions {
         return addComment
     }
     
-    func addReply(comment : String,name :String ,ts : String ,email : String ,up_votes : Int ,down_votes : Int ,comment_id : String ,replies : Int , user_id : String ,avatar_url : String ,parent_id : String , user_points : Int ,myComment : Bool, level : Int) -> GetCommentsFeed {
+    func addReply(_ comment : String,name :String ,ts : String ,email : String ,up_votes : Int ,down_votes : Int ,comment_id : String ,replies : Int , user_id : String ,avatar_url : String ,parent_id : String , user_points : Int ,myComment : Bool, level : Int) -> GetCommentsFeed {
         let addComment = GetCommentsFeed()
         
         addComment.comment = comment
@@ -52,64 +52,64 @@ class PrivetFunctions {
         
         return addComment
     }
-    func showAlert(title : String ,message : String) {
+    func showAlert(_ title : String ,message : String) {
         let ErrorAlert = UIAlertView(title: "\(title)", message: "\(message)", delegate: self, cancelButtonTitle: "Ok")
         ErrorAlert.show()
     }
     
-    func checkFields(name : String , email : String , comment : String) -> Bool {
+    func checkFields(_ name : String , email : String , comment : String) -> Bool {
         var allFill = false
         if name != "" && email != "" && comment != "" && comment != "Please write a comment..."{
             if ((email.range(of: "@")) != nil) && ((email.range(of: ".")) != nil) {
                 allFill = true
             } else {
-                showAlert( title: "Please enter a correct email!",message: "")
+                showAlert( "Please enter a correct email!",message: "")
                 allFill = false
             }
         } else if name == ""{
-            showAlert(title: "Please enter a name!", message: "")
+            showAlert("Please enter a name!", message: "")
             allFill = false
         } else if email == ""{
-            showAlert(title: "Please enter a email!", message: "")
+            showAlert("Please enter a email!", message: "")
             allFill = false
         } else if comment == "Please write a comment..."{
-            showAlert(title: "Please enter a comment!", message: "")
+            showAlert("Please enter a comment!", message: "")
             allFill = false
         }
         return allFill
     }
     
-    func setDateInFofmat(dateInString : String) -> NSDate{
-        var date = NSDate()
+    func setDateInFofmat(_ dateInString : String) -> Date{
+        var date = Date()
         if dateInString != "" {
             let dateString:String = dateInString
             let dateFormat = DateFormatter.init()
             dateFormat.dateStyle = .full
             dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
-            date = dateFormat.date(from: dateString)! as NSDate
+            date = (dateFormat.date(from: dateString)! as NSDate) as Date
         }
         return date
     }
     
-    func encodingString(string : String) -> String{
-
-        return string.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+    func encodingString(_ string : String) -> String{
+        
+        return string.addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)!
         
     }
     
-    func decodingString(string : String) -> String{
+    func decodingString(_ string : String) -> String{
         return string.removingPercentEncoding!
     }
-
-
-    func setRatePercent (first : Int , second : Int , thirt : Int , fourth : Int , fifth : Int , sixt : Int , element : Int) -> Int {
+    
+    
+    func setRatePercent (_ first : Int , second : Int , thirt : Int , fourth : Int , fifth : Int , sixt : Int , element : Int) -> Int {
         let sume : Int = first + second + thirt + fourth + fifth + sixt
         let percent = (element * 100)/sume
         return percent
     }
     
     
-    func searchUpperChracters(fullName: String) -> String{
+    func searchUpperChracters(_ fullName: String) -> String{
         var output1 = ""
         var output2 = ""
         var output = ""
@@ -138,13 +138,13 @@ class PrivetFunctions {
         return output
     }
     
-    func setRate(article_id : String ,emote : Int , tableView : UITableView) {
+    func setRate(_ article_id : String ,emote : Int , tableView : UITableView) {
         
         if  self.defaults.object(forKey: "\(article_id)") as? String == nil{
             self.defaults.set("\(emote)", forKey: "\(article_id)")
             self.defaults.synchronize()
-            PrivetFunctions.sharedInstance.showAlert( title: "Voted!",message: "You just voted!")
-            NetworkManager.sharedInstance.setRaring(article_id: article_id, emote: emote) { (response) in
+            PrivetFunctions.sharedInstance.showAlert( "Voted!",message: "You just voted!")
+            NetworkManager.sharedInstance.setRaring(article_id, emote: emote) { (response) in
                 switch emote {
                 case 1:
                     CellForRowAtIndex.sharedInstance.first += 1
@@ -165,13 +165,13 @@ class PrivetFunctions {
             }
             
         } else {
-            PrivetFunctions.sharedInstance.showAlert( title: "You have already voted!",message: "")
+            PrivetFunctions.sharedInstance.showAlert( "You have already voted!",message: "")
         }
     }
     
-
     
-    func setEmoticonCountVotes (data : EmoteRating){
+    
+    func setEmoticonCountVotes (_ data : EmoteRating){
         CellForRowAtIndex.sharedInstance.first = data.first
         CellForRowAtIndex.sharedInstance.second = data.second
         CellForRowAtIndex.sharedInstance.third = data.third

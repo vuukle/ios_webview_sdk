@@ -1,10 +1,3 @@
-//
-//  Comment.swift
-//  Vuukle Comment
-//
-//  Created by Орест on 07.09.16.
-//  Copyright © 2016 Midgets. All rights reserved.
-//
 
 import Foundation
 
@@ -29,7 +22,7 @@ class Comment {
     var level : Int?
     var myReplys : NSArray?
     
-    static func getCommentWhithArray(pDict : NSDictionary) -> Comment {
+    static func getCommentWhithArray(_ pDict : NSDictionary) -> Comment {
         
         let lComment = Comment()
         lComment.comment = pDict["comment"] as? String ?? ""

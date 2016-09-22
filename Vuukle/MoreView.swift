@@ -1,12 +1,11 @@
 
-
 import UIKit
 
 class MoreView: UIView {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var shadowView: UIView!
-    @IBAction func closeButtonPressed(sender: AnyObject) {
+    @IBAction func closeButtonPressed(_ sender: AnyObject) {
         self.removeFromSuperview()
     }
     

@@ -5,13 +5,13 @@ import Alamofire
 
 protocol CommentCellDelegate {
     
-    func upvoteButtonPressed(tableCell : CommentCell ,upvoteButtonPressed upvoteButton : AnyObject )
-    func downvoteButtonPressed(tableCell : CommentCell ,downvoteButtonPressed downvoteButton : AnyObject )
-    func replyButtonPressed(tableCell : CommentCell ,replyButtonPressed replyButton : AnyObject )
-    func moreButtonPressed(tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
-    func showReplyButtonPressed(tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
-    func firstShareButtonPressed(tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
-    func secondShareButtonPressed(tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
+    func upvoteButtonPressed(_ tableCell : CommentCell ,upvoteButtonPressed upvoteButton : AnyObject )
+    func downvoteButtonPressed(_ tableCell : CommentCell ,downvoteButtonPressed downvoteButton : AnyObject )
+    func replyButtonPressed(_ tableCell : CommentCell ,replyButtonPressed replyButton : AnyObject )
+    func moreButtonPressed(_ tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
+    func showReplyButtonPressed(_ tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
+    func firstShareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
+    func secondShareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
 }
 
 class CommentCell: UITableViewCell {
@@ -29,8 +29,8 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var InitialsLabel: UILabel!
     @IBOutlet weak var replyCount: UILabel!
     @IBOutlet weak var showReply: UIButton!
-
-
+    
+    
     @IBOutlet weak var imageLeftCostraint: NSLayoutConstraint!
     @IBOutlet weak var totalCountLeftConstraint: NSLayoutConstraint!
     @IBOutlet weak var upvoteButtonLeftConstraint: NSLayoutConstraint!
@@ -39,30 +39,30 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var countReplyWidth: NSLayoutConstraint!
     
     
-   
-    @IBAction func upvoteButton(sender: AnyObject) {
-        self.delegate?.upvoteButtonPressed(tableCell: self , upvoteButtonPressed: sender)
+    
+    @IBAction func upvoteButton(_ sender: AnyObject) {
+        self.delegate?.upvoteButtonPressed(self , upvoteButtonPressed: sender)
     }
-    @IBAction func downvoteButton(sender: AnyObject) {
-        self.delegate?.downvoteButtonPressed(tableCell: self , downvoteButtonPressed: sender)
+    @IBAction func downvoteButton(_ sender: AnyObject) {
+        self.delegate?.downvoteButtonPressed(self , downvoteButtonPressed: sender)
     }
-    @IBAction func replyButton(sender: AnyObject) {
-        self.delegate?.replyButtonPressed(tableCell: self , replyButtonPressed: sender)
+    @IBAction func replyButton(_ sender: AnyObject) {
+        self.delegate?.replyButtonPressed(self , replyButtonPressed: sender)
     }
-    @IBAction func moreButton(sender: AnyObject) {
-        self.delegate?.moreButtonPressed(tableCell: self , moreButtonPressed: sender)
+    @IBAction func moreButton(_ sender: AnyObject) {
+        self.delegate?.moreButtonPressed(self , moreButtonPressed: sender)
     }
-    @IBAction func showReplyButton(sender: AnyObject) {
-        self.delegate?.showReplyButtonPressed(tableCell: self , showReplyButtonPressed: sender)
+    @IBAction func showReplyButton(_ sender: AnyObject) {
+        self.delegate?.showReplyButtonPressed(self , showReplyButtonPressed: sender)
     }
-    @IBAction func shareButton(sender: AnyObject) {
-        self.delegate?.firstShareButtonPressed(tableCell: self, shareButtonPressed: sender)
+    @IBAction func shareButton(_ sender: AnyObject) {
+        self.delegate?.firstShareButtonPressed(self, shareButtonPressed: sender)
     }
-    @IBAction func secondShareButton(sender: AnyObject) {
-        self.delegate?.secondShareButtonPressed(tableCell: self, shareButtonPressed: sender)
+    @IBAction func secondShareButton(_ sender: AnyObject) {
+        self.delegate?.secondShareButtonPressed(self, shareButtonPressed: sender)
     }
     
-   
+    
     var request: Request?
     
     var imageForCell: String? {
@@ -70,13 +70,13 @@ class CommentCell: UITableViewCell {
             if let lImage = imageForCell {
                 
                 request?.cancel()
-                request = NetworkManager.sharedInstance.getImageWhihURL(imageURL: NSURL(string: lImage)!, completion: { (image) in
+                request = NetworkManager.sharedInstance.getImageWhihURL(URL(string: lImage)! as NSURL, completion: { (image) in
                     if let lResponseImage = image {
                         self.userImage.image = lResponseImage
                         
                     }
                 })
-
+                
             }
         }
     }
@@ -91,13 +91,13 @@ class CommentCell: UITableViewCell {
         InitialsLabel.layer.cornerRadius = 22
         InitialsLabel.layer.masksToBounds = true
         
-
+        
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }

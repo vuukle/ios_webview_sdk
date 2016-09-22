@@ -2,14 +2,14 @@
 import Foundation
 import UIKit
 
-public class VuukleCommentsBuilder : NSObject {
+open class VuukleCommentsBuilder : NSObject {
     
-   public override init() { }
+    public override init() { }
     
     /**
      Set true for visible emote rating!
      */
-    public func setVuukleEmoteVisible(isVisible : Bool) -> VuukleCommentsBuilder {
+    open func setVuukleEmoteVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
         Global.showEmoticonCell = isVisible
         return self
     }
@@ -17,7 +17,7 @@ public class VuukleCommentsBuilder : NSObject {
     /**
      Set true for visible refres!
      */
-    public func setVuukleRefreshVisible(isVisible : Bool) -> VuukleCommentsBuilder {
+    open func setVuukleRefreshVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
         Global.showRefreshControl = isVisible
         return self
     }
@@ -25,7 +25,7 @@ public class VuukleCommentsBuilder : NSObject {
     /**
      Set true for visible your WebContent from Aticle URL!
      */
-    public func addWebViewArticleURL(isVisible : Bool) -> VuukleCommentsBuilder {
+    open func addWebViewArticleURL(_ isVisible : Bool) -> VuukleCommentsBuilder {
         Global.setYourWebContent = isVisible
         return self
     }
@@ -35,7 +35,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      For example: "https://vuukle.com/api.asmx/"
      */
-    public func setVuukleBaseUrl(url : String) -> VuukleCommentsBuilder {
+    open func setVuukleBaseUrl(_ url : String) -> VuukleCommentsBuilder {
         Global.baseURL = url
         return self
     }
@@ -43,7 +43,7 @@ public class VuukleCommentsBuilder : NSObject {
     /**
      Get id from Vuukle site. Every article has unique id!
      */
-    public func setVuukleArticleId(articleId : String) -> VuukleCommentsBuilder{
+    open func setVuukleArticleId(_ articleId : String) -> VuukleCommentsBuilder{
         Global.article_id = articleId
         return self
     }
@@ -57,7 +57,7 @@ public class VuukleCommentsBuilder : NSObject {
      so when library installed on your app, You should paste domain for ‘host’ property without http:// or https:// or www.
      
      */
-    public func setVuukleHost(host : String) -> VuukleCommentsBuilder{
+    open func setVuukleHost(_ host : String) -> VuukleCommentsBuilder{
         Global.host = host
         return self
     }
@@ -78,7 +78,7 @@ public class VuukleCommentsBuilder : NSObject {
      2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
      
      */
-    public func setVuukleApiKey(apiKey : String) -> VuukleCommentsBuilder{
+    open func setVuukleApiKey(_ apiKey : String) -> VuukleCommentsBuilder{
         Global.api_key = apiKey
         return self
     }
@@ -99,7 +99,7 @@ public class VuukleCommentsBuilder : NSObject {
      2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
      
      */
-    public func setVuukleSecretKey(secretKey : String) -> VuukleCommentsBuilder{
+    open func setVuukleSecretKey(_ secretKey : String) -> VuukleCommentsBuilder{
         Global.secret_key = secretKey
         return self
     }
@@ -112,7 +112,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      <url>https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</url>
      */
-    public func setVuukleTimeZone(timeZone : String) -> VuukleCommentsBuilder{
+    open func setVuukleTimeZone(_ timeZone : String) -> VuukleCommentsBuilder{
         Global.time_zone = timeZone
         return self
     }
@@ -129,7 +129,7 @@ public class VuukleCommentsBuilder : NSObject {
      it opens and our library should have unique properties
      for each article like URL, TAGS, TITLE.
      */
-    public func firstVuukleTag(tag : String) -> VuukleCommentsBuilder{
+    open func firstVuukleTag(_ tag : String) -> VuukleCommentsBuilder{
         Global.tag1 = tag.replacingOccurrences(of: " ", with: "")
         return self
     }
@@ -146,7 +146,7 @@ public class VuukleCommentsBuilder : NSObject {
      it opens and our library should have unique properties
      for each article like URL, TAGS, TITLE.
      */
-    @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  public func secondVuukleTag(tag : String) -> VuukleCommentsBuilder{
+    @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  open func secondVuukleTag(_ tag : String) -> VuukleCommentsBuilder{
         Global.tag2 = tag.replacingOccurrences(of: " ", with: "")
         return self
     }
@@ -156,7 +156,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      For example: "http:vuukle.com/test_files/test48.html"
      */
-    @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  public func setVuukleUrl(url : String) -> VuukleCommentsBuilder{
+    @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  open func setVuukleUrl(_ url : String) -> VuukleCommentsBuilder{
         Global.url = url
         return self
     }
@@ -166,7 +166,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set your Title.
      */
-    public func setVuukleTitle(title : String) -> VuukleCommentsBuilder{
+    open func setVuukleTitle(_ title : String) -> VuukleCommentsBuilder{
         Global.title = title.replacingOccurrences(of: " ", with: "")
         return self
     }
@@ -176,7 +176,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set your Article Title.
      */
-    public func setVuukleArticleTitle (articleTitle : String) -> VuukleCommentsBuilder{
+    open func setVuukleArticleTitle (_ articleTitle : String) -> VuukleCommentsBuilder{
         Global.article_title = articleTitle.replacingOccurrences(of: " ", with: "")
         return self
     }
@@ -186,7 +186,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set your application name.
      */
-    public func setAppName (appName : String) -> VuukleCommentsBuilder{
+    open func setAppName (_ appName : String) -> VuukleCommentsBuilder{
         Global.appName = appName.replacingOccurrences(of: " ", with: "")
         return self
     }
@@ -196,7 +196,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set your article url.
      */
-    public func setArticleUrl (articleUrl : String) -> VuukleCommentsBuilder{
+    open func setArticleUrl (_ articleUrl : String) -> VuukleCommentsBuilder{
         Global.articleUrl = articleUrl
         return self
     }
@@ -206,7 +206,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set your application id.
      */
-    public func setAppID (appID : String) -> VuukleCommentsBuilder{
+    open func setAppID (_ appID : String) -> VuukleCommentsBuilder{
         Global.appId = appID
         return self
     }
@@ -216,7 +216,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      By default, 10 items!
      */
-    public func setVuuklePaginationCount(paginationCount : Int) -> VuukleCommentsBuilder{
+    open func setVuuklePaginationCount(_ paginationCount : Int) -> VuukleCommentsBuilder{
         Global.countLoadCommentsInPagination = paginationCount
         return self
     }
@@ -230,7 +230,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      Set : "self.view"
      */
-    public func buildVuukle(view : UIView){
+    open func buildVuukle(_ view : UIView){
         let bundle = Bundle(for: CommentViewController.self)
         let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewController(withIdentifier: "CommentViewController")
         view.frame = vc.view.frame

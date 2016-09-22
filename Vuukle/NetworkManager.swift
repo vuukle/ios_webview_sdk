@@ -13,7 +13,7 @@ class NetworkManager {
     
     //MARK: Get Replies For Comment
     
-    func getRepliesForComment(comment_id : String ,parent_id : String ,completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
+    func getRepliesForComment(_ comment_id : String ,parent_id : String ,completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
         
         Alamofire.request("\(Global.baseURL)getReplyFeed?host=\(Global.host)&article_id=00048&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&article_id=\(Global.article_id)&parent_id=\(parent_id)&time_zone=\(Global.time_zone)" )
             .responseJSON { response in
@@ -23,7 +23,7 @@ class NetworkManager {
                     var responseArray = [GetCommentsFeed]()
                     
                     for objectDict in data  {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: objectDict as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(objectDict as! NSDictionary))
                     }
                     
                     completion(responseArray ,nil)
@@ -36,8 +36,8 @@ class NetworkManager {
     
     //MARK: Get Comment Feed
     
-    func getCommentsFeed(completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
-
+    func getCommentsFeed(_ completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
+        
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
                 
@@ -51,7 +51,7 @@ class NetworkManager {
                     
                     
                     for feed in commentFeedArray.firstObject as! NSArray {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(feed as! NSDictionary))
                     }
                     
                     completion(responseArray, nil)
@@ -66,7 +66,7 @@ class NetworkManager {
     
     // MARK: Post Comment
     
-    func posComment(name : String ,email : String ,comment : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+    func posComment(_ name : String ,email : String ,comment : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
         
         let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&tags=\(Global.tag1)&title=\(Global.title)&url=\(Global.articleUrl)"
         
@@ -96,7 +96,7 @@ class NetworkManager {
     
     //MARK: Images
     
-    func getImageWhihURL(imageURL: NSURL,completion: @escaping (UIImage?) -> Void) -> Request? {
+    func getImageWhihURL(_ imageURL: NSURL,completion: @escaping (UIImage?) -> Void) -> Request? {
         
         return Alamofire.request(imageURL as! URLRequestConvertible)
             .responseImage { response in
@@ -111,10 +111,10 @@ class NetworkManager {
     }
     //MARK: Post Reply for Comment
     
-    func postReplyForComment(name : String ,email : String ,comment : String ,comment_id : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+    func postReplyForComment(_ name : String ,email : String ,comment : String ,comment_id : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
         
         let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
-
+        
         Alamofire.request(url)
             .responseJSON { response in
                 
@@ -137,11 +137,11 @@ class NetworkManager {
     }
     //MARK : Set Comment Vote - Up/Down Vote
     
-    func setCommentVote(name : String ,email : String ,comment_id : String ,up_down : String,completion : @escaping (String? ,NSError?) -> Void) {
+    func setCommentVote(_ name : String ,email : String ,comment_id : String ,up_down : String,completion : @escaping (String? ,NSError?) -> Void) {
         let url = "\(Global.baseURL)setCommentVote?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&up_down=\(up_down)&name=\(name)&email=\(email)"
         
         let newUrl = url.replacingOccurrences(of: " ", with: "")
-            //url.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSString.CompareOptions.LiteralSearch, range: nil)
+        //url.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSString.CompareOptions.LiteralSearch, range: nil)
         
         Alamofire.request( newUrl)
             .responseJSON { response in
@@ -160,7 +160,7 @@ class NetworkManager {
     
     //MARK: Get More Comment Feed
     
-    func getMoreCommentsFeed(from_count : Int ,to_count : Int ,completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
+    func getMoreCommentsFeed(_ from_count : Int ,to_count : Int ,completion: @escaping ([GetCommentsFeed]?, NSError?) -> Void) {
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)")
             .responseJSON { response in
                 
@@ -174,7 +174,7 @@ class NetworkManager {
                     var responseArray = [GetCommentsFeed]()
                     
                     for feed in commentFeedArray.firstObject as! NSArray {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(feed as! NSDictionary))
                     }
                     
                     completion(responseArray, nil)
@@ -188,7 +188,7 @@ class NetworkManager {
     
     //MARK: Get rating
     
-    func getEmoticonRating(completion: @escaping (EmoteRating) -> Void) {
+    func getEmoticonRating(_ completion: @escaping (EmoteRating) -> Void) {
         Alamofire.request("\(Global.baseURL)getEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(Global.article_id)")
             .responseJSON { response in
                 
@@ -197,7 +197,7 @@ class NetworkManager {
                     self.jsonArray = JSON as? NSDictionary
                     
                     let ratingDictionary = self.jsonArray!["emotes"]!
-                    let lRating = EmoteRating.EmoteRatingWhithDictionary(pDictionary: (ratingDictionary as? NSDictionary)!)
+                    let lRating = EmoteRating.EmoteRatingWhithDictionary((ratingDictionary as? NSDictionary)!)
                     
                     completion(lRating)
                     
@@ -209,7 +209,7 @@ class NetworkManager {
     
     //MARK: Set rating
     
-    func setRaring(article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
+    func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
         
         print("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
         Alamofire.request("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)&url=\(Global.articleUrl)")
@@ -227,13 +227,13 @@ class NetworkManager {
                 } else {
                     print("Status cod = \(response.response!.statusCode)")
                 }
-
+                
         }
     }
     
     //MARK: Get Comment Feed
     
-    func getTotalCommentsCount(completion: @escaping (TotalCommentsCount) -> Void) {
+    func getTotalCommentsCount(_ completion: @escaping (TotalCommentsCount) -> Void) {
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=1")
             .responseJSON { response in
                 
@@ -267,7 +267,7 @@ class NetworkManager {
                 } else {
                     print("Status cod = \(response.response?.statusCode)")
                 }
-
+                
         }
     }
 }

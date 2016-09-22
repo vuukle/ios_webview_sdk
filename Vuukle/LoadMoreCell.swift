@@ -4,8 +4,8 @@ import UIKit
 
 protocol AddLoadMoreCellDelegate {
     
-    func loadMoreButtonPressed(tableCell : LoadMoreCell ,loadMoreButtonPressed loadMoreButton : AnyObject )
-    func openVuukleButtonButtonPressed(tableCell : LoadMoreCell ,openVuukleButtonPressed openVuukleButton : AnyObject )
+    func loadMoreButtonPressed(_ tableCell : LoadMoreCell ,loadMoreButtonPressed loadMoreButton : AnyObject )
+    func openVuukleButtonButtonPressed(_ tableCell : LoadMoreCell ,openVuukleButtonPressed openVuukleButton : AnyObject )
 }
 
 class LoadMoreCell: UITableViewCell {
@@ -24,13 +24,13 @@ class LoadMoreCell: UITableViewCell {
         
     }
     
-    @IBAction func openVuukleButton(sender: AnyObject) {
-        self.delegate?.openVuukleButtonButtonPressed(tableCell: self, openVuukleButtonPressed: sender)
+    @IBAction func openVuukleButton(_ sender: AnyObject) {
+        self.delegate?.openVuukleButtonButtonPressed(self, openVuukleButtonPressed: sender)
     }
     
-    @IBAction func loadMoreButton(sender: AnyObject) {
+    @IBAction func loadMoreButton(_ sender: AnyObject) {
         
-        self.delegate?.loadMoreButtonPressed(tableCell: self, loadMoreButtonPressed: sender)
+        self.delegate?.loadMoreButtonPressed(self, loadMoreButtonPressed: sender)
         activityIndicator.isHidden = false
         activityIndicator.color? = UIColor.gray
         activityIndicator.startAnimating()

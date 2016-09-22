@@ -4,11 +4,11 @@ import Foundation
 import UIKit
 
 class Saver {
-
+    
     static let sharedInstance = Saver()
     let defaults : UserDefaults = UserDefaults.standard
-
-    func savingWhenPostButtonPressed (name : String ,email : String) {
+    
+    func savingWhenPostButtonPressed (_ name : String ,email : String) {
         if self.defaults.object(forKey: "name") == nil {
             self.defaults.set("\(name)", forKey: "name")
             self.defaults.synchronize()
@@ -33,7 +33,7 @@ class Saver {
             self.defaults.set("\(email)", forKey: "email")
             self.defaults.synchronize()
         }
-    
+        
     }
     
     func removeWhenLogOutbuttonPressed() {
@@ -45,6 +45,6 @@ class Saver {
         if self.defaults.object(forKey: "email") as? String != nil {
             self.defaults.removeObject(forKey: "email")
             self.defaults.synchronize()
-    }
+        }
     }
 }

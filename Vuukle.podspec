@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
 # 1
 s.platform = :ios
-s.ios.deployment_target = '10.0'
+s.ios.deployment_target = '9.0'
 s.name         = "Vuukle"
 s.summary      = "Vuukle.com"
 
