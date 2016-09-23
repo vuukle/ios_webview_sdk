@@ -4,15 +4,8 @@ import UIKit
 import Alamofire
 import Social
 
-public protocol CommentViewControllerDelegate {
-    
-    func vuukleDidFinishReloadTableView(_ withNewContentHeight : CGFloat)
-    
-}
 
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate{
-    
-    open var delegate : CommentViewControllerDelegate?
     
     static let sharedInstance = Global()
     var arrayObjectsForCell = [AnyObject]()
@@ -74,14 +67,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             }
             getComments()
             
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(CommentViewController.keyboardWillHide(sender:)),
-                                                   name: NSNotification.Name.UIKeyboardWillShow,
-                                                   object: nil)
-            NotificationCenter.default.addObserver(self,
-                                                   selector: #selector(CommentViewController.keyboardWillHide(sender:)),
-                                                   name: NSNotification.Name.UIKeyboardWillHide,
-                                                   object: nil)
+
             NetworkManager.sharedInstance.getTotalCommentsCount { (totalCount) in
                 CellForRowAtIndex.sharedInstance.totalComentsCount = totalCount.comments!
                 self.tableView.reloadData()
@@ -365,7 +351,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     //MARK: AddCommentCellDelegate
     
-    func postButtonPressed(_ tableCell: AddCommentCell, postButtonPressed postButton: AnyObject) {
+    func postButtonPressed(tableCell: AddCommentCell, postButtonPressed postButton: AnyObject) {
         
         if arrayObjectsForCell[tableCell.tag] is AddComment {
             let comment = arrayObjectsForCell[tableCell.tag] as! AddComment
@@ -425,7 +411,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
     }
     
-    func logOutButtonPressed(_ tableCell: AddCommentCell, logOutButtonPressed logOutButton: AnyObject) {
+    func logOutButtonPressed(tableCell: AddCommentCell, logOutButtonPressed logOutButton: AnyObject) {
         tableCell.nameTextField.text = ""
         tableCell.emailTextField.text = ""
         Saver.sharedInstance.removeWhenLogOutbuttonPressed()
@@ -485,16 +471,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         PrivetFunctions.sharedInstance.setRate(Global.article_id, emote: 6, tableView: tableView)
     }
     
-    //MARK: Keyboard (Show/Hide/Dismiss)
+    //MARK: Keyboard 
     
-    func keyboardWillShow(sender: NSNotification) {
-        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y = -keyboardSize.height
-        }
-    }
-    func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0
-    }
     func dismissKeyboard() {
         self.view.endEditing(true)
     }
@@ -611,9 +589,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        if indexPath.row == arrayObjectsForCell.endIndex {
-            self.delegate?.vuukleDidFinishReloadTableView(tableView.contentSize.height)
+        if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
+            let myNumber = NSNumber(value: Float(tableView.contentSize.height))
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         }
     }
 }

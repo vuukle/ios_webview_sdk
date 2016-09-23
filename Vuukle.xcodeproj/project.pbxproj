@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04AE5B671D8FEA710074E991 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 04AE5B651D8FEA710074E991 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04AE5B6E1D8FEB530074E991 /* AddComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE5B6D1D8FEB530074E991 /* AddComment.swift */; };
 		04AE5B701D8FEB650074E991 /* AddCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE5B6F1D8FEB650074E991 /* AddCommentCell.swift */; };
 		04AE5B721D8FEB6B0074E991 /* AddReply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AE5B711D8FEB6B0074E991 /* AddReply.swift */; };
@@ -58,13 +57,13 @@
 		04AE5BCF1D8FEC8D0074E991 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AE5BB81D8FEC8D0074E991 /* twitter.png */; };
 		04AE5BD01D8FEC8D0074E991 /* vuukle_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 04AE5BB91D8FEC8D0074E991 /* vuukle_logo.jpg */; };
 		04AE5BD11D8FEC8D0074E991 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AE5BBA1D8FEC8D0074E991 /* WebViewCell.xib */; };
-		04AE5BD51D8FEF950074E991 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 04AE5BD41D8FEF950074E991 /* LICENSE */; };
+		04F08A0E1D952F9700CD08A3 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F08A0D1D952F9700CD08A3 /* Vuukle.h */; };
+		04F08A101D952FB900CD08A3 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04F08A0F1D952FB900CD08A3 /* Info.plist */; };
+		04F08A121D95302600CD08A3 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F08A111D95302600CD08A3 /* Vuukle.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		04AE5B621D8FEA710074E991 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		04AE5B651D8FEA710074E991 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
-		04AE5B661D8FEA710074E991 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04AE5B6D1D8FEB530074E991 /* AddComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddComment.swift; sourceTree = "<group>"; };
 		04AE5B6F1D8FEB650074E991 /* AddCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCommentCell.swift; sourceTree = "<group>"; };
 		04AE5B711D8FEB6B0074E991 /* AddReply.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReply.swift; sourceTree = "<group>"; };
@@ -115,7 +114,9 @@
 		04AE5BB81D8FEC8D0074E991 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		04AE5BB91D8FEC8D0074E991 /* vuukle_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vuukle_logo.jpg; sourceTree = "<group>"; };
 		04AE5BBA1D8FEC8D0074E991 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
-		04AE5BD41D8FEF950074E991 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		04F08A0D1D952F9700CD08A3 /* Vuukle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
+		04F08A0F1D952FB900CD08A3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04F08A111D95302600CD08A3 /* Vuukle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +149,7 @@
 		04AE5B641D8FEA710074E991 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				04AE5BD41D8FEF950074E991 /* LICENSE */,
 				04AE5BA31D8FEC7D0074E991 /* Resourse */,
-				04AE5B651D8FEA710074E991 /* Vuukle.h */,
 				04AE5B6D1D8FEB530074E991 /* AddComment.swift */,
 				04AE5B6F1D8FEB650074E991 /* AddCommentCell.swift */,
 				04AE5B731D8FEB720074E991 /* AppDelegate.swift */,
@@ -178,7 +177,8 @@
 				04AE5B9B1D8FEC310074E991 /* TimeAgo.swift */,
 				04AE5BA11D8FEC470074E991 /* WebViewCell.swift */,
 				04AE5B9F1D8FEC410074E991 /* WebView.swift */,
-				04AE5B661D8FEA710074E991 /* Info.plist */,
+				04F08A111D95302600CD08A3 /* Vuukle.h */,
+				04F08A0F1D952FB900CD08A3 /* Info.plist */,
 			);
 			path = Vuukle;
 			sourceTree = "<group>";
@@ -186,6 +186,7 @@
 		04AE5BA31D8FEC7D0074E991 /* Resourse */ = {
 			isa = PBXGroup;
 			children = (
+				04F08A0D1D952F9700CD08A3 /* Vuukle.h */,
 				04AE5BA41D8FEC8C0074E991 /* 122.png */,
 				04AE5BA51D8FEC8C0074E991 /* AddCommentCell.xib */,
 				04AE5BA61D8FEC8C0074E991 /* CommentCell.xib */,
@@ -220,7 +221,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04AE5B671D8FEA710074E991 /* Vuukle.h in Headers */,
+				04F08A121D95302600CD08A3 /* Vuukle.h in Headers */,
+				04F08A0E1D952F9700CD08A3 /* Vuukle.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,11 +304,11 @@
 				04AE5BCE1D8FEC8D0074E991 /* thumb-up.png in Resources */,
 				04AE5BCC1D8FEC8D0074E991 /* Solid_gray.png in Resources */,
 				04AE5BC61D8FEC8D0074E991 /* smile-amused.png in Resources */,
-				04AE5BD51D8FEF950074E991 /* LICENSE in Resources */,
 				04AE5BBC1D8FEC8D0074E991 /* AddCommentCell.xib in Resources */,
 				04AE5BD11D8FEC8D0074E991 /* WebViewCell.xib in Resources */,
 				04AE5BCA1D8FEC8D0074E991 /* smile-indifferent.png in Resources */,
 				04AE5BBE1D8FEC8D0074E991 /* ContentWebViewCell.xib in Resources */,
+				04F08A101D952FB900CD08A3 /* Info.plist in Resources */,
 				04AE5BC91D8FEC8D0074E991 /* smile-happy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

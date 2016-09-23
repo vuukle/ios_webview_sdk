@@ -95,7 +95,7 @@ open class  CellForRowAtIndex {
         cell.userNameLabel.textColor = UIColor.blue
         cell.commentLabel.text = newComment
         cell.userNameLabel.text = newName
-        cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date, numericDates: true)
+        cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date: date as NSDate, numericDates: true)
         cell.countLabel.text = String(comment.user_points!)
         if comment.up_votes! > 0 {
             cell.upvoteCountLabel.text = String(comment.up_votes!)
@@ -167,7 +167,7 @@ open class  CellForRowAtIndex {
             cell.showReply.isHidden = true
             cell.replyCount.isHidden = true
         }
-        cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date, numericDates: true)
+        cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date: date as NSDate, numericDates: true)
         cell.countLabel.text = String(comment.user_points!)
         if comment.avatar_url != Global.defaultImageUrl && comment.avatar_url != ""  {
             cell.imageForCell = comment.avatar_url

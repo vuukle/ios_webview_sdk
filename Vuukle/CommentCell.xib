@@ -39,7 +39,7 @@
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="moreButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="6k8-sa-Y9d"/>
+                            <action selector="moreButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="8C8-tG-oja"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qwerty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-km-zuG">
@@ -59,7 +59,7 @@
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="upvoteButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="OCy-B4-xRv"/>
+                            <action selector="upvoteButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="uQ8-3g-6DO"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D94-L2-Oi4">
@@ -81,7 +81,7 @@
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="downvoteButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="ZFr-Ni-CoZ"/>
+                            <action selector="downvoteButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="woJ-6a-66T"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tYq-Qc-2EF">
@@ -104,7 +104,7 @@
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="replyButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="U4G-Iy-FVx"/>
+                            <action selector="replyButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="aWh-EL-Ohd"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello all" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PpY-Hj-ciT">
@@ -145,7 +145,7 @@
                             <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="showReplyButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="Mfw-o8-glV"/>
+                            <action selector="showReplyButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="hDt-87-65c"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 дні тому" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c6t-kd-PjZ">
@@ -166,7 +166,7 @@
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="shareButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="gie-fS-CWa"/>
+                            <action selector="shareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="r9q-XJ-S3c"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcT-ws-ptz">
@@ -180,7 +180,7 @@
                         </constraints>
                         <state key="normal" image="images.png"/>
                         <connections>
-                            <action selector="secondShareButtonWithSender:" destination="6zw-tT-BJR" eventType="touchUpInside" id="UH0-p0-wgg"/>
+                            <action selector="secondShareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="QT6-0E-mu9"/>
                         </connections>
                     </button>
                 </subviews>

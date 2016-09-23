@@ -23,7 +23,7 @@ class NetworkManager {
                     var responseArray = [GetCommentsFeed]()
                     
                     for objectDict in data  {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(objectDict as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: objectDict as! NSDictionary))
                     }
                     
                     completion(responseArray ,nil)
@@ -51,7 +51,7 @@ class NetworkManager {
                     
                     
                     for feed in commentFeedArray.firstObject as! NSArray {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(feed as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
                     }
                     
                     completion(responseArray, nil)
@@ -98,8 +98,7 @@ class NetworkManager {
     
     func getImageWhihURL(_ imageURL: NSURL,completion: @escaping (UIImage?) -> Void) -> Request? {
         
-        return Alamofire.request(imageURL as! URLRequestConvertible)
-            .responseImage { response in
+        return Alamofire.request(imageURL as! URLRequestConvertible).responseImage { response in
                 
                 if let image = response.result.value {
                     
@@ -141,7 +140,6 @@ class NetworkManager {
         let url = "\(Global.baseURL)setCommentVote?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&up_down=\(up_down)&name=\(name)&email=\(email)"
         
         let newUrl = url.replacingOccurrences(of: " ", with: "")
-        //url.stringByReplacingOccurrencesOfString(" ", withString: "", options: NSString.CompareOptions.LiteralSearch, range: nil)
         
         Alamofire.request( newUrl)
             .responseJSON { response in
@@ -174,7 +172,7 @@ class NetworkManager {
                     var responseArray = [GetCommentsFeed]()
                     
                     for feed in commentFeedArray.firstObject as! NSArray {
-                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(feed as! NSDictionary))
+                        responseArray.append(GetCommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
                     }
                     
                     completion(responseArray, nil)

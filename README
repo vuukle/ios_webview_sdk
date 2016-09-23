@@ -1,7 +1,7 @@
 This library works with Swift and Objective-C.
 
 1.Install the library to your project.
-    Example Podfile - Swift:
+    Example Podfile - Swift (If Xcode version is less than 8.0):
 
 
         platform :ios, '9.0'
@@ -12,12 +12,12 @@ This library works with Swift and Objective-C.
         target ‘My Project Name’ do
             use_frameworks!
 
-        pod ‘Vuukle’, :path => ’path to your framework’ 
+          pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’ 
 
         end
 ------------------------------------------------------------------
 
-    Example Podfile - Objective-c:
+    Example Podfile - Objective-c (If Xcode version is less than 8.0): 
 
         platform :ios, '9.0'
 
@@ -26,7 +26,36 @@ This library works with Swift and Objective-C.
 
         target ‘VuukleCommentObjective’ do
         
-        pod ‘Vuukle’, :path => ’path to your framework’
+        pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’
+
+        end
+<_________________________________________________________________>
+   Example Podfile - Swift (If Xcode version is higher than 8.0):
+
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘My Project Name’ do
+            use_frameworks!
+
+          pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’ 
+
+        end
+------------------------------------------------------------------
+
+    Example Podfile - Objective-c (If Xcode version is higher than 8.0): 
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘VuukleCommentObjective’ do
+        
+        pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’
 
         end
 _________________________________________________________________
@@ -49,22 +78,24 @@ _________________________________________________________________
     override func viewDidLoad() {
     super.viewDidLoad()
 
-    var vuukle = VuukleCommentsBuilder()
+        let vuukle = VuukleCommentsBuilder()
         vuukle.firstVuukleTag("articleTag1")
-					      .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
-					      .setVuukleArticleId("00048")
-					      .setVuukleArticleTitle("myArticleTitle")
-					      .setVuukleBaseUrl("https://vuukle.com/api.asmx/")
-					      .setVuukleEmoteVisible(true)
-					      .setVuukleHost("vuukle.com")
-					      .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
-					      .setVuukleTimeZone("Europe/Kiev").setVuukleTitle("Title")
-					      .setAppName("myAppName")
-					      .setArticleUrl("myArticleUrl")
-					      .setAppID("myApId")
-					      .setVuukleRefreshVisible(true)
-					      .addWebViewArticleURL(false)
-					      .buildVuukle(self.view)
+            .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
+            .setVuukleArticleId("00048")
+            .setVuukleArticleTitle("myArticleTitle")
+            .setVuukleBaseUrl("https://vuukle.com/api.asmx/")
+            .setVuukleEmoteVisible(true)
+            .setVuukleHost("vuukle.com")
+            .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
+            .setVuukleTimeZone("Europe/Kiev")
+            .setVuukleTitle("Title")
+            .setAppName("myAppName")
+            .setArticleUrl("myArticleUrl")
+            .setAppID("myApId")
+            .setVuukleRefreshVisible(true)
+            .addWebViewArticleURL(false)
+            .setScrolingVuukleTableView(true)
+            .buildVuukle(self.view)
     }
 ----------------------------------------------------------------
     For example (Objective-c):
@@ -74,7 +105,7 @@ _________________________________________________________________
 
 
     VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
-        [[[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
+        [[[[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
             setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
             setVuukleArticleId:@"00048"]
             setVuukleBaseUrl:@"https://vuukle.com/api.asmx/"]
@@ -89,6 +120,7 @@ _________________________________________________________________
             setVuukleArticleTitle:@"myTitle"]
 	    setVuukleRefreshVisible:YES]
 	    addWebViewArticleURL:NO]
+	    setScrolingVuukleTableView:YES]
             buildVuukle:self.view];
 
 }

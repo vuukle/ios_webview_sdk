@@ -31,6 +31,17 @@ open class VuukleCommentsBuilder : NSObject {
     }
     
     /**
+     Optional field !
+     
+     Set true for the possibility of scroll Vuukle Table View!
+     For example: If you need to add a Vuukle comments on Scroll View near your content set false!
+     */
+    public func setScrolingVuukleTableView(_ scroll : Bool) -> VuukleCommentsBuilder {
+        Global.scrolingTableView = scroll
+        return self
+    }
+    
+    /**
      Required field !
      
      For example: "https://vuukle.com/api.asmx/"
@@ -235,6 +246,6 @@ open class VuukleCommentsBuilder : NSObject {
         let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewController(withIdentifier: "CommentViewController")
         view.frame = vc.view.frame
         view.addSubview(vc.view)
-    }
-    
+}
+
 }

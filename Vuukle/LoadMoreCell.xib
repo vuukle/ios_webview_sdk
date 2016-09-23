@@ -26,7 +26,7 @@
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </state>
                         <connections>
-                            <action selector="loadMoreButtonWithSender:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="YGE-2g-6rV"/>
+                            <action selector="loadMoreButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="fIR-EL-tKl"/>
                         </connections>
                     </button>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Y1H-Aa-ZfM">
