@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040E9B1F1D99654400833351 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040E9B1E1D99654400833351 /* Main.storyboard */; };
 		04114E1C1D75B9C300113721 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 04114E1B1D75B9C300113721 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04114E2D1D75BA8900113721 /* CommentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04114E2C1D75BA8900113721 /* CommentsBuilder.swift */; };
 		04114E2F1D75BA9800113721 /* CellForRowAtIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04114E2E1D75BA9800113721 /* CellForRowAtIndex.swift */; };
@@ -54,7 +55,6 @@
 		04F2016C1D86FE1D00F17A96 /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F2016A1D86FE1D00F17A96 /* CommentCell.xib */; };
 		04F202501D8AD1C100F17A96 /* ContentWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2024F1D8AD1C100F17A96 /* ContentWebViewCell.swift */; };
 		04F202521D8AD1D100F17A96 /* ContentWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F202511D8AD1D100F17A96 /* ContentWebViewCell.xib */; };
-		04F2FF1E1D76EC9A00F17A96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04F2FF1D1D76EC9A00F17A96 /* Main.storyboard */; };
 		04F2FF621D7877E500F17A96 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2FF611D7877E500F17A96 /* WebViewCell.swift */; };
 		04F2FF641D7877F000F17A96 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04F2FF631D7877F000F17A96 /* WebViewCell.xib */; };
 		04F2FFBD1D79E85E00F17A96 /* EmoticonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F2FFBB1D79E85E00F17A96 /* EmoticonCell.swift */; };
@@ -62,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040E9B1E1D99654400833351 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		04114E181D75B9C300113721 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		04114E1B1D75B9C300113721 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		04114E1D1D75B9C300113721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		04F2016A1D86FE1D00F17A96 /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		04F2024F1D8AD1C100F17A96 /* ContentWebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentWebViewCell.swift; sourceTree = "<group>"; };
 		04F202511D8AD1D100F17A96 /* ContentWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentWebViewCell.xib; sourceTree = "<group>"; };
-		04F2FF1D1D76EC9A00F17A96 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		04F2FF611D7877E500F17A96 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
 		04F2FF631D7877F000F17A96 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
 		04F2FFBB1D79E85E00F17A96 /* EmoticonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonCell.swift; sourceTree = "<group>"; };
@@ -149,8 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				04114E751D75BF3A00113721 /* AppDelegate.swift */,
-				04F2FF1D1D76EC9A00F17A96 /* Main.storyboard */,
 				04114E771D75BF6900113721 /* LICENSE */,
+				040E9B1E1D99654400833351 /* Main.storyboard */,
 				04114E581D75BBAF00113721 /* View */,
 				04114E451D75BB5900113721 /* Resourse */,
 				04114E3A1D75BB0300113721 /* Model */,
@@ -436,6 +436,7 @@
 				04F201381D86F9D200F17A96 /* smile-angry.png in Resources */,
 				04F2FFBE1D79E85E00F17A96 /* EmoticonCell.xib in Resources */,
 				04F2FF641D7877F000F17A96 /* WebViewCell.xib in Resources */,
+				040E9B1F1D99654400833351 /* Main.storyboard in Resources */,
 				04F201391D86F9D200F17A96 /* Solid_gray.png in Resources */,
 				04F201341D86F9D200F17A96 /* smile-amused.png in Resources */,
 				04F201331D86F9D200F17A96 /* thumb-up.png in Resources */,
@@ -446,7 +447,6 @@
 				04114E781D75BF6900113721 /* LICENSE in Resources */,
 				04F2012F1D86F9D200F17A96 /* 122.png in Resources */,
 				04F2016C1D86FE1D00F17A96 /* CommentCell.xib in Resources */,
-				04F2FF1E1D76EC9A00F17A96 /* Main.storyboard in Resources */,
 				04F201361D86F9D200F17A96 /* smile-sad-full.png in Resources */,
 				04F2012C1D86F9D200F17A96 /* smile-indifferent.png in Resources */,
 				04F201371D86F9D200F17A96 /* smile-excited.png in Resources */,
