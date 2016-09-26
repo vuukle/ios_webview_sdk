@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="LoadMoreCell" rowHeight="108" id="qHS-Ms-WX5" customClass="LoadMoreCell" customModule="Vuukle_Comment" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="447" height="108"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="qHS-Ms-WX5" id="fp9-kw-wnK">
+                <rect key="frame" x="0.0" y="0.0" width="447" height="107"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUh-hH-ZsC">
+                        <rect key="frame" x="164" y="24" width="120" height="30"/>
+                        <color key="backgroundColor" red="0.202493587" green="0.52975807909999995" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="120" id="GG7-ll-H5J"/>
+                            <constraint firstAttribute="height" constant="30" id="Y7u-pq-FNi"/>
+                        </constraints>
+                        <state key="normal" title="Load more ...">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="loadMoreButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="c03-Au-eTX"/>
+                        </connections>
+                    </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Y1H-Aa-ZfM">
+                        <rect key="frame" x="205" y="20" width="37" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="WXb-GB-0mY"/>
+                            <constraint firstAttribute="width" constant="37" id="vRh-RE-FC7"/>
+                        </constraints>
+                        <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </activityIndicatorView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="vuukle_logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tmT-lE-c8a">
+                        <rect key="frame" x="184" y="62" width="80" height="34"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="2hS-C4-OeQ"/>
+                            <constraint firstAttribute="width" constant="80" id="K7h-3q-1Qn"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNa-3u-1tQ">
+                        <rect key="frame" x="184" y="62" width="80" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="Bkq-dt-yIi"/>
+                            <constraint firstAttribute="width" constant="80" id="e4d-cS-1ff"/>
+                        </constraints>
+                        <connections>
+                            <action selector="openVuukleButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="Ggt-6o-FUA"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="oUh-hH-ZsC" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="00g-zF-Rky"/>
+                    <constraint firstItem="Y1H-Aa-ZfM" firstAttribute="top" secondItem="fp9-kw-wnK" secondAttribute="topMargin" constant="12" id="0Ho-d0-cjF"/>
+                    <constraint firstItem="tmT-lE-c8a" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="3xs-pJ-xwc"/>
+                    <constraint firstItem="tmT-lE-c8a" firstAttribute="bottom" secondItem="fp9-kw-wnK" secondAttribute="bottomMargin" id="8Bx-Gy-lyU"/>
+                    <constraint firstItem="tmT-lE-c8a" firstAttribute="top" secondItem="Y1H-Aa-ZfM" secondAttribute="bottom" constant="5" id="Sqy-Sr-gIh"/>
+                    <constraint firstItem="oUh-hH-ZsC" firstAttribute="top" secondItem="fp9-kw-wnK" secondAttribute="topMargin" constant="16" id="UWN-dR-bUv"/>
+                    <constraint firstItem="Y1H-Aa-ZfM" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="fUm-eh-cqm"/>
+                    <constraint firstItem="TNa-3u-1tQ" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="oOc-o5-oYm"/>
+                    <constraint firstItem="TNa-3u-1tQ" firstAttribute="top" secondItem="Y1H-Aa-ZfM" secondAttribute="bottom" constant="5" id="vdF-9S-cAw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="activityIndicator" destination="Y1H-Aa-ZfM" id="cMt-AX-a2U"/>
+                <outlet property="heightActivitiIndicator" destination="WXb-GB-0mY" id="X1M-Ke-K8Z"/>
+                <outlet property="heightButton" destination="Y7u-pq-FNi" id="W1i-5A-RhS"/>
+                <outlet property="loadMore" destination="oUh-hH-ZsC" id="bdc-kW-Bc1"/>
+            </connections>
+            <point key="canvasLocation" x="517.5" y="375"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="vuukle_logo.jpg" width="466" height="197"/>
+    </resources>
+</document>
