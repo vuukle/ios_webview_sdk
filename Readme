@@ -1,0 +1,36 @@
+1. Create scrollview and put your webView on this scrollView as subview
+2. Create UIView and put it under webView as subview of scrollView
+3. Create constraints for scroll view (top, leading, trailing, bottom) to subview
+4. Create constraints for webView (top, leading, trailing) to scrollView, and bottom constraint to UIView
+5. Create constraints for UIView (leading, trailing, bottom) to scrollView and top to webView
+6. Create height constraints for webView and UiView
+7. Create IBOutlets for height constraints of webView and UiView
+8. In delegate method of your webView you can calculate content height and change constraint for your webView 
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+    
+    self.webViewHeightConstraint.constant = fittingSize.height;
+}
+
+9. Subscribe your controller to notification 
+ 
+NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+ 
+    [nc addObserver:self
+           selector:@selector(successfullyRetrievedObjects:)
+               name:Constants.ContentHeightDidChaingedNotification
+             object:nil];
+
+10. Dynamiccally change height of UIView
+
+- (void) successfullyRetrievedObjects:(NSNotification*) notification {
+    
+    self.vuukleHeightConstraint.constant = [notification.object floatValue];
+}

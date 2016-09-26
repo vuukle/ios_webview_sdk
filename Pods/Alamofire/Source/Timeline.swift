@@ -39,27 +39,29 @@ public struct Timeline {
     public let serializationCompletedTime: CFAbsoluteTime
 
     /// The time interval in seconds from the time the request started to the initial response from the server.
-    public let latency: TimeInterval
+    public let latency: NSTimeInterval
 
     /// The time interval in seconds from the time the request started to the time the request completed.
-    public let requestDuration: TimeInterval
+    public let requestDuration: NSTimeInterval
 
     /// The time interval in seconds from the time the request completed to the time response serialization completed.
-    public let serializationDuration: TimeInterval
+    public let serializationDuration: NSTimeInterval
 
     /// The time interval in seconds from the time the request started to the time response serialization completed.
-    public let totalDuration: TimeInterval
+    public let totalDuration: NSTimeInterval
 
-    /// Creates a new `Timeline` instance with the specified request times.
-    ///
-    /// - parameter requestStartTime:           The time the request was initialized. Defaults to `0.0`.
-    /// - parameter initialResponseTime:        The time the first bytes were received from or sent to the server.
-    ///                                         Defaults to `0.0`.
-    /// - parameter requestCompletedTime:       The time when the request was completed. Defaults to `0.0`.
-    /// - parameter serializationCompletedTime: The time when the response serialization was completed. Defaults
-    ///                                         to `0.0`.
-    ///
-    /// - returns: The new `Timeline` instance.
+    /**
+        Creates a new `Timeline` instance with the specified request times.
+
+        - parameter requestStartTime:           The time the request was initialized. Defaults to `0.0`.
+        - parameter initialResponseTime:        The time the first bytes were received from or sent to the server. 
+                                                Defaults to `0.0`.
+        - parameter requestCompletedTime:       The time when the request was completed. Defaults to `0.0`.
+        - parameter serializationCompletedTime: The time when the response serialization was completed. Defaults 
+                                                to `0.0`.
+
+        - returns: The new `Timeline` instance.
+    */
     public init(
         requestStartTime: CFAbsoluteTime = 0.0,
         initialResponseTime: CFAbsoluteTime = 0.0,
@@ -81,7 +83,7 @@ public struct Timeline {
 // MARK: - CustomStringConvertible
 
 extension Timeline: CustomStringConvertible {
-    /// The textual representation used when written to an output stream, which includes the latency, the request
+    /// The textual representation used when written to an output stream, which includes the latency, the request 
     /// duration and the total duration.
     public var description: String {
         let latency = String(format: "%.3f", self.latency)
@@ -98,14 +100,14 @@ extension Timeline: CustomStringConvertible {
             "\"Total Duration\": " + totalDuration + " secs"
         ]
 
-        return "Timeline: { " + timings.joined(separator: ", ") + " }"
+        return "Timeline: { " + timings.joinWithSeparator(", ") + " }"
     }
 }
 
 // MARK: - CustomDebugStringConvertible
 
 extension Timeline: CustomDebugStringConvertible {
-    /// The textual representation used when written to an output stream, which includes the request start time, the
+    /// The textual representation used when written to an output stream, which includes the request start time, the 
     /// initial response time, the request completed time, the serialization completed time, the latency, the request
     /// duration and the total duration.
     public var debugDescription: String {
@@ -131,6 +133,6 @@ extension Timeline: CustomDebugStringConvertible {
             "\"Total Duration\": " + totalDuration + " secs"
         ]
 
-        return "Timeline: { " + timings.joined(separator: ", ") + " }"
+        return "Timeline: { " + timings.joinWithSeparator(", ") + " }"
     }
 }

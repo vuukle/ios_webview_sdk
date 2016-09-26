@@ -1,5 +1,4 @@
 
-
 #import "ExampleWebViewVC.h"
 #import <Vuukle/Vuukle-Swift.h>
 
@@ -50,8 +49,7 @@
        addWebViewArticleURL:NO]
       setScrolingVuukleTableView : NO]
      buildVuukle:self.vuukleView];
-    
-    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -71,9 +69,6 @@
     webView.frame = frame;
     
     self.webViewHeightConstraint.constant = fittingSize.height;
-
-
-    
 }
 
 - (void) successfullyRetrievedObjects:(NSNotification*) notification {

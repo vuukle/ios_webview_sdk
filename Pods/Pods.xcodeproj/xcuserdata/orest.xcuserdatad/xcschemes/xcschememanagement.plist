@@ -6,41 +6,33 @@
 	<dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>0</integer>
-		</dict>
-		<key>AlamofireImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>Pods-VuukleNestedCommentsExample.xcscheme</key>
+		<key>AlamofireImage.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>Vuukle.xcscheme</key>
+		<key>Pods-VuukleNestedCommentsExample.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false/>
 			<key>orderHint</key>
 			<integer>3</integer>
+		</dict>
+		<key>Vuukle.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E2D7496D95CB06783805946382157E4</key>
+		<key>05094CC4A047119F7ADC14EE74C4881C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>333E47F1004946B94926B19979768D18</key>
+		<key>0E2D7496D95CB06783805946382157E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
