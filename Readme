@@ -1,36 +1,154 @@
-1. Create scrollview and put your webView on this scrollView as subview
-2. Create UIView and put it under webView as subview of scrollView
-3. Create constraints for scroll view (top, leading, trailing, bottom) to subview
-4. Create constraints for webView (top, leading, trailing) to scrollView, and bottom constraint to UIView
-5. Create constraints for UIView (leading, trailing, bottom) to scrollView and top to webView
-6. Create height constraints for webView and UiView
-7. Create IBOutlets for height constraints of webView and UiView
-8. In delegate method of your webView you can calculate content height and change constraint for your webView 
+This library works with Swift and Objective-C.
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
+1.Install the library to your project.
+    Example Podfile - Swift (If Xcode version is less than 8.0):
+
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘My Project Name’ do
+            use_frameworks!
+
+          pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’ 
+
+        end
+------------------------------------------------------------------
+
+    Example Podfile - Objective-c (If Xcode version is less than 8.0): 
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘VuukleCommentObjective’ do
+        
+        pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’
+
+        end
+<_________________________________________________________________>
+   Example Podfile - Swift (If Xcode version is higher than 8.0):
+
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘My Project Name’ do
+            use_frameworks!
+
+          pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’ 
+
+        end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+end
+------------------------------------------------------------------
+
+    Example Podfile - Objective-c (If Xcode version is higher than 8.0): 
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+        target ‘VuukleCommentObjective’ do
+        
+        pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’
+
+        end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['SWIFT_VERSION'] = '3.0'
+        end
+    end
+end
+_________________________________________________________________
+
+2.Import "Vuukle" framework into your "YourController.swift"
+    For example (Swift):
+
+        import Vuukle
+-----------------------------------------------------------------
+    For example (Objective-c):
+
+        #import <Vuukle/Vuukle-Swift.h>
+
+3.Add all "VuukleCommentsBuilder" methods into "viewDidLoad()"
+
+    For example (Swift):
+
+    @IBOutlet weak var someView: UIView!
+
+    override func viewDidLoad() {
+    super.viewDidLoad()
+
+        let vuukle = VuukleCommentsBuilder()
+        vuukle.firstVuukleTag("articleTag1")
+            .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
+            .setVuukleArticleId("00048")
+            .setVuukleArticleTitle("myArticleTitle")
+            .setVuukleBaseUrl("https://vuukle.com/api.asmx/")
+            .setVuukleEmoteVisible(true)
+            .setVuukleHost("vuukle.com")
+            .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
+            .setVuukleTimeZone("Europe/Kiev")
+            .setVuukleTitle("Title")
+            .setAppName("myAppName")
+            .setArticleUrl("myArticleUrl")
+            .setAppID("myApId")
+            .setVuukleRefreshVisible(true)
+            .addWebViewArticleURL(false)
+            .setScrolingVuukleTableView(true)
+            .buildVuukle(self.view)
+    }
+----------------------------------------------------------------
+    For example (Objective-c):
+
+    - (void)viewDidLoad {
+    [super viewDidLoad];
+
+
+    VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
     
-    CGRect frame = webView.frame;
-    frame.size.height = 1;
-    webView.frame = frame;
-    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    webView.frame = frame;
-    
-    self.webViewHeightConstraint.constant = fittingSize.height;
+    [[[[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
+                    setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
+                   setVuukleArticleId:@"00048"]
+                  setVuukleBaseUrl:@"https://vuukle.com/api.asmx/"]
+                 setVuukleEmoteVisible:YES]
+                setVuukleHost:@"vuukle.com"]
+               setVuukleSecretKey:@"07115720-6848-11e5-9bc9-002590f371ee"]
+              setVuukleTimeZone:@"Europe/Kiev"]
+             setVuukleTitle:@"Title"]
+            setAppName:@"myAppName"]
+           setArticleUrl:@"myArticleUrl"]
+          setAppID:@"myApId"]
+         setVuukleArticleTitle:@"myTitle"]
+        setVuukleRefreshVisible:YES]
+       addWebViewArticleURL:NO]
+      setScrolingVuukleTableView:NO]
+     buildVuukle:self.vuukleView];
+
 }
 
-9. Subscribe your controller to notification 
- 
-NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
- 
-    [nc addObserver:self
-           selector:@selector(successfullyRetrievedObjects:)
-               name:Constants.ContentHeightDidChaingedNotification
-             object:nil];
+4.Please add into "Info.plist" fields with values
 
-10. Dynamiccally change height of UIView
+    For example :
 
-- (void) successfullyRetrievedObjects:(NSNotification*) notification {
-    
-    self.vuukleHeightConstraint.constant = [notification.object floatValue];
-}
+        App Transport Security Settings  Dictionary  (1 item)
+            Allow Arbitary               Boolean     YES
+
+
+5.Everything is ready, you can run the project.
+

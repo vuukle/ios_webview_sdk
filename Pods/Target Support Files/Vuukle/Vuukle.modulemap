@@ -1,6 +1,0 @@
-framework module Vuukle {
-  umbrella header "Vuukle-umbrella.h"
-
-  export *
-  module * { export * }
-}
