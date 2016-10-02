@@ -6,7 +6,7 @@ class Global {
     
     static let sharedInstance = Global()
     
-    static var baseURL = ""
+    static var baseURL = "https://vuukle.com/api.asmx/"
     static var article_id = ""
     static var host = ""
     static var api_key = ""
@@ -24,6 +24,7 @@ class Global {
     static var tag2 = ""
     static var scrolingTableView = false
     static var setYourWebContent = false
+    static var setAdsVisible = true
     static var defaultImageUrl = "http://3aa0b40d2aab024f527d-510de3faeb1a65410c7c889a906ce44e.r42.cf6.rackcdn.com/avatar.png"
     static var websiteUrl = "https://vuukle.com"
     
@@ -33,13 +34,19 @@ class Global {
     static let leftConstrainCommentSize = 16
     static let leftConstrainReplySize = 75
     
+    static var firstEmoticonVotesCount = 0
+    static var secondEmoticonVotesCount  = 0
+    static var thirdEmoticonVotesCount = 0
+    static var fourthEmoticonVotesCount  = 0
+    static var fifthEmoticonVotesCount  = 0
+    static var sixthEmoticonVotesCount = 0
+    static var votes = EmoteRating()
+    
     func checkAllParameters() -> Bool{
-        if Global.baseURL != "" && Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
+        if Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{
             return true
         } else {
             switch "" {
-            case Global.baseURL:
-                print("You have not specified BaseUrl!")
             case Global.article_id:
                 print("You have not specified ArticleId!")
             case Global.host :

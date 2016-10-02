@@ -24,6 +24,14 @@ public class VuukleCommentsBuilder : NSObject {
     }
     
     /**
+     Set true for visible Ads!
+     */
+    public func setVuukleAdsVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.setAdsVisible = isVisible
+        return self
+    }
+    
+    /**
      Set true for visible refres!
      */
     public func setVuukleRefreshVisible(isVisible : Bool) -> VuukleCommentsBuilder {
@@ -50,15 +58,6 @@ public class VuukleCommentsBuilder : NSObject {
         return self
     }
     
-    /**
-     Required field !
-     
-     For example: "https://vuukle.com/api.asmx/"
-     */
-    public func setVuukleBaseUrl(url : String) -> VuukleCommentsBuilder {
-        Global.baseURL = url
-        return self
-    }
     
     /**
      Get id from Vuukle site. Every article has unique id!

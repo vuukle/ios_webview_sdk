@@ -6,6 +6,7 @@ class WebViewCell: UITableViewCell ,UIWebViewDelegate {
     var delegate : WebViewCell?
     
     @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var webViewHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,6 +21,12 @@ class WebViewCell: UITableViewCell ,UIWebViewDelegate {
             webView.delegate = self
             webView.frame = UIScreen.mainScreen().bounds
             getDataFromHtml()
+        }
+        
+        if Global.setAdsVisible == true {
+            webViewHeight.constant = 120
+        } else {
+            webViewHeight.constant = 0
         }
     }
     
