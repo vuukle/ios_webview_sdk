@@ -4,8 +4,8 @@ import UIKit
 
 protocol AddLoadMoreCellDelegate {
     
-    func loadMoreButtonPressed(tableCell : LoadMoreCell ,loadMoreButtonPressed loadMoreButton : AnyObject )
-    func openVuukleButtonButtonPressed(tableCell : LoadMoreCell ,openVuukleButtonPressed openVuukleButton : AnyObject )
+    func loadMoreButtonPressed(_ tableCell : LoadMoreCell ,loadMoreButtonPressed loadMoreButton : AnyObject )
+    func openVuukleButtonButtonPressed(_ tableCell : LoadMoreCell ,openVuukleButtonPressed openVuukleButton : AnyObject )
 }
 
 class LoadMoreCell: UITableViewCell {
@@ -18,28 +18,28 @@ class LoadMoreCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        activityIndicator.hidden = true
+        activityIndicator.isHidden = true
         activityIndicator.stopAnimating()
         loadMore.layer.cornerRadius = 5
         
     }
     
-    @IBAction func openVuukleButton(sender: AnyObject) {
+    @IBAction func openVuukleButton(_ sender: AnyObject) {
         self.delegate?.openVuukleButtonButtonPressed(self, openVuukleButtonPressed: sender)
     }
     
-    @IBAction func loadMoreButton(sender: AnyObject) {
+    @IBAction func loadMoreButton(_ sender: AnyObject) {
         
         self.delegate?.loadMoreButtonPressed(self, loadMoreButtonPressed: sender)
-        activityIndicator.hidden = false
-        activityIndicator.color? = UIColor.grayColor()
+        activityIndicator.isHidden = false
+        activityIndicator.color? = UIColor.gray
         activityIndicator.startAnimating()
         
-        loadMore.hidden = true
+        loadMore.isHidden = true
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

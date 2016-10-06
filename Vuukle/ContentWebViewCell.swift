@@ -1,5 +1,4 @@
 
-
 import UIKit
 
 class ContentWebViewCell : UITableViewCell ,UIWebViewDelegate{
@@ -12,49 +11,47 @@ class ContentWebViewCell : UITableViewCell ,UIWebViewDelegate{
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        let frameworkBundle = NSBundle(forClass: ContentWebViewCell.self)
+        let frameworkBundle = Bundle(for: ContentWebViewCell.self)
         getDataFromURL()
-
-        webView.scrollView.scrollEnabled = false
+        
+        webView.scrollView.isScrollEnabled = false
         webView.scrollView.bounces = false
         
         
     }
     
     func getDataFromURL () {
-        let url = NSURL (string: Global.articleUrl);
-        let requestObj = NSURLRequest(URL: url!);
-        webView.loadRequest(requestObj);
+        let url = URL (string: Global.articleUrl);
+        let requestObj = URLRequest(url: url! as URL);
+        webView.loadRequest(requestObj as URLRequest);
         webView.delegate = self
     }
     
-     func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         
-        if let heightString = webView.stringByEvaluatingJavaScriptFromString("document.body.scrollHeight"){
-             height = CGFloat(Float(heightString)!)
+        if let heightString = webView.stringByEvaluatingJavaScript(from: "document.body.scrollHeight"){
+            height = CGFloat(Float(heightString)!)
             print(height)
             self.webViewCellHeight.constant = height
-            webView.frame.size = webView.sizeThatFits(CGSizeZero)
-
-            
+            webView.frame.size = webView.sizeThatFits(CGSize.zero)
         }
         
     }
-
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if navigationType == UIWebViewNavigationType.LinkClicked {
-            UIApplication.sharedApplication().openURL(request.URL!)
-            print(request.URL!)
+    
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if navigationType == UIWebViewNavigationType.linkClicked {
+            UIApplication.shared.openURL(request.url!)
+            print(request.url!)
             return false
         }
         return true
     }
-
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
     }
-
+    
 }

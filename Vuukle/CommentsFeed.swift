@@ -2,7 +2,7 @@
 
 import Foundation
 
-class GetCommentsFeed {
+class CommentsFeed {
     var comment : String?
     var name : String?
     var ts : String?
@@ -23,9 +23,9 @@ class GetCommentsFeed {
     var level : Int?
     var myReplys : NSArray?
     
-    static func getCommentsFeedWhithArray(pDict : NSDictionary) -> GetCommentsFeed {
+    static func getCommentsFeedWhithArray(pDict : NSDictionary) -> CommentsFeed {
         
-        let lGetCommentsFeed = GetCommentsFeed()
+        let lGetCommentsFeed = CommentsFeed()
         lGetCommentsFeed.comment = pDict["comment"] as? String ?? ""
         lGetCommentsFeed.name = pDict["name"] as? String ?? ""
         lGetCommentsFeed.ts = pDict["ts"] as? String ?? ""
