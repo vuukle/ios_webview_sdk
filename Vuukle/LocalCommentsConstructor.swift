@@ -4,7 +4,8 @@ import Foundation
 
 class LocalCommentsConstructor{
     static let sharedInstance = LocalCommentsConstructor()
-    let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()    
+    let defaults : UserDefaults = UserDefaults.standard
+    
     func addComment(_ comment : String,name :String ,ts : String ,email : String ,up_votes : Int ,down_votes : Int ,comment_id : String ,replies : Int , user_id : String ,avatar_url : String ,parent_id : String , user_points : Int ,myComment : Bool, level : Int) -> CommentsFeed {
         let addComment = CommentsFeed()
         

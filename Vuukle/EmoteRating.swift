@@ -11,10 +11,10 @@ class EmoteRating {
     var fifth : Int!
     var sixth : Int!
     
-    static func EmoteRatingWhithDictionary(pDictionary:NSDictionary) -> EmoteRating {
+    static func EmoteRatingWhithDictionary(_ pDictionary:NSDictionary) -> EmoteRating {
         
         let lEmoteRating = EmoteRating()
-    
+        
         lEmoteRating.first = pDictionary["first"] == nil ? 0 : pDictionary["first"] as? Int ?? 0
         lEmoteRating.second = pDictionary["second"] == nil ? 0 : pDictionary["second"] as? Int ?? 0
         lEmoteRating.third =  pDictionary["third"] == nil ? 0 : pDictionary["third"] as? Int ?? 0
@@ -23,6 +23,6 @@ class EmoteRating {
         lEmoteRating.sixth = pDictionary["sixth"] == nil ? 0 : pDictionary["sixth"] as? Int ?? 0
         return lEmoteRating
     }
-
+    
     
 }
