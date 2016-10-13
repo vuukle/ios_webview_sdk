@@ -61,11 +61,11 @@ class ParametersConstructor  {
     
     
     func setRatePercent (_ first : Int , second : Int , thirt : Int , fourth : Int , fifth : Int , sixt : Int , element : Int) -> Int {
-        var percent = 0
         let sume : Int = first + second + thirt + fourth + fifth + sixt
-        if sume > 0{
-            percent = (element * 100)/sume
+        if sume == 0 {
+            return 0
         }
+        let percent = (element * 100)/sume
         return percent
     }
     
@@ -99,11 +99,13 @@ class ParametersConstructor  {
         return output
     }
     
+    
+    
     func setRate(_ article_id : String ,emote : Int , tableView : UITableView) {
         
         if  self.defaults.object(forKey: "\(article_id)") as? String == nil{
             
-            showAlert( "Voted!",message: "You just voted!")
+            showAlert( "Voted!",message: "Thanks for voting!")
             NetworkManager.sharedInstance.setRaring(article_id, emote: emote) { (response) in
                 switch emote {
                 case 1:

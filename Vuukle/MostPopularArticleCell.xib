@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="MostPopularArticleCell" rowHeight="178" id="KGk-i7-Jjw" customClass="MostPopularArticleCell" customModule="Vuukle" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="475" height="178"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="475" height="177"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6f1-4N-td7">
+                        <constraints>
+                            <constraint firstAttribute="height" constant="177.5" id="MiS-S4-kdw"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AY6-zT-TX8">
+                        <frame key="frameInset" minX="8" minY="103" width="459" height="67"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="p7d-VN-552">
+                                <frame key="frameInset" width="459" height="67"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoJ-fg-H78">
+                                        <frame key="frameInset" minX="8" minY="8" width="443" height="51"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="KLQ-oP-DPY"/>
+                                    <constraint firstItem="CoJ-fg-H78" firstAttribute="top" secondItem="p7d-VN-552" secondAttribute="top" constant="8" id="VOF-8z-BCY"/>
+                                    <constraint firstAttribute="trailing" secondItem="CoJ-fg-H78" secondAttribute="trailing" constant="8" id="bK7-t4-h4g"/>
+                                    <constraint firstAttribute="bottom" secondItem="CoJ-fg-H78" secondAttribute="bottom" constant="8" id="cSC-qw-SRB"/>
+                                    <constraint firstItem="CoJ-fg-H78" firstAttribute="leading" secondItem="p7d-VN-552" secondAttribute="leading" constant="8" id="iUt-6a-vhd"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                    </stackView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-JN-gg8">
+                        <connections>
+                            <action selector="showArticleButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rig-qc-qr0"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="6f1-4N-td7" secondAttribute="trailing" id="8Ww-di-UjD"/>
+                    <constraint firstAttribute="bottom" secondItem="6f1-4N-td7" secondAttribute="bottom" id="Lqt-yI-KK0"/>
+                    <constraint firstItem="ixW-JN-gg8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Mba-bE-PO2"/>
+                    <constraint firstItem="ixW-JN-gg8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="NEk-ce-4Fd"/>
+                    <constraint firstItem="6f1-4N-td7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Oq0-5a-mUW"/>
+                    <constraint firstItem="ixW-JN-gg8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Vv3-X9-y8q"/>
+                    <constraint firstItem="ixW-JN-gg8" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Xtb-qU-v9N"/>
+                    <constraint firstItem="6f1-4N-td7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="m5C-J5-7GI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="aboutArticleLabel" destination="CoJ-fg-H78" id="Z7j-W3-piZ"/>
+                <outlet property="articleImage" destination="6f1-4N-td7" id="nVB-jJ-s0T"/>
+            </connections>
+            <point key="canvasLocation" x="102.5" y="119"/>
+        </tableViewCell>
+    </objects>
+</document>

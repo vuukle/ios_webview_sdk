@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -183,6 +183,9 @@
                             <action selector="secondShareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="QT6-0E-mu9"/>
                         </connections>
                     </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="PXJ-jM-I36">
+                        <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tYq-Qc-2EF" firstAttribute="leading" secondItem="cfv-vm-dA8" secondAttribute="trailing" constant="4" id="2C4-rA-fPl"/>
@@ -197,6 +200,8 @@
                     <constraint firstItem="cfv-vm-dA8" firstAttribute="top" secondItem="PpY-Hj-ciT" secondAttribute="bottom" constant="3" id="OId-5m-ZPy"/>
                     <constraint firstItem="D94-L2-Oi4" firstAttribute="leading" secondItem="AcI-cT-RuQ" secondAttribute="trailing" constant="4" id="R03-a7-D4R"/>
                     <constraint firstAttribute="bottomMargin" secondItem="D94-L2-Oi4" secondAttribute="bottom" constant="9" id="SFo-ao-GPO"/>
+                    <constraint firstItem="PXJ-jM-I36" firstAttribute="centerX" secondItem="4yY-hT-H8m" secondAttribute="centerX" id="SJx-oh-UxZ"/>
+                    <constraint firstItem="PXJ-jM-I36" firstAttribute="centerY" secondItem="4yY-hT-H8m" secondAttribute="centerY" id="Sdm-no-Pq9"/>
                     <constraint firstAttribute="trailing" secondItem="PpY-Hj-ciT" secondAttribute="trailing" constant="40" id="TVk-uf-M5G"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4Ec-CF-oxH" secondAttribute="bottom" constant="7" id="WLb-6d-dRe"/>
                     <constraint firstItem="PpY-Hj-ciT" firstAttribute="leading" secondItem="mTb-9N-ojD" secondAttribute="trailing" constant="16" id="dpw-Pj-Q54"/>
@@ -239,6 +244,7 @@
                 <outlet property="imageLeftCostraint" destination="uNw-cZ-APL" id="iWT-NB-02R"/>
                 <outlet property="initialsLabel" destination="auN-Bb-TbM" id="NRf-aR-MeX"/>
                 <outlet property="initialsLabelLeftConstraints" destination="o46-HR-k8v" id="d9a-jh-o8Y"/>
+                <outlet property="progressIndicator" destination="PXJ-jM-I36" id="sBV-Bs-pMi"/>
                 <outlet property="replyCount" destination="R7t-g4-6D1" id="ZOg-eH-4Kh"/>
                 <outlet property="showButtonWidth" destination="nxz-oq-BlB" id="GBL-Rw-q5W"/>
                 <outlet property="showReply" destination="sN2-LF-kru" id="prO-sR-beW"/>

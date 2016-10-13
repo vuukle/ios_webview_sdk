@@ -12,6 +12,8 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     var indexRow = 1
     
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var commentTextView: UITextView!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -134,6 +136,18 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func showProgress() {
+        progressIndicator.startAnimating()
+        progressIndicator.isHidden = false
+        self.alpha = 0.4
+    }
+    
+    func hideProgress() {
+        progressIndicator.isHidden = true
+        progressIndicator.stopAnimating()
+        self.alpha = 1
     }
     
 }

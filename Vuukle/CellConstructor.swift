@@ -76,9 +76,9 @@ open class  CellConstructor {
 
         
         var cell = CellConstraintsConstructor.sharedInstance.setCommentCellConstraints(cell)
-
+        cell.hideProgress()
         cell.userNameLabel.textColor = UIColor.blue
-        cell.commentLabel.text = newComment
+        cell.commentLabel.text = newComment.replacingOccurrences(of: "<br/>", with: " ", options: NSString.CompareOptions.literal, range: nil)
         cell.userNameLabel.text = newName
         cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date: date as NSDate, numericDates: true)
         cell.countLabel.text = String(comment.user_points!)
@@ -121,7 +121,17 @@ open class  CellConstructor {
         return cell
     }
     
+    func returnMostPopularArticleCell (_ cell : MostPopularArticleCell , object : MostPopularArticle ) -> MostPopularArticleCell {
+        if object.imgUrl != "" && object.imgUrl != nil {
+            cell.imageForCell = object.imgUrl
+        }
+        cell.aboutArticleLabel.text = object.heading
+        return cell
+    }
+    
     func returnReplyCell (_ cell : CommentCell ,comment : CommentsFeed , date : Date ,newComment : String ,newName : String ) -> CommentCell {
+        
+        cell.hideProgress()
         cell.imageLeftCostraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.totalCountLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
@@ -172,6 +182,8 @@ open class  CellConstructor {
     
     func returnAddCommentCellForComment(_ cell : AddCommentCell) -> AddCommentCell{
         
+        cell.hideProgress()
+        
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil {
             cell.nameTextField.text = self.defaults.object(forKey: "name") as? String
@@ -210,6 +222,7 @@ open class  CellConstructor {
     
     func returnAddCommentCellForReply(_ cell : AddCommentCell , object : ReplyForm) -> AddCommentCell{
         
+        cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         if let lname = self.defaults.object(forKey: "name") as? String {
             cell.nameTextField.text = lname
@@ -288,6 +301,11 @@ open class  CellConstructor {
                 cell = returnCommentCell(cell, comment: objectForcell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForcell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForcell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForcell.name!))
                 return cell
             }
+        } else if object is MostPopularArticle {
+            let objectForcell : MostPopularArticle = object as! MostPopularArticle
+            var cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell") as! MostPopularArticleCell
+            cell = returnMostPopularArticleCell(cell, object: object as! MostPopularArticle)
+            return cell
         }
         return cell
     }

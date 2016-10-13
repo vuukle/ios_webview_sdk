@@ -15,6 +15,14 @@ open class VuukleCommentsBuilder : NSObject {
     }
     
     /**
+     Set true for visible emote rating!
+     */
+    open func setVuukleMostPopularArticleVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.setMostPopularArticleVisible = isVisible
+        return self
+    }
+    
+    /**
      Set true for visible Ads!
      */
     open func setVuukleAdsVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
@@ -228,6 +236,16 @@ open class VuukleCommentsBuilder : NSObject {
      */
     open func setVuuklePaginationCount(_ paginationCount : Int) -> VuukleCommentsBuilder{
         Global.countLoadCommentsInPagination = paginationCount
+        return self
+    }
+    
+    /**
+     Optional field!
+     
+     By default, 10 items!
+     */
+    open func setVuukleMostPopularArticleCount(_ count : Int) -> VuukleCommentsBuilder{
+        Global.countLoadMostPopularArticle = count
         return self
     }
     

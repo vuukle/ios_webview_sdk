@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -74,6 +74,9 @@
                                     <action selector="logOutButtonWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IQz-1L-Jdw"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="SxS-A2-Uk4">
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -92,9 +95,13 @@
                             <constraint firstItem="At0-0K-1K5" firstAttribute="top" secondItem="6Hm-zn-RJP" secondAttribute="bottom" constant="8" id="S9p-eM-MzQ"/>
                             <constraint firstAttribute="trailing" secondItem="GWR-1y-50J" secondAttribute="trailing" constant="8" id="Sku-c6-xZb"/>
                             <constraint firstItem="zJs-tt-as8" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="V7r-oV-HXh"/>
+                            <constraint firstItem="SxS-A2-Uk4" firstAttribute="centerY" secondItem="6lB-jC-hQ5" secondAttribute="centerY" id="XxV-WX-Jjf"/>
                             <constraint firstItem="aPu-Aw-7Lq" firstAttribute="top" secondItem="hCq-Oh-NT9" secondAttribute="bottom" constant="6" id="YVt-3B-eVx"/>
                             <constraint firstAttribute="trailing" secondItem="zJs-tt-as8" secondAttribute="trailing" constant="8" id="ZeK-og-2To"/>
+                            <constraint firstItem="SxS-A2-Uk4" firstAttribute="centerY" secondItem="6lB-jC-hQ5" secondAttribute="centerY" id="hII-Rc-kGH"/>
                             <constraint firstItem="QBA-es-1Dq" firstAttribute="top" secondItem="6lB-jC-hQ5" secondAttribute="top" constant="4" id="hzg-QJ-UtB"/>
+                            <constraint firstItem="SxS-A2-Uk4" firstAttribute="centerX" secondItem="6lB-jC-hQ5" secondAttribute="centerX" id="lOg-r8-OUo"/>
+                            <constraint firstItem="SxS-A2-Uk4" firstAttribute="centerX" secondItem="6lB-jC-hQ5" secondAttribute="centerX" id="mBT-r3-TbL"/>
                             <constraint firstAttribute="bottom" secondItem="zJs-tt-as8" secondAttribute="bottom" constant="7" id="oS7-pA-sh9"/>
                             <constraint firstItem="hCq-Oh-NT9" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="t7P-us-aA5"/>
                             <constraint firstAttribute="trailing" secondItem="6Hm-zn-RJP" secondAttribute="trailing" constant="8" id="uxL-VM-ULo"/>
@@ -119,6 +126,7 @@
                 <outlet property="logOutButtonHeight" destination="0zP-CM-bPs" id="9My-BA-yFN"/>
                 <outlet property="nameTextField" destination="6Hm-zn-RJP" id="72s-3P-WJ2"/>
                 <outlet property="postButtonOutlet" destination="zJs-tt-as8" id="at9-IG-p32"/>
+                <outlet property="progressIndicator" destination="SxS-A2-Uk4" id="jeh-AS-UZq"/>
                 <outlet property="totalCount" destination="hCq-Oh-NT9" id="Y3q-v5-tbA"/>
                 <outlet property="totalCountHeight" destination="x8d-qO-dsb" id="rMS-e9-Xsv"/>
             </connections>

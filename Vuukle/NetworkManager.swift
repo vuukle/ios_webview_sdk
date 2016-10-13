@@ -96,9 +96,10 @@ class NetworkManager {
     
     //MARK: Images
     
-    func getImageWhihURL(_ imageURL: NSURL,completion: @escaping (UIImage?) -> Void) -> Request? {
+    func getImageWhihURL(_ imageURL: String,completion: @escaping (UIImage?) -> Void) -> Request? {
         
-        return Alamofire.request(imageURL as! URLRequestConvertible).responseImage { response in
+       // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
+            return Alamofire.request(imageURL).responseImage { response in
                 
                 if let image = response.result.value {
                     
@@ -159,6 +160,8 @@ class NetworkManager {
     //MARK: Get More Comment Feed
     
     func getMoreCommentsFeed(_ from_count : Int ,to_count : Int ,completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
+        
+        var url = "\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)"
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)")
             .responseJSON { response in
                 
@@ -243,6 +246,7 @@ class NetworkManager {
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
                     print(respon)
+                    print("TIP")
                     completion(respon)
                     
                 } else {
@@ -267,5 +271,40 @@ class NetworkManager {
                 }
                 
         }
+    }
+    
+    //MARK : Get most popular article
+    
+    
+    func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
+        //if Global.setMostPopularArticleVisible {
+        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key)&host=\(Global.host)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
+            .responseJSON { response in
+                
+                if let JSON = response.result.value {
+
+                    let array = JSON as? NSArray
+
+                    
+                    var responseArray = [MostPopularArticle]()
+                    
+                    
+                    for feed in array! {
+                        //First Entrance
+                        responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: feed as! NSDictionary))
+                    }
+                    
+                    if !Global.setMostPopularArticleVisible {
+                        responseArray = []
+                    }
+                    
+                    completion(responseArray, nil)
+
+                    
+                } else {
+                    print("Status cod = \(response.response?.statusCode)")
+                    completion(nil,response.result.error as NSError?)
+                }
+            }
     }
 }

@@ -19,6 +19,7 @@ class CommentCell: UITableViewCell {
     var delegate : CommentCellDelegate?
     var leftCostraint = 16
     
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
@@ -70,7 +71,7 @@ class CommentCell: UITableViewCell {
             if let lImage = imageForCell {
                 
                 request?.cancel()
-                request = NetworkManager.sharedInstance.getImageWhihURL(URL(string: lImage)! as NSURL, completion: { (image) in
+                request = NetworkManager.sharedInstance.getImageWhihURL(lImage, completion: { (image) in
                     if let lResponseImage = image {
                         self.userImage.image = lResponseImage
                         
@@ -98,6 +99,18 @@ class CommentCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func showProgress() {
+        progressIndicator.startAnimating()
+        progressIndicator.isHidden = false
+        self.alpha = 0.4
+    }
+    
+    func hideProgress() {
+        progressIndicator.isHidden = true
+        progressIndicator.stopAnimating()
+        self.alpha = 1
     }
     
 }
