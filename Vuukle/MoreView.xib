@@ -38,7 +38,6 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="UWA-L1-tCp" secondAttribute="trailing" id="3sp-Aa-OU5"/>
                 <constraint firstItem="UWA-L1-tCp" firstAttribute="leading" secondItem="Xf9-eV-fTh" secondAttribute="leading" id="MWI-Ns-Yc4"/>

@@ -58,6 +58,8 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
         self.delegate?.sixthEmoticonButtonPressed(self, sixthEmoticonButtonPressed: sender)
     }
     
+    
+    @IBOutlet weak var thanksText: UILabel!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var firstEmoticonImageHeight: NSLayoutConstraint!

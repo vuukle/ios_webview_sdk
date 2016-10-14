@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="552" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="552" height="165"/>
+                <frame key="frameInset" width="552" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for voting!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adH-OB-WGU">
@@ -358,6 +358,7 @@
                 <outlet property="sixthEmoticonImage" destination="1ht-6Q-Cib" id="plL-J7-IR7"/>
                 <outlet property="sixthEmoticonImageHeight" destination="LhJ-ue-aET" id="dI8-3t-1Q6"/>
                 <outlet property="sixthEmoticonLabel" destination="ab4-1K-6ez" id="FHO-Pu-upP"/>
+                <outlet property="thanksText" destination="adH-OB-WGU" id="w1s-VQ-ozU"/>
                 <outlet property="thirdCountVotesLabelHeight" destination="pT0-oO-XiR" id="LSG-cH-b4f"/>
                 <outlet property="thirdEmoticonImage" destination="1Xe-u8-ILf" id="SNI-SS-CSn"/>
                 <outlet property="thirdEmoticonImageHeight" destination="ENB-0I-6bc" id="Ev5-Bm-JJx"/>

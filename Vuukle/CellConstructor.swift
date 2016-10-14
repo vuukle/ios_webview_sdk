@@ -12,11 +12,12 @@ open class  CellConstructor {
     func returnEmoticonCell(_ cell : EmoticonCell) -> EmoticonCell{
         
         var cell = cell
-        
+        cell.thanksText.isHidden = true
         if Global.showEmoticonCell == false {
             cell = CellConstraintsConstructor.sharedInstance.setEmoticonCellConstraint(cell)
         }
         if let selected = self.defaults.object(forKey: "\(Global.article_id)") as? String {
+            cell.thanksText.isHidden = false
             switch "\(selected)" {
             case "firstEmoticonSelected":
                 cell.firstEmoticonLabel.textColor = UIColor.red
@@ -66,6 +67,15 @@ open class  CellConstructor {
             cell.fifthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.fifth))%" ?? "0%"
             cell.sixthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.sixth))%" ?? "0%"
             
+        }
+        
+        if !Global.showEmoticonCell {
+            cell.countFirstEmoticonLabel.isHidden = true
+            cell.countSecondEmoticonLabel.isHidden = true
+            cell.countThirdEmoticonLabel.isHidden = true
+            cell.countFourthEmoticonLabel.isHidden = true
+            cell.countFifthEmoticonLabel.isHidden = true
+            cell.countSixthEmoticonLabel.isHidden = true
         }
         
         return cell

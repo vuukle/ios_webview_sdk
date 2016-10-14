@@ -100,9 +100,8 @@ class NetworkManager {
         
        // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
             return Alamofire.request(imageURL).responseImage { response in
-                
+                print("1488")
                 if let image = response.result.value {
-                    
                     completion(image)
                 } else {
                     print("Status cod = \(response)")
@@ -287,7 +286,6 @@ class NetworkManager {
 
                     
                     var responseArray = [MostPopularArticle]()
-                    
                     
                     for feed in array! {
                         //First Entrance

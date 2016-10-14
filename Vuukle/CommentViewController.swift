@@ -343,8 +343,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         NetworkManager.sharedInstance.getTotalCommentsCount { (totalCount) in
             CellConstructor.sharedInstance.totalComentsCount = totalCount.comments!
             
-            NetworkManager.sharedInstance.getEmoticonRating { (data) in
-                ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
+            if Global.showEmoticonCell {
+                NetworkManager.sharedInstance.getEmoticonRating { (data) in
+                    ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
+                }
                 
             }
         }
@@ -709,6 +711,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 self.tableView.reloadData()
             //}
         }
+    }
+    
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+            let myNumber = NSNumber(value: Float(tableView.contentSize.height))
+            
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
     }
     
     func removeMostPopularArticle (array : [CommentsFeed]) {

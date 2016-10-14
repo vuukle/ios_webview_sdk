@@ -14,7 +14,7 @@ class CellConstraintsConstructor {
         cell.fourthEmoticonImageHeight.constant = 0
         cell.fifthEmoticonImageHeight.constant = 0
         cell.sixthEmoticonImageHeight.constant = 0
-        
+    
         return cell
     }
     
