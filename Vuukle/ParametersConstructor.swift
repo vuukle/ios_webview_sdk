@@ -99,13 +99,11 @@ class ParametersConstructor  {
         return output
     }
     
-    
-    
     func setRate(_ article_id : String ,emote : Int , tableView : UITableView) {
         
         if  self.defaults.object(forKey: "\(article_id)") as? String == nil{
             
-            showAlert( "Voted!",message: "Thanks for voting!")
+            showAlert( "Voted!",message: "You just voted!")
             NetworkManager.sharedInstance.setRaring(article_id, emote: emote) { (response) in
                 switch emote {
                 case 1:
@@ -134,7 +132,7 @@ class ParametersConstructor  {
             }
             
         } else {
-            showAlert( "You have already voted!",message: "")
+            showAlert( "You just voted!",message: "")
         }
     }
     

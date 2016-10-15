@@ -12,8 +12,6 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     var indexRow = 1
     
-    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var commentTextView: UITextView!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -34,6 +32,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBOutlet weak var logOut: UIButton!
     
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     @IBAction func postButton(sender: AnyObject) {
         
         if self.defaults.object(forKey: "name") as? String == nil {
@@ -139,15 +138,15 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     }
     
     func showProgress() {
-        progressIndicator.startAnimating()
-        progressIndicator.isHidden = false
+        self.progressIndicator.startAnimating()
+        self.progressIndicator.isHidden = false
         self.alpha = 0.4
     }
     
     func hideProgress() {
-        progressIndicator.isHidden = true
-        progressIndicator.stopAnimating()
-        self.alpha = 1
+        self.progressIndicator.stopAnimating()
+        self.progressIndicator.isHidden = true
+        self.alpha = 1.0
     }
     
 }

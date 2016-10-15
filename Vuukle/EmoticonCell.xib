@@ -331,6 +331,7 @@
                     <constraint firstAttribute="bottom" secondItem="vcI-ef-Nvp" secondAttribute="bottom" constant="8" id="zof-UH-yQD"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="countFifthEmoticonLabel" destination="EOI-6t-fZW" id="Por-LO-Uy3"/>
                 <outlet property="countFirstEmoticonLabel" destination="3re-cX-awA" id="Nz7-fx-dfT"/>
@@ -358,7 +359,7 @@
                 <outlet property="sixthEmoticonImage" destination="1ht-6Q-Cib" id="plL-J7-IR7"/>
                 <outlet property="sixthEmoticonImageHeight" destination="LhJ-ue-aET" id="dI8-3t-1Q6"/>
                 <outlet property="sixthEmoticonLabel" destination="ab4-1K-6ez" id="FHO-Pu-upP"/>
-                <outlet property="thanksText" destination="adH-OB-WGU" id="w1s-VQ-ozU"/>
+                <outlet property="thanksLabel" destination="adH-OB-WGU" id="HCP-4k-laY"/>
                 <outlet property="thirdCountVotesLabelHeight" destination="pT0-oO-XiR" id="LSG-cH-b4f"/>
                 <outlet property="thirdEmoticonImage" destination="1Xe-u8-ILf" id="SNI-SS-CSn"/>
                 <outlet property="thirdEmoticonImageHeight" destination="ENB-0I-6bc" id="Ev5-Bm-JJx"/>

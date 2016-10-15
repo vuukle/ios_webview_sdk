@@ -1,5 +1,3 @@
-
-
 import UIKit
 import Alamofire
 import Social
@@ -91,6 +89,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
         }
         
+
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -170,23 +170,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         var secondLevel = 0
         tableCell.showProgress()
         
-        var position = tableCell.tag
-        
-        if replyOpened {
-            replyOpened = false
-            arrayObjectsForCell.remove(at: lastReplyID)
-            tableView.reloadData()
-            if lastReplyID < position {
-                position = position - 1
-            }
-        }
-        
-        if arrayObjectsForCell[position] is CommentsFeed {
-            let firstObject = arrayObjectsForCell[position] as! CommentsFeed
+        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
+            let firstObject = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
             firstLevel = firstObject.level!
         }
-        if arrayObjectsForCell[position + 1] is CommentsFeed {
-            let secondObject = arrayObjectsForCell[position + 1] as! CommentsFeed
+        if arrayObjectsForCell[tableCell.tag + 1] is CommentsFeed {
+            let secondObject = arrayObjectsForCell[tableCell.tag + 1] as! CommentsFeed
             secondLevel = secondObject.level!
         } else {
             secondLevel = 0
@@ -194,7 +183,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         if firstLevel == secondLevel && loadReply == true || firstLevel > secondLevel{
             loadReply = false
-            getReplies(index: position , comment: self.arrayObjectsForCell[position] as! CommentsFeed)
+            getReplies(index: tableCell.tag , comment: self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed)
             
         } else if firstLevel < secondLevel {
             removeObjectFromSortedArray(indexObject: tableCell.tag)
@@ -202,9 +191,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
-        tableCell.showProgress()
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
-        
+        tableCell.showProgress()
         if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
             
             var mail = ""
@@ -233,16 +221,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-                self.tableView.reloadData()
+                tableCell.hideProgress()
         }
     }
     
     func downvoteButtonPressed(_ tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
-        
-        tableCell.showProgress()
-        
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
-        
+        tableCell.showProgress()
         if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
             var mail = ""
             if self.defaults.object(forKey: "email") as? String != nil {
@@ -268,8 +253,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
             })
         } else {
-            ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-            self.tableView.reloadData()
+                ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+            tableCell.hideProgress()
         }
     }
     
@@ -305,7 +290,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     tableView.reloadData()
                 }
             }
-            
+        
+        
+//        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
+//            
 //            if indexOfLastObject > 0 && indexOfLastObject == Int(tableCell.tag + 1) {
 //                arrayObjectsForCell.remove(at: indexOfLastObject)
 //                indexOfLastObject = -1
@@ -337,16 +325,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.setContentOffset(CGPoint.zero, animated: true)
     }
     
-    //MARK: Get comments
     func getComments() {
         
         NetworkManager.sharedInstance.getTotalCommentsCount { (totalCount) in
             CellConstructor.sharedInstance.totalComentsCount = totalCount.comments!
             
-            if Global.showEmoticonCell {
-                NetworkManager.sharedInstance.getEmoticonRating { (data) in
-                    ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
-                }
+            NetworkManager.sharedInstance.getEmoticonRating { (data) in
+                ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
                 
             }
         }
@@ -368,10 +353,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if error == nil {
                     self.refreshControl?.endRefreshing()
                     self.saveCommentData(array: array!)
-                    self.tableView.reloadData()
-                    //if Global.setMostPopularArticleVisible == true {
-                        self.getMostPopularArticles()
-                    //}
+
                 } else {
                     NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
                         self.refreshControl?.endRefreshing()
@@ -389,7 +371,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 self.loadReply = true
                 for r in repliesArray! {
                     r.level = comment.level! + 1
-                    //if index
                     self.arrayObjectsForCell.insert(r, at: index + 1)
                 }
                 self.tableView.reloadData()
@@ -428,7 +409,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func postButtonPressed(tableCell: AddCommentCell, pressed postButton: AnyObject) {
         
         tableCell.showProgress()
-        self.view.endEditing(true)
         
         if arrayObjectsForCell[tableCell.tag] is CommentForm {
             let comment = arrayObjectsForCell[tableCell.tag] as! CommentForm
@@ -670,6 +650,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let load = LoadMore()
             load.showLoadMoreButton = true
             self.arrayObjectsForCell.append(load)
+                NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
+                    var returnArray = array
+                    if Global.setMostPopularArticleVisible == false {
+                        returnArray = []
+                    }
+                    for article in returnArray! {
+                        self.arrayObjectsForCell.append(article)
+                    }
+                    self.tableView.reloadData()
+                }
             tableView.setContentOffset(CGPoint.zero, animated: false)
         } else {
             
@@ -684,6 +674,14 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let load = LoadMore()
             load.showLoadMoreButton = false
             self.arrayObjectsForCell.append(load)
+            if Global.setMostPopularArticleVisible == true {
+                NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
+                    for article in array! {
+                        self.arrayObjectsForCell.append(article)
+                    }
+                    
+                }
+            }
         }
         self.canGetCommentsFeed = true
         self.canLoadmore = true
@@ -700,32 +698,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
     }
     
-    func getMostPopularArticles() {
-        //if Global.setMostPopularArticleVisible {
-            NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
-                if let responseArray = array {
-                    for article in array! {
-                        self.arrayObjectsForCell.append(article)
-                    }
-                }
-                self.tableView.reloadData()
-            //}
-        }
-    }
     
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-            let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-            
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
-    }
     
     func removeMostPopularArticle (array : [CommentsFeed]) {
         
-//        if Global.setMostPopularArticleVisible == true {
+        if Global.setMostPopularArticleVisible == true {
             for object in 1...Global.countLoadMostPopularArticle + 1 {
-                if self.arrayObjectsForCell.count > 0 {
-                    self.arrayObjectsForCell.removeLast()
-                }
+                self.arrayObjectsForCell.removeLast()
             }
             
             addMoreCommentsToArrayOfObjects(array: array)
@@ -735,10 +714,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
                 self.tableView.reloadData()
             }
-//        } else {
-//            self.arrayObjectsForCell.removeLast()
-//            addMoreCommentsToArrayOfObjects(array: array)
-//        }
+        } else {
+            self.arrayObjectsForCell.removeLast()
+            addMoreCommentsToArrayOfObjects(array: array)
+        }
         
     }
 

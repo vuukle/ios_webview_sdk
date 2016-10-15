@@ -19,7 +19,6 @@ class CommentCell: UITableViewCell {
     var delegate : CommentCellDelegate?
     var leftCostraint = 16
     
-    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var countLabel: UILabel!
@@ -30,7 +29,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var replyCount: UILabel!
     @IBOutlet weak var showReply: UIButton!
-    
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var imageLeftCostraint: NSLayoutConstraint!
     @IBOutlet weak var totalCountLeftConstraint: NSLayoutConstraint!
@@ -102,15 +101,15 @@ class CommentCell: UITableViewCell {
     }
     
     func showProgress() {
-        progressIndicator.startAnimating()
-        progressIndicator.isHidden = false
+        self.progressIndicator.startAnimating()
+        self.progressIndicator.isHidden = false
         self.alpha = 0.4
     }
     
     func hideProgress() {
-        progressIndicator.isHidden = true
-        progressIndicator.stopAnimating()
-        self.alpha = 1
+        self.progressIndicator.stopAnimating()
+        self.progressIndicator.isHidden = true
+        self.alpha = 1.0
     }
     
 }

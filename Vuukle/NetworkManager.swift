@@ -100,8 +100,9 @@ class NetworkManager {
         
        // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
             return Alamofire.request(imageURL).responseImage { response in
-                print("1488")
+                
                 if let image = response.result.value {
+                    
                     completion(image)
                 } else {
                     print("Status cod = \(response)")
@@ -245,7 +246,6 @@ class NetworkManager {
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
                     print(respon)
-                    print("TIP")
                     completion(respon)
                     
                 } else {
@@ -276,8 +276,8 @@ class NetworkManager {
     
     
     func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
-        //if Global.setMostPopularArticleVisible {
-        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key)&host=\(Global.host)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
+        
+        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=2e5a47ef-15f6-4eec-a685-65a6d0ed00d0&host=indianexpress.com&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -287,13 +287,9 @@ class NetworkManager {
                     
                     var responseArray = [MostPopularArticle]()
                     
-                    for feed in array! {
-                        //First Entrance
-                        responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: feed as! NSDictionary))
-                    }
                     
-                    if !Global.setMostPopularArticleVisible {
-                        responseArray = []
+                    for feed in array! {
+                        responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: feed as! NSDictionary))
                     }
                     
                     completion(responseArray, nil)
@@ -303,6 +299,8 @@ class NetworkManager {
                     print("Status cod = \(response.response?.statusCode)")
                     completion(nil,response.result.error as NSError?)
                 }
-            }
+                
+        }
     }
+    
 }

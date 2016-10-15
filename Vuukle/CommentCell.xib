@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="473" height="167"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6zw-tT-BJR" id="4yY-hT-H8m">
-                <frame key="frameInset" width="473" height="166"/>
+                <frame key="frameInset" width="473" height="167"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Solid_gray.png" translatesAutoresizingMaskIntoConstraints="NO" id="UBo-mb-86z">
@@ -183,9 +183,13 @@
                             <action selector="secondShareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="QT6-0E-mu9"/>
                         </connections>
                     </button>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="PXJ-jM-I36">
-                        <color key="color" cocoaTouchSystemColor="darkTextColor"/>
-                    </activityIndicatorView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="yOT-uq-TK3">
+                        <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="DNJ-hW-YuI">
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
+                        </subviews>
+                    </stackView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tYq-Qc-2EF" firstAttribute="leading" secondItem="cfv-vm-dA8" secondAttribute="trailing" constant="4" id="2C4-rA-fPl"/>
@@ -200,8 +204,6 @@
                     <constraint firstItem="cfv-vm-dA8" firstAttribute="top" secondItem="PpY-Hj-ciT" secondAttribute="bottom" constant="3" id="OId-5m-ZPy"/>
                     <constraint firstItem="D94-L2-Oi4" firstAttribute="leading" secondItem="AcI-cT-RuQ" secondAttribute="trailing" constant="4" id="R03-a7-D4R"/>
                     <constraint firstAttribute="bottomMargin" secondItem="D94-L2-Oi4" secondAttribute="bottom" constant="9" id="SFo-ao-GPO"/>
-                    <constraint firstItem="PXJ-jM-I36" firstAttribute="centerX" secondItem="4yY-hT-H8m" secondAttribute="centerX" id="SJx-oh-UxZ"/>
-                    <constraint firstItem="PXJ-jM-I36" firstAttribute="centerY" secondItem="4yY-hT-H8m" secondAttribute="centerY" id="Sdm-no-Pq9"/>
                     <constraint firstAttribute="trailing" secondItem="PpY-Hj-ciT" secondAttribute="trailing" constant="40" id="TVk-uf-M5G"/>
                     <constraint firstAttribute="bottomMargin" secondItem="4Ec-CF-oxH" secondAttribute="bottom" constant="7" id="WLb-6d-dRe"/>
                     <constraint firstItem="PpY-Hj-ciT" firstAttribute="leading" secondItem="mTb-9N-ojD" secondAttribute="trailing" constant="16" id="dpw-Pj-Q54"/>
@@ -213,6 +215,7 @@
                     <constraint firstItem="R7t-g4-6D1" firstAttribute="leading" secondItem="sN2-LF-kru" secondAttribute="trailing" constant="4" id="jS6-B4-8hs"/>
                     <constraint firstItem="pjE-4c-11K" firstAttribute="leading" secondItem="tYq-Qc-2EF" secondAttribute="trailing" constant="4" id="kJL-Fn-Dh8"/>
                     <constraint firstAttribute="trailing" secondItem="R7t-g4-6D1" secondAttribute="trailing" constant="12" id="klg-Z2-eVM"/>
+                    <constraint firstItem="yOT-uq-TK3" firstAttribute="centerY" secondItem="4yY-hT-H8m" secondAttribute="centerY" id="lKO-7L-Dpf"/>
                     <constraint firstItem="auN-Bb-TbM" firstAttribute="leading" secondItem="4yY-hT-H8m" secondAttribute="leadingMargin" constant="8" id="mtZ-He-FuX"/>
                     <constraint firstItem="IQq-Ll-rQO" firstAttribute="top" secondItem="c6t-kd-PjZ" secondAttribute="bottom" constant="10" id="mwG-bU-eTg"/>
                     <constraint firstItem="AcI-cT-RuQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4yY-hT-H8m" secondAttribute="topMargin" constant="100" id="nsx-cs-0gC"/>
@@ -223,6 +226,7 @@
                     <constraint firstItem="cfv-vm-dA8" firstAttribute="leading" secondItem="D94-L2-Oi4" secondAttribute="trailing" constant="4" id="r79-hX-5Zw"/>
                     <constraint firstItem="sN2-LF-kru" firstAttribute="leading" secondItem="4JE-fe-sM3" secondAttribute="trailing" id="sML-d5-NNt"/>
                     <constraint firstItem="AcI-cT-RuQ" firstAttribute="leading" secondItem="4yY-hT-H8m" secondAttribute="leading" constant="8" id="sei-zo-jp6"/>
+                    <constraint firstItem="yOT-uq-TK3" firstAttribute="centerX" secondItem="4yY-hT-H8m" secondAttribute="centerX" id="t4r-Wd-8qY"/>
                     <constraint firstItem="c6t-kd-PjZ" firstAttribute="trailing" secondItem="4yY-hT-H8m" secondAttribute="trailingMargin" id="tfM-Iv-byT"/>
                     <constraint firstItem="UBo-mb-86z" firstAttribute="leading" secondItem="4yY-hT-H8m" secondAttribute="leading" constant="16" id="uNw-cZ-APL"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pjE-4c-11K" secondAttribute="bottom" constant="6" id="udC-nq-fdh"/>
@@ -244,7 +248,7 @@
                 <outlet property="imageLeftCostraint" destination="uNw-cZ-APL" id="iWT-NB-02R"/>
                 <outlet property="initialsLabel" destination="auN-Bb-TbM" id="NRf-aR-MeX"/>
                 <outlet property="initialsLabelLeftConstraints" destination="o46-HR-k8v" id="d9a-jh-o8Y"/>
-                <outlet property="progressIndicator" destination="PXJ-jM-I36" id="sBV-Bs-pMi"/>
+                <outlet property="progressIndicator" destination="DNJ-hW-YuI" id="OHF-dV-2Uw"/>
                 <outlet property="replyCount" destination="R7t-g4-6D1" id="ZOg-eH-4Kh"/>
                 <outlet property="showButtonWidth" destination="nxz-oq-BlB" id="GBL-Rw-q5W"/>
                 <outlet property="showReply" destination="sN2-LF-kru" id="prO-sR-beW"/>

@@ -12,12 +12,13 @@ open class  CellConstructor {
     func returnEmoticonCell(_ cell : EmoticonCell) -> EmoticonCell{
         
         var cell = cell
-        cell.thanksText.isHidden = true
+        cell.thanksLabel.isHidden = true
         if Global.showEmoticonCell == false {
+            cell.isHidden = true
             cell = CellConstraintsConstructor.sharedInstance.setEmoticonCellConstraint(cell)
         }
         if let selected = self.defaults.object(forKey: "\(Global.article_id)") as? String {
-            cell.thanksText.isHidden = false
+            cell.thanksLabel.isHidden = true
             switch "\(selected)" {
             case "firstEmoticonSelected":
                 cell.firstEmoticonLabel.textColor = UIColor.red
@@ -67,15 +68,6 @@ open class  CellConstructor {
             cell.fifthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.fifth))%" ?? "0%"
             cell.sixthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.sixth))%" ?? "0%"
             
-        }
-        
-        if !Global.showEmoticonCell {
-            cell.countFirstEmoticonLabel.isHidden = true
-            cell.countSecondEmoticonLabel.isHidden = true
-            cell.countThirdEmoticonLabel.isHidden = true
-            cell.countFourthEmoticonLabel.isHidden = true
-            cell.countFifthEmoticonLabel.isHidden = true
-            cell.countSixthEmoticonLabel.isHidden = true
         }
         
         return cell
@@ -140,13 +132,11 @@ open class  CellConstructor {
     }
     
     func returnReplyCell (_ cell : CommentCell ,comment : CommentsFeed , date : Date ,newComment : String ,newName : String ) -> CommentCell {
-        
-        cell.hideProgress()
         cell.imageLeftCostraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.totalCountLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.initialsLabelLeftConstraints.constant = CGFloat(Global.leftConstrainReplySize)
-        
+        cell.hideProgress()
         cell.userNameLabel.textColor = UIColor.blue
         cell.commentLabel.text = newComment
         cell.userNameLabel.text = newName
@@ -193,7 +183,6 @@ open class  CellConstructor {
     func returnAddCommentCellForComment(_ cell : AddCommentCell) -> AddCommentCell{
         
         cell.hideProgress()
-        
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil {
             cell.nameTextField.text = self.defaults.object(forKey: "name") as? String
@@ -231,7 +220,6 @@ open class  CellConstructor {
     }
     
     func returnAddCommentCellForReply(_ cell : AddCommentCell , object : ReplyForm) -> AddCommentCell{
-        
         cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         if let lname = self.defaults.object(forKey: "name") as? String {

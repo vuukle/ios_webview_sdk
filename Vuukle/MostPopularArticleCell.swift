@@ -30,6 +30,7 @@ class MostPopularArticleCell: UITableViewCell {
                 request = NetworkManager.sharedInstance.getImageWhihURL(lImage, completion: { (image) in
                     if let lResponseImage = image {
                         self.articleImage.image = lResponseImage
+                        
                     }
                 })
                 
