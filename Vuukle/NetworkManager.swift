@@ -246,6 +246,7 @@ class NetworkManager {
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
                     print(respon)
+                    print("TIP")
                     completion(respon)
                     
                 } else {
@@ -276,7 +277,7 @@ class NetworkManager {
     
     
     func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
-        
+        //if Global.setMostPopularArticleVisible {
         Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key)&host=\(Global.host)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
             .responseJSON { response in
                 
@@ -293,6 +294,10 @@ class NetworkManager {
                         responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: feed as! NSDictionary))
                     }
                     
+                    if !Global.setMostPopularArticleVisible {
+                        responseArray = []
+                    }
+                    
                     completion(responseArray, nil)
 
                     
@@ -300,8 +305,6 @@ class NetworkManager {
                     print("Status cod = \(response.response?.statusCode)")
                     completion(nil,response.result.error as NSError?)
                 }
-                
-        }
+            }
     }
-    
 }
