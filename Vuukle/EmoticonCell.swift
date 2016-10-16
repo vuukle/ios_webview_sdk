@@ -4,18 +4,18 @@ import UIKit
 
 protocol EmoticonCellDelegate {
     
-    func firstEmoticonButtonPressed(_ tableCell : EmoticonCell ,firstEmoticonButtonPressed firstEmoticonButton : AnyObject )
-    func secondEmoticonButtonPressed(_ tableCell : EmoticonCell ,secondEmoticonButtonPressed secondEmoticonButton : AnyObject )
-    func thirdEmoticonButtonPressed(_ tableCell : EmoticonCell ,thirdEmoticonButtonPressed thirdEmoticonButton : AnyObject )
-    func fourthEmoticonButtonPressed(_ tableCell : EmoticonCell ,fourthEmoticonButtonPressed fourthEmoticonButton : AnyObject )
-    func fifthEmoticonButtonPressed(_ tableCell : EmoticonCell ,fifthEmoticonButtonPressed fifthEmoticonButton : AnyObject )
-    func sixthEmoticonButtonPressed(_ tableCell : EmoticonCell ,sixthEmoticonButtonPressed sixthEmoticonButton : AnyObject )
+    func firstEmoticonButtonPressed(tableCell : EmoticonCell ,firstEmoticonButtonPressed firstEmoticonButton : AnyObject )
+    func secondEmoticonButtonPressed(tableCell : EmoticonCell ,secondEmoticonButtonPressed secondEmoticonButton : AnyObject )
+    func thirdEmoticonButtonPressed(tableCell : EmoticonCell ,thirdEmoticonButtonPressed thirdEmoticonButton : AnyObject )
+    func fourthEmoticonButtonPressed(tableCell : EmoticonCell ,fourthEmoticonButtonPressed fourthEmoticonButton : AnyObject )
+    func fifthEmoticonButtonPressed(tableCell : EmoticonCell ,fifthEmoticonButtonPressed fifthEmoticonButton : AnyObject )
+    func sixthEmoticonButtonPressed(tableCell : EmoticonCell ,sixthEmoticonButtonPressed sixthEmoticonButton : AnyObject )
 }
 
 class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     
     var delegate : EmoticonCellDelegate?
-    let defaults : UserDefaults = UserDefaults.standard
+    let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var firstEmoticonImage: UIImageView!
     @IBOutlet weak var secondEmoticonImage: UIImageView!
@@ -32,6 +32,7 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var sixthEmoticonLabel: UILabel!
     
     
+    @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var countFirstEmoticonLabel: UILabel!
     @IBOutlet weak var countSecondEmoticonLabel: UILabel!
     @IBOutlet weak var countThirdEmoticonLabel: UILabel!
@@ -39,22 +40,22 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var countFifthEmoticonLabel: UILabel!
     @IBOutlet weak var countSixthEmoticonLabel: UILabel!
     
-    @IBAction func firstEmoticonButton(_ sender: AnyObject) {
+    @IBAction func firstEmoticonButton(sender: AnyObject) {
         self.delegate?.firstEmoticonButtonPressed(self, firstEmoticonButtonPressed: sender)
     }
-    @IBAction func secondEmoticonButton(_ sender: AnyObject) {
+    @IBAction func secondEmoticonButton(sender: AnyObject) {
         self.delegate?.secondEmoticonButtonPressed(self, secondEmoticonButtonPressed: sender)
     }
-    @IBAction func thirdEmoticonButton(_ sender: AnyObject) {
+    @IBAction func thirdEmoticonButton(sender: AnyObject) {
         self.delegate?.thirdEmoticonButtonPressed(self, thirdEmoticonButtonPressed: sender)
     }
-    @IBAction func fourthEmoticonButton(_ sender: AnyObject) {
+    @IBAction func fourthEmoticonButton(sender: AnyObject) {
         self.delegate?.fourthEmoticonButtonPressed(self, fourthEmoticonButtonPressed: sender)
     }
-    @IBAction func fifthEmoticonButton(_ sender: AnyObject) {
+    @IBAction func fifthEmoticonButton(sender: AnyObject) {
         self.delegate?.fifthEmoticonButtonPressed(self, fifthEmoticonButtonPressed: sender)
     }
-    @IBAction func sixthEmoticonButton(_ sender: AnyObject) {
+    @IBAction func sixthEmoticonButton(sender: AnyObject) {
         self.delegate?.sixthEmoticonButtonPressed(self, sixthEmoticonButtonPressed: sender)
     }
     
@@ -67,18 +68,12 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var fifthEmoticonImageHeight: NSLayoutConstraint!
     @IBOutlet weak var sixthEmoticonImageHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var firstCountVotesLabelHeight: NSLayoutConstraint!
-    @IBOutlet weak var secondCountVotesLabelHeight: NSLayoutConstraint!
-    @IBOutlet weak var thirdCountVotesLabelHeight: NSLayoutConstraint!
-    @IBOutlet weak var fourthCountVotesLabelHeight: NSLayoutConstraint!
-    @IBOutlet weak var fifthCountVotesLabelHeight: NSLayoutConstraint!
-    @IBOutlet weak var sixtCountVotesLabelHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state

@@ -3,16 +3,14 @@
 import UIKit
 protocol AddCommentCellDelegate {
     
-    func postButtonPressed(tableCell : AddCommentCell ,pressed postButton : AnyObject )
-    func logOutButtonPressed(tableCell : AddCommentCell ,pressed logOutButton : AnyObject )
+    func postButtonPressed(tableCell : AddCommentCell ,postButtonPressed postButton : AnyObject )
+    func logOutButtonPressed(tableCell : AddCommentCell ,logOutButtonPressed logOutButton : AnyObject )
 }
-class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate {
+class AddCommentCell: UITableViewCell , UITextViewDelegate ,UITextFieldDelegate {
     var delegate : AddCommentCellDelegate?
-    let defaults : UserDefaults = UserDefaults.standard
+    let defaults : NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     var indexRow = 1
-    
-    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var commentTextView: UITextView!
     
@@ -36,26 +34,33 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBAction func postButton(sender: AnyObject) {
         
-        if self.defaults.object(forKey: "name") as? String == nil {
-            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-        } else {
-            self.defaults.removeObject(forKey: "name")
-            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-        }
-        
-        if self.defaults.object(forKey: "email") as? String == nil {
-            self.defaults.set("\(emailTextField.text!)", forKey: "email")
+        if self.defaults.objectForKey("name") as? String == nil {
+            self.defaults.setObject("\(nameTextField.text!)", forKey: "name")
+            self.defaults.synchronize()
+            
         } else {
             
-            self.defaults.removeObject(forKey: "email")
-            self.defaults.set("\(emailTextField.text!)", forKey: "email")
+            self.defaults.removeObjectForKey("name")
+            self.defaults.setObject("\(nameTextField.text!)", forKey: "name")
+            self.defaults.synchronize()
         }
-        self.defaults.synchronize()
-        self.delegate?.postButtonPressed(tableCell: self ,pressed : sender)
+        
+        if self.defaults.objectForKey("email") as? String == nil {
+            self.defaults.setObject("\(emailTextField.text!)", forKey: "email")
+            self.defaults.synchronize()
+            
+        } else {
+            
+            self.defaults.removeObjectForKey("email")
+            self.defaults.setObject("\(emailTextField.text!)", forKey: "email")
+            self.defaults.synchronize()
+        }
+        
+        self.delegate?.postButtonPressed(self ,postButtonPressed : sender)
     }
     
     @IBAction func logOutButton(sender: AnyObject) {
-        self.delegate?.logOutButtonPressed(tableCell: self, pressed: sender)
+        self.delegate?.logOutButtonPressed(self, logOutButtonPressed: sender)
     }
     
     
@@ -71,27 +76,24 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         emailTextField.layer.cornerRadius = 5
         
         commentTextView.layer.borderWidth = 1
-        commentTextView.layer.borderColor = UIColor.lightGray.cgColor
+        commentTextView.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         nameTextField.layer.borderWidth = 1
-        nameTextField.layer.borderColor = UIColor.lightGray.cgColor
+        nameTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         emailTextField.layer.borderWidth = 1
-        emailTextField.layer.borderColor = UIColor.lightGray.cgColor
+        emailTextField.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         background.layer.borderWidth = 1
-        background.layer.borderColor = UIColor.lightGray.cgColor
+        background.layer.borderColor = UIColor.lightGrayColor().CGColor
         
         commentTextView.text = "Please write a comment..."
-        commentTextView.textColor = UIColor.lightGray
+        commentTextView.textColor = UIColor.lightGrayColor()
         commentTextView.delegate = self
         
         let viewForDoneButtonOnKeyboard = UIToolbar()
         viewForDoneButtonOnKeyboard.sizeToFit()
-        let btnDoneOnKeyboard = UIBarButtonItem(title: "Done",
-                                                style: .plain,
-                                                target: self,
-                                                action: #selector(doneBtnFromKeyboardClicked(sender:)))
+        let btnDoneOnKeyboard = UIBarButtonItem(title: "Done", style: .Plain, target: self, action: #selector(AddCommentCell.doneBtnFromKeyboardClicked(_:)))
         viewForDoneButtonOnKeyboard.setItems([btnDoneOnKeyboard], animated: false)
         
         nameTextField.delegate = self
@@ -101,9 +103,9 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         emailTextField.inputAccessoryView = viewForDoneButtonOnKeyboard
         commentTextView.inputAccessoryView = viewForDoneButtonOnKeyboard
         
-        commentTextView.returnKeyType = UIReturnKeyType.default
-        nameTextField.returnKeyType = UIReturnKeyType.next
-        emailTextField.returnKeyType = UIReturnKeyType.next
+        commentTextView.returnKeyType = UIReturnKeyType.Default
+        nameTextField.returnKeyType = UIReturnKeyType.Next
+        emailTextField.returnKeyType = UIReturnKeyType.Next
         
         emailTextField.enablesReturnKeyAutomatically = true
         nameTextField.enablesReturnKeyAutomatically = true
@@ -115,39 +117,27 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         commentTextView.resignFirstResponder()
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
+    func textViewDidBeginEditing(textView: UITextView) {
         
-        if commentTextView.textColor == UIColor.lightGray {
+        if commentTextView.textColor == UIColor.lightGrayColor(){
             commentTextView.text = ""
-            commentTextView.textColor = UIColor.black
+            commentTextView.textColor = UIColor.blackColor()
         }
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
+    func textViewDidEndEditing(textView: UITextView) {
         
         if commentTextView.text.isEmpty {
             commentTextView.text = "Please write a comment..."
-            commentTextView.textColor = UIColor.lightGray
+            commentTextView.textColor = UIColor.lightGrayColor()
         }
     }
     
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
+    override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
-    }
-    
-    func showProgress() {
-        progressIndicator.startAnimating()
-        progressIndicator.isHidden = false
-        self.alpha = 0.4
-    }
-    
-    func hideProgress() {
-        progressIndicator.isHidden = true
-        progressIndicator.stopAnimating()
-        self.alpha = 1
     }
     
 }
