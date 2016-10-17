@@ -24,7 +24,6 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
     @IBOutlet weak var fifthEmoticonImage: UIImageView!
     @IBOutlet weak var sixthEmoticonImage: UIImageView!
     
-    @IBOutlet weak var thanksLabel: UILabel!
     @IBOutlet weak var firstEmoticonLabel: UILabel!
     @IBOutlet weak var secondEmoticonLabel: UILabel!
     @IBOutlet weak var thirdEmoticonLabel: UILabel!
@@ -59,6 +58,8 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
         self.delegate?.sixthEmoticonButtonPressed(self, sixthEmoticonButtonPressed: sender)
     }
     
+    
+    @IBOutlet weak var thanksText: UILabel!
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var titleHeight: NSLayoutConstraint!
     @IBOutlet weak var firstEmoticonImageHeight: NSLayoutConstraint!

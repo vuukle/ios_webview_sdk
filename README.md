@@ -214,7 +214,12 @@ ___________________________________________________________________
 
 16. buildVuukle(self.view)                                     -[Set your View name where should be displayed Vuukle!For example: "myView".] Required field!
 
+__________________________________________________________________
+                                
+                                                 API
 
 
+1. VuukleInfo.getCommentsCount()                               -Returns count of comments under your article (Int value)
+2. VuukleInfo.getCommentsHeight()                              -Returns height of Vuukle comments block  (CGFloat value)
 
 

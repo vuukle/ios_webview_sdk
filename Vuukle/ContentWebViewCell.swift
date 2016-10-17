@@ -40,7 +40,7 @@ class ContentWebViewCell : UITableViewCell ,UIWebViewDelegate{
         // var timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: Selector("setWebViewFrame"), userInfo: nil, repeats: false)
         
         //        let date = Date().addingTimeInterval(5)
-        //        let timer = Timer(fireAt: date, interval: 5, target: self, selector: #selector(setWebViewFrame), userInfo: nil, repeats: false)
+        //        let time = Timer(fireAt: date, interval: 5, target: self, selector: #selector(setWebViewFrame), userInfo: nil, repeats: false)
         //        RunLoop.main.add(timer, forMode: RunLoopMode.commonModes)
     }
 
