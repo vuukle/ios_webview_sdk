@@ -76,7 +76,7 @@ open class VuukleCommentsBuilder : NSObject {
      
      */
     open func setVuukleHost(_ host : String) -> VuukleCommentsBuilder{
-        Global.host = host
+        Global.host = host.lowercased()
         return self
     }
     

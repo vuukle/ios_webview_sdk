@@ -21,16 +21,22 @@ open class  CellConstructor {
             switch "\(selected)" {
             case "firstEmoticonSelected":
                 cell.firstEmoticonLabel.textColor = UIColor.red
+                cell.countFirstEmoticonLabel.textColor = UIColor.red
             case "secondEmoticonSelected":
                 cell.secondEmoticonLabel.textColor = UIColor.red
+                cell.countSecondEmoticonLabel.textColor = UIColor.red
             case "thirdEmoticonSelected":
                 cell.thirdEmoticonLabel.textColor = UIColor.red
+                cell.countThirdEmoticonLabel.textColor = UIColor.red
             case "fourthEmoticonSelected":
                 cell.fourthEmoticonLabel.textColor = UIColor.red
+                cell.countFourthEmoticonLabel.textColor = UIColor.red
             case "fifthEmoticonSelected":
                 cell.fifthEmoticonLabel.textColor = UIColor.red
+                cell.countFifthEmoticonLabel.textColor = UIColor.red
             case "sixtEmoticonSelected":
                 cell.sixthEmoticonLabel.textColor = UIColor.red
+                cell.countSixthEmoticonLabel.textColor = UIColor.red
             default:
                 break
             }
