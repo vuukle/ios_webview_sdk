@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class VuukleInfo {
+open class VuukleInfo {
     static var totalCommentsCount = 0
     static var commentsHeight: CGFloat = 0.0
     

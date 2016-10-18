@@ -117,6 +117,7 @@
                     <constraint firstAttribute="trailing" secondItem="6lB-jC-hQ5" secondAttribute="trailing" constant="5" id="hHI-Id-bFo"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="background" destination="6lB-jC-hQ5" id="in0-8A-MJv"/>
                 <outlet property="commentTextView" destination="aPu-Aw-7Lq" id="RfB-Dd-uZN"/>

@@ -245,7 +245,7 @@ class NetworkManager {
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
                     print(respon)
-                    print("TIP")
+                    VuukleInfo.totalCommentsCount = respon.comments!
                     completion(respon)
                     
                 } else {

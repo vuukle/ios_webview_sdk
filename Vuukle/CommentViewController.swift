@@ -64,6 +64,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             self.tableView.estimatedRowHeight = 180
             
+            
             self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CommentViewController.dismissKeyboard)))
             
             if Global.showRefreshControl == true {
@@ -86,11 +87,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                                    selector: #selector(showTopOfTableView(sender:)),
                                                    name: NSNotification.Name(rawValue: "webViewLoaded"),
                                                    object: nil)
-            
             getComments()
             
         }
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setHeight(sender:)),
+                                               name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation,
+                                               object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -462,6 +470,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             }
                         }
                     }
+                    else {
+                        tableCell.hideProgress()
+                    }
                 }
             }
         } else if arrayObjectsForCell[tableCell.tag] is ReplyForm {
@@ -697,7 +708,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
             let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-            VuukleInfo.commentsHeight = tableView.contentSize.height
+            //VuukleInfo.commentsHeight = tableView.contentSize.height
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         }
     }
@@ -713,18 +724,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 self.tableView.reloadData()
             //}
         }
-    }
-    
-    override func willRotate(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
-        let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-        VuukleInfo.commentsHeight = tableView.contentSize.height
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
-    }
-    
-    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-            let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-            VuukleInfo.commentsHeight = tableView.contentSize.height
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
     }
     
     func removeMostPopularArticle (array : [CommentsFeed]) {
@@ -750,10 +749,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-        VuukleInfo.commentsHeight = tableView.contentSize.height
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+    func setHeight(sender: AnyObject) {
+        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+        })
     }
-    
 }

@@ -265,4 +265,12 @@ open class VuukleCommentsBuilder : NSObject {
         view.addSubview(vc.view)
 }
 
+    open static func getHeight() -> CGFloat{
+        return VuukleInfo.commentsHeight
+    }
+    
+    open static func getCommentsCount() -> Int{
+        return VuukleInfo.getCommentsCount()
+    }
+    
 }

@@ -331,6 +331,7 @@
                     <constraint firstAttribute="bottom" secondItem="vcI-ef-Nvp" secondAttribute="bottom" constant="8" id="zof-UH-yQD"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
             <connections>
                 <outlet property="countFifthEmoticonLabel" destination="EOI-6t-fZW" id="Por-LO-Uy3"/>
                 <outlet property="countFirstEmoticonLabel" destination="3re-cX-awA" id="Nz7-fx-dfT"/>

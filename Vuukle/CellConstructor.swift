@@ -200,6 +200,7 @@ open class  CellConstructor {
         
         cell.hideProgress()
         
+        
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil {
             cell.nameTextField.text = self.defaults.object(forKey: "name") as? String
