@@ -167,6 +167,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func showReplyButtonPressed(tableCell: CommentCell, showReplyButtonPressed showReplyButton: AnyObject) {
         var firstLevel = 0
         var secondLevel = 0
+        tableCell.showProgress()
         
         if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
             let firstObject = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
@@ -190,6 +191,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func upvoteButtonPressed(tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
+        tableCell.showProgress()
         
         if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
             
@@ -215,14 +217,17 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 })
             } else {
                 ParametersConstructor.sharedInstance.showAlert("You can not vote !You are not logged in!", message: "")
+                tableCell.hideProgress()
             }
             
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+            tableCell.hideProgress()
         }
     }
     
     func downvoteButtonPressed(tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
+        tableCell.showProgress()
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
         if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
@@ -249,10 +254,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 })
             } else {
                 ParametersConstructor.sharedInstance.showAlert("You can not vote !You are not logged in!", message: "")
+                tableCell.hideProgress()
             }
             
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+            tableCell.hideProgress()
         }
     }
     
@@ -263,7 +270,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func replyButtonPressed(tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
-        
         
         if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
             if !replyOpened {
@@ -362,6 +368,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func postButtonPressed(tableCell: AddCommentCell, postButtonPressed postButton: AnyObject) {
         
+        tableCell.showProgress()
         if arrayObjectsForCell[tableCell.tag] is CommentForm {
             let comment = arrayObjectsForCell[tableCell.tag] as! CommentForm
             if comment.addComment == true {
@@ -392,6 +399,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         }
                     }
                 }
+                else {
+                    tableCell.hideProgress()
+                }
               }
             }
         } else if arrayObjectsForCell[tableCell.tag] is ReplyForm {
@@ -417,8 +427,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             }
                         }
                     }
+                else {
+                    tableCell.hideProgress()
                 }
             }
+        }
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell, logOutButtonPressed logOutButton: AnyObject) {

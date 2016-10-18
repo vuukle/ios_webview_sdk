@@ -252,6 +252,7 @@ class NetworkManager {
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
                     print(respon)
+                    VuukleInfo.totalCommentsCount = respon.comments!
                     completion(respon)
                     
                 } else {

@@ -24,7 +24,7 @@ public class  CellConstructor {
         if selected != nil && selected != ""{
             cell.thanksLabel.hidden = false
             print("\(selected) 1488")
-            switch "\(selected)" {
+            switch selected! {
             case "firstEmoticonSelected":
                 cell.firstEmoticonLabel.textColor = UIColor.redColor()
                 cell.countFirstEmoticonLabel.textColor = UIColor.redColor()
@@ -86,6 +86,7 @@ public class  CellConstructor {
     }
     
     func returnCommentCell(cell : CommentCell ,comment : CommentsFeed , date : NSDate ,newComment : String ,newName : String ) -> CommentCell {
+        cell.hideProgress()
         cell.imageLeftCostraint.constant = CGFloat(Global.leftConstrainCommentSize)
         cell.totalCountLeftConstraint.constant = CGFloat(Global.leftConstrainCommentSize)
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainCommentSize)
@@ -136,6 +137,7 @@ public class  CellConstructor {
     }
     
     func returnReplyCell (cell : CommentCell ,comment : CommentsFeed , date : NSDate ,newComment : String ,newName : String ) -> CommentCell {
+        cell.hideProgress()
         cell.imageLeftCostraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.totalCountLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
@@ -186,6 +188,7 @@ public class  CellConstructor {
     
     func returnAddCommentCellForComment(cell : AddCommentCell) -> AddCommentCell{
         
+        cell.hideProgress()
          var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         
         if self.defaults.objectForKey("email") as? String != nil {
@@ -215,7 +218,7 @@ public class  CellConstructor {
     
     func returnAddCommentCellForReply(cell : AddCommentCell , object : ReplyForm) -> AddCommentCell{
         
-        
+        cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         
         if let lname = self.defaults.objectForKey("name") as? String {

@@ -29,7 +29,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var InitialsLabel: UILabel!
     @IBOutlet weak var replyCount: UILabel!
     @IBOutlet weak var showReply: UIButton!
-
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var imageLeftCostraint: NSLayoutConstraint!
     @IBOutlet weak var totalCountLeftConstraint: NSLayoutConstraint!
@@ -99,5 +99,17 @@ class CommentCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
+    func showProgress() {
+        self.progressIndicator.startAnimating()
+        self.progressIndicator.hidden = false
+        self.alpha = 0.4
+    }
+    
+    func hideProgress() {
+        self.progressIndicator.hidden = true
+        self.progressIndicator.stopAnimating()
+        self.alpha = 1
+    }
+    
 }

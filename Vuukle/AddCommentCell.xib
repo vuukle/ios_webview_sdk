@@ -45,12 +45,12 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Hm-zn-RJP">
-                                <rect key="frame" x="8" y="198" width="484" height="30"/>
+                                <rect key="frame" x="8" y="198" width="484" height="56"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GWR-1y-50J">
-                                <rect key="frame" x="8" y="236" width="484" height="56"/>
+                                <rect key="frame" x="8" y="236" width="484" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
@@ -77,6 +77,10 @@
                                     <action selector="logOutButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bZG-5H-bq3"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gWL-zX-AEG">
+                                <rect key="frame" x="232" y="165" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -85,6 +89,7 @@
                             <constraint firstItem="At0-0K-1K5" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="6Ng-db-rEf"/>
                             <constraint firstItem="GWR-1y-50J" firstAttribute="top" secondItem="6Hm-zn-RJP" secondAttribute="bottom" constant="8" id="8Kc-Hw-IrT"/>
                             <constraint firstItem="aPu-Aw-7Lq" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="9aY-hc-GxS"/>
+                            <constraint firstItem="gWL-zX-AEG" firstAttribute="centerX" secondItem="6lB-jC-hQ5" secondAttribute="centerX" id="D9h-Pu-PIU"/>
                             <constraint firstItem="6Hm-zn-RJP" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="DTa-m7-cDR"/>
                             <constraint firstAttribute="trailing" secondItem="aPu-Aw-7Lq" secondAttribute="trailing" constant="8" id="Frx-3w-kaC"/>
                             <constraint firstAttribute="trailing" secondItem="hCq-Oh-NT9" secondAttribute="trailing" constant="84" id="Hdu-wh-gbx"/>
@@ -92,6 +97,7 @@
                             <constraint firstItem="6Hm-zn-RJP" firstAttribute="top" secondItem="aPu-Aw-7Lq" secondAttribute="bottom" constant="20" id="J7B-CD-0uG"/>
                             <constraint firstItem="hCq-Oh-NT9" firstAttribute="top" secondItem="6lB-jC-hQ5" secondAttribute="top" constant="8" id="Oq4-j5-1Df"/>
                             <constraint firstAttribute="trailing" secondItem="At0-0K-1K5" secondAttribute="trailing" constant="8" id="PEc-XV-L6G"/>
+                            <constraint firstItem="gWL-zX-AEG" firstAttribute="centerY" secondItem="6lB-jC-hQ5" secondAttribute="centerY" id="QYs-6u-Dgw"/>
                             <constraint firstItem="At0-0K-1K5" firstAttribute="top" secondItem="6Hm-zn-RJP" secondAttribute="bottom" constant="8" id="S9p-eM-MzQ"/>
                             <constraint firstAttribute="trailing" secondItem="GWR-1y-50J" secondAttribute="trailing" constant="8" id="Sku-c6-xZb"/>
                             <constraint firstItem="zJs-tt-as8" firstAttribute="leading" secondItem="6lB-jC-hQ5" secondAttribute="leading" constant="8" id="V7r-oV-HXh"/>
@@ -123,6 +129,7 @@
                 <outlet property="logOutButtonHeight" destination="0zP-CM-bPs" id="9My-BA-yFN"/>
                 <outlet property="nameTextField" destination="6Hm-zn-RJP" id="72s-3P-WJ2"/>
                 <outlet property="postButtonOutlet" destination="zJs-tt-as8" id="at9-IG-p32"/>
+                <outlet property="progressIndicator" destination="gWL-zX-AEG" id="GHK-8a-x1S"/>
                 <outlet property="totalCount" destination="hCq-Oh-NT9" id="Y3q-v5-tbA"/>
                 <outlet property="totalCountHeight" destination="x8d-qO-dsb" id="rMS-e9-Xsv"/>
             </connections>

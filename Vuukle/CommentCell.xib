@@ -197,6 +197,10 @@
                             <action selector="secondShareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="dbH-Y8-pJR"/>
                         </connections>
                     </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aGh-jT-kP3">
+                        <rect key="frame" x="218" y="64" width="37" height="37"/>
+                        <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="tYq-Qc-2EF" firstAttribute="leading" secondItem="cfv-vm-dA8" secondAttribute="trailing" constant="4" id="2C4-rA-fPl"/>
@@ -253,6 +257,7 @@
                 <outlet property="downvoteCountLabel" destination="tYq-Qc-2EF" id="Pdq-U8-XPH"/>
                 <outlet property="imageLeftCostraint" destination="uNw-cZ-APL" id="iWT-NB-02R"/>
                 <outlet property="initialsLabelLeftConstraints" destination="o46-HR-k8v" id="d9a-jh-o8Y"/>
+                <outlet property="progressIndicator" destination="aGh-jT-kP3" id="uQC-g8-iJD"/>
                 <outlet property="replyCount" destination="R7t-g4-6D1" id="ZOg-eH-4Kh"/>
                 <outlet property="showButtonWidth" destination="nxz-oq-BlB" id="GBL-Rw-q5W"/>
                 <outlet property="showReply" destination="sN2-LF-kru" id="prO-sR-beW"/>

@@ -30,6 +30,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate ,UITextFieldDelegate 
     
     @IBOutlet weak var logOutButtonHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     @IBOutlet weak var logOut: UIButton!
     
     @IBAction func postButton(sender: AnyObject) {
@@ -138,6 +139,18 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate ,UITextFieldDelegate 
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+    func showProgress() {
+        self.progressIndicator.startAnimating()
+        self.progressIndicator.hidden = false
+        self.alpha = 0.4
+    }
+    
+    func hideProgress() {
+        self.progressIndicator.stopAnimating()
+        self.progressIndicator.hidden = true
+        self.alpha = 1
     }
     
 }
