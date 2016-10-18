@@ -77,7 +77,7 @@ public class VuukleCommentsBuilder : NSObject {
      
      */
     public func setVuukleHost(host : String) -> VuukleCommentsBuilder{
-        Global.host = host
+        Global.host = host.lowercaseString
         return self
     }
     
@@ -262,5 +262,8 @@ public class VuukleCommentsBuilder : NSObject {
         
     }
     
+    public static func getCommentsCount() -> Int {
+        return VuukleInfo.getCommentsCount()
+    }
  
 }

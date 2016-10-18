@@ -143,7 +143,7 @@ class ParametersConstructor {
     
     func setRate(article_id : String ,emote : Int , tableView : UITableView) {
         
-        if  self.defaults.objectForKey("\(article_id)") as? String == nil{
+        if  self.defaults.objectForKey("\(article_id)") as? String == nil || self.defaults.objectForKey("\(article_id)") as? String == "" {
             self.defaults.synchronize()
             showAlert( "Voted!",message: "You just voted!")
             NetworkManager.sharedInstance.setRaring(article_id, emote: emote) { (response) in

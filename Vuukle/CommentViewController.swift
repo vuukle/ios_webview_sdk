@@ -191,7 +191,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func upvoteButtonPressed(tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
-        if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil{
+        if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
             
             var mail = ""
             if self.defaults.objectForKey("email") as? String != nil {
@@ -225,7 +225,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     func downvoteButtonPressed(tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
-        if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil{
+        if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
             
             var mail = ""
             if self.defaults.objectForKey("email") as? String != nil  {

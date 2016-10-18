@@ -18,21 +18,31 @@ public class  CellConstructor {
             cell.hidden = true
             cell = CellConstraintsConstructor.sharedInstance.setEmoticonCellConstraint(cell)
         }
-        if let selected = self.defaults.objectForKey("\(Global.article_id)") as? String {
+        
+        let selected = self.defaults.objectForKey("\(Global.article_id)") as? String
+        
+        if selected != nil && selected != ""{
             cell.thanksLabel.hidden = false
+            print("\(selected) 1488")
             switch "\(selected)" {
-            case "1":
+            case "firstEmoticonSelected":
                 cell.firstEmoticonLabel.textColor = UIColor.redColor()
-            case "2":
+                cell.countFirstEmoticonLabel.textColor = UIColor.redColor()
+            case "secondEmoticonSelected":
                 cell.secondEmoticonLabel.textColor = UIColor.redColor()
-            case "3":
+                cell.countSecondEmoticonLabel.textColor = UIColor.redColor()
+            case "thirdEmoticonSelected":
                 cell.thirdEmoticonLabel.textColor = UIColor.redColor()
-            case "4":
+                cell.countThirdEmoticonLabel.textColor = UIColor.redColor()
+            case "fourthEmoticonSelected":
                 cell.fourthEmoticonLabel.textColor = UIColor.redColor()
-            case "5":
+                cell.countFourthEmoticonLabel.textColor = UIColor.redColor()
+            case "fifthEmoticonSelected":
                 cell.fifthEmoticonLabel.textColor = UIColor.redColor()
-            case "6":
+                cell.countFifthEmoticonLabel.textColor = UIColor.redColor()
+            case "sixthEmoticonSelected":
                 cell.sixthEmoticonLabel.textColor = UIColor.redColor()
+                cell.countSixthEmoticonLabel.textColor = UIColor.redColor()
             default:
                 break
             }
