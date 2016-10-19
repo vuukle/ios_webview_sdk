@@ -37,7 +37,7 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getCommentsFeed(_ completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
-        
+//        print("1499 \(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
                 
@@ -81,9 +81,9 @@ class NetworkManager {
                     let respon = ResponseToComment()
                     respon.result = self.jsonArray!["result"] as? String
                     respon.comment_id = self.jsonArray!["comment_id"] as? String
-                    respon.isModeration = self.jsonArray!["isModeration"] as? String
-                    
-                    
+                    respon.isModeration = self.jsonArray!["isModeration"] as! String
+                    let notOptionalResponse = respon.isModeration!
+                    respon.isModeration = notOptionalResponse
                     completion(respon , nil)
                     print(respon)
                     
@@ -124,6 +124,8 @@ class NetworkManager {
                     
                     let respon = ResponseToComment()
                     respon.result = self.jsonArray!["result"] as? String
+                    respon.isModeration = self.jsonArray!["isModeration"] as? String
+                    print("1466 \(respon.isModeration)")
                     
                     completion(respon , nil)
                     print("ID мого ріплая :\(respon.result!)")

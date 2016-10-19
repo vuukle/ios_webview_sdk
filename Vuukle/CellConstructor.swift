@@ -203,17 +203,25 @@ open class  CellConstructor {
         
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil {
+            let lname = self.defaults.object(forKey: "name") as! String
+            cell.nameTextField.isHidden = true
+            cell.greetingLabel.text = "Welcome, \(lname)"
+            cell.nameTextField.text = lname
+            cell.nameTextField.isEnabled = false
+            cell.backgroundHeight.constant = 230
             cell.nameTextField.text = self.defaults.object(forKey: "name") as? String
             cell.nameTextField.isEnabled = false
             cell.nameTextField.isSelected = false
             cell.logOut.isHidden = false
         } else {
+            cell.greetingLabel.isHidden = true
             cell.logOut.isHidden = true
             cell.nameTextField.isEnabled = true
             cell.nameTextField.isSelected = true
         }
         
         if self.defaults.object(forKey: "email") as? String != nil {
+            cell.emailTextField.isHidden = true
             cell.emailTextField.text = self.defaults.object(forKey: "email") as? String
             cell.emailTextField.isEnabled = false
             cell.emailTextField.isSelected = false
@@ -242,13 +250,19 @@ open class  CellConstructor {
         cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         if let lname = self.defaults.object(forKey: "name") as? String {
+            cell.nameTextField.isHidden = true
+            cell.greetingLabel.text = "Welcome, \(lname)"
             cell.nameTextField.text = lname
             cell.nameTextField.isEnabled = false
+            cell.backgroundHeight.constant = 218
         } else if self.defaults.object(forKey: "name") == nil{
+            cell.backgroundHeight.constant = 285
+            cell.greetingLabel.isHidden = true
             cell.nameTextField.text = ""
             cell.nameTextField.isEnabled = true
         }
         if let lemail = self.defaults.object(forKey: "email") as? String {
+            cell.emailTextField.isHidden = true
             cell.emailTextField.text = lemail
             cell.logOut.isHidden = true
             cell.emailTextField.isEnabled = false

@@ -226,14 +226,23 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             self.defaults.synchronize()
             NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
                 if error == nil {
-                    print(string)
                     commen.up_votes! += 1
-                    self.tableView.reloadData()
+                    if tableCell.upvoteCountLabel.isHidden {
+                        tableCell.upvoteCountLabel.isHidden = false
+                        tableCell.upvoteCountLabel.text = "1"
+                    } else {
+                        var votes = Int(tableCell.upvoteCountLabel.text!)
+                        votes = (votes! + 1)
+                        let upVotes = votes!
+                        tableCell.upvoteCountLabel.text = String(describing: upVotes)
+                    }
+                    tableCell.hideProgress()
+                    //self.tableView.reloadData()
                 } else {
                     NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
                         if string == "error" {
                             commen.up_votes! += 1
-                            self.tableView.reloadData()
+                            tableCell.hideProgress()
                         }
                     })
                 }
@@ -241,7 +250,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-                self.tableView.reloadData()
+                tableCell.hideProgress()
         }
     }
     
@@ -265,19 +274,29 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
                 if error == nil {
                     commen.down_votes! += 1
+                    if tableCell.downvoteCountLabel.isHidden {
+                        tableCell.downvoteCountLabel.isHidden = false
+                        tableCell.downvoteCountLabel.text = "1"
+                    } else {
+                        var votes = Int(tableCell.downvoteCountLabel.text!)
+                        votes = (votes! + 1)
+                        let downVotes = votes!
+                        tableCell.upvoteCountLabel.text = String(describing: downVotes)
+                    }
                     self.tableView.reloadData()
+                    
                 } else {
                     NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
                         if string == "error" {
                             commen.down_votes! += 1
-                            self.tableView.reloadData()
+                            tableCell.hideProgress()
                         }
                     })
                 }
             })
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-            self.tableView.reloadData()
+            tableCell.hideProgress()
         }
     }
     
@@ -458,11 +477,24 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                             if (error == nil) {
                                 self.morePost = true
-                                self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                let allow = respon!.isModeration! as String
+                                if allow == "true" {
+                                    ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                    tableCell.hideProgress()
+                                    cell.commentTextView.text = ""
+                                } else {
+                                    ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted", message: "")
+                                    self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                }
                             } else {
                                 NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                                     if (error == nil) {
+                                        let allow = respon!.isModeration! as String
+                                        if allow == "true" {
+                                            ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                        } else {
                                         self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                        }
                                     } else {
                                         self.morePost = true
                                     }
@@ -582,7 +614,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func keyboardWillShow(sender: NSNotification) {
         if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y = -keyboardSize.height
+            //self.view.frame.origin.y = -keyboardSize.height
         }
     }
     func keyboardWillHide(sender: NSNotification) {
@@ -756,4 +788,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         })
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let position = touch.location(in: self.view)
+            print("1488 x:\(position.x) y: \(position.y)")
+        }
+    }
+    
+    func getTap(sender: AnyObject) {
+        
+    }
+    
 }

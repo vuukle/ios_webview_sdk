@@ -28,9 +28,13 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBOutlet weak var totalCount: UILabel!
     
+    @IBOutlet weak var greetingLabel: UILabel!
+    
     @IBOutlet weak var totalCountHeight: NSLayoutConstraint!
     
     @IBOutlet weak var logOutButtonHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var backgroundHeight: NSLayoutConstraint!
     
     @IBOutlet weak var logOut: UIButton!
     

@@ -37,10 +37,12 @@ class CellConstraintsConstructor {
     }
     
     func setAddCommentCellForReplyConstraints (_ cell : AddCommentCell) ->  AddCommentCell{
+        cell.backgroundHeight.constant += -20
         cell.leftConstrainSize.constant = 5
         cell.totalCountHeight.constant = 5
         cell.logOutButtonHeight.constant = 5
         cell.totalCount.isHidden = true
+        //cell.commentTextView
         
         return cell
     }
