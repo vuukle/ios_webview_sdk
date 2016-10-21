@@ -26,7 +26,11 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate ,UITextFieldDelegate 
     
     @IBOutlet weak var totalCount: UILabel!
     
+    @IBOutlet weak var greeting: UILabel!
+    
     @IBOutlet weak var totalCountHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var backgroundHeight: NSLayoutConstraint!
     
     @IBOutlet weak var logOutButtonHeight: NSLayoutConstraint!
     
@@ -151,6 +155,13 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate ,UITextFieldDelegate 
         self.progressIndicator.stopAnimating()
         self.progressIndicator.hidden = true
         self.alpha = 1
+    }
+    
+    func isLogged() -> Bool {
+        if self.defaults.objectForKey("email") as? String != nil && self.defaults.objectForKey("name") as? String != nil && self.defaults.objectForKey("email") as? String != "" && self.defaults.objectForKey("name") as? String != "" {
+            return true
+        }
+        return false
     }
     
 }

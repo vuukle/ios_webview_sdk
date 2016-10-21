@@ -197,7 +197,7 @@
                             <action selector="secondShareButton:" destination="6zw-tT-BJR" eventType="touchUpInside" id="dbH-Y8-pJR"/>
                         </connections>
                     </button>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aGh-jT-kP3">
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="aGh-jT-kP3">
                         <rect key="frame" x="218" y="64" width="37" height="37"/>
                         <color key="color" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </activityIndicatorView>
@@ -209,6 +209,7 @@
                     <constraint firstItem="UBo-mb-86z" firstAttribute="top" secondItem="4yY-hT-H8m" secondAttribute="top" constant="16" id="4mg-Ii-kKn"/>
                     <constraint firstItem="IQq-Ll-rQO" firstAttribute="trailing" secondItem="4yY-hT-H8m" secondAttribute="trailingMargin" id="7fE-Cw-2US"/>
                     <constraint firstItem="4JE-fe-sM3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4Ec-CF-oxH" secondAttribute="trailing" id="AWZ-VV-jER"/>
+                    <constraint firstItem="aGh-jT-kP3" firstAttribute="centerY" secondItem="4yY-hT-H8m" secondAttribute="centerY" id="BQX-os-yIk"/>
                     <constraint firstAttribute="bottom" secondItem="R7t-g4-6D1" secondAttribute="bottom" constant="18" id="K21-fy-Ixo"/>
                     <constraint firstAttribute="bottom" secondItem="AcI-cT-RuQ" secondAttribute="bottom" constant="14" id="Kl5-G9-mmx"/>
                     <constraint firstItem="4Ec-CF-oxH" firstAttribute="leading" secondItem="pjE-4c-11K" secondAttribute="trailing" constant="4" id="O35-Bl-Ege"/>
@@ -226,6 +227,7 @@
                     <constraint firstItem="R7t-g4-6D1" firstAttribute="leading" secondItem="sN2-LF-kru" secondAttribute="trailing" constant="4" id="jS6-B4-8hs"/>
                     <constraint firstItem="pjE-4c-11K" firstAttribute="leading" secondItem="tYq-Qc-2EF" secondAttribute="trailing" constant="4" id="kJL-Fn-Dh8"/>
                     <constraint firstAttribute="trailing" secondItem="R7t-g4-6D1" secondAttribute="trailing" constant="12" id="klg-Z2-eVM"/>
+                    <constraint firstItem="aGh-jT-kP3" firstAttribute="centerX" secondItem="4yY-hT-H8m" secondAttribute="centerX" id="mZ7-z3-Imj"/>
                     <constraint firstItem="auN-Bb-TbM" firstAttribute="leading" secondItem="4yY-hT-H8m" secondAttribute="leadingMargin" constant="8" id="mtZ-He-FuX"/>
                     <constraint firstItem="IQq-Ll-rQO" firstAttribute="top" secondItem="c6t-kd-PjZ" secondAttribute="bottom" constant="10" id="mwG-bU-eTg"/>
                     <constraint firstItem="AcI-cT-RuQ" firstAttribute="top" relation="greaterThanOrEqual" secondItem="4yY-hT-H8m" secondAttribute="topMargin" constant="100" id="nsx-cs-0gC"/>

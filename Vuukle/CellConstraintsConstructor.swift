@@ -29,6 +29,7 @@ class CellConstraintsConstructor {
     }
     
     func setAddCommentCellConstraints (_ cell : AddCommentCell) ->  AddCommentCell{
+        cell.backgroundHeight.constant = 285
         cell.leftConstrainSize.constant = 5
         cell.totalCountHeight.constant = 21
         cell.logOutButtonHeight.constant = 26
@@ -37,6 +38,7 @@ class CellConstraintsConstructor {
     }
     
     func setAddCommentCellForReplyConstraints (_ cell : AddCommentCell) ->  AddCommentCell{
+        cell.backgroundHeight.constant = 270
         cell.leftConstrainSize.constant = 5
         cell.totalCountHeight.constant = 5
         cell.logOutButtonHeight.constant = 5

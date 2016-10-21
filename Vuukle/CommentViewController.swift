@@ -196,8 +196,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
             
             var mail = ""
-            if self.defaults.objectForKey("email") as? String != nil {
+            if self.defaults.objectForKey("email") != nil && self.defaults.objectForKey("email") as? String != "" {
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.objectForKey("email") as! String)
+            } else {
+            mail = "no email"
+            }
                 let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
                 self.defaults.setObject("\(commen.comment_id)", forKey: "\(commen.comment_id)")
                 self.defaults.synchronize()
@@ -205,21 +208,24 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     if error == nil {
                         print(string)
                         commen.up_votes! += 1
-                        self.tableView.reloadData()
+                        if tableCell.upvoteCountLabel.hidden {
+                            tableCell.upvoteCountLabel.text = "1"
+                            tableCell.upvoteCountLabel.hidden = false
+                        } else {
+                            var count = tableCell.upvoteCountLabel.text as! Int
+                            count += 1
+                            tableCell.upvoteCountLabel.text = String(count)
+                        }
+                        tableCell.hideProgress()
                     } else {
                         NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
                             if string == "error" {
                                 commen.up_votes! += 1
-                                self.tableView.reloadData()
+                                tableCell.hideProgress()
                             }
                         })
                     }
                 })
-            } else {
-                ParametersConstructor.sharedInstance.showAlert("You can not vote !You are not logged in!", message: "")
-                tableCell.hideProgress()
-            }
-            
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
             tableCell.hideProgress()
@@ -233,30 +239,36 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         if  self.defaults.objectForKey("\(commen.comment_id)") as? String == nil || self.defaults.objectForKey("\(commen.comment_id)") as? String == "" {
             
             var mail = ""
-            if self.defaults.objectForKey("email") as? String != nil  {
+            if self.defaults.objectForKey("email") != nil && self.defaults.objectForKey("email") as? String != "" {
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.objectForKey("email") as! String)
-                let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
-                self.defaults.setObject("\(commen.comment_id)", forKey: "\(commen.comment_id)")
-                self.defaults.synchronize()
-                NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
-                    if error == nil {
-                        print(string)
-                        commen.up_votes! += 1
-                        self.tableView.reloadData()
+            } else {
+                mail = "no mail"
+            }
+            let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
+            self.defaults.setObject("\(commen.comment_id)", forKey: "\(commen.comment_id)")
+            self.defaults.synchronize()
+            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
+                if error == nil {
+                    print(string)
+                    commen.up_votes! += 1
+                    if tableCell.downvoteCountLabel.hidden {
+                        tableCell.downvoteCountLabel.text = "1"
+                        tableCell.downvoteCountLabel.hidden = false
                     } else {
-                        NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
-                            if string == "error" {
-                                commen.up_votes! += 1
-                                self.tableView.reloadData()
+                        var count = tableCell.downvoteCountLabel.text as! Int
+                        count += 1
+                        tableCell.downvoteCountLabel.text = String(count)
+                    }
+                    tableCell.hideProgress()
+                } else {
+                    NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
+                        if string == "error" {
+                            commen.up_votes! += 1
+                            self.tableView.reloadData()
                             }
                         })
                     }
                 })
-            } else {
-                ParametersConstructor.sharedInstance.showAlert("You can not vote !You are not logged in!", message: "")
-                tableCell.hideProgress()
-            }
-            
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
             tableCell.hideProgress()

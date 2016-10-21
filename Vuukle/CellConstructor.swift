@@ -187,24 +187,30 @@ public class  CellConstructor {
     }
     
     func returnAddCommentCellForComment(cell : AddCommentCell) -> AddCommentCell{
-        
         cell.hideProgress()
-         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
+        var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
+        cell.totalCount.hidden = false
         
-        if self.defaults.objectForKey("email") as? String != nil {
-            cell.emailTextField.text = self.defaults.objectForKey("email") as? String
-            cell.emailTextField.enabled = false
+        if cell.isLogged() {
+            let name = self.defaults.objectForKey("name") as! String
+            let email = self.defaults.objectForKey("email") as! String
+            cell.emailTextField.text = email
+            cell.nameTextField.text = name
+            cell.emailTextField.hidden = true
+            cell.nameTextField.hidden = true
             cell.logOut.hidden = false
-        } else{
-            cell.logOut.hidden = true
-            cell.emailTextField.enabled = true
-        }
-        if self.defaults.objectForKey("name") as? String != nil {
-            cell.nameTextField.text = self.defaults.objectForKey("name") as? String
-            cell.nameTextField.enabled = false
+            cell.greeting.text = "Welcome, \(name)"
+            cell.backgroundHeight.constant = 240
         } else {
+            cell.greeting.hidden = true
+            cell.logOut.hidden = true
+            cell.nameTextField.hidden = false
+            cell.emailTextField.hidden = false
+            cell.emailTextField.enabled = true
             cell.nameTextField.enabled = true
+            cell.backgroundHeight.constant = 285
         }
+        
         if totalComentsCount > 1 {
             cell.totalCount.text = "Total comments: \(totalComentsCount)"
         } else if totalComentsCount == 0 {
@@ -221,21 +227,26 @@ public class  CellConstructor {
         cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         
-        if let lname = self.defaults.objectForKey("name") as? String {
-            cell.nameTextField.text = lname
-            cell.nameTextField.enabled = false
-        } else if self.defaults.objectForKey("name") == nil{
+        if cell.isLogged() {
+            let name = self.defaults.objectForKey("name") as! String
+            let email = self.defaults.objectForKey("email") as! String
+            cell.emailTextField.text = email
+            cell.nameTextField.text = name
+            cell.emailTextField.hidden = true
+            cell.nameTextField.hidden = true
+            cell.logOut.hidden = true
+            cell.greeting.text = "Welcome, \(name)"
+            cell.backgroundHeight.constant = 225
+        } else {
             cell.nameTextField.text = ""
-            cell.nameTextField.enabled = true
-        }
-        if let lemail = self.defaults.objectForKey("email") as? String {
-            cell.emailTextField.text = lemail
-            cell.logOut.hidden = true
-            cell.emailTextField.enabled = false
-        } else if self.defaults.objectForKey("email") == nil {
             cell.emailTextField.text = ""
+            cell.greeting.hidden = true
             cell.logOut.hidden = true
+            cell.nameTextField.hidden = false
+            cell.emailTextField.hidden = false
             cell.emailTextField.enabled = true
+            cell.nameTextField.enabled = true
+            cell.backgroundHeight.constant = 270
         }
         return cell
     }
