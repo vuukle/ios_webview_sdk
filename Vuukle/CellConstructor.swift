@@ -76,12 +76,7 @@ open class  CellConstructor {
         }
         
         if !Global.showEmoticonCell {
-            cell.countFirstEmoticonLabel.isHidden = true
-            cell.countSecondEmoticonLabel.isHidden = true
-            cell.countThirdEmoticonLabel.isHidden = true
-            cell.countFourthEmoticonLabel.isHidden = true
-            cell.countFifthEmoticonLabel.isHidden = true
-            cell.countSixthEmoticonLabel.isHidden = true
+            cell.isHidden = true
         }
         
         return cell
@@ -145,6 +140,10 @@ open class  CellConstructor {
         return cell
     }
     
+    func returnLoginCell (_ cell : LoginCell, object: LoginForm) -> LoginCell {
+        return cell
+    }
+    
     func returnReplyCell (_ cell : CommentCell ,comment : CommentsFeed , date : Date ,newComment : String ,newName : String ) -> CommentCell {
         
         cell.hideProgress()
@@ -199,12 +198,13 @@ open class  CellConstructor {
     func returnAddCommentCellForComment(_ cell : AddCommentCell) -> AddCommentCell{
         
         cell.hideProgress()
-        
+        cell.totalCount.isHidden = false
         
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
-        if self.defaults.object(forKey: "name") as? String != nil {
+        if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != ""{
             let lname = self.defaults.object(forKey: "name") as! String
             cell.nameTextField.isHidden = true
+            cell.greetingLabel.isHidden = false
             cell.greetingLabel.text = "Welcome, \(lname)"
             cell.nameTextField.text = lname
             cell.nameTextField.isEnabled = false
@@ -214,13 +214,16 @@ open class  CellConstructor {
             cell.nameTextField.isSelected = false
             cell.logOut.isHidden = false
         } else {
+            cell.backgroundHeight.constant = 285
             cell.greetingLabel.isHidden = true
             cell.logOut.isHidden = true
+            cell.nameTextField.isHidden = false
             cell.nameTextField.isEnabled = true
             cell.nameTextField.isSelected = true
+            cell.nameTextField.text = ""
         }
         
-        if self.defaults.object(forKey: "email") as? String != nil {
+        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             cell.emailTextField.isHidden = true
             cell.emailTextField.text = self.defaults.object(forKey: "email") as? String
             cell.emailTextField.isEnabled = false
@@ -228,8 +231,10 @@ open class  CellConstructor {
             cell.logOut.isHidden = false
         } else{
             cell.logOut.isHidden = true
+            cell.emailTextField.isHidden = false
             cell.emailTextField.isEnabled = true
             cell.emailTextField.isSelected = true
+            cell.emailTextField.text = ""
         }
 
         
@@ -256,7 +261,7 @@ open class  CellConstructor {
             cell.nameTextField.isEnabled = false
             cell.backgroundHeight.constant = 218
         } else if self.defaults.object(forKey: "name") == nil{
-            cell.backgroundHeight.constant = 285
+            cell.backgroundHeight.constant = 268
             cell.greetingLabel.isHidden = true
             cell.nameTextField.text = ""
             cell.nameTextField.isEnabled = true
@@ -336,6 +341,11 @@ open class  CellConstructor {
             let objectForcell : MostPopularArticle = object as! MostPopularArticle
             var cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell") as! MostPopularArticleCell
             cell = returnMostPopularArticleCell(cell, object: object as! MostPopularArticle)
+            return cell
+        } else if object is LoginForm {
+            let objectForcell : LoginForm = object as! LoginForm
+            var cell = tableView.dequeueReusableCell(withIdentifier: "LoginCell") as! LoginCell
+            cell = returnLoginCell(cell, object: object as! LoginForm)
             return cell
         }
         return cell

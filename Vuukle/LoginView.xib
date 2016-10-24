@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.80000000000000004" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, log in to vote!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bUf-Rh-DIJ">
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LKj-JD-35D">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="bGy-tH-NI0"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Email" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TWt-hA-Kgj">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="163" id="ZUm-mz-hfg"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8nd-1l-hEZ">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="Jlf-e7-02H"/>
+                    </constraints>
+                    <state key="normal" title="Log In"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DHH-9n-J2y">
+                    <state key="normal" title="Cancel">
+                        <color key="titleColor" red="1" green="0.0049735469999147019" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="DHH-9n-J2y" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0nm-Y1-LaD"/>
+                <constraint firstItem="LKj-JD-35D" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="3Vb-qA-uEG"/>
+                <constraint firstItem="8nd-1l-hEZ" firstAttribute="top" secondItem="TWt-hA-Kgj" secondAttribute="bottom" constant="23" id="I9v-ee-34B"/>
+                <constraint firstItem="LKj-JD-35D" firstAttribute="top" secondItem="bUf-Rh-DIJ" secondAttribute="bottom" constant="21" id="IWq-f7-hbP"/>
+                <constraint firstItem="bUf-Rh-DIJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="131" id="KFq-90-q46"/>
+                <constraint firstItem="8nd-1l-hEZ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Kp5-qT-FMy"/>
+                <constraint firstItem="bUf-Rh-DIJ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="fSL-D7-OUg"/>
+                <constraint firstItem="TWt-hA-Kgj" firstAttribute="top" secondItem="LKj-JD-35D" secondAttribute="bottom" constant="8" id="kYT-VW-nw8"/>
+                <constraint firstItem="DHH-9n-J2y" firstAttribute="top" secondItem="8nd-1l-hEZ" secondAttribute="bottom" constant="8" id="o6w-Gx-edr"/>
+                <constraint firstItem="TWt-hA-Kgj" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="vMu-0s-Jhn"/>
+            </constraints>
+            <point key="canvasLocation" x="34.5" y="61.5"/>
+        </view>
+    </objects>
+</document>

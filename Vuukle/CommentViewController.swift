@@ -1,11 +1,9 @@
-
-
 import UIKit
 import Alamofire
 import Social
 
 
-class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate {
+class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate {
     
     static let sharedInstance = Global()
     var arrayObjectsForCell = [AnyObject]()
@@ -26,9 +24,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     var loadReply = true
     var countOthetCell = 3
     var indexOfLastObject = -1
-    //Needed to check if reply field is opened
+    //Needed to check if reply form is opened
     var lastReplyID = 0
     var replyOpened = false
+    //Needed to check if login form is opened
+    var lastLoginID = 0
+    var loginOpened = false
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,6 +42,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let bundleAddCommentCell = Bundle(for: CommentCell.self)
             let bundleEmoticonCell = Bundle(for: CommentCell.self)
             let bundleLoadMoreCell = Bundle(for: CommentCell.self)
+            let bundleLoginCell = Bundle(for: CommentCell.self)
+            //let bundleLoginView = Bundle(for: AddLoadMore)
             
             let nibComment = UINib(nibName: "CommentCell", bundle: bundleCommentCell)
             self.tableView.register(nibComment, forCellReuseIdentifier: "CommentCell")
@@ -61,6 +65,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             let nibMostPopularArticleCell = UINib(nibName: "MostPopularArticleCell", bundle: bundleLoadMoreCell)
             self.tableView.register(nibMostPopularArticleCell, forCellReuseIdentifier: "MostPopularArticleCell")
+            
+            let nibLoginCell = UINib(nibName: "LoginCell", bundle: bundleLoginCell)
+            self.tableView.register(nibLoginCell, forCellReuseIdentifier: "LoginCell")
             
             self.tableView.estimatedRowHeight = 180
             
@@ -152,6 +159,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+        case is LoginForm:
+            let cell : LoginCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! LoginCell
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
         default:
             break
         }
@@ -180,14 +192,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         var position = tableCell.tag
         
-        if replyOpened {
-            replyOpened = false
-            arrayObjectsForCell.remove(at: lastReplyID)
-            tableView.reloadData()
-            if lastReplyID < position {
-                position = position - 1
-            }
-        }
+        position = hideForms(position: position)
         
         if arrayObjectsForCell[position] is CommentsFeed {
             let firstObject = arrayObjectsForCell[position] as! CommentsFeed
@@ -214,41 +219,44 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
         if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
-            
+            print("1499 \(self.defaults.object(forKey: "email"))")
             var mail = ""
-            if self.defaults.object(forKey: "email") as? String != nil {
+            if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != ""{
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
-            } else {
-                mail = "no email"
-            }
-            let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
-            self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
-            self.defaults.synchronize()
-            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
-                if error == nil {
-                    commen.up_votes! += 1
-                    if tableCell.upvoteCountLabel.isHidden {
-                        tableCell.upvoteCountLabel.isHidden = false
-                        tableCell.upvoteCountLabel.text = "1"
-                    } else {
-                        var votes = Int(tableCell.upvoteCountLabel.text!)
-                        votes = (votes! + 1)
-                        let upVotes = votes!
-                        tableCell.upvoteCountLabel.text = String(describing: upVotes)
-                    }
-                    tableCell.hideProgress()
-                    //self.tableView.reloadData()
-                } else {
-                    NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
-                        if string == "error" {
-                            commen.up_votes! += 1
-                            tableCell.hideProgress()
+                let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
+                self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
+                self.defaults.synchronize()
+                NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
+                    if error == nil {
+                        commen.up_votes! += 1
+                        if tableCell.upvoteCountLabel.isHidden {
+                            tableCell.upvoteCountLabel.isHidden = false
+                            tableCell.upvoteCountLabel.text = "1"
+                        } else {
+                            var votes = Int(tableCell.upvoteCountLabel.text!)
+                            votes = (votes! + 1)
+                            let upVotes = votes!
+                            tableCell.upvoteCountLabel.text = String(describing: upVotes)
                         }
-                    })
-                }
-            })
-            
-        } else {
+                        tableCell.hideProgress()
+                    } else {
+                        NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
+                            if string == "error" {
+                                commen.up_votes! += 1
+                                tableCell.hideProgress()
+                            }
+                        })
+                    }
+                })
+            } else {
+                var position = tableCell.tag + 1
+                position = hideForms(position: position)
+                arrayObjectsForCell.insert(LoginForm(), at: position)
+                lastLoginID = position
+                loginOpened = true
+                tableView.reloadData()
+            }
+        }else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
                 tableCell.hideProgress()
         }
@@ -262,38 +270,42 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
             var mail = ""
-            if self.defaults.object(forKey: "email") as? String != nil {
-                mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
-                
-            } else {
-                mail = "no email"
-            }
-            let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
-            self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
-            self.defaults.synchronize()
-            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
-                if error == nil {
-                    commen.down_votes! += 1
-                    if tableCell.downvoteCountLabel.isHidden {
-                        tableCell.downvoteCountLabel.isHidden = false
-                        tableCell.downvoteCountLabel.text = "1"
-                    } else {
-                        var votes = Int(tableCell.downvoteCountLabel.text!)
-                        votes = (votes! + 1)
-                        let downVotes = votes!
-                        tableCell.upvoteCountLabel.text = String(describing: downVotes)
-                    }
-                    self.tableView.reloadData()
-                    
-                } else {
-                    NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
-                        if string == "error" {
-                            commen.down_votes! += 1
-                            tableCell.hideProgress()
+            if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
+                    mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
+                let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
+                self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
+                self.defaults.synchronize()
+                NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
+                    if error == nil {
+                        commen.down_votes! += 1
+                        if tableCell.downvoteCountLabel.isHidden {
+                            tableCell.downvoteCountLabel.isHidden = false
+                            tableCell.downvoteCountLabel.text = "1"
+                        } else {
+                            var votes = Int(tableCell.downvoteCountLabel.text!)
+                            votes = (votes! + 1)
+                            let downVotes = votes!
+                            tableCell.downvoteCountLabel.text = String(describing: downVotes)
                         }
-                    })
-                }
-            })
+                        tableCell.hideProgress()
+                    
+                    } else {
+                        NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
+                            if string == "error" {
+                                ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
+                            tableCell.hideProgress()
+                            }
+                        })
+                    }
+                })
+            } else {
+                var position = tableCell.tag + 1
+                position = hideForms(position: position)
+                arrayObjectsForCell.insert(LoginForm(), at: position)
+                lastLoginID = position
+                loginOpened = true
+                tableView.reloadData()
+            }
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
             tableCell.hideProgress()
@@ -302,36 +314,27 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
+        self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?")
         print("\(tableCell.tag)")
         
     }
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
-        
+        tableCell.showProgress()
         if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
             
-            if !replyOpened {
-                replyOpened = true
-                lastReplyID = Int(tableCell.tag + 1)
-                arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-                tableView.reloadData()
-            } else if lastReplyID == Int(tableCell.tag + 1) {
-                replyOpened = false
-                arrayObjectsForCell.remove(at: lastReplyID)
-                tableView.reloadData()
+            var position = tableCell.tag
+            
+            if lastReplyID == position + 1 && replyOpened {
+                hideForms()
             } else {
-                arrayObjectsForCell.remove(at: lastReplyID)
-                if lastReplyID < tableCell.tag {
-                    lastReplyID = tableCell.tag
-                    arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag)
-                    tableView.reloadData()
-                }
-                else {
-                    lastReplyID = tableCell.tag + 1
-                    arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-                    tableView.reloadData()
-                }
+                position = hideForms(position: tableCell.tag)
+                replyOpened = true
+                lastReplyID = Int(position + 1)
+                arrayObjectsForCell.insert(ReplyForm(), at: position + 1)
             }
+            
+            tableView.reloadData()
             
 //            if indexOfLastObject > 0 && indexOfLastObject == Int(tableCell.tag + 1) {
 //                arrayObjectsForCell.remove(at: indexOfLastObject)
@@ -371,12 +374,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         NetworkManager.sharedInstance.getTotalCommentsCount { (totalCount) in
             CellConstructor.sharedInstance.totalComentsCount = totalCount.comments!
-            
-            if Global.showEmoticonCell {
-                NetworkManager.sharedInstance.getEmoticonRating { (data) in
-                    ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
-                }
-                
+            }
+        if Global.showEmoticonCell {
+            NetworkManager.sharedInstance.getEmoticonRating { (data) in
+                ParametersConstructor.sharedInstance.setEmoticonCountVotes(data)
             }
         }
         
@@ -483,7 +484,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                     tableCell.hideProgress()
                                     cell.commentTextView.text = ""
                                 } else {
-                                    ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted", message: "")
+                                    ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                     self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                                 }
                             } else {
@@ -493,6 +494,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                         if allow == "true" {
                                             ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
                                         } else {
+                                            ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                         self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                                         }
                                     } else {
@@ -519,24 +521,38 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     morePost = false
                     self.arrayObjectsForCell.remove(at: tableCell.tag)
                     let commen = arrayObjectsForCell[tableCell.tag - 1] as! CommentsFeed
+                    //tok
+                    var checker = true
+                    
                     NetworkManager.sharedInstance.postReplyForComment(nameText, email: emailText, comment: commentText, comment_id: commen.comment_id!) { (responce ,error) in
                         if error == nil  && responce?.result != "repeat_comment" {
-                            self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: (responce?.result!)!)
-                            
-                        } else {
-                            NetworkManager.sharedInstance.postReplyForComment(nameText, email: emailText, comment: commentText, comment_id: commen.comment_id!) { (responce ,error) in
+                            if checker {
+                                checker = false
+                                ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                 self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: (responce?.result!)!)
                             }
+                        } else {
+                             ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
+//                            NetworkManager.sharedInstance.postReplyForComment(nameText, email: emailText, comment: commentText, comment_id: commen.comment_id!) { (responce ,error) in
+//                                self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: (responce?.result!)!)
+//                            }
                         }
                     }
+                }
+                else {
+                    tableCell.hideProgress()
                 }
             }
         }
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
-        tableCell.nameTextField.text = ""
-        tableCell.emailTextField.text = ""
+        tableCell.nameTextField.text = nil
+        tableCell.emailTextField.text = nil
+        self.defaults.set("", forKey: "name")
+        self.defaults.set("", forKey: "email")
+        self.defaults.synchronize()
+        
         Saver.sharedInstance.removeWhenLogOutbuttonPressed()
         NetworkManager.sharedInstance.logOut()
         
@@ -544,6 +560,17 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     //MARK : LoadMoreCell delegate
+    
+    func loginButtonPressed(tableCell: LoginCell, pressed loginButton: AnyObject) {
+        ParametersConstructor.sharedInstance.showAlert("Success", message: "You have logged in")
+        let name = tableCell.nameField.text!
+        let email = tableCell.emailField.text!
+        self.defaults.set(name, forKey: "name")
+        self.defaults.set(email, forKey: "email")
+        self.view.endEditing(true)
+        hideForms()
+        self.tableView.reloadData()
+    }
     
     func loadMoreButtonPressed(_ tableCell: LoadMoreCell, loadMoreButtonPressed loadMoreButton: AnyObject) {
         if canGetCommentsFeed == true {
@@ -572,7 +599,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //Mark: EmoticonCellDelegate
     
     func firstEmoticonButtonPressed(_ tableCell: EmoticonCell, firstEmoticonButtonPressed firstEmoticonButton: AnyObject) {
-        
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 1, tableView: tableView)
     }
     
@@ -614,7 +640,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func keyboardWillShow(sender: NSNotification) {
         if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            //self.view.frame.origin.y = -keyboardSize.height
+            self.view.frame.origin.y = -(keyboardSize.height/2)
         }
     }
     func keyboardWillHide(sender: NSNotification) {
@@ -800,4 +826,50 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
     }
     
+    func showAlert(title: String, message: String) {
+        
+        // create the alert
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        // add the actions (buttons)
+        alert.addAction(UIAlertAction(title: "Report", style: UIAlertActionStyle.destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        
+        // show the alert
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //Function, which hide all forms and returns new position to understand, if reply changed position of element
+    
+    func hideForms(position: Int) -> Int{
+        print("1499\(position)")
+        if replyOpened {
+            replyOpened = false
+            arrayObjectsForCell.remove(at: lastReplyID)
+            if lastReplyID < position {
+                return position - 1
+            }
+        }
+        
+        if loginOpened {
+            loginOpened = false
+            arrayObjectsForCell.remove(at: lastLoginID)
+            if lastLoginID < position {
+                return position - 1
+            }
+        }
+        return position
+    }
+    
+    func hideForms() {
+        if replyOpened {
+            replyOpened = false
+            arrayObjectsForCell.remove(at: lastReplyID)
+        }
+        
+        if loginOpened {
+            loginOpened = false
+            arrayObjectsForCell.remove(at: lastLoginID)
+        }
+    }
 }

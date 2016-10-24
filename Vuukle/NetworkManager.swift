@@ -124,8 +124,16 @@ class NetworkManager {
                     
                     let respon = ResponseToComment()
                     respon.result = self.jsonArray!["result"] as? String
+                    let res = self.jsonArray?["isModeration"]
+                    print("1433 \(res)")
                     respon.isModeration = self.jsonArray!["isModeration"] as? String
-                    print("1466 \(respon.isModeration)")
+                    if let notOptionalResponse = respon.isModeration {
+                        respon.isModeration = notOptionalResponse
+                    } else {
+                        respon.isModeration = "false"
+                    }
+                    completion(respon , nil)
+                    print(respon)
                     
                     completion(respon , nil)
                     print("ID мого ріплая :\(respon.result!)")
