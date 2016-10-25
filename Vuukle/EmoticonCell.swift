@@ -86,4 +86,22 @@ class EmoticonCell: UITableViewCell ,UIWebViewDelegate {
         // Configure the view for the selected state
     }
     
+    func recountPercentage() {
+        let sum = Global.firstEmoticonVotesCount + Global.secondEmoticonVotesCount + Global.thirdEmoticonVotesCount + Global.fourthEmoticonVotesCount + Global.fifthEmoticonVotesCount + Global.sixthEmoticonVotesCount
+        if sum != 0 {
+            firstEmoticonLabel.text = "\(getPercents(arg: Global.firstEmoticonVotesCount, sum: sum))%"
+            secondEmoticonLabel.text = "\(getPercents(arg: Global.secondEmoticonVotesCount, sum: sum))%"
+            thirdEmoticonLabel.text = "\(getPercents(arg: Global.thirdEmoticonVotesCount, sum: sum))%"
+            fourthEmoticonLabel.text = "\(getPercents(arg: Global.fourthEmoticonVotesCount, sum: sum))%"
+            fifthEmoticonLabel.text = "\(getPercents(arg: Global.fifthEmoticonVotesCount, sum: sum))%"
+            sixthEmoticonLabel.text = "\(getPercents(arg: Global.sixthEmoticonVotesCount, sum: sum))%"
+        }
+    }
+    
+    func getPercents(arg: Int, sum: Int) -> Int{
+        return Int((arg * 100) / sum)
+    }
 }
+
+
+

@@ -129,6 +129,7 @@ class ParametersConstructor  {
                 default:
                     break
                 }
+                //tableCell.recountPercentage()
                 self.defaults.synchronize()
                 tableView.reloadData()
             }
@@ -148,6 +149,7 @@ class ParametersConstructor  {
         Global.fifthEmoticonVotesCount = data.fifth
         Global.sixthEmoticonVotesCount = data.sixth
         Global.votes = data
+        
         
     }
     

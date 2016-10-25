@@ -483,6 +483,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
                                     tableCell.hideProgress()
                                     cell.commentTextView.text = ""
+                                    self.defaults.set(name, forKey: "name")
+                                    self.defaults.set(email, forKey: "email")
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                     self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
@@ -493,6 +495,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                         let allow = respon!.isModeration! as String
                                         if allow == "true" {
                                             ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                            self.defaults.set(name, forKey: "name")
+                                            self.defaults.set(email, forKey: "email")
                                         } else {
                                             ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                         self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
@@ -539,11 +543,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         }
                     }
                 }
-                else {
-                    tableCell.hideProgress()
-                }
             }
         }
+        let row = [IndexPath.init(row: tableCell.tag, section: 0)]
+        tableView.reloadRows(at: row, with: UITableViewRowAnimation.none)
+        tableCell.hideProgress()
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
@@ -600,26 +604,32 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func firstEmoticonButtonPressed(_ tableCell: EmoticonCell, firstEmoticonButtonPressed firstEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 1, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     func secondEmoticonButtonPressed(_ tableCell: EmoticonCell, secondEmoticonButtonPressed secondEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 2, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     func thirdEmoticonButtonPressed(_ tableCell: EmoticonCell, thirdEmoticonButtonPressed thirdEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 3, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     func fourthEmoticonButtonPressed(_ tableCell: EmoticonCell, fourthEmoticonButtonPressed fourthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 4, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     func fifthEmoticonButtonPressed(_ tableCell: EmoticonCell, fifthEmoticonButtonPressed fifthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 5, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     func sixthEmoticonButtonPressed(_ tableCell: EmoticonCell, sixthEmoticonButtonPressed sixthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 6, tableView: tableView)
+        tableCell.recountPercentage()
     }
     
     //MARK: MostPopularArticleCellDelegate
@@ -842,7 +852,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //Function, which hide all forms and returns new position to understand, if reply changed position of element
     
     func hideForms(position: Int) -> Int{
-        print("1499\(position)")
         if replyOpened {
             replyOpened = false
             arrayObjectsForCell.remove(at: lastReplyID)
