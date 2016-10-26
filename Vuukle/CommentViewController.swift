@@ -507,6 +507,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
             }
         } else if arrayObjectsForCell[tableCell.tag] is ReplyForm {
+            let commentPosition = tableCell.tag
             if morePost == true {
                 let indexPath = NSIndexPath.init(row: tableCell.tag, section: 0)
                 let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
@@ -525,8 +526,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         if error == nil  && responce?.result != "repeat_comment" {
                             if checker {
                                 checker = false
-                                ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
-                                self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: (responce?.result!)!)
+                                ParametersConstructor.sharedInstance.showAlert("Your reply was published", message: "")
+                                self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: commentPosition, forObject: commen, commentID: (responce?.result!)!)
                             }
                         } else {
                              ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
@@ -612,32 +613,26 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func firstEmoticonButtonPressed(_ tableCell: EmoticonCell, firstEmoticonButtonPressed firstEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 1, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     func secondEmoticonButtonPressed(_ tableCell: EmoticonCell, secondEmoticonButtonPressed secondEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 2, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     func thirdEmoticonButtonPressed(_ tableCell: EmoticonCell, thirdEmoticonButtonPressed thirdEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 3, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     func fourthEmoticonButtonPressed(_ tableCell: EmoticonCell, fourthEmoticonButtonPressed fourthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 4, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     func fifthEmoticonButtonPressed(_ tableCell: EmoticonCell, fifthEmoticonButtonPressed fifthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 5, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     func sixthEmoticonButtonPressed(_ tableCell: EmoticonCell, sixthEmoticonButtonPressed sixthEmoticonButton: AnyObject) {
         ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 6, tableView: tableView)
-        tableCell.recountPercentage()
     }
     
     //MARK: MostPopularArticleCellDelegate
@@ -705,6 +700,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func addLocalCommentObjectToTableView(cell : AddCommentCell, commentText : String,nameText : String , emailText : String , commentID : String ,index : Int) {
+        hideLoginForm()
         let date = NSDate()
         let dateFormat = DateFormatter.init()
         dateFormat.dateStyle = .full
@@ -718,6 +714,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         cell.commentTextView.text = "Please write a comment..."
         cell.commentTextView.textColor = UIColor.lightGray
         self.morePost = true
+        CellConstructor.sharedInstance.totalComentsCount += 1
     }
     
     func addMoreCommentsToArrayOfObjects(array : [CommentsFeed]) {
@@ -891,6 +888,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             arrayObjectsForCell.remove(at: lastReplyID)
         }
         
+        if loginOpened {
+            loginOpened = false
+            arrayObjectsForCell.remove(at: lastLoginID)
+        }
+    }
+    
+    func hideLoginForm() {
         if loginOpened {
             loginOpened = false
             arrayObjectsForCell.remove(at: lastLoginID)

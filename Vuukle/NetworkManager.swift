@@ -151,6 +151,8 @@ class NetworkManager {
         
         let newUrl = url.replacingOccurrences(of: " ", with: "")
         
+        print("1288 \(newUrl)")
+        
         Alamofire.request( newUrl)
             .responseJSON { response in
                 
@@ -221,7 +223,8 @@ class NetworkManager {
     
     func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
         
-        print("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
+        print("1288 \(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
+        
         Alamofire.request("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)&url=\(Global.articleUrl)")
             .responseJSON { response in
                 
@@ -318,6 +321,9 @@ class NetworkManager {
     
     func reportComment(commentID: String, completion: @escaping(Bool?, String?) -> Void) {
         var result = false
+        
+        print("1288 \(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)")
+        
         Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)")
             .responseJSON { response in
                 if let JSON = response.result.value {

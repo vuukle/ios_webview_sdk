@@ -66,12 +66,16 @@ open class  CellConstructor {
             cell.countFifthEmoticonLabel.text = "\(Global.fifthEmoticonVotesCount)" ?? "0"
             cell.countSixthEmoticonLabel.text = "\(Global.sixthEmoticonVotesCount)" ?? "0"
             
-            cell.firstEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.first))%" ?? "0%"
-            cell.secondEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.second))%" ?? "0%"
-            cell.thirdEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.third))%" ?? "0%"
-            cell.fourthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.fourth))%" ?? "0%"
-            cell.fifthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.fifth))%" ?? "0%"
-            cell.sixthEmoticonLabel.text = "\(ParametersConstructor.sharedInstance.setRatePercent(Global.votes.first, second: Global.votes.second, thirt: Global.votes.third, fourth: Global.votes.fourth, fifth: Global.votes.fifth, sixt: Global.votes.sixth, element: Global.votes.sixth))%" ?? "0%"
+            let count: [Int] = [Global.firstEmoticonVotesCount, Global.secondEmoticonVotesCount, Global.thirdEmoticonVotesCount, Global.fourthEmoticonVotesCount, Global.fifthEmoticonVotesCount, Global.sixthEmoticonVotesCount]
+            
+            let percentage: [Int] = ParametersConstructor.sharedInstance.getPercentage(count)
+            
+            cell.firstEmoticonLabel.text = "\(percentage[0])%" ?? "0%"
+            cell.secondEmoticonLabel.text = "\(percentage[1])%" ?? "0%"
+            cell.thirdEmoticonLabel.text = "\(percentage[2])%" ?? "0%"
+            cell.fourthEmoticonLabel.text = "\(percentage[3])%" ?? "0%"
+            cell.fifthEmoticonLabel.text = "\(percentage[4])%" ?? "0%"
+            cell.sixthEmoticonLabel.text = "\(percentage[5])%" ?? "0%"
             
         }
         
