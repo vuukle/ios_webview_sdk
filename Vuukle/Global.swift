@@ -6,7 +6,7 @@ class Global {
     
     static let sharedInstance = Global()
     
-    static var baseURL = "https://vuukle.com/api.asmx/"
+    static var baseURL = "http://vuukle.com/api.asmx/"
     static var article_id = ""
     static var host = ""
     static var api_key = ""

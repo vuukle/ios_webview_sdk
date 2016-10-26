@@ -249,12 +249,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 })
             } else {
-                var position = tableCell.tag + 1
-                position = hideForms(position: position)
-                arrayObjectsForCell.insert(LoginForm(), at: position)
-                lastLoginID = position
-                loginOpened = true
-                tableView.reloadData()
+                askToLogin(position: tableCell.tag)
             }
         }else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
@@ -299,12 +294,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 })
             } else {
-                var position = tableCell.tag + 1
-                position = hideForms(position: position)
-                arrayObjectsForCell.insert(LoginForm(), at: position)
-                lastLoginID = position
-                loginOpened = true
-                tableView.reloadData()
+                askToLogin(position: tableCell.tag)
             }
         } else {
             ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
@@ -314,9 +304,31 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
-        self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?")
+        let user = getUserInfo()
+        if user["isLoggedIn"] == "true" {
+            self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
+            , redHandler: {
+            
+                let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
+                NetworkManager.sharedInstance.reportComment(commentID: cell.comment_id!, completion: { result, error in
+                        if result! {
+                            ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
+                        } else {
+                            if let errorDescription = error {
+                                ParametersConstructor.sharedInstance.showAlert("Error!", message: errorDescription)
+                        } else {
+                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
+                        }
+                    }
+                })
+            }
+            , blueHandler: {
+                print("Canceled")
+            })
         print("\(tableCell.tag)")
-        
+        } else {
+            askToLogin(position: tableCell.tag)
+        }
     }
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
@@ -335,25 +347,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             }
             
             tableView.reloadData()
-            
-//            if indexOfLastObject > 0 && indexOfLastObject == Int(tableCell.tag + 1) {
-//                arrayObjectsForCell.remove(at: indexOfLastObject)
-//                indexOfLastObject = -1
-//                tableView.reloadData()
-//            } else if indexOfLastObject > 0 && indexOfLastObject != Int(tableCell.tag + 1) {
-//                if indexOfLastObject > tableCell.tag + 1 {
-//                    arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-//                    indexOfLastObject = Int(tableCell.tag + 1)
-//                } else if indexOfLastObject < tableCell.tag + 1 {
-//                    arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1 )
-//                    indexOfLastObject = Int(tableCell.tag + 1)
-//                }
-//                tableView.reloadData()
-//            } else {
-//                arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-//                indexOfLastObject = Int(tableCell.tag + 1)
-//                tableView.reloadData()
-//            }
         }
     }
     
@@ -545,9 +538,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
             }
         }
-        let row = [IndexPath.init(row: tableCell.tag, section: 0)]
-        tableView.reloadRows(at: row, with: UITableViewRowAnimation.none)
-        tableCell.hideProgress()
+        tableView.reloadData()
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
@@ -566,15 +557,22 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //MARK : LoadMoreCell delegate
     
     func loginButtonPressed(tableCell: LoginCell, pressed loginButton: AnyObject) {
-        ParametersConstructor.sharedInstance.showAlert("Success", message: "You have logged in")
         let name = tableCell.nameField.text!
         let email = tableCell.emailField.text!
-        self.defaults.set(name, forKey: "name")
-        self.defaults.set(email, forKey: "email")
-        self.view.endEditing(true)
-        hideForms()
-        self.tableView.reloadData()
+        if ParametersConstructor.sharedInstance.checkFields(name, email: email, comment: "JustTesting") {
+            if email != "" {
+                self.defaults.set(name, forKey: "name")
+                self.defaults.set(email, forKey: "email")
+                self.view.endEditing(true)
+                hideForms()
+                self.tableView.reloadData()
+                ParametersConstructor.sharedInstance.showAlert("Success", message: "You have logged in")
+            } 
+        }
     }
+    
+    //Yeah, Alamofire requests shouldn't be here, but Swift code Optimizer makes crash at that request to
+    //NetworkManager, so I had to do this here
     
     func loadMoreButtonPressed(_ tableCell: LoadMoreCell, loadMoreButtonPressed loadMoreButton: AnyObject) {
         if canGetCommentsFeed == true {
@@ -582,18 +580,28 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             from_count += Global.countLoadCommentsInPagination + 1
             to_count += Global.countLoadCommentsInPagination + 1
             
-            NetworkManager.sharedInstance.getMoreCommentsFeed(from_count, to_count: to_count, completion: { (array ,error) in
-                
-                if error == nil {
-                    //self.addMoreCommentsToArrayOfObjects(array: array!)
-                    self.removeMostPopularArticle(array: array!)
-                } else {
-                    NetworkManager.sharedInstance.getMoreCommentsFeed(self.from_count, to_count: self.to_count, completion: { (array ,error) in
-                       // self.addMoreCommentsToArrayOfObjects(array: array!)
-                        self.removeMostPopularArticle(array: array!)
-                    })
-                }
-            })
+            Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)")
+                .responseJSON { response in
+                    
+                    if let JSON = response.result.value {
+                        
+                        var jsonArray = JSON as? NSDictionary
+                        
+                        
+                        let commentFeedArray : NSArray = [jsonArray!["comment_feed"]!]
+                        
+                        var responseArray = [CommentsFeed]()
+                        
+                        for feed in commentFeedArray.firstObject as! NSArray {
+                            responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
+                        }
+                        
+                        self.addMoreCommentsToArrayOfObjects(array: responseArray)
+                        
+                    } else {
+                        print("Status cod = \(response.response?.statusCode)")
+                    }
+            }
         }
     }
     func openVuukleButtonButtonPressed(_ tableCell: LoadMoreCell, openVuukleButtonPressed openVuukleButton: AnyObject) {
@@ -713,7 +721,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func addMoreCommentsToArrayOfObjects(array : [CommentsFeed]) {
-
+        
+        if arrayObjectsForCell[arrayObjectsForCell.count - 1] is LoadMore {
+            arrayObjectsForCell.remove(at: arrayObjectsForCell.count - 1)
+        }
         for object in array {
             self.arrayObjectsForCell.append(object)
         }
@@ -836,14 +847,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
     }
     
-    func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String, redButton: String, blueButton: String, redHandler: @escaping() -> Void, blueHandler: @escaping() -> Void) {
         
         // create the alert
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         
         // add the actions (buttons)
-        alert.addAction(UIAlertAction(title: "Report", style: UIAlertActionStyle.destructive, handler: nil))
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: redButton, style: UIAlertActionStyle.destructive, handler: { action in
+            redHandler()
+        }))
+        alert.addAction(UIAlertAction(title: blueButton, style: UIAlertActionStyle.cancel, handler: { action in
+            blueHandler()
+        }))
         
         // show the alert
         self.present(alert, animated: true, completion: nil)
@@ -880,5 +895,26 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             loginOpened = false
             arrayObjectsForCell.remove(at: lastLoginID)
         }
+    }
+    
+    func askToLogin(position: Int) {
+        var newCellPosition = position + 1
+        newCellPosition = hideForms(position: newCellPosition)
+        arrayObjectsForCell.insert(LoginForm(), at: newCellPosition)
+        lastLoginID = newCellPosition
+        loginOpened = true
+        tableView.reloadData()
+    }
+    
+    func getUserInfo() -> [String:String] {
+        var resultDictionary: [String:String] = ["email":"", "name":"", "isLoggedIn":"false"]
+        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" && self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
+            let name = self.defaults.object(forKey: "email") as! String
+            let email = self.defaults.object(forKey: "name") as! String
+            resultDictionary.updateValue("true", forKey: "isLoggedIn")
+            resultDictionary.updateValue(name, forKey: "name")
+            resultDictionary.updateValue(email, forKey: "email")
+        }
+        return resultDictionary
     }
 }

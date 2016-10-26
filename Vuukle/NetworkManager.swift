@@ -37,7 +37,7 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getCommentsFeed(_ completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
-//        print("1499 \(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
+        print("1499 \(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
                 
@@ -314,5 +314,25 @@ class NetworkManager {
                     completion(nil,response.result.error as NSError?)
                 }
             }
+    }
+    
+    func reportComment(commentID: String, completion: @escaping(Bool?, String?) -> Void) {
+        var result = false
+        Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)")
+            .responseJSON { response in
+                if let JSON = response.result.value {
+                    self.jsonArray = JSON as? NSDictionary
+                    let respon = self.jsonArray!["result"] as? Bool
+                    
+                    if respon! == true {
+                        completion(true, nil)
+                    } else {
+                        completion(false , "Internal server error")
+                    }
+                } else {
+                    print("Status cod = \(response.response?.statusCode)")
+                    completion(false, response.result.error as! String)
+                }
+        }
     }
 }
