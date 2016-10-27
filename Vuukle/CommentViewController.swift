@@ -829,19 +829,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
+            NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         })
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let position = touch.location(in: self.view)
-            print("1488 x:\(position.x) y: \(position.y)")
-        }
-    }
-    
-    func getTap(sender: AnyObject) {
-        
     }
     
     func showAlert(title: String, message: String, redButton: String, blueButton: String, redHandler: @escaping() -> Void, blueHandler: @escaping() -> Void) {
