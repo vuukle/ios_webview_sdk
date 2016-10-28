@@ -17,20 +17,6 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var loginButtonOutlet: UIButton!
     
     @IBAction func loginButton(_ sender: AnyObject) {
-        if self.defaults.object(forKey: "name") as? String == nil || self.defaults.object(forKey: "name") as? String == "" {
-            self.defaults.set("\(nameField.text!)", forKey: "name")
-        } else {
-            self.defaults.removeObject(forKey: "name")
-            self.defaults.set("\(nameField.text!)", forKey: "name")
-        }
-        
-        if self.defaults.object(forKey: "email") as? String == nil || self.defaults.object(forKey: "email") as? String == "" {
-            self.defaults.set("\(emailField.text!)", forKey: "email")
-        } else {
-            self.defaults.removeObject(forKey: "email")
-            self.defaults.set("\(emailField.text!)", forKey: "email")
-        }
-        self.defaults.synchronize()
         self.delegate?.loginButtonPressed(tableCell: self, pressed: sender)
     }
     

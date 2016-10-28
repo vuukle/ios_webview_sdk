@@ -20,7 +20,8 @@ class MostPopularArticle {
         lMostPopularArticle.api_key = pDict["api_key"] as? String ?? ""
         lMostPopularArticle.count = pDict["count"] as? String ?? ""
         lMostPopularArticle.articleId = pDict["articleId"] as? String ?? ""
-        lMostPopularArticle.heading = pDict["heading"] as? String ?? ""
+        let header = ParametersConstructor.sharedInstance.decodingString(pDict["heading"] as! String)
+        lMostPopularArticle.heading = header
         lMostPopularArticle.imgUrl = pDict["img"] as? String ?? ""
         lMostPopularArticle.articleUrl = pDict["url"] as? String ?? ""
         lMostPopularArticle.ts = pDict["ts"] as? String ?? ""

@@ -312,7 +312,6 @@ class NetworkManager {
                     }
                     
                     if !Global.setMostPopularArticleVisible {
-                        print("999999 disabled articles")
                         responseArray = []
                     }
                     

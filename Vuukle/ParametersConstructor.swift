@@ -17,20 +17,26 @@ class ParametersConstructor  {
     
     func checkFields(_ name : String , email : String , comment : String) -> Bool {
         var allFill = false
+        
+        if name.characters.first == " " {
+            showAlert("Error", message: "Name cannot start from space!")
+            return false
+        }
+        
         if name != "" && email != "" && comment != "" && comment != "Please write a comment..."{
-            if ((email.range(of: "@")) != nil) && ((email.range(of: ".")) != nil) {
+            if ((email.range(of: "@")) != nil) && ((email.range(of: ".")) != nil) && checkStringForSpaces(string: email){
                 allFill = true
             } else {
                 showAlert( "Please enter a correct email!",message: "")
                 allFill = false
             }
-        } else if (name == "") || (name == " ") || checkStringForSpaces(string: name, indexSimbol: 0) == false{
+        } else if (name == "") || (name == " ") || checkStringForSpaces(string: name) == false{
             showAlert("Please enter your name", message: "")
             allFill = false
         } else if email == ""{
             showAlert("Please enter your email", message: "")
             allFill = false
-        } else if ((comment == "Please write a comment...") || (comment == "") || (comment.isEmpty) || (comment == " ")) || (checkStringForSpaces(string: comment, indexSimbol: 0) == false) {
+        } else if ((comment == "Please write a comment...") || (comment == "") || (comment.isEmpty) || (comment == " ")) || (checkStringForSpaces(string: comment) == false) {
             showAlert("Please enter the comment", message: "")
             allFill = false
         }
@@ -56,7 +62,10 @@ class ParametersConstructor  {
     }
     
     func decodingString(_ string : String) -> String{
-        return string.removingPercentEncoding!
+        var output = string
+        output = output.replacingOccurrences(of: "&#8216;", with: "'")
+        output = output.replacingOccurrences(of: "&#8217;", with: "'")
+        return output.removingPercentEncoding!
     }
     
     
@@ -152,16 +161,14 @@ class ParametersConstructor  {
         
     }
     
-    func checkStringForSpaces(string : String , indexSimbol : Int) -> Bool {
-        var result : Bool!
-        var fullNameComponents = string.components(separatedBy: " ")
-        if fullNameComponents[indexSimbol].isEmpty && indexSimbol < string.characters.count{
-            checkStringForSpaces(string: string, indexSimbol: indexSimbol + 1)
-            result = false
+    func checkStringForSpaces(string : String) -> Bool {
+        let whitespaceSet = " "
+        if string.range(of: whitespaceSet) != nil {
+            
+            return false
         } else {
-            result = true
+            return true
         }
-        return result
     }
     
     func getPercentage(_ input: [Int]) -> [Int] {

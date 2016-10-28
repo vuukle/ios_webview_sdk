@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -55,15 +55,23 @@
                             <action selector="openVuukleButtonWithSender:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="1AX-4X-Lj8"/>
                         </connections>
                     </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="version 0.91" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                        <frame key="frameInset" minX="189" minY="92" width="70" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="oUh-hH-ZsC" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="00g-zF-Rky"/>
                     <constraint firstItem="Y1H-Aa-ZfM" firstAttribute="top" secondItem="fp9-kw-wnK" secondAttribute="topMargin" constant="12" id="0Ho-d0-cjF"/>
                     <constraint firstItem="tmT-lE-c8a" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="3xs-pJ-xwc"/>
                     <constraint firstItem="tmT-lE-c8a" firstAttribute="bottom" secondItem="fp9-kw-wnK" secondAttribute="bottomMargin" id="8Bx-Gy-lyU"/>
+                    <constraint firstItem="hjx-Lw-WKR" firstAttribute="top" secondItem="TNa-3u-1tQ" secondAttribute="bottom" constant="-7" id="HsA-W6-ZTR"/>
                     <constraint firstItem="tmT-lE-c8a" firstAttribute="top" secondItem="Y1H-Aa-ZfM" secondAttribute="bottom" constant="5" id="Sqy-Sr-gIh"/>
                     <constraint firstItem="oUh-hH-ZsC" firstAttribute="top" secondItem="fp9-kw-wnK" secondAttribute="topMargin" constant="16" id="UWN-dR-bUv"/>
                     <constraint firstItem="Y1H-Aa-ZfM" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="fUm-eh-cqm"/>
+                    <constraint firstItem="hjx-Lw-WKR" firstAttribute="centerX" secondItem="TNa-3u-1tQ" secondAttribute="centerX" id="lbZ-Uu-fSv"/>
                     <constraint firstItem="TNa-3u-1tQ" firstAttribute="centerX" secondItem="fp9-kw-wnK" secondAttribute="centerX" id="oOc-o5-oYm"/>
                     <constraint firstItem="TNa-3u-1tQ" firstAttribute="top" secondItem="Y1H-Aa-ZfM" secondAttribute="bottom" constant="5" id="vdF-9S-cAw"/>
                 </constraints>

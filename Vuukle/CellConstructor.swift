@@ -141,6 +141,7 @@ open class  CellConstructor {
             cell.imageForCell = object.imgUrl
         }
         cell.aboutArticleLabel.text = object.heading
+        cell.commentsCount.text = object.count
         return cell
     }
     

@@ -469,6 +469,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         let name = ParametersConstructor.sharedInstance.encodingString(cell.nameTextField.text!)
                         let email = ParametersConstructor.sharedInstance.encodingString(cell.emailTextField.text!)
                         let comment = ParametersConstructor.sharedInstance.encodingString(cell.commentTextView.text!)
+                        
+                        self.defaults.set(name, forKey: "name")
+                        self.defaults.set(email, forKey: "email")
+                        
                         NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                             if (error == nil) {
                                 self.morePost = true
@@ -501,6 +505,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 }
                             }
                         }
+                        self.hideForms()
+                        tableView.reloadData()
                     }
                     else {
                         tableCell.hideProgress()
@@ -537,10 +543,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
 //                            }
                         }
                     }
+                    tableView.reloadData()
+                } else {
+                    tableCell.hideProgress()
                 }
             }
         }
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
