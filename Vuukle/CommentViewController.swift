@@ -219,7 +219,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
         if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
-            print("1499 \(self.defaults.object(forKey: "email"))")
             var mail = ""
             if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != ""{
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
@@ -304,18 +303,21 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
-        let user = getUserInfo()
+        let user = ParametersConstructor.sharedInstance.getUserInfo()
         if user["isLoggedIn"] == "true" {
             self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
             , redHandler: {
             
                 let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
-                NetworkManager.sharedInstance.reportComment(commentID: cell.comment_id!, completion: { result, error in
+                
+                let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
+                let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
+                NetworkManager.sharedInstance.reportComment(commentID: cell.comment_id!, name: name, email: email, completion: { result, error in
                         if result! {
                             ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
                         } else {
                             if let errorDescription = error {
-                                ParametersConstructor.sharedInstance.showAlert("Error!", message: errorDescription)
+                                ParametersConstructor.sharedInstance.showAlert("Error!", message: "\(errorDescription)")
                         } else {
                             ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
                         }
@@ -391,10 +393,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if error == nil {
                     self.refreshControl?.endRefreshing()
                     self.saveCommentData(array: array!)
+                    self.getMostPopularArticles()
                     self.tableView.reloadData()
-                    //if Global.setMostPopularArticleVisible == true {
-                        self.getMostPopularArticles()
-                    //}
                 } else {
                     NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
                         self.refreshControl?.endRefreshing()
@@ -403,6 +403,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
             }
         }
+        tableView.reloadData()
     }
     
     func getReplies(index : Int ,comment : CommentsFeed ) {
@@ -639,13 +640,17 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func showArticleButtonPressed(_ tableCell: MostPopularArticleCell, _ showArticle: AnyObject) {
         var popularArticle = arrayObjectsForCell[tableCell.tag] as! MostPopularArticle
-        Global.articleUrl = popularArticle.articleUrl!
-        Global.article_id = popularArticle.articleId!
-        Global.api_key = popularArticle.api_key!
-        Global.host = popularArticle.host!
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "selectedPopularArticleNotification"), object: Global.articleUrl)
-        arrayObjectsForCell.removeAll()
-        getComments()
+        print("99999 \(popularArticle.articleUrl)")
+        if let articleUrl = popularArticle.articleUrl {
+            UIApplication.shared.openURL(URL(string: articleUrl)!)
+        }
+        //Global.articleUrl = popularArticle.articleUrl!
+//        Global.article_id = popularArticle.articleId!
+//        Global.api_key = popularArticle.api_key!
+//        Global.host = popularArticle.host!
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "selectedPopularArticleNotification"), object: Global.articleUrl)
+//        arrayObjectsForCell.removeAll()
+//        getComments()
         
     }
     
@@ -719,11 +724,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func addMoreCommentsToArrayOfObjects(array : [CommentsFeed]) {
         
+        removeMostPopularArticle(array: arrayObjectsForCell as! [CommentsFeed])
+        
         if arrayObjectsForCell[arrayObjectsForCell.count - 1] is LoadMore {
             arrayObjectsForCell.remove(at: arrayObjectsForCell.count - 1)
         }
+        
         for object in array {
             self.arrayObjectsForCell.append(object)
+        }
+        
+        if Global.setMostPopularArticleVisible {
+            getMostPopularArticles()
         }
         
         self.canLoadmore = true
@@ -790,7 +802,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func getMostPopularArticles() {
-        //if Global.setMostPopularArticleVisible {
             NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
                 if let responseArray = array {
                     for article in array! {
@@ -798,8 +809,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 }
                 self.tableView.reloadData()
-            //}
-        }
+            }
     }
     
     func removeMostPopularArticle (array : [CommentsFeed]) {
@@ -811,16 +821,15 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 }
             }
             
-            addMoreCommentsToArrayOfObjects(array: array)
-            NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
-                for article in array! {
-                    self.arrayObjectsForCell.append(article)
-                }
-                self.tableView.reloadData()
-            }
+//            NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
+//                for article in array! {
+//                    self.arrayObjectsForCell.append(article)
+//                }
+//                self.tableView.reloadData()
+//            }
         } else {
             self.arrayObjectsForCell.removeLast()
-            addMoreCommentsToArrayOfObjects(array: array)
+            //addMoreCommentsToArrayOfObjects(array: array)
         }
         
     }
@@ -900,15 +909,4 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.reloadData()
     }
     
-    func getUserInfo() -> [String:String] {
-        var resultDictionary: [String:String] = ["email":"", "name":"", "isLoggedIn":"false"]
-        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" && self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
-            let name = self.defaults.object(forKey: "email") as! String
-            let email = self.defaults.object(forKey: "name") as! String
-            resultDictionary.updateValue("true", forKey: "isLoggedIn")
-            resultDictionary.updateValue(name, forKey: "name")
-            resultDictionary.updateValue(email, forKey: "email")
-        }
-        return resultDictionary
-    }
 }

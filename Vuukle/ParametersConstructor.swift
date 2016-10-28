@@ -181,4 +181,24 @@ class ParametersConstructor  {
         return output
     }
     
+    func getUserInfo() -> [String:String] {
+        var resultDictionary: [String:String] = ["email":"", "name":"", "isLoggedIn":"false"]
+        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" && self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
+            let name = self.defaults.object(forKey: "name") as! String
+            let email = self.defaults.object(forKey: "email") as! String
+            resultDictionary.updateValue("true", forKey: "isLoggedIn")
+            resultDictionary.updateValue(name, forKey: "name")
+            resultDictionary.updateValue(email, forKey: "email")
+        }
+        return resultDictionary
+    }
+    
 }
+
+
+
+
+
+
+
+

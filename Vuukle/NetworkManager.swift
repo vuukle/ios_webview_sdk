@@ -37,11 +37,13 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getCommentsFeed(_ completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
-        print("1499 \(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
+        print("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
-                
-                if let JSON = response.result.value {
+                print("1488 \(response.result.value)")
+                print("1488 \(response.result.error)")
+                if let result = response.result.value {
+                    let JSON = result
                     self.jsonArray = JSON as? NSDictionary
                     
                     let commentFeedArray : NSArray = [self.jsonArray!["comment_feed"]!]
@@ -57,8 +59,13 @@ class NetworkManager {
                     completion(responseArray, nil)
                     
                 } else {
-                    print("Status cod = \(response.response?.statusCode)")
-                    completion(nil,response.result.error as NSError?)
+                    if let statusCode = response.response?.statusCode {
+                        print("Status cod = \(response.response?.statusCode)")
+                        completion(nil,response.result.error as NSError?)
+                    }
+                    else {
+                        completion([CommentsFeed](), nil)
+                    }
                 }
                 
         }
@@ -100,7 +107,6 @@ class NetworkManager {
         
        // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
             return Alamofire.request(imageURL).responseImage { response in
-                print("1488")
                 if let image = response.result.value {
                     completion(image)
                 } else {
@@ -306,6 +312,7 @@ class NetworkManager {
                     }
                     
                     if !Global.setMostPopularArticleVisible {
+                        print("999999 disabled articles")
                         responseArray = []
                     }
                     
@@ -319,25 +326,26 @@ class NetworkManager {
             }
     }
     
-    func reportComment(commentID: String, completion: @escaping(Bool?, String?) -> Void) {
+    func reportComment(commentID: String, name: String, email: String, completion: @escaping(Bool?, NSError?) -> Void) {
         var result = false
         
-        print("1288 \(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)")
+        print("1288 \(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
         
-        Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)")
+        Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
             .responseJSON { response in
                 if let JSON = response.result.value {
                     self.jsonArray = JSON as? NSDictionary
-                    let respon = self.jsonArray!["result"] as? Bool
+                    print("\(self.jsonArray!["result"])")
+                    let respon = self.jsonArray!["result"] as! String
                     
-                    if respon! == true {
+                    if respon == "true" {
                         completion(true, nil)
                     } else {
-                        completion(false , "Internal server error")
+                        completion(false , nil)
                     }
                 } else {
                     print("Status cod = \(response.response?.statusCode)")
-                    completion(false, response.result.error as! String)
+                    completion(false, response.result.error as NSError?)
                 }
         }
     }
