@@ -65,6 +65,8 @@ class ParametersConstructor  {
         var output = string
         output = output.replacingOccurrences(of: "&#8216;", with: "'")
         output = output.replacingOccurrences(of: "&#8217;", with: "'")
+        output = output.replacingOccurrences(of: "%20", with: " ")
+        
         return output.removingPercentEncoding!
     }
     
@@ -163,8 +165,19 @@ class ParametersConstructor  {
     
     func checkStringForSpaces(string : String) -> Bool {
         let whitespaceSet = " "
-        if string.range(of: whitespaceSet) != nil {
-            
+        var stringArray : [Character] = []
+        for literal in string.characters {
+            stringArray.append(literal)
+        }
+        if stringArray[stringArray.count - 1] == " " {
+            stringArray.popLast()
+        }
+        var output = ""
+        for literal in stringArray {
+            output += String(literal)
+        }
+        
+        if output.range(of: whitespaceSet) != nil {
             return false
         } else {
             return true

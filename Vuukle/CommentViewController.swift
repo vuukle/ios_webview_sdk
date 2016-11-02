@@ -30,7 +30,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //Needed to check if login form is opened
     var lastLoginID = 0
     var loginOpened = false
-    
+    //Needed to check action
+    var lastAction: Action = .unknown
+    var lastActionPosition = -1
+    var reportId = ""
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -215,12 +218,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
+        print("2299 \(upvoteButton)")
         tableCell.showProgress()
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
-        if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
+        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             var mail = ""
-            if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != ""{
+            if self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil {
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
                 let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
                 self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
@@ -248,11 +252,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 })
             } else {
-                askToLogin(position: tableCell.tag)
+                ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+                tableCell.hideProgress()
             }
         }else {
-            ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-                tableCell.hideProgress()
+            lastAction = .upvote
+            lastActionPosition = tableCell.tag
+            askToLogin(position: tableCell.tag)
         }
     }
     
@@ -262,9 +268,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
-        if  self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil{
+        if  self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             var mail = ""
-            if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
+            if self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil {
                     mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
                 let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
                 self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
@@ -293,42 +299,26 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                 })
             } else {
-                askToLogin(position: tableCell.tag)
+                ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+                tableCell.hideProgress()
             }
         } else {
-            ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-            tableCell.hideProgress()
+            lastAction = .downvote
+            lastActionPosition = tableCell.tag
+            askToLogin(position: tableCell.tag)
         }
     }
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
         let user = ParametersConstructor.sharedInstance.getUserInfo()
+        let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         if user["isLoggedIn"] == "true" {
-            self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
-            , redHandler: {
-            
-                let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
-                
-                let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
-                let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
-                NetworkManager.sharedInstance.reportComment(commentID: cell.comment_id!, name: name, email: email, completion: { result, error in
-                        if result! {
-                            ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
-                        } else {
-                            if let errorDescription = error {
-                                ParametersConstructor.sharedInstance.showAlert("Error!", message: "\(errorDescription)")
-                        } else {
-                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
-                        }
-                    }
-                })
-            }
-            , blueHandler: {
-                print("Canceled")
-            })
-        print("\(tableCell.tag)")
+            reportComment(user: user, cellId: cell.comment_id!)
         } else {
+            lastAction = .report
+            lastActionPosition = tableCell.tag
+            reportId = cell.comment_id!
             askToLogin(position: tableCell.tag)
         }
     }
@@ -524,8 +514,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     let emailText = ParametersConstructor.sharedInstance.encodingString(cell.emailTextField.text!)
                     let commentText = ParametersConstructor.sharedInstance.encodingString(cell.commentTextView.text!)
                     morePost = false
+                    
+                    self.defaults.set(nameText, forKey: "name")
+                    self.defaults.set(emailText, forKey: "email")
+                    
                     self.arrayObjectsForCell.remove(at: tableCell.tag)
-                    let commen = arrayObjectsForCell[tableCell.tag - 1] as! CommentsFeed
+                    if let commen = arrayObjectsForCell[tableCell.tag - 1] as? CommentsFeed {
                     //tok
                     var checker = true
                     
@@ -544,6 +538,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         }
                     }
                     tableView.reloadData()
+                    } else {
+                        ParametersConstructor.sharedInstance.showAlert("Error", message: "Error in sending your message, try not to response yourself :)")
+                        tableView.reloadData()
+                    }
                 } else {
                     tableCell.hideProgress()
                 }
@@ -578,7 +576,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 hideForms()
                 self.tableView.reloadData()
                 ParametersConstructor.sharedInstance.showAlert("Success", message: "You have logged in")
-            } 
+            }
+            continueAction()
         }
     }
     
@@ -829,13 +828,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     self.arrayObjectsForCell.removeLast()
                 }
             }
-            
-//            NetworkManager.sharedInstance.getMostPopularArticle { (array, error) in
-//                for article in array! {
-//                    self.arrayObjectsForCell.append(article)
-//                }
-//                self.tableView.reloadData()
-//            }
         } else {
             self.arrayObjectsForCell.removeLast()
             //addMoreCommentsToArrayOfObjects(array: array)
@@ -886,8 +878,35 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             if lastLoginID < position {
                 return position - 1
             }
+            lastAction = .unknown
         }
         return position
+    }
+    
+    func continueAction() {
+        if lastActionPosition != -1 {
+            let cell = arrayObjectsForCell[lastActionPosition] as! CommentsFeed
+            switch lastAction {
+            case .upvote:
+                if self.defaults.object(forKey: "\(cell.comment_id)") as? String == nil {
+                    cell.up_votes = cell.up_votes! + 1
+                    ParametersConstructor.sharedInstance.showAlert("Success", message: "Thanks for voting")
+                } else {
+                    ParametersConstructor.sharedInstance.showAlert("You have already voted", message: "")
+                }
+            case .downvote:
+                if self.defaults.object(forKey: "\(cell.comment_id)") as? String == nil {
+                    cell.down_votes = cell.down_votes! + 1
+                    ParametersConstructor.sharedInstance.showAlert("Success", message: "Thanks for voting")
+                } else {
+                    ParametersConstructor.sharedInstance.showAlert("You have already voted", message: "")
+                }
+            case .report:
+                reportComment(user: ParametersConstructor.sharedInstance.getUserInfo(), cellId: reportId)
+            default:
+                print("nothing")
+            }
+        }
     }
     
     func hideForms() {
@@ -916,6 +935,29 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         lastLoginID = newCellPosition
         loginOpened = true
         tableView.reloadData()
+    }
+    
+    func reportComment(user: [String:String], cellId: String) {
+        self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
+            , redHandler: {
+                
+                let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
+                let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
+                NetworkManager.sharedInstance.reportComment(commentID: cellId/*cell.comment_id!*/, name: name, email: email, completion: { result, error in
+                    if result! {
+                        ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
+                    } else {
+                        if let errorDescription = error {
+                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "\(errorDescription)")
+                        } else {
+                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
+                        }
+                    }
+                })
+            }
+            , blueHandler: {
+                print("Canceled")
+        })
     }
     
 }

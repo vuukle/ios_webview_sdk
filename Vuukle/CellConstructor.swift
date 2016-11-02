@@ -208,7 +208,9 @@ open class  CellConstructor {
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != ""{
             let lname = self.defaults.object(forKey: "name") as! String
-            let newline = lname.replacingOccurrences(of: "%20", with: " ")
+            var newline = lname.replacingOccurrences(of: "%20", with: " ")
+            newline = newline.replacingOccurrences(of: "%2520", with: " ")
+            self.defaults.set(newline, forKey: "name")
             cell.nameTextField.isHidden = true
             cell.greetingLabel.isHidden = false
             cell.greetingLabel.text = "Welcome, \(newline)"
@@ -262,7 +264,9 @@ open class  CellConstructor {
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
             let lname = self.defaults.object(forKey: "name") as! String
-            let newline = lname.replacingOccurrences(of: "%20", with: " ")
+            var newline = lname.replacingOccurrences(of: "%20", with: " ")
+            newline = newline.replacingOccurrences(of: "%2520", with: " ")
+            newline = newline.replacingOccurrences(of: "%252520", with: " ")
 
             cell.nameTextField.isHidden = true
             cell.greetingLabel.text = "Welcome, \(newline)"
