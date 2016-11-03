@@ -29,6 +29,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var replyCount: UILabel!
     @IBOutlet weak var showReply: UIButton!
+    @IBOutlet weak var replyButton: UIButton!
     
     
     @IBOutlet weak var imageLeftCostraint: NSLayoutConstraint!
@@ -37,7 +38,8 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var initialsLabelLeftConstraints: NSLayoutConstraint!
     @IBOutlet weak var showButtonWidth: NSLayoutConstraint!
     @IBOutlet weak var countReplyWidth: NSLayoutConstraint!
-    
+    @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     
     @IBAction func upvoteButton(_ sender: AnyObject) {

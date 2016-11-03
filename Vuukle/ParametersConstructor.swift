@@ -229,8 +229,10 @@ class ParametersConstructor  {
         for value in stroke.characters {
             strArray.append(String(value))
         }
+        if strArray.count > 2{
         if strArray[strArray.count - 1] == " " {
             strArray.popLast()
+            }
         }
         var output = ""
         for value in strArray {

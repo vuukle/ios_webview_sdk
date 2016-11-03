@@ -6,7 +6,7 @@ open class VuukleInfo {
     static var commentsHeight: CGFloat = 0.0
     
     public static func getCommentsHeight() -> CGFloat {
-        return commentsHeight
+        return CGFloat(CommentViewController.shared!.getHeight())
     }
     
     public static func getCommentsCount() -> Int {

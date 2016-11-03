@@ -6,6 +6,7 @@ import Social
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate {
     
     static let sharedInstance = Global()
+    static var shared : CommentViewController?
     var arrayObjectsForCell = [AnyObject]()
     var rating = EmoteRating()
     var showRepleiCell = -1
@@ -105,6 +106,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
         }
         
+        CommentViewController.shared = self
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -182,6 +185,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         return UITableViewAutomaticDimension
     }
     
+    public func getHeight() -> Float {
+        let myNumber = Float(self.tableView.contentSize.height)
+        return myNumber
+    }
+    
     //MARK: CommentCellDelegate
     
     func firstShareButtonPressed(_ tableCell: CommentCell, shareButtonPressed shareButton: AnyObject) {
@@ -204,7 +212,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         var firstLevel = 0
         var secondLevel = 0
         tableCell.showProgress()
-        
         var position = tableCell.tag
         
         position = hideForms(position: position)
@@ -227,6 +234,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         } else if firstLevel < secondLevel {
             removeObjectFromSortedArray(indexObject: tableCell.tag)
         }
+        tableCell.showReply.setTitle("hide", for: UIControlState.normal)
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
@@ -413,8 +421,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     r.level = comment.level! + 1
                     //if index
                     self.arrayObjectsForCell.insert(r, at: index + 1)
+                    self.insertCell(position: index + 1)
                 }
-                self.tableView.reloadData()
+                //self.insertCellArray(from: <#T##Int#>, to: <#T##Int#>)
             } else {
                 self.getReplies(index: index, comment: comment)
             }
@@ -944,7 +953,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         insertCell(position: newCellPosition)
         lastLoginID = newCellPosition
         loginOpened = true
-//        tableView.reloadData()
+//      tableView.reloadData()
     }
     
     func reportComment(user: [String:String], cellId: String) {
@@ -976,6 +985,20 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.insertRows(at: [indexPath], with: .right)
         tableView.endUpdates()
         updateIndexesFrom(position)
+    }
+    
+    func insertCellArray(from: Int, to: Int) {
+        tableView.beginUpdates()
+        var indexPathes : [IndexPath] = []
+        if from <= to {
+            for index in from...to {
+                indexPathes.append(IndexPath.init(row: index, section: 0))
+            }
+            tableView.beginUpdates()
+            tableView.insertRows(at: indexPathes, with: .right)
+            tableView.endUpdates()
+            updateIndexesFrom(from)
+        }
     }
     
     func deleteCell(position: Int) {
