@@ -37,11 +37,8 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getCommentsFeed(_ completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
-        print("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
         Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
-                print("1488 \(response.result.value)")
-                print("1488 \(response.result.error)")
                 if let result = response.result.value {
                     let JSON = result
                     self.jsonArray = JSON as? NSDictionary
@@ -51,10 +48,11 @@ class NetworkManager {
                     
                     var responseArray = [CommentsFeed]()
                     
-                    
                     for feed in commentFeedArray.firstObject as! NSArray {
                         responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
                     }
+                    
+                    
                     
                     completion(responseArray, nil)
                     
@@ -119,6 +117,8 @@ class NetworkManager {
     func postReplyForComment(_ name : String ,email : String ,comment : String ,comment_id : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
         
         let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
+        
+        print("1499 \(url)")
         
         Alamofire.request(url)
             .responseJSON { response in
@@ -328,9 +328,7 @@ class NetworkManager {
     func reportComment(commentID: String, name: String, email: String, completion: @escaping(Bool?, NSError?) -> Void) {
         var result = false
         
-        print("1288 \(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
-        
-        Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
+                Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
             .responseJSON { response in
                 if let JSON = response.result.value {
                     self.jsonArray = JSON as? NSDictionary

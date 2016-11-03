@@ -23,14 +23,16 @@ class ParametersConstructor  {
             return false
         }
         
+        let lemail = removeSpace(stroke: email)
+        
         if name != "" && email != "" && comment != "" && comment != "Please write a comment..."{
-            if ((email.range(of: "@")) != nil) && ((email.range(of: ".")) != nil) && checkStringForSpaces(string: email){
+            if ((lemail.range(of: "@")) != nil) && ((lemail.range(of: ".")) != nil) && checkStringForSpaces(string: lemail){
                 allFill = true
             } else {
                 showAlert( "Please enter a correct email!",message: "")
                 allFill = false
             }
-        } else if (name == "") || (name == " ") || checkStringForSpaces(string: name) == false{
+        } else if name == "" || name == " " || checkStringForSpaces(string: name) == false{
             showAlert("Please enter your name", message: "")
             allFill = false
         } else if email == ""{
@@ -66,7 +68,7 @@ class ParametersConstructor  {
         output = output.replacingOccurrences(of: "&#8216;", with: "'")
         output = output.replacingOccurrences(of: "&#8217;", with: "'")
         output = output.replacingOccurrences(of: "%20", with: " ")
-        
+        output = output.replacingOccurrences(of: "%2520", with: " ")
         return output.removingPercentEncoding!
     }
     
@@ -165,19 +167,8 @@ class ParametersConstructor  {
     
     func checkStringForSpaces(string : String) -> Bool {
         let whitespaceSet = " "
-        var stringArray : [Character] = []
-        for literal in string.characters {
-            stringArray.append(literal)
-        }
-        if stringArray[stringArray.count - 1] == " " {
-            stringArray.popLast()
-        }
-        var output = ""
-        for literal in stringArray {
-            output += String(literal)
-        }
-        
-        if output.range(of: whitespaceSet) != nil {
+        if string.range(of: whitespaceSet) != nil {
+            
             return false
         } else {
             return true
@@ -211,6 +202,41 @@ class ParametersConstructor  {
             resultDictionary.updateValue(email, forKey: "email")
         }
         return resultDictionary
+    }
+    
+    func setUserInfo(name: String, email: String) {
+        var lname = decodingString(name)
+        var lemail = decodingString(email)
+        lemail = lemail.replacingOccurrences(of: " ", with: "")
+        lemail = lemail.replacingOccurrences(of: "%", with: "")
+        self.defaults.set(lname, forKey: "name")
+        self.defaults.set(lemail, forKey: "email")
+        print("12345 \(lname)")
+        print("12345 \(lemail)")
+    }
+    
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    
+    func removeSpace(stroke : String) -> String {
+        var strArray : [String] = []
+        for value in stroke.characters {
+            strArray.append(String(value))
+        }
+        if strArray[strArray.count - 1] == " " {
+            strArray.popLast()
+        }
+        var output = ""
+        for value in strArray {
+            output += value
+        }
+        return output
     }
     
 }

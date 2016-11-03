@@ -11,7 +11,6 @@ protocol CommentCellDelegate {
     func moreButtonPressed(_ tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
     func showReplyButtonPressed(_ tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
     func firstShareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
-    func secondShareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
 }
 
 class CommentCell: UITableViewCell {
@@ -58,11 +57,7 @@ class CommentCell: UITableViewCell {
     }
     @IBAction func shareButton(_ sender: AnyObject) {
         self.delegate?.firstShareButtonPressed(self, shareButtonPressed: sender)
-    }
-    @IBAction func secondShareButton(_ sender: AnyObject) {
-        self.delegate?.secondShareButtonPressed(self, shareButtonPressed: sender)
-    }
-    
+    }    
     
     var request: Request?
     
@@ -86,7 +81,9 @@ class CommentCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         upvoteCountLabel.layer.cornerRadius = 5
-        downvoteCountLabel.layer.cornerRadius = 5
+        //downvoteCountLabel.layer.cornerRadius = 5
+        replyCount.layer.cornerRadius = 4
+        replyCount.layer.masksToBounds = true
         userImage.layer.cornerRadius = 22
         userImage.layer.masksToBounds = true
         initialsLabel.layer.cornerRadius = 22

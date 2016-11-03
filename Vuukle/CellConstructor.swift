@@ -92,28 +92,27 @@ open class  CellConstructor {
         
         var cell = CellConstraintsConstructor.sharedInstance.setCommentCellConstraints(cell)
         cell.hideProgress()
-        cell.userNameLabel.textColor = UIColor.blue
+        //cell.userNameLabel.textColor = UIColor.blue
         cell.commentLabel.text = newComment.replacingOccurrences(of: "<br/>", with: " ", options: NSString.CompareOptions.literal, range: nil)
         cell.userNameLabel.text = newName
         cell.dateLabel.text = TimeAgo.sharedInstance.timeAgoSinceDate(date: date as NSDate, numericDates: true)
         cell.countLabel.text = String(comment.user_points!)
-        if comment.up_votes! > 0 {
-            cell.upvoteCountLabel.text = String(comment.up_votes!)
-            cell.upvoteCountLabel.isHidden = false
+        //cell.downvoteCountLabel.isHidden = true
+        let sum = comment.up_votes! - comment.down_votes!
+        if sum > 0 {
+            cell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
+        } else if sum < 0 {
+            cell.upvoteCountLabel.textColor = UIColor.red
         } else {
-            cell.upvoteCountLabel.isHidden = true
+            cell.upvoteCountLabel.textColor = UIColor.lightGray
         }
-        if comment.down_votes! > 0 {
-            cell.downvoteCountLabel.text  = String(comment.down_votes!)
-            cell.downvoteCountLabel.isHidden = false
-        } else {
-            cell.downvoteCountLabel.isHidden = true
-        }
+        cell.upvoteCountLabel.text  = String(sum)
+        
         if comment.replies! > 0 {
             cell.replyCount.text  = String(comment.replies!)
             cell.showReply.isHidden = false
             cell.replyCount.isHidden = false
-            cell.showButtonWidth.constant = 40
+            cell.showButtonWidth.constant = 60
         } else {
             cell.showButtonWidth.constant = 0
             cell.showReply.isHidden = true
@@ -132,16 +131,23 @@ open class  CellConstructor {
             cell.initialsLabel.isHidden = false
             cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name!))
         }
-        
+        cell.userImage.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
+        cell.userImage.layer.shadowColor = UIColor.black.cgColor
+        cell.userImage.layer.shadowRadius = 4
+        cell.userImage.layer.shadowOpacity = 0.50
+        cell.userImage.layer.masksToBounds = false
+        cell.userImage.clipsToBounds = false
         return cell
     }
     
     func returnMostPopularArticleCell (_ cell : MostPopularArticleCell , object : MostPopularArticle ) -> MostPopularArticleCell {
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = UIColor.lightGray.cgColor
         if object.imgUrl != "" && object.imgUrl != nil {
             cell.imageForCell = object.imgUrl
         }
         cell.aboutArticleLabel.text = object.heading
-        cell.commentsCount.text = object.count
+        cell.commentsCount.text = "\(object.count!) Comments"
         return cell
     }
     
@@ -157,21 +163,19 @@ open class  CellConstructor {
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.initialsLabelLeftConstraints.constant = CGFloat(Global.leftConstrainReplySize)
         
-        cell.userNameLabel.textColor = UIColor.blue
+        //cell.userNameLabel.textColor = UIColor.blue
         cell.commentLabel.text = newComment
         cell.userNameLabel.text = newName
-        if comment.up_votes! > 0 {
-            cell.upvoteCountLabel.text = String(comment.up_votes!)
-            cell.upvoteCountLabel.isHidden = false
+        //cell.downvoteCountLabel.isHidden = true
+        let sum = comment.up_votes! - comment.down_votes!
+        if sum > 0 {
+            cell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
+        } else if sum < 0 {
+            cell.upvoteCountLabel.textColor = UIColor.red
         } else {
-            cell.upvoteCountLabel.isHidden = true
+            cell.upvoteCountLabel.textColor = UIColor.lightGray
         }
-        if comment.down_votes! > 0 {
-            cell.downvoteCountLabel.text  = String(comment.down_votes!)
-            cell.downvoteCountLabel.isHidden = false
-        } else {
-            cell.downvoteCountLabel.isHidden = true
-        }
+        cell.upvoteCountLabel.text  = String(sum)
         if comment.replies! > 0 {
             cell.replyCount.text  = String(comment.replies!)
             cell.showReply.isHidden = false
@@ -208,9 +212,7 @@ open class  CellConstructor {
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != ""{
             let lname = self.defaults.object(forKey: "name") as! String
-            var newline = lname.replacingOccurrences(of: "%20", with: " ")
-            newline = newline.replacingOccurrences(of: "%2520", with: " ")
-            self.defaults.set(newline, forKey: "name")
+            let newline = lname.replacingOccurrences(of: "%20", with: " ")
             cell.nameTextField.isHidden = true
             cell.greetingLabel.isHidden = false
             cell.greetingLabel.text = "Welcome, \(newline)"
@@ -264,9 +266,7 @@ open class  CellConstructor {
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
         if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
             let lname = self.defaults.object(forKey: "name") as! String
-            var newline = lname.replacingOccurrences(of: "%20", with: " ")
-            newline = newline.replacingOccurrences(of: "%2520", with: " ")
-            newline = newline.replacingOccurrences(of: "%252520", with: " ")
+            let newline = lname.replacingOccurrences(of: "%20", with: " ")
 
             cell.nameTextField.isHidden = true
             cell.greetingLabel.text = "Welcome, \(newline)"

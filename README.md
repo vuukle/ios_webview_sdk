@@ -125,7 +125,7 @@ VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
             setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
             setVuukleArticleId:@"00048"]
             setVuukleEmoteVisible:YES]
-            setVuukleHost:@"your_host"]
+            setVuukleHost:@“your_host”]
             setVuukleSecretKey:@"07115720-6848-11e5-9bc9-002590f371ee"]
             setVuukleTimeZone:@"Europe/Kiev"]
             setVuukleTitle:@"Title"]
@@ -135,8 +135,8 @@ VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
             setVuukleArticleTitle:@"myTitle"]
             setVuukleRefreshVisible:YES]
             addWebViewArticleURL:NO]
-            setScrolingVuukleTableView : YES]
-            buildVuukle:self.view];
+            setScrolingVuukleTableView:NO]
+            buildVuukle:self.vuukleView];
 
 }
 
