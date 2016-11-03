@@ -423,6 +423,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     self.arrayObjectsForCell.insert(r, at: index + 1)
                     self.insertCell(position: index + 1)
                 }
+                if let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? CommentCell {
+                    cell.hideProgress()
+                }
                 //self.insertCellArray(from: <#T##Int#>, to: <#T##Int#>)
             } else {
                 self.getReplies(index: index, comment: comment)
@@ -851,7 +854,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
 
     func setHeight(sender: AnyObject) {
-        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
             NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
@@ -985,6 +988,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.insertRows(at: [indexPath], with: .right)
         tableView.endUpdates()
         updateIndexesFrom(position)
+        changeHeight()
     }
     
     func insertCellArray(from: Int, to: Int) {
@@ -999,6 +1003,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             tableView.endUpdates()
             updateIndexesFrom(from)
         }
+        changeHeight()
     }
     
     func deleteCell(position: Int) {
@@ -1008,6 +1013,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.deleteRows(at: [indexPath], with: .left)
         tableView.endUpdates()
         updateIndexesFrom(position)
+        changeHeight()
     }
     
     func closeForms() {
@@ -1022,6 +1028,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
         replyOpened = false
         loginOpened = false
+        changeHeight()
     }
     
     func updateIndexes() {
@@ -1035,4 +1042,15 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             tableView.cellForRow(at: IndexPath.init(row: i, section: 0))?.tag = i
         }
     }
+    
+    func changeHeight() {
+        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
+            NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+        })
+    }
+    
+    
 }

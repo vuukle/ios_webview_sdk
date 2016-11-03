@@ -180,7 +180,7 @@ open class  CellConstructor {
             cell.replyCount.text  = String(comment.replies!)
             cell.showReply.isHidden = false
             cell.replyCount.isHidden = false
-            cell.showButtonWidth.constant = 40
+            cell.showButtonWidth.constant = 60
         } else {
             cell.showButtonWidth.constant = 0
             cell.showReply.isHidden = true

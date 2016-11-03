@@ -133,7 +133,7 @@ class NetworkManager {
                     let res = self.jsonArray?["isModeration"]
                     print("1433 \(res)")
                     respon.isModeration = self.jsonArray!["isModeration"] as? String
-                    if let notOptionalResponse = respon.isModeration {
+                    if let notOptionalResponse = respon.isModeration?.lowercased() {
                         respon.isModeration = notOptionalResponse
                     } else {
                         respon.isModeration = "false"
