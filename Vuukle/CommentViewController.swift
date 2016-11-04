@@ -41,10 +41,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let vuuklebundle = Bundle(identifier: "org.cocoapods.Vuukle")!
-//        let version = vuuklebundle.infoDictionary![kCFBundleVersionKey] as! String
-//        print("222333 \(version)")
-        
         if Global.sharedInstance.checkAllParameters() == true {
             let bundleCommentCell = Bundle(for: CommentCell.self)
             let bundleAddCommentCell = Bundle(for: CommentCell.self)
@@ -202,7 +198,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         activityViewController.popoverPresentationController?.sourceView = self.view // so that iPads won't crash
         
         // exclude some activity types from the list (optional)
-        activityViewController.excludedActivityTypes = [ UIActivityType.airDrop, UIActivityType.postToFacebook, UIActivityType.postToTwitter, UIActivityType.postToFlickr, UIActivityType.mail, UIActivityType.message ]
+        activityViewController.excludedActivityTypes = []
         
         // present the view controller
         self.present(activityViewController, animated: true, completion: nil)
@@ -338,7 +334,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
-        
+        if morePost {
 //        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
 //            var position = tableCell.tag
             
@@ -353,7 +349,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 insertCell(position: tableCell.tag + 1)
             }
             
-        
+        }
     }
     
     //MARK: Load data
@@ -460,15 +456,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //MARK: AddCommentCellDelegate
     
     func postButtonPressed(tableCell: AddCommentCell, pressed postButton: AnyObject) {
-        
+        updateIndexesFrom(tableCell.tag - 1)
         tableCell.showProgress()
         self.view.endEditing(true)
         
         if arrayObjectsForCell[tableCell.tag] is CommentForm {
             let comment = arrayObjectsForCell[tableCell.tag] as! CommentForm
             if comment.addComment == true {
-                
-                if morePost == true {
                     
                     let indexPath = NSIndexPath.init(row: tableCell.tag , section: 0)
                     let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
@@ -485,7 +479,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                             if (error == nil) {
                                 self.morePost = true
-                                let allow = respon!.isModeration! as String
+                                var allow = respon!.isModeration! as String
                                 if allow == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
                                     tableCell.hideProgress()
@@ -495,32 +489,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                     self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                                 }
                             } else {
-                                NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
-                                    if (error == nil) {
-                                        let allow = respon!.isModeration! as String
-                                        if allow == "true" {
-                                            ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
-                                        } else {
-                                            ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
-                                        self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
-                                        }
-                                    } else {
-                                        self.morePost = true
-                                    }
-                                }
+                                ParametersConstructor.sharedInstance.showAlert("Error", message: String(describing: error))
+                                self.morePost = true
+                                tableCell.hideProgress()
                             }
                         }
-                        self.hideForms()
-                        tableView.reloadData()
                     }
                     else {
                         tableCell.hideProgress()
                     }
                 }
-            }
         } else if arrayObjectsForCell[tableCell.tag] is ReplyForm {
             let commentPosition = tableCell.tag
-            if morePost == true {
                 let indexPath = NSIndexPath.init(row: tableCell.tag, section: 0)
                 let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
                 
@@ -543,9 +523,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 checker = false
                                 var moderation = responce?.isModeration! as String!
                                 moderation = moderation?.lowercased()
-                                
+                                tableCell.hideProgress()
                                 if moderation == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                    self.tableView.reloadData()
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your reply was published", message: "")
                                     self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: commentPosition, forObject: commen, commentID: (responce?.result!)!)
@@ -553,22 +534,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             }
                         } else {
                              ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
-//                            NetworkManager.sharedInstance.postReplyForComment(nameText, email: emailText, comment: commentText, comment_id: commen.comment_id!) { (responce ,error) in
-//                                self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: tableCell.tag, forObject: commen, commentID: (responce?.result!)!)
-//                            }
                         }
-                    }
-                    tableView.reloadData()
-                    } else {
-                        ParametersConstructor.sharedInstance.showAlert("Error", message: "Error in sending your message, try not to response yourself :)")
-                        tableView.reloadData()
+                        self.morePost == true
                     }
                 } else {
-                    tableCell.hideProgress()
+                    ParametersConstructor.sharedInstance.showAlert("Error", message: "Error in sending your message, try not to response yourself :)")
+                    tableView.reloadData()
                 }
+            } else {
+                tableCell.hideProgress()
             }
         }
-//        tableView.reloadData()
+        closeForms()
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
@@ -924,7 +901,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             case .report:
                 reportComment(user: ParametersConstructor.sharedInstance.getUserInfo(), cellId: reportId)
             default:
-                print("nothing")
+                break
             }
         }
     }
@@ -989,6 +966,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.endUpdates()
         updateIndexesFrom(position)
         changeHeight()
+        //tableView.scrollToRow(at: IndexPath.init(row: position - 1, section: 0), at: .bottom, animated: true)
     }
     
     func insertCellArray(from: Int, to: Int) {
@@ -1051,6 +1029,4 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         })
     }
-    
-    
 }

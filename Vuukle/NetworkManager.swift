@@ -90,7 +90,6 @@ class NetworkManager {
                     let notOptionalResponse = respon.isModeration!
                     respon.isModeration = notOptionalResponse
                     completion(respon , nil)
-                    print(respon)
                     
                 } else {
                     completion(nil,response.result.error as NSError?)
@@ -118,8 +117,6 @@ class NetworkManager {
         
         let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
         
-        print("1499 \(url)")
-        
         Alamofire.request(url)
             .responseJSON { response in
                 
@@ -131,7 +128,6 @@ class NetworkManager {
                     let respon = ResponseToComment()
                     respon.result = self.jsonArray!["result"] as? String
                     let res = self.jsonArray?["isModeration"]
-                    print("1433 \(res)")
                     respon.isModeration = self.jsonArray!["isModeration"] as? String
                     if let notOptionalResponse = respon.isModeration?.lowercased() {
                         respon.isModeration = notOptionalResponse
@@ -142,8 +138,7 @@ class NetworkManager {
                     print(respon)
                     
                     completion(respon , nil)
-                    print("ID мого ріплая :\(respon.result!)")
-                    
+                    print("Reply ID :\(respon.result!)")
                 } else {
                     completion(nil,response.result.error as NSError?)
                     print("Status cod = \(response.response?.statusCode)")
@@ -156,8 +151,6 @@ class NetworkManager {
         let url = "\(Global.baseURL)setCommentVote?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&up_down=\(up_down)&name=\(name)&email=\(email)"
         
         let newUrl = url.replacingOccurrences(of: " ", with: "")
-        
-        print("1288 \(newUrl)")
         
         Alamofire.request( newUrl)
             .responseJSON { response in
@@ -229,8 +222,6 @@ class NetworkManager {
     
     func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
         
-        print("1288 \(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)")
-        
         Alamofire.request("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)&url=\(Global.articleUrl)")
             .responseJSON { response in
                 
@@ -263,7 +254,6 @@ class NetworkManager {
                     let respon = TotalCommentsCount()
                     
                     respon.comments = self.jsonArray!["comments"] as? Int
-                    print(respon)
                     VuukleInfo.totalCommentsCount = respon.comments!
                     completion(respon)
                     
@@ -281,8 +271,6 @@ class NetworkManager {
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                    
                     
                 } else {
                     print("Status cod = \(response.response?.statusCode)")

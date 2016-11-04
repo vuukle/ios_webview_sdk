@@ -17,7 +17,6 @@ class Saver {
             
             self.defaults.removeObject(forKey: "name")
             self.defaults.synchronize()
-            print(defaults.object(forKey: "name"))
             self.defaults.set("\(name)", forKey: "name")
             self.defaults.synchronize()
         }

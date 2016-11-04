@@ -32,7 +32,7 @@ class ParametersConstructor  {
                 showAlert( "Please enter a correct email!",message: "")
                 allFill = false
             }
-        } else if name == "" || name == " " || checkStringForSpaces(string: name) == false{
+        } else if name == "" || name == " " {
             showAlert("Please enter your name", message: "")
             allFill = false
         } else if email == ""{
@@ -211,8 +211,6 @@ class ParametersConstructor  {
         lemail = lemail.replacingOccurrences(of: "%", with: "")
         self.defaults.set(lname, forKey: "name")
         self.defaults.set(lemail, forKey: "email")
-        print("12345 \(lname)")
-        print("12345 \(lemail)")
     }
     
     func UIColorFromRGB(rgbValue: UInt) -> UIColor {

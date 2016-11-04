@@ -143,9 +143,10 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     }
     
     func showProgress() {
+        self.alpha = 0.4
         progressIndicator.startAnimating()
         progressIndicator.isHidden = false
-        self.alpha = 0.4
+        //commentTextView.a
     }
     
     func hideProgress() {
