@@ -22,7 +22,7 @@ class LocalCommentsConstructor{
         addComment.parent_id = parent_id
         addComment.user_points = user_points
         addComment.myComment = myComment
-        addComment.isReplie = false
+        addComment.isReply = false
         addComment.level = level
         
         return addComment
@@ -44,7 +44,7 @@ class LocalCommentsConstructor{
         addComment.parent_id = parent_id
         addComment.user_points = user_points
         addComment.myComment = myComment
-        addComment.isReplie = true
+        addComment.isReply = true
         addComment.level = level
         
         return addComment

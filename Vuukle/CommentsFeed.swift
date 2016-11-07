@@ -17,7 +17,7 @@ class CommentsFeed {
     var email : String?
     var myParent_id : String?
     var myComment : Bool?
-    var isReplie : Bool?
+    var isReply : Bool?
     var myReplyFormIndex : Int?
     var initials : String?
     var level : Int?
@@ -39,9 +39,9 @@ class CommentsFeed {
         lGetCommentsFeed.parent_id = pDict["parent_id"] as? String ?? ""
         lGetCommentsFeed.email = pDict["email"] as? String ?? ""
         lGetCommentsFeed.myParent_id = ""
-        lGetCommentsFeed.isReplie = false
+        lGetCommentsFeed.isReply = false
         if lGetCommentsFeed.parent_id != "-1" {
-            lGetCommentsFeed.isReplie = true
+            lGetCommentsFeed.isReply = true
         }
         lGetCommentsFeed.myReplyFormIndex = -1
         lGetCommentsFeed.initials = ""

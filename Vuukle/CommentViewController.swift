@@ -132,49 +132,98 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let  cell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView)
+        let object = arrayObjectsForCell[indexPath.row]
         
-        switch arrayObjectsForCell[indexPath.row] {
+        switch object {
         case is CommentsFeed:
-            let  cell : CommentCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! CommentCell
-            cell.delegate = self
-            cell.tag = indexPath.row
-            return cell
-        case is Emoticon:
-            let  cell : EmoticonCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! EmoticonCell
-            cell.delegate = self
-            cell.tag = indexPath.row
-            return cell
-        case is CommentForm:
-            let  cell : AddCommentCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! AddCommentCell
-            cell.delegate = self
-            cell.tag = indexPath.row
-            return cell
-        case is LoadMore:
-            let  cell : LoadMoreCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! LoadMoreCell
-            cell.delegate = self
-            cell.tag = indexPath.row
-            return cell
-        case is ReplyForm:
-            let  cell : AddCommentCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! AddCommentCell
+            let objectForCell = object as! CommentsFeed
+            var cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
+            if cell == nil {
+                cell = CommentCell() as! CommentCell
+            }
+            if objectForCell.isReply! {
+                cell = CellConstructor.sharedInstance.returnReplyCell(cell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name!)) as! CommentCell
+            } else {
+                cell = CellConstructor.sharedInstance.returnCommentCell(cell as! CommentCell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name!)) as! CommentCell
+            }
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
         case is MostPopularArticle:
-            let  cell : MostPopularArticleCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! MostPopularArticleCell
+            let objectForCell = object as! MostPopularArticle
+            var cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell") as! MostPopularArticleCell
+            if cell == nil {
+                cell = MostPopularArticleCell() as! MostPopularArticleCell
+            }
+            cell = CellConstructor.sharedInstance.returnMostPopularArticleCell(cell, object: objectForCell) as! MostPopularArticleCell
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
+        case is ReplyForm:
+            let objectForCell = object as! ReplyForm
+            var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
+            if cell == nil {
+                cell = AddCommentCell() as! AddCommentCell
+            }
+            cell = CellConstructor.sharedInstance.returnAddCommentCellForReply(cell, object: objectForCell) as! AddCommentCell
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
+        case is CommentForm:
+            let objectForCell = object as! CommentForm
+            var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
+            if cell == nil {
+                cell = AddCommentCell() as! AddCommentCell
+            }
+            cell = CellConstructor.sharedInstance.returnAddCommentCellForComment(cell) as! AddCommentCell
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
         case is LoginForm:
-            let cell : LoginCell = CellConstructor.sharedInstance.returnCellForRow(arrayObjectsForCell[indexPath.row], tableView: tableView) as! LoginCell
+            let objectForCell = object as! LoginForm
+            var cell = tableView.dequeueReusableCell(withIdentifier: "LoginCell") as! LoginCell
+            if cell == nil {
+                cell = LoginCell() as! LoginCell
+            }
+            cell = CellConstructor.sharedInstance.returnLoginCell(cell, object: objectForCell) as! LoginCell
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+        case is Emoticon:
+            let objectForCell = object as! Emoticon
+            var cell = tableView.dequeueReusableCell(withIdentifier: "EmoticonCell") as! EmoticonCell
+            if cell == nil {
+                cell = EmoticonCell() as! EmoticonCell
+            }
+            cell = CellConstructor.sharedInstance.returnEmoticonCell(cell) as! EmoticonCell
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
+        case is LoadMore:
+            let objectForCell = object as! LoadMore
+            var cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell") as! LoadMoreCell
+            if cell == nil {
+                cell = LoadMoreCell() as! LoadMoreCell
+            }
+            cell = CellConstructor.sharedInstance.returnLoadMoreCell(cell, object: objectForCell) as! LoadMoreCell
+            cell.delegate = self
+            cell.tag = indexPath.row
+            return cell
+        case is WebView:
+            let objectForcell : WebView = object as! WebView
+            if objectForcell.advertisingBanner == true {
+                let  cell = tableView.dequeueReusableCell(withIdentifier: "WebViewCell") as! WebViewCell
+                cell.tag = indexPath.row
+                return cell
+            } else {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ContentWebViewCell") as! ContentWebViewCell
+                cell.tag = indexPath.row
+                return cell
+            }
         default:
             break
         }
-        cell.tag = indexPath.row
-        return cell
+        return UITableViewCell()
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -601,6 +650,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
                         }
                         
+//                        for value in responseArray {
+//                            arrayObjectsForCell.insert(value, at: <#T##Int#>)
+//                        }
+                        
                         self.addMoreCommentsToArrayOfObjects(array: responseArray)
                         
                     } else {
@@ -756,6 +809,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
         self.tableView.reloadData()
     }
+    
+    
     
     func saveCommentData(array : [CommentsFeed]) {
         
