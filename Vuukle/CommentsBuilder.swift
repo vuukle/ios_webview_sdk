@@ -17,10 +17,10 @@ open class VuukleCommentsBuilder : NSObject {
     /**
      Set true for visible emote rating!
      */
-//    open func setVuukleMostPopularArticleVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
-//        Global.setMostPopularArticleVisible = isVisible
-//        return self
-//    }
+    open func setVuukleMostPopularArticleVisible(_ isVisible : Bool) -> VuukleCommentsBuilder {
+        Global.setMostPopularArticleVisible = isVisible
+        return self
+    }
     
     /**
      Set true for visible Ads!
