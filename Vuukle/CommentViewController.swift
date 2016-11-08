@@ -532,13 +532,14 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 if allow == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
                                     tableCell.hideProgress()
+                                    self.tableView.reloadRows(at: [IndexPath.init(row: tableCell.tag, section: 0)], with: .automatic)
                                     cell.commentTextView.text = ""
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                     self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                                 }
                             } else {
-                                ParametersConstructor.sharedInstance.showAlert("Error", message: String(describing: error))
+                                ParametersConstructor.sharedInstance.showAlert("Error", message: "Something went wrong")
                                 self.morePost = true
                                 tableCell.hideProgress()
                             }
@@ -1002,7 +1003,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
                     } else {
                         if let errorDescription = error {
-                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "\(errorDescription)")
+                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "Server is not responding. Try again later.")
                         } else {
                             ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
                         }
