@@ -214,7 +214,16 @@ ___________________________________________________________________
 
 16. buildVuukle(self.view)                                     -[Set your View name where should be displayed Vuukle!For example: "myView".] Required field!
 
+17. setVuukleMostPopularArticleVisible(true)                   -[By default false] Optional field! (Bool value)
 
+18. setVuukleMostPopularArticleCount(5)                        -[By default 6] Optional field! (Int value)
 
+___________________________________________________________________
 
+                    Public methods:
 
+1.VuukleCommentsBuilder.getHeight()                            -[Returns height of comments view] (CGFloat value)
+
+2.VuukleCommentsBuilder.getCommentsCount()                     -[Returns count of comments under article] (Int value)
+
+3.VuukleCommentsBuilder.setUserInfo(name: String, email: String) -[Log in vuukle] (Void)

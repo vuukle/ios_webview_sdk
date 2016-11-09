@@ -276,6 +276,7 @@ open class  CellConstructor {
             cell.backgroundHeight.constant = 218
         } else {
             cell.backgroundHeight.constant = 268
+            cell.nameTextField.isHidden = false
             cell.greetingLabel.isHidden = true
             cell.nameTextField.text = ""
             cell.nameTextField.isEnabled = true
@@ -287,6 +288,7 @@ open class  CellConstructor {
             cell.logOut.isHidden = true
             cell.emailTextField.isEnabled = false
         } else {
+            cell.emailTextField.isHidden = false
             cell.emailTextField.text = ""
             cell.logOut.isHidden = true
             cell.emailTextField.isEnabled = true

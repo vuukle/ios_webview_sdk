@@ -273,4 +273,8 @@ open class VuukleCommentsBuilder : NSObject {
         return VuukleInfo.getCommentsCount()
     }
     
+    open static func setUserInfo(name: String, email: String) {
+        CommentViewController.shared?.loginUser(name: name, email: email)
+    }
+    
 }

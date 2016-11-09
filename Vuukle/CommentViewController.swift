@@ -35,6 +35,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     var lastAction: Action = .unknown
     var lastActionPosition = -1
     var reportId = ""
+    //Needed to check how to scroll view, if keyboard is opening
+    var scrollIs = false
+    var keyboardOpened = false
+    
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -167,6 +171,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             }
             cell = CellConstructor.sharedInstance.returnAddCommentCellForReply(cell, object: objectForCell) as! AddCommentCell
             cell.delegate = self
+            if objectForCell.hidden {
+                cell.isHidden = true
+            }
             cell.tag = indexPath.row
             return cell
         case is CommentForm:
@@ -309,7 +316,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         
                         tableCell.hideProgress()
                     } else {
+                        self.defaults.set(nil, forKey: "\(commen.comment_id)")
                         ParametersConstructor.sharedInstance.showAlert("Error", message: "Try again later")
+                        tableCell.hideProgress()
                     }
                 })
             } else {
@@ -352,7 +361,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         
                         tableCell.hideProgress()
                     } else {
+                        self.defaults.set(nil, forKey: "\(commen.comment_id)")
                         ParametersConstructor.sharedInstance.showAlert("Error", message: "Try again later")
+                        tableCell.hideProgress()
                     }
                 })
             } else {
@@ -449,7 +460,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 } else {
                     NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
                         self.refreshControl?.endRefreshing()
-                        self.saveCommentData(array: array!)
+                        if error == nil {
+                            self.saveCommentData(array: array!)
+                        } else {
+                            print("VuukleComments: server is not responding")
+                        }
                     }
                 }
             }
@@ -536,6 +551,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                     cell.commentTextView.text = ""
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
+                                    self.closeForms()
                                     self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                                 }
                             } else {
@@ -562,7 +578,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     ParametersConstructor.sharedInstance.setUserInfo(name: nameText, email: emailText)
                     
                     morePost = false
-                    self.arrayObjectsForCell.remove(at: tableCell.tag)
+                    //self.arrayObjectsForCell.remove(at: tableCell.tag)
                     if let commen = arrayObjectsForCell[tableCell.tag - 1] as? CommentsFeed {
                     //tok
                     var checker = true
@@ -576,14 +592,20 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 tableCell.hideProgress()
                                 if moderation == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
-                                    self.tableView.reloadData()
+                                    //self.tableView.reloadData()
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your reply was published", message: "")
                                     self.addLocalPeplyObjectToTableView(cell: cell, commentText: commentText, nameText: nameText, emailText: emailText, index: commentPosition, forObject: commen, commentID: (responce?.result!)!)
                                 }
+                                self.closeForms()
                             }
                         } else {
-                             ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
+                            if checker {
+                                checker = false
+                                ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
+                                tableCell.hideProgress()
+                                //self.tableView.reloadRows(at: [IndexPath.init(row: tableCell.tag, section: 0)], with: .automatic)
+                            }
                         }
                         self.morePost == true
                     }
@@ -595,20 +617,20 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 tableCell.hideProgress()
             }
         }
-        closeForms()
     }
     
     func logOutButtonPressed(tableCell: AddCommentCell,pressed logOutButton: AnyObject) {
+        closeForms()
         tableCell.nameTextField.text = nil
         tableCell.emailTextField.text = nil
-        self.defaults.set("", forKey: "name")
-        self.defaults.set("", forKey: "email")
+        self.defaults.set(nil, forKey: "name")
+        self.defaults.set(nil, forKey: "email")
         self.defaults.synchronize()
         
         Saver.sharedInstance.removeWhenLogOutbuttonPressed()
         NetworkManager.sharedInstance.logOut()
         
-        tableView.reloadData()
+        tableView.reloadRows(at: [IndexPath.init(row: tableCell.tag, section: 0)], with: .none)
     }
     
     //MARK : LoadMoreCell delegate
@@ -714,13 +736,40 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //MARK: Keyboard (Show/Hide/Dismiss)
     
     func keyboardWillShow(sender: NSNotification) {
-        if let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            self.view.frame.origin.y = -(keyboardSize.height/2)
+        if  !keyboardOpened {
+            let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)!.cgRectValue
+            keyboardOpened = true
+            var scrolled = false
+            var scrollView = self.view
+            for i in 0..<10 {
+                scrollView = scrollView?.superview
+                if scrollView is UIScrollView {
+                    let upCell = ReplyForm()
+                    upCell.hidden = true
+                    arrayObjectsForCell.append(upCell)
+                    insertCell(position: arrayObjectsForCell.count - 1)
+                    let superView = scrollView as! UIScrollView
+                    var point = superView.contentOffset
+                    point.y += keyboardSize.height/2
+                    superView.setContentOffset(point, animated: true)
+                    scrollIs = true
+                    break
+                }
+            }
+            if !scrollIs {
+                self.view.frame.origin.y = -keyboardSize.height/2
+            }
         }
     }
     func keyboardWillHide(sender: NSNotification) {
-        self.view.frame.origin.y = 0
+        keyboardOpened = false
+        if !scrollIs {
+            self.view.frame.origin.y = 0
+        } else {
+            deleteCell(position: arrayObjectsForCell.count - 1)
+        }
     }
+    
     func dismissKeyboard() {
         self.view.endEditing(true)
     }
@@ -808,6 +857,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             self.arrayObjectsForCell.append(load)
             
         }
+        //
         self.tableView.reloadData()
     }
     
@@ -1085,4 +1135,15 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
         })
     }
+    
+    func loginUser(name: String, email: String) {
+        ParametersConstructor.sharedInstance.setUserInfo(name: name, email: email)
+        if arrayObjectsForCell.count > 2 {
+            tableView.reloadRows(at: [IndexPath.init(row: 2, section: 0)], with: .none)
+        } else {
+            print("Vuukle is not found")
+        }
+        //if let cell = tableView.cellForRow(at: IndexPath.init(row: 2, section: 0)) as
+    }
+    
 }
