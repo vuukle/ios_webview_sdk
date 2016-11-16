@@ -79,7 +79,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             self.tableView.estimatedRowHeight = 180
             
-            
             self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(CommentViewController.dismissKeyboard)))
             
             if Global.showRefreshControl == true {
@@ -150,6 +149,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             } else {
                 cell = CellConstructor.sharedInstance.returnCommentCell(cell as! CommentCell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name!)) as! CommentCell
             }
+            cell.userImage.layer.masksToBounds = true
+            cell.userImage.layer.cornerRadius = 22
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
@@ -395,6 +396,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
         if morePost {
+            if keyboardOpened {
+                self.view.endEditing(true)
+                tableView.reloadData()
+            }
 //        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
 //            var position = tableCell.tag
             
@@ -456,7 +461,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     self.refreshControl?.endRefreshing()
                     self.saveCommentData(array: array!)
                     self.getMostPopularArticles()
-                    self.tableView.reloadData()
+                    //self.tableView.reloadData()
                 } else {
                     NetworkManager.sharedInstance.getCommentsFeed { (array, error) in
                         self.refreshControl?.endRefreshing()
@@ -486,10 +491,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? CommentCell {
                     cell.hideProgress()
                 }
+                
                 //self.insertCellArray(from: <#T##Int#>, to: <#T##Int#>)
             } else {
                 self.getReplies(index: index, comment: comment)
             }
+            //self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
         })
     }
     
@@ -509,11 +516,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
         
         if firstLevel < secondLevel {
-            arrayObjectsForCell.remove(at: indexObject + 1)
-            tableView.reloadData()
+            //arrayObjectsForCell.remove(at: indexObject + 1)
+            //tableView.reloadData()
+            self.deleteCell(position: indexObject + 1)
             removeObjectFromSortedArray(indexObject: indexObject)
         } else if firstLevel == secondLevel {
-            tableView.reloadData()
+            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.2 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                self.tableView.reloadRows(at: [IndexPath(row: indexObject, section: 0)], with: .none)
+            })
+            //tableView.reloadData()
         }
     }
     
@@ -547,7 +559,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 if allow == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
                                     tableCell.hideProgress()
-                                    self.tableView.reloadRows(at: [IndexPath.init(row: tableCell.tag, section: 0)], with: .automatic)
+                                    tableCell.commentTextView.text = ""
+                                    self.tableView.reloadRows(at: [IndexPath.init(row: 2, section: 0)], with: .automatic)
                                     cell.commentTextView.text = ""
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
@@ -592,6 +605,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 tableCell.hideProgress()
                                 if moderation == "true" {
                                     ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                    self.tableView.reloadRows(at: [IndexPath.init(row: 2, section: 0)], with: .automatic)
                                     //self.tableView.reloadData()
                                 } else {
                                     ParametersConstructor.sharedInstance.showAlert("Your reply was published", message: "")
@@ -766,7 +780,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         if !scrollIs {
             self.view.frame.origin.y = 0
         } else {
-            deleteCell(position: arrayObjectsForCell.count - 1)
+            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                self.deleteCell(position: self.arrayObjectsForCell.count - 1)
+                let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
+                NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            })
         }
     }
     
@@ -1101,6 +1121,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func closeForms() {
+        updateIndexes()
         var excessiveElements : [Int] = []
         for i in 0..<arrayObjectsForCell.count {
             if arrayObjectsForCell[i] is ReplyForm || arrayObjectsForCell[i] is LoginForm{
@@ -1109,6 +1130,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
         for value in excessiveElements {
             deleteCell(position: value)
+            break
         }
         replyOpened = false
         loginOpened = false

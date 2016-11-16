@@ -87,6 +87,8 @@ class NetworkManager {
                     respon.result = self.jsonArray!["result"] as? String
                     respon.comment_id = self.jsonArray!["comment_id"] as? String
                     respon.isModeration = self.jsonArray!["isModeration"] as! String
+                    //FIX
+                    //respon.isModeration = "true"
                     let notOptionalResponse = respon.isModeration!
                     respon.isModeration = notOptionalResponse
                     completion(respon , nil)
@@ -134,6 +136,7 @@ class NetworkManager {
                     } else {
                         respon.isModeration = "false"
                     }
+                    //respon.isModeration = "true"
                     completion(respon , nil)
                     print(respon)
                     

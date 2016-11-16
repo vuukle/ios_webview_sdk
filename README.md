@@ -227,3 +227,34 @@ ___________________________________________________________________
 2.VuukleCommentsBuilder.getCommentsCount()                     -[Returns count of comments under article] (Int value)
 
 3.VuukleCommentsBuilder.setUserInfo(name: String, email: String) -[Log in vuukle] (Void)
+
+------------------------------------------------------------------
+                    Facebook implementing:
+* Register your application at [Facebook for Developers website](https://developers.facebook.com)
+
+* Complete [QuickStart](https://developers.facebook.com/quickstarts/) for IOS
+
+* Install Vuukle with Facebook logination via pods:
+
+Example Podfile - Objective-c (If Xcode version is higher than 8.0): 
+
+        platform :ios, '9.0'
+
+        use_frameworks!
+
+
+            target ‘VuukleCommentObjective’ do
+
+            pod ‘Vuukle’, :git => 'https://github.com/b13markus/Vuukle_comments_test.git', :branch => ‘swift_3_logination’
+
+        end
+
+    post_install do |installer|
+        installer.pods_project.targets.each do |target|
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.0'
+            end
+        end
+    end
+
+* It's all! In your Vuukle library is Facebook logination!

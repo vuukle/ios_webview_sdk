@@ -70,6 +70,8 @@ class CommentCell: UITableViewCell {
                 request?.cancel()
                 request = NetworkManager.sharedInstance.getImageWhihURL(lImage, completion: { (image) in
                     if let lResponseImage = image {
+                        self.userImage.layer.masksToBounds = true
+                        self.userImage.layer.cornerRadius = 22
                         self.userImage.image = lResponseImage
                         
                     }
