@@ -395,26 +395,29 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
-        if morePost {
-            if keyboardOpened {
-                self.view.endEditing(true)
-                tableView.reloadData()
+        tableCell.showProgress()
+        self.view.endEditing(true)
+        let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            if self.morePost {
+                //        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
+                //            var position = tableCell.tag
+                
+                if self.lastReplyID == tableCell.tag + 1 && self.replyOpened {
+                    self.replyOpened = false
+                    self.closeForms()
+                } else {
+                    
+                    self.closeForms()
+                    self.replyOpened = true
+                    self.lastReplyID = Int(tableCell.tag + 1)
+                    self.arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
+                    self.insertCell(position: tableCell.tag + 1)
+                    
+                }
             }
-//        if arrayObjectsForCell[tableCell.tag] is CommentsFeed {
-//            var position = tableCell.tag
-            
-            if lastReplyID == tableCell.tag + 1 && replyOpened {
-                replyOpened = false
-                closeForms()
-            } else {
-                closeForms()
-                replyOpened = true
-                lastReplyID = Int(tableCell.tag + 1)
-                arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-                insertCell(position: tableCell.tag + 1)
-            }
-            
-        }
+            tableCell.hideProgress()
+        })
     }
     
     //MARK: Load data
@@ -615,7 +618,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             }
                         } else {
                             if checker {
-                                checker = false
                                 ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
                                 tableCell.hideProgress()
                                 //self.tableView.reloadRows(at: [IndexPath.init(row: tableCell.tag, section: 0)], with: .automatic)
@@ -1091,7 +1093,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.insertRows(at: [indexPath], with: .right)
         tableView.endUpdates()
         updateIndexesFrom(position)
-        changeHeight()
+        //changeHeight()
         //tableView.scrollToRow(at: IndexPath.init(row: position - 1, section: 0), at: .bottom, animated: true)
     }
     
