@@ -573,7 +573,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             } else {
                                 ParametersConstructor.sharedInstance.showAlert("Error", message: "Something went wrong")
                                 self.morePost = true
-                                tableCell.hideProgress()
+                                tableCell.hideProgress()    
                             }
                         }
                     }
@@ -760,10 +760,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             for i in 0..<10 {
                 scrollView = scrollView?.superview
                 if scrollView is UIScrollView {
-                    let upCell = ReplyForm()
-                    upCell.hidden = true
-                    arrayObjectsForCell.append(upCell)
-                    insertCell(position: arrayObjectsForCell.count - 1)
+//                    let upCell = ReplyForm()
+//                    upCell.hidden = true
+//                    arrayObjectsForCell.append(upCell)
+//                    insertCell(position: arrayObjectsForCell.count - 1)
                     let superView = scrollView as! UIScrollView
                     var point = superView.contentOffset
                     point.y += keyboardSize.height/2
@@ -784,7 +784,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         } else {
             let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
-                self.deleteCell(position: self.arrayObjectsForCell.count - 1)
+                //self.deleteCell(position: self.arrayObjectsForCell.count - 1)
                 let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
                 NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)

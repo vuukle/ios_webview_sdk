@@ -7,7 +7,7 @@ import AlamofireImage
 class NetworkManager {
     
     
-    
+    var counter = 0
     var jsonArray : NSDictionary?
     static let sharedInstance = NetworkManager()
     
@@ -94,8 +94,15 @@ class NetworkManager {
                     completion(respon , nil)
                     
                 } else {
-                    completion(nil,response.result.error as NSError?)
-                    print("Status cod = \(response.response?.statusCode)")
+                    if self.counter > 3 {
+                        self.counter = 0
+                        completion(nil,response.result.error as NSError?)
+                        print("Status cod = \(response.response?.statusCode)")
+                    } else {
+                        self.counter += 1
+                        
+                        self.posComment(name, email: email, comment: comment, completion: completion)
+                    }
                 }
         }
     }
@@ -119,7 +126,9 @@ class NetworkManager {
         
         let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
         
-        Alamofire.request(url)
+        
+        
+        let request = Alamofire.request(url)
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -137,17 +146,23 @@ class NetworkManager {
                         respon.isModeration = "false"
                     }
                     //respon.isModeration = "true"
-                    completion(respon , nil)
-                    print(respon)
                     
                     completion(respon , nil)
                     print("Reply ID :\(respon.result!)")
                 } else {
-                    completion(nil,response.result.error as NSError?)
-                    print("Status cod = \(response.response?.statusCode)")
+                    self.counter += 1
+                    if self.counter < 3 {
+                    self.postReplyForComment(name, email: email, comment: comment, comment_id: comment_id, completion: completion)
+                    } else {
+                        self.counter = 0
+                        completion(nil, response.result.error as NSError?)
+                        print("Status cod = \(response.response?.statusCode)")
+                    }
                 }
         }
+        
     }
+    
     //MARK : Set Comment Vote - Up/Down Vote
     
     func setCommentVote(_ name : String ,email : String ,comment_id : String ,up_down : String,completion : @escaping (String? ,NSError?) -> Void) {
