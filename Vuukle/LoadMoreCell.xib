@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="447" height="108"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHS-Ms-WX5" id="fp9-kw-wnK">
-                <rect key="frame" x="0.0" y="0.0" width="447" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="108"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUh-hH-ZsC">
@@ -58,7 +58,7 @@
                             <action selector="openVuukleButtonWithSender:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="1AX-4X-Lj8"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.7" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
                         <rect key="frame" x="188" y="92" width="71" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>

@@ -267,7 +267,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableCell.showProgress()
         var position = tableCell.tag
         
-        position = hideForms(position: position)
+        closeForms()
         
         if arrayObjectsForCell[position] is CommentsFeed {
             let firstObject = arrayObjectsForCell[position] as! CommentsFeed
@@ -288,6 +288,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             removeObjectFromSortedArray(indexObject: tableCell.tag)
         }
         tableCell.showReply.setTitle("hide", for: UIControlState.normal)
+        setHeight(sender: self)
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
@@ -495,7 +496,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 self.loadReply = true
                 for r in repliesArray! {
                     r.level = comment.level! + 1
-                    //if index
                     self.arrayObjectsForCell.insert(r, at: index + 1)
                     self.insertCell(position: index + 1)
                 }
@@ -927,18 +927,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
-            if cell.tag == arrayObjectsForCell.count - 2 {
-                let myNumber = NSNumber(value: Float(tableView.contentSize.height) + 600.0)
-                //VuukleInfo.commentsHeight = tableView.contentSize.height
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
-            } else {
-                let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-                //VuukleInfo.commentsHeight = tableView.contentSize.height
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
-            }
-            
-        }
+        setHeight(sender: self)
     }
     
     func getMostPopularArticles() {
