@@ -209,6 +209,8 @@ class ParametersConstructor  {
         var lemail = decodingString(email)
         lemail = lemail.replacingOccurrences(of: " ", with: "")
         lemail = lemail.replacingOccurrences(of: "%", with: "")
+        //lname = lname.replacingOccurrences(of: " ", with: "")
+        lname = lname.replacingOccurrences(of: "%", with: "")
         self.defaults.set(lname, forKey: "name")
         self.defaults.set(lemail, forKey: "email")
     }

@@ -16,6 +16,7 @@ class LoadMoreCell: UITableViewCell {
     @IBOutlet weak var heightButton: NSLayoutConstraint!
     @IBOutlet weak var heightActivitiIndicator: NSLayoutConstraint!
     
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
         activityIndicator.isHidden = true

@@ -210,7 +210,7 @@ open class  CellConstructor {
         cell.totalCount.isHidden = false
         
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellConstraints(cell)
-        if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != ""{
+        if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" && self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != ""{
             let lname = self.defaults.object(forKey: "name") as! String
             let newline = lname.replacingOccurrences(of: "%20", with: " ")
             cell.nameTextField.isHidden = true
@@ -223,6 +223,11 @@ open class  CellConstructor {
             cell.nameTextField.isEnabled = false
             cell.nameTextField.isSelected = false
             cell.logOut.isHidden = false
+            cell.emailTextField.isHidden = true
+            cell.emailTextField.text = self.defaults.object(forKey: "email") as? String
+            cell.emailTextField.isEnabled = false
+            cell.emailTextField.isSelected = false
+            cell.logOut.isHidden = false
         } else {
             cell.backgroundHeight.constant = 285
             cell.greetingLabel.isHidden = true
@@ -231,22 +236,12 @@ open class  CellConstructor {
             cell.nameTextField.isEnabled = true
             cell.nameTextField.isSelected = true
             cell.nameTextField.text = ""
-        }
-        
-        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
-            cell.emailTextField.isHidden = true
-            cell.emailTextField.text = self.defaults.object(forKey: "email") as? String
-            cell.emailTextField.isEnabled = false
-            cell.emailTextField.isSelected = false
-            cell.logOut.isHidden = false
-        } else{
             cell.logOut.isHidden = true
             cell.emailTextField.isHidden = false
             cell.emailTextField.isEnabled = true
             cell.emailTextField.isSelected = true
             cell.emailTextField.text = ""
         }
-
         
         if totalComentsCount > 1 {
             cell.totalCount.text = "Total comments: \(totalComentsCount)"
@@ -264,7 +259,7 @@ open class  CellConstructor {
         
         cell.hideProgress()
         var cell = CellConstraintsConstructor.sharedInstance.setAddCommentCellForReplyConstraints(cell)
-        if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" {
+        if self.defaults.object(forKey: "name") as? String != nil && self.defaults.object(forKey: "name") as? String != "" &&  self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             let lname = self.defaults.object(forKey: "name") as! String
             let newline = lname.replacingOccurrences(of: "%20", with: " ")
 
@@ -274,20 +269,17 @@ open class  CellConstructor {
             cell.nameTextField.text = lname
             cell.nameTextField.isEnabled = false
             cell.backgroundHeight.constant = 218
-        } else {
-            cell.backgroundHeight.constant = 268
-            cell.nameTextField.isHidden = false
-            cell.greetingLabel.isHidden = true
-            cell.nameTextField.text = ""
-            cell.nameTextField.isEnabled = true
-        }
-        if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             let lemail = self.defaults.object(forKey: "email") as! String!
             cell.emailTextField.isHidden = true
             cell.emailTextField.text = lemail
             cell.logOut.isHidden = true
             cell.emailTextField.isEnabled = false
         } else {
+            cell.backgroundHeight.constant = 268
+            cell.nameTextField.isHidden = false
+            cell.greetingLabel.isHidden = true
+            cell.nameTextField.text = ""
+            cell.nameTextField.isEnabled = true
             cell.emailTextField.isHidden = false
             cell.emailTextField.text = ""
             cell.logOut.isHidden = true

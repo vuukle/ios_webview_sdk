@@ -396,7 +396,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func replyButtonPressed(_ tableCell: CommentCell, replyButtonPressed replyButton: AnyObject) {
         tableCell.showProgress()
-        self.view.endEditing(true)
+        //self.view.endEditing(true)
         let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
             if self.morePost {
@@ -407,12 +407,20 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     self.replyOpened = false
                     self.closeForms()
                 } else {
-                    
                     self.closeForms()
                     self.replyOpened = true
                     self.lastReplyID = Int(tableCell.tag + 1)
                     self.arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
-                    self.insertCell(position: tableCell.tag + 1)
+                    if tableCell.tag == self.arrayObjectsForCell.count - 2 {
+                        self.tableView.reloadData()
+                    } else {
+                        self.insertCell(position: tableCell.tag + 1)
+                    }
+                    
+                   // self.arrayObjectsForCell.insert(ReplyForm(), at: tableCell.tag + 1)
+                   
+                    //self.tableView.scrollToRow(at: IndexPath(row: tableCell.tag + 1, section: 0), at: .middle, animated: true)
+                    //setHeight(sender: self)
                     
                 }
             }
@@ -753,17 +761,24 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func keyboardWillShow(sender: NSNotification) {
         if  !keyboardOpened {
+            
+            
+            
             let keyboardSize = (sender.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)!.cgRectValue
             keyboardOpened = true
+            //self.view.frame.origin.y = -keyboardSize.height/2
+            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+                let myNumber = NSNumber(value: Float(self.tableView.contentSize.height) + Float(keyboardSize.height))
+                NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            })
+
             var scrolled = false
             var scrollView = self.view
             for i in 0..<10 {
                 scrollView = scrollView?.superview
                 if scrollView is UIScrollView {
-//                    let upCell = ReplyForm()
-//                    upCell.hidden = true
-//                    arrayObjectsForCell.append(upCell)
-//                    insertCell(position: arrayObjectsForCell.count - 1)
                     let superView = scrollView as! UIScrollView
                     var point = superView.contentOffset
                     point.y += keyboardSize.height/2
@@ -772,24 +787,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     break
                 }
             }
-            if !scrollIs {
-                self.view.frame.origin.y = -keyboardSize.height/2
-            }
         }
     }
     func keyboardWillHide(sender: NSNotification) {
         keyboardOpened = false
-        if !scrollIs {
-            self.view.frame.origin.y = 0
-        } else {
-            let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
-            DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
-                //self.deleteCell(position: self.arrayObjectsForCell.count - 1)
-                let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
-                NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
-            })
-        }
+        setHeight(sender: self)
     }
     
     func dismissKeyboard() {
@@ -926,9 +928,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
-            let myNumber = NSNumber(value: Float(tableView.contentSize.height))
-            //VuukleInfo.commentsHeight = tableView.contentSize.height
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            if cell.tag == arrayObjectsForCell.count - 2 {
+                let myNumber = NSNumber(value: Float(tableView.contentSize.height) + 600.0)
+                //VuukleInfo.commentsHeight = tableView.contentSize.height
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            } else {
+                let myNumber = NSNumber(value: Float(tableView.contentSize.height))
+                //VuukleInfo.commentsHeight = tableView.contentSize.height
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            }
+            
         }
     }
     
@@ -1136,6 +1145,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         }
         replyOpened = false
         loginOpened = false
+        morePost = true
         changeHeight()
     }
     
