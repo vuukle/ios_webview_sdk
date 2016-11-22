@@ -570,11 +570,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                             
                             var logMessage = NSString(string: "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason).")
                             
-                            print(logMessage)
-                            
                             self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
-                            
-                            //ParametersConstructor.sharedInstance.showAlert("Error", message: "Something went wrong")
                             
                             self.morePost = true
                             tableCell.hideProgress()
@@ -649,7 +645,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 
                                 var logMessage = NSString(string: "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason).")
                                 
-                                print(logMessage)
+                                self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
                                 
                                 tableCell.hideProgress()
                                 self.morePost = true
@@ -727,11 +723,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let mailComposeVC = configureMailComposerViewController(errorMessage: errorMessage)
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        let sendAction = UIAlertAction(title: "Send bug report", style: .default) { action -> Void in
-            
-            //FIXME: Memory leaks!
-            
-            //self.present(mailComposeVC, animated: true, completion:nil)
+        let sendAction = UIAlertAction(title: "Send bug report", style: .default) { [unowned self] action -> Void in
             
             if MFMailComposeViewController.canSendMail() {
                 self.present(mailComposeVC, animated: true, completion:nil)

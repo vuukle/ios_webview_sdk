@@ -142,6 +142,10 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        commentTextView.text = ""
+    }
+    
     func showProgress() {
         self.alpha = 0.4
         progressIndicator.startAnimating()
