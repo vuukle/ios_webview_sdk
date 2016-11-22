@@ -75,7 +75,6 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         }
     }
     
-    
     func doneBtnFromKeyboardClicked(sender : UIBarButtonItem) {
         nameField.resignFirstResponder()
         emailField.resignFirstResponder()

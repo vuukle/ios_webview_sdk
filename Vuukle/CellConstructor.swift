@@ -163,10 +163,8 @@ open class  CellConstructor {
         cell.upvoteButtonLeftConstraint.constant = CGFloat(Global.leftConstrainReplySize)
         cell.initialsLabelLeftConstraints.constant = CGFloat(Global.leftConstrainReplySize)
         
-        //cell.userNameLabel.textColor = UIColor.blue
         cell.commentLabel.text = newComment
         cell.userNameLabel.text = newName
-        //cell.downvoteCountLabel.isHidden = true
         let sum = comment.up_votes! - comment.down_votes!
         if sum > 0 {
             cell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
@@ -304,59 +302,4 @@ open class  CellConstructor {
         return loadMoreCell
     }
     
-    
-//    func returnCellForRow(_ object : AnyObject , tableView : UITableView) -> UITableViewCell{
-//        var cell = UITableViewCell()
-//        if object is CommentsFeed {
-//            let objectForcell : CommentsFeed = object as! CommentsFeed
-//            if objectForcell.isReply == true{
-//                var cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-//                cell = returnReplyCell(cell, comment: objectForcell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForcell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForcell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForcell.name!))
-//                return cell
-//            } else {
-//                var cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
-//                cell = returnCommentCell(cell, comment: objectForcell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForcell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForcell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForcell.name!))
-//                return cell
-//            }
-//        } else if object is LoadMore {
-//            let objectForcell : LoadMore = object as! LoadMore
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell") as! LoadMoreCell
-//            cell = returnLoadMoreCell(cell, object: objectForcell)
-//            return cell
-//        } else if object is CommentForm {
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
-//            cell = returnAddCommentCellForComment(cell)
-//            return cell
-//        } else if object is Emoticon {
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "EmoticonCell") as! EmoticonCell
-//            cell = returnEmoticonCell(cell)
-//            return cell
-//        } else if object is ReplyForm {
-//            let objectForcell : ReplyForm = object as! ReplyForm
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
-//            cell = returnAddCommentCellForReply(cell, object: objectForcell)
-//            return cell
-//        } else if object is WebView {
-//            let objectForcell : WebView = object as! WebView
-//            if objectForcell.advertisingBanner == true {
-//                let  cell = tableView.dequeueReusableCell(withIdentifier: "WebViewCell") as! WebViewCell
-//                return cell
-//            } else {
-//                let cell = tableView.dequeueReusableCell(withIdentifier: "ContentWebViewCell") as! ContentWebViewCell
-//                return cell
-//            }
-//            cell = tableView.dequeueReusableCell(withIdentifier: "WebViewCell") as! WebViewCell
-//        }  else if object is MostPopularArticle {
-//            let objectForcell : MostPopularArticle = object as! MostPopularArticle
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell") as! MostPopularArticleCell
-//            cell = returnMostPopularArticleCell(cell, object: object as! MostPopularArticle)
-//            return cell
-//        } else if object is LoginForm {
-//            let objectForcell : LoginForm = object as! LoginForm
-//            var cell = tableView.dequeueReusableCell(withIdentifier: "LoginCell") as! LoginCell
-//            cell = returnLoginCell(cell, object: object as! LoginForm)
-//            return cell
-//        }
-//        return cell
-//    }
 }

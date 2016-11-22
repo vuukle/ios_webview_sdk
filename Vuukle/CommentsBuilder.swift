@@ -265,16 +265,33 @@ open class VuukleCommentsBuilder : NSObject {
         view.addSubview(vc.view)
 }
 
+    /*
+     Function which returns Height of Vuukle
+     
+     We recommend to work with notifications!
+     */
+    
     open static func getHeight() -> CGFloat{
         return VuukleInfo.getCommentsHeight()
     }
+    
+    /*
+     Function which returns count of comments under current article
+     */
     
     open static func getCommentsCount() -> Int{
         return VuukleInfo.getCommentsCount()
     }
     
+    /*
+     Function which allows you to log in users
+     
+     You can use it when user logs in your application
+     */
+    
     open static func setUserInfo(name: String, email: String) {
-        CommentViewController.shared?.loginUser(name: name, email: email)
+        ParametersConstructor.sharedInstance.setUserInfo(name: name, email: email)
+        CommentViewController.shared?.reloadAddCommentField()
     }
     
 }
