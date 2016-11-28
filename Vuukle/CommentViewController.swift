@@ -279,6 +279,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
                 self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
                 self.defaults.synchronize()
+                
                 NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
                     if error == nil {
                         commen.up_votes! += 1
@@ -295,9 +296,29 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         tableCell.hideProgress()
                     } else {
                         self.defaults.set(nil, forKey: "\(commen.comment_id)")
-                        ParametersConstructor.sharedInstance.showAlert("Error", message: "Try again later")
                         
                         tableCell.hideProgress()
+                        
+                        // FIXME: New alert with "Send Report" button
+                        var urlCommentID = "no_id"
+                        
+                        if (commen.comment_id != nil) {
+                            urlCommentID = commen.comment_id!
+                        }
+                        
+                        let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("1")&name=\(name as String)&email=\(mail as String)"
+                        
+                        var logErrDescription = "nil"
+                        var logErrFailureReason = "nil"
+                        
+                        if ((error) != nil) {
+                            logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                            logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                        }
+                        
+                        var logMessage = NSString(string: "URL - \(logUrl).  Type - VoteUP.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason).")
+                        
+                        self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
                     }
                 })
             } else {
@@ -341,8 +362,29 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         tableCell.hideProgress()
                     } else {
                         self.defaults.set(nil, forKey: "\(commen.comment_id)")
-                        ParametersConstructor.sharedInstance.showAlert("Error", message: "Try again later")
+                        
                         tableCell.hideProgress()
+                        
+                        // FIXME: New alert with "Send Report" button
+                        var urlCommentID = "no_id"
+                        
+                        if (commen.comment_id != nil) {
+                            urlCommentID = commen.comment_id!
+                        }
+                        
+                        let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("-1")&name=\(name as String)&email=\(mail as String)"
+                        
+                        var logErrDescription = "nil"
+                        var logErrFailureReason = "nil"
+                        
+                        if ((error) != nil) {
+                            logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                            logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                        }
+                        
+                        var logMessage = NSString(string: "URL - \(logUrl).  Type - VoteDOWN.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason).")
+                        
+                        self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
                     }
                 })
             } else {
@@ -617,12 +659,15 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         } else {
                             if checker {
                                 
-                                //ParametersConstructor.sharedInstance.showAlert("Something went wrong", message: "")
-                                
                                 // FIXME: New alert with "Send Report" button
                                 
-                                let logUrl = "https://vuukle.com/api.asmx/postReply?name=\(nameText)&email=\(emailText)&comment=\(commentText)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(commen.comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
+                                var urlCommentID = "no_id"
                                 
+                                if (commen.comment_id != nil) {
+                                    urlCommentID = commen.comment_id!
+                                }
+                                
+                                let logUrl = "https://vuukle.com/api.asmx/postReply?name=\(nameText)&email=\(emailText)&comment=\(commentText)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(urlCommentID as! String)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
                                 
                                 var logResult = "nil"
                                 var logCommentID = "nil"
@@ -1050,6 +1095,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 
                 let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
                 let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
+                
                 NetworkManager.sharedInstance.reportComment(commentID: cellId/*cell.comment_id!*/, name: name, email: email, completion: { result, error in
                     if result! {
                         ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
@@ -1057,7 +1103,21 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         if let errorDescription = error {
                             ParametersConstructor.sharedInstance.showAlert("Error!", message: "Server is not responding. Try again later.")
                         } else {
-                            ParametersConstructor.sharedInstance.showAlert("Error!", message: "Something went wrong")
+                            
+                            // FIXME: New alert with "Send Report" button
+                            let logUrl = "\(Global.baseURL)flagCommentOrReply?comment_id=\(cellId)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)"
+                            
+                            var logErrDescription = "nil"
+                            var logErrFailureReason = "nil"
+                            
+                            if ((error) != nil) {
+                                logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                                logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                            }
+                            
+                            var logMessage = NSString(string: "URL - \(logUrl). Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason).")
+                            
+                            self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
                         }
                     }
                 })

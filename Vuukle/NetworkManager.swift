@@ -15,7 +15,7 @@ class NetworkManager {
     
     func getRepliesForComment(_ comment_id : String ,parent_id : String ,completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
         
-        Alamofire.request("\(Global.baseURL)getReplyFeed?host=\(Global.host)&article_id=00048&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&article_id=\(Global.article_id)&parent_id=\(parent_id)&time_zone=\(Global.time_zone)" )
+        Alamofire.request("\(Global.baseURL as String)getReplyFeed?host=\(Global.host as String)&article_id=00048&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as String)&article_id=\(Global.article_id as String)&parent_id=\(parent_id as String)&time_zone=\(Global.time_zone as String)" )
             .responseJSON { response in
                 
                 if let JSON = response.result.value as? NSArray{
@@ -37,7 +37,8 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getCommentsFeed(_ completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
-        Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
+        
+        Alamofire.request("\(Global.baseURL as String)getCommentFeed?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
             .responseJSON { response in
                 if let result = response.result.value {
                     let JSON = result
@@ -73,13 +74,12 @@ class NetworkManager {
     
     func posComment(_ name : String ,email : String ,comment : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
         
-        let url = "\(Global.baseURL)postComment?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&name=\(name)&email=\(email)&comment=\(comment)&tags=\(Global.tag1)&title=\(Global.title)&url=\(Global.articleUrl)"
+        let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
         
         Alamofire.request(url)
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -111,28 +111,28 @@ class NetworkManager {
     
     func getImageWhihURL(_ imageURL: String,completion: @escaping (UIImage?) -> Void) -> Request? {
         
-       // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
-            return Alamofire.request(imageURL).responseImage { response in
-                if let image = response.result.value {
-                    completion(image)
-                } else {
-                    print("Status cod = \(response)")
-                }
+        // return Alamofire.request(imageURL as! NSURL as! URLRequestConvertible).responseImage { response in
+        return Alamofire.request(imageURL).responseImage { response in
+            if let image = response.result.value {
+                completion(image)
+            } else {
+                print("Status cod = \(response)")
+            }
         }
     }
+    
+    
     //MARK: Post Reply for Comment
     
     func postReplyForComment(_ name : String ,email : String ,comment : String ,comment_id : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
         
-        let url = "https://vuukle.com/api.asmx/postReply?name=\(name)&email=\(email)&comment=\(comment)&host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&resource_id=\(Global.resource_id)&url=\(Global.articleUrl)"
-        
-        
-        
-        let request = Alamofire.request(url)
-            .responseJSON { response in
+        if (comment_id != nil) {
+            
+            let url = "https://vuukle.com/api.asmx/postReply?name=\(name as String)&email=\(email as String)&comment=\(comment as String)&host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&resource_id=\(Global.resource_id as String)&url=\(Global.articleUrl as String)"
+            
+            let request = Alamofire.request(url).responseJSON { response in
                 
                 if let JSON = response.result.value {
-                    
                     
                     self.jsonArray = JSON as? NSDictionary
                     
@@ -152,36 +152,54 @@ class NetworkManager {
                 } else {
                     self.counter += 1
                     if self.counter < 3 {
-                    self.postReplyForComment(name, email: email, comment: comment, comment_id: comment_id, completion: completion)
+                        self.postReplyForComment(name, email: email, comment: comment, comment_id: comment_id, completion: completion)
                     } else {
                         self.counter = 0
                         completion(nil, response.result.error as NSError?)
                         print("Status cod = \(response.response?.statusCode)")
                     }
                 }
+            }
+        } else {
+            let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString("comment_id_nil", comment: "comment_id_nil")]
+            let canceledError = NSError(domain: "vuukle",
+                                        code: 100502,
+                                        userInfo: userInfo)
+            completion(nil, canceledError)
         }
-        
     }
+    
     
     //MARK : Set Comment Vote - Up/Down Vote
     
     func setCommentVote(_ name : String ,email : String ,comment_id : String ,up_down : String,completion : @escaping (String? ,NSError?) -> Void) {
-        let url = "\(Global.baseURL)setCommentVote?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&comment_id=\(comment_id)&up_down=\(up_down)&name=\(name)&email=\(email)"
         
-        let newUrl = url.replacingOccurrences(of: " ", with: "")
-        
-        Alamofire.request( newUrl)
-            .responseJSON { response in
-                
-                
-                if let JSON = response.result.value {
-                    self.jsonArray = JSON as? NSDictionary
-                    let respon = self.jsonArray!["result"] as? String
-                    completion(respon! ,nil)
-                } else {
-                    print("Status cod = \(response.response?.statusCode)")
-                    completion(nil,response.result.error as NSError?)
-                }
+        if (comment_id != nil) {
+            
+            let url = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&up_down=\(up_down as String)&name=\(name as String)&email=\(email as String)"
+            
+            let newUrl = url.replacingOccurrences(of: " ", with: "")
+            
+            Alamofire.request( newUrl)
+                .responseJSON { response in
+                    
+                    if let JSON = response.result.value {
+                        self.jsonArray = JSON as? NSDictionary
+                        let respon = self.jsonArray!["result"] as? String
+                        completion(respon! ,nil)
+                        
+                    } else {
+                        print("Status cod = \(response.response?.statusCode)")
+                        completion(nil,response.result.error as NSError?)
+                    }
+            }
+        } else {
+            
+            let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString("comment_id_nil", comment: "comment_id_nil")]
+            let canceledError = NSError(domain: "vuukle",
+                                        code: 100501,
+                                        userInfo: userInfo)
+            completion(nil, canceledError)
         }
     }
     
@@ -189,8 +207,8 @@ class NetworkManager {
     
     func getMoreCommentsFeed(_ from_count : Int ,to_count : Int ,completion: @escaping ([CommentsFeed]?, NSError?) -> Void) {
         
-        var url = "\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)"
-        Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.secret_key)&from_count=\(from_count)&to_count=\(to_count)")
+        var url = "\(Global.baseURL as String)getCommentFeed?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&time_zone=\(Global.secret_key as String)&from_count=\(from_count)&to_count=\(to_count)"
+        Alamofire.request("\(Global.baseURL as String)getCommentFeed?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&time_zone=\(Global.secret_key as String)&from_count=\(from_count)&to_count=\(to_count)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -218,7 +236,7 @@ class NetworkManager {
     //MARK: Get rating
     
     func getEmoticonRating(_ completion: @escaping (EmoteRating) -> Void) {
-        Alamofire.request("\(Global.baseURL)getEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(Global.article_id)")
+        Alamofire.request("\(Global.baseURL as String)getEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(Global.article_id as String)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -240,7 +258,7 @@ class NetworkManager {
     
     func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
         
-        Alamofire.request("\(Global.baseURL)setEmoteRating?host=\(Global.host)&api_key=\(Global.api_key)&article_id=\(article_id)&article_title=\(Global.article_title)&article_image=\(Global.article_image)&emote=\(emote)&url=\(Global.articleUrl)")
+        Alamofire.request("\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)")
             .responseJSON { response in
                 
                 
@@ -262,7 +280,8 @@ class NetworkManager {
     //MARK: Get Comment Feed
     
     func getTotalCommentsCount(_ completion: @escaping (TotalCommentsCount) -> Void) {
-        Alamofire.request("\(Global.baseURL)getCommentFeed?host=\(Global.host)&article_id=\(Global.article_id)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key)&time_zone=\(Global.time_zone)&from_count=0&to_count=1")
+        
+        Alamofire.request("\(Global.baseURL as String)getCommentFeed?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&time_zone=\(Global.time_zone as String)&from_count=0&to_count=1")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
@@ -302,13 +321,13 @@ class NetworkManager {
     
     func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
         //if Global.setMostPopularArticleVisible {
-        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key)&host=\(Global.host)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
+        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
-
+                    
                     let array = JSON as? NSArray
-
+                    
                     
                     var responseArray = [MostPopularArticle]()
                     
@@ -322,19 +341,19 @@ class NetworkManager {
                     }
                     
                     completion(responseArray, nil)
-
+                    
                     
                 } else {
                     print("Status cod = \(response.response?.statusCode)")
                     completion(nil,response.result.error as NSError?)
                 }
-            }
+        }
     }
     
     func reportComment(commentID: String, name: String, email: String, completion: @escaping(Bool?, NSError?) -> Void) {
         var result = false
         
-                Alamofire.request("\(Global.baseURL)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)")
+        Alamofire.request("\(Global.baseURL as String)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key as String)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id as String)&name=\(name)&email=\(email)")
             .responseJSON { response in
                 if let JSON = response.result.value {
                     self.jsonArray = JSON as? NSDictionary

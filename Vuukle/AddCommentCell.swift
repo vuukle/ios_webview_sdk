@@ -111,6 +111,9 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         
         emailTextField.enablesReturnKeyAutomatically = true
         nameTextField.enablesReturnKeyAutomatically = true
+        
+        logOut.layer.cornerRadius = 5
+        logOut.layer.masksToBounds = true
     }
     
     func doneBtnFromKeyboardClicked(sender : UIBarButtonItem) {
