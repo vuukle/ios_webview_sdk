@@ -132,9 +132,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 cell = CommentCell() as! CommentCell
             }
             if objectForCell.isReply! {
-                cell = CellConstructor.sharedInstance.returnReplyCell(cell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name!)) as! CommentCell
+                cell = CellConstructor.sharedInstance.returnReplyCell(cell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name)) as! CommentCell
             } else {
-                cell = CellConstructor.sharedInstance.returnCommentCell(cell as! CommentCell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment!), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name!)) as! CommentCell
+                cell = CellConstructor.sharedInstance.returnCommentCell(cell as! CommentCell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name)) as! CommentCell
             }
             cell.userImage.layer.masksToBounds = true
             cell.userImage.layer.cornerRadius = 22

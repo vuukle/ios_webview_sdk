@@ -125,11 +125,11 @@ open class  CellConstructor {
         } else if comment.avatar_url == ""{
             cell.userImage.isHidden = true
             cell.initialsLabel.isHidden = false
-            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name!))
+            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name))
         }else {
             cell.userImage.isHidden = true
             cell.initialsLabel.isHidden = false
-            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name!))
+            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name))
         }
         cell.userImage.layer.shadowOffset = CGSize(width: 0.0, height: 0.0)
         cell.userImage.layer.shadowColor = UIColor.black.cgColor
@@ -193,11 +193,11 @@ open class  CellConstructor {
         } else if comment.avatar_url == ""{
             cell.userImage.isHidden = true
             cell.initialsLabel.isHidden = false
-            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name!))
+            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name))
         } else {
             cell.userImage.isHidden = true
             cell.initialsLabel.isHidden = false
-            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name!))
+            cell.initialsLabel.text = ParametersConstructor.sharedInstance.searchUpperChracters(ParametersConstructor.sharedInstance.decodingString(comment.name))
         }
         return cell
     }
