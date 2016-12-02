@@ -561,6 +561,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     NetworkManager.sharedInstance.posComment(name, email: email, comment: comment) { (respon , error) in
                         
                         if (error == nil) {
+                            
                             self.morePost = true
                             
                             var allow = respon?.isModeration
@@ -573,21 +574,24 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 self.reloadAddCommentField()
                                 cell.commentTextView.text = ""
                                 
-                            } else if respon?.result == "repeat_comment" {
-                                
-                                self.showSimpleAlert(title: "Repeat comment!", message: nil)
-                                self.closeForms()
-                                tableCell.hideProgress()
-                                tableCell.commentTextView.text = ""
-                                self.reloadAddCommentField()
-                                cell.commentTextView.text = ""
-                                
                             } else {
                                 
-                                ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
-                                
-                                self.closeForms()
-                                self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                if respon?.result == "repeat_comment" {
+                                    
+                                    self.showSimpleAlert(title: "Repeat comment!", message: nil)
+                                    self.closeForms()
+                                    tableCell.hideProgress()
+                                    tableCell.commentTextView.text = ""
+                                    self.reloadAddCommentField()
+                                    cell.commentTextView.text = ""
+                                    
+                                } else {
+                                    
+                                    ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
+                                    
+                                    self.closeForms()
+                                    self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
+                                }
                             }
                             
                         } else {

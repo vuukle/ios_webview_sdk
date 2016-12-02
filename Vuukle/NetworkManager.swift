@@ -74,6 +74,8 @@ class NetworkManager {
         
         let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
         
+        print("\n \(url)")
+        
         Alamofire.request(url).responseJSON { response in
             
             if let JSON = response.result.value {
@@ -87,7 +89,7 @@ class NetworkManager {
                 var moderationAnswer = self.jsonArray!["isModeration"] as? String
                 
                 if moderationAnswer != nil {
-                    moderationAnswer = moderationAnswer?.lowercased()
+                    respon.isModeration = moderationAnswer?.lowercased()
                     print("\n \(moderationAnswer)")
                 } else {
                     respon.isModeration = "false" as? String
@@ -142,7 +144,7 @@ class NetworkManager {
                     var moderationAnswer = self.jsonArray!["isModeration"] as? String
                     
                     if moderationAnswer != nil {
-                        moderationAnswer = moderationAnswer?.lowercased()
+                        respon.isModeration = moderationAnswer?.lowercased()
                         print("\n \(moderationAnswer)")
                     } else {
                         respon.isModeration = "false"
