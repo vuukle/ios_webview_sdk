@@ -1,11 +1,12 @@
-
-
 import UIKit
+
 protocol AddCommentCellDelegate {
     
     func postButtonPressed(tableCell : AddCommentCell ,pressed postButton : AnyObject )
     func logOutButtonPressed(tableCell : AddCommentCell ,pressed logOutButton : AnyObject )
 }
+
+
 class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate {
     var delegate : AddCommentCellDelegate?
     let defaults : UserDefaults = UserDefaults.standard
@@ -40,21 +41,21 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBAction func postButton(sender: AnyObject) {
         
-//        if self.defaults.object(forKey: "name") as? String == nil || self.defaults.object(forKey: "name") as? String == "" {
-//            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-//        } else {
-//            self.defaults.removeObject(forKey: "name")
-//            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-//        }
-//        
-//        if self.defaults.object(forKey: "email") as? String == nil || self.defaults.object(forKey: "email") as? String == "" {
-//            self.defaults.set("\(emailTextField.text!)", forKey: "email")
-//        } else {
-//            
-//            self.defaults.removeObject(forKey: "email")
-//            self.defaults.set("\(emailTextField.text!)", forKey: "email")
-//        }
-//        self.defaults.synchronize()
+        //        if self.defaults.object(forKey: "name") as? String == nil || self.defaults.object(forKey: "name") as? String == "" {
+        //            self.defaults.set("\(nameTextField.text!)", forKey: "name")
+        //        } else {
+        //            self.defaults.removeObject(forKey: "name")
+        //            self.defaults.set("\(nameTextField.text!)", forKey: "name")
+        //        }
+        //
+        //        if self.defaults.object(forKey: "email") as? String == nil || self.defaults.object(forKey: "email") as? String == "" {
+        //            self.defaults.set("\(emailTextField.text!)", forKey: "email")
+        //        } else {
+        //
+        //            self.defaults.removeObject(forKey: "email")
+        //            self.defaults.set("\(emailTextField.text!)", forKey: "email")
+        //        }
+        //        self.defaults.synchronize()
         self.delegate?.postButtonPressed(tableCell: self ,pressed : sender)
     }
     
@@ -116,6 +117,99 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         logOut.layer.masksToBounds = true
     }
     
+    
+    //MARK: - Handling of keyboard for UITextField
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let superView = textField.superview?.superview?.superview?.superview?.superview?.superview?.superview?.superview
+        
+        if superView is UIScrollView {
+            
+            var scrollView = superView as! UIScrollView
+            print("\n \(scrollView)")
+            
+            var pointInScroll: CGPoint = textField.superview!.convert(textField.frame.origin, to: scrollView)
+            
+            var contentOffset: CGPoint = scrollView.contentOffset
+            contentOffset.y  = pointInScroll.y
+            
+            if let accessoryView = textField.inputAccessoryView {
+                
+                if (UIDevice.current.orientation.isLandscape) {
+                    switch UIScreen.main.bounds.height {
+                    case 375:
+                        contentOffset.y -= accessoryView.frame.size.height + 20
+                    case 414:
+                        contentOffset.y -= accessoryView.frame.size.height + 40
+                    default:
+                        contentOffset.y -= accessoryView.frame.size.height
+                    }
+                } else {
+                    switch UIScreen.main.bounds.width {
+                    case 320:
+                        switch UIScreen.main.bounds.height {
+                        case 480:
+                            contentOffset.y -= accessoryView.frame.size.height + 50
+                        default:
+                            contentOffset.y -= accessoryView.frame.size.height + 140
+                        }
+                    case 375:
+                        contentOffset.y -= accessoryView.frame.size.height + 210
+                    case 414:
+                        contentOffset.y -= accessoryView.frame.size.height + 250
+                    default:
+                        contentOffset.y -= accessoryView.frame.size.height + 120
+                    }
+                }
+            }
+            scrollView.setContentOffset(contentOffset, animated: true)
+        }
+        return true
+    }
+    
+    //MARK: - Handling of keyboard for UITextView
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        
+        let superView = textView.superview?.superview?.superview?.superview?.superview?.superview?.superview?.superview
+        
+        if superView is UIScrollView {
+            
+            var scrollView = superView as! UIScrollView
+            print("\n \(scrollView)")
+            
+            var pointInScroll: CGPoint = textView.superview!.convert(textView.frame.origin, to: scrollView)
+            
+            var contentOffset: CGPoint = scrollView.contentOffset
+            contentOffset.y  = pointInScroll.y
+            
+            if let accessoryView = textView.inputAccessoryView {
+                
+                if (UIDevice.current.orientation.isLandscape) {
+                    contentOffset.y -= accessoryView.frame.size.height
+                } else {
+                    switch UIScreen.main.bounds.width {
+                    case 320:
+                        switch UIScreen.main.bounds.height {
+                        case 480:
+                            contentOffset.y -= accessoryView.frame.size.height + 10
+                        default:
+                            contentOffset.y -= accessoryView.frame.size.height + 40
+                        }
+                    case 375:
+                        contentOffset.y -= accessoryView.frame.size.height + 70
+                    case 414:
+                        contentOffset.y -= accessoryView.frame.size.height + 100
+                    default:
+                        contentOffset.y -= accessoryView.frame.size.height + 20
+                    }
+                }
+            }
+            scrollView.setContentOffset(contentOffset, animated: true)
+        }
+        return true
+    }
+    
+    //MARK: -
     func doneBtnFromKeyboardClicked(sender : UIBarButtonItem) {
         nameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()

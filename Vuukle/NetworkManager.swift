@@ -53,8 +53,6 @@ class NetworkManager {
                         responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
                     }
                     
-                    
-                    
                     completion(responseArray, nil)
                     
                 } else {
@@ -76,36 +74,36 @@ class NetworkManager {
         
         let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
         
-        Alamofire.request(url)
-            .responseJSON { response in
+        Alamofire.request(url).responseJSON { response in
+            
+            if let JSON = response.result.value {
                 
-                if let JSON = response.result.value {
-                    
-                    self.jsonArray = JSON as? NSDictionary
-                    
-                    let respon = ResponseToComment()
-                    respon.result = self.jsonArray!["result"] as? String
-                    respon.comment_id = self.jsonArray!["comment_id"] as? String
-                    respon.isModeration = self.jsonArray!["isModeration"] as! String
-                    //FIX
-                    //respon.isModeration = "true"
-                    let notOptionalResponse = respon.isModeration!
-                    respon.isModeration = notOptionalResponse
-                    completion(respon , nil)
-                    
+                self.jsonArray = JSON as? NSDictionary
+                
+                let respon = ResponseToComment()
+                respon.result = self.jsonArray!["result"] as? String
+                respon.comment_id = self.jsonArray!["comment_id"] as? String
+                
+                var moderationAnswer = self.jsonArray!["isModeration"] as? String
+                
+                if moderationAnswer != nil {
+                    moderationAnswer = moderationAnswer?.lowercased()
+                    print("\n \(moderationAnswer)")
                 } else {
-                    if self.counter > 3 {
-                        self.counter = 0
-                        completion(nil,response.result.error as NSError?)
-                        print("Status cod = \(response.response?.statusCode)")
-                    } else {
-                        self.counter += 1
-                        
-                        self.posComment(name, email: email, comment: comment, completion: completion)
-                    }
+                    respon.isModeration = "false" as? String
                 }
+                
+                completion(respon , nil)
+                
+            } else {
+                
+                self.counter = 0
+                completion(nil,response.result.error as NSError?)
+                print("Status cod = \(response.response?.statusCode)")
+            }
         }
     }
+    
     
     //MARK: Images
     
@@ -130,7 +128,7 @@ class NetworkManager {
             
             let url = "https://vuukle.com/api.asmx/postReply?name=\(name as String)&email=\(email as String)&comment=\(comment as String)&host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&resource_id=\(Global.resource_id as String)&url=\(Global.articleUrl as String)"
             
-            let request = Alamofire.request(url).responseJSON { response in
+            Alamofire.request(url).responseJSON { response in
                 
                 if let JSON = response.result.value {
                     
@@ -140,27 +138,27 @@ class NetworkManager {
                     respon.result = self.jsonArray!["result"] as? String
                     let res = self.jsonArray?["isModeration"]
                     respon.isModeration = self.jsonArray!["isModeration"] as? String
-                    if let notOptionalResponse = respon.isModeration?.lowercased() {
-                        respon.isModeration = notOptionalResponse
+                    
+                    var moderationAnswer = self.jsonArray!["isModeration"] as? String
+                    
+                    if moderationAnswer != nil {
+                        moderationAnswer = moderationAnswer?.lowercased()
+                        print("\n \(moderationAnswer)")
                     } else {
                         respon.isModeration = "false"
                     }
-                    //respon.isModeration = "true"
                     
                     completion(respon , nil)
                     print("Reply ID :\(respon.result!)")
+                    
                 } else {
-                    self.counter += 1
-                    if self.counter < 3 {
-                        self.postReplyForComment(name, email: email, comment: comment, comment_id: comment_id, completion: completion)
-                    } else {
-                        self.counter = 0
-                        completion(nil, response.result.error as NSError?)
-                        print("Status cod = \(response.response?.statusCode)")
-                    }
+                    
+                    completion(nil, response.result.error as NSError?)
+                    print("Status cod = \(response.response?.statusCode)")
                 }
             }
         } else {
+            
             let userInfo = [NSLocalizedDescriptionKey: NSLocalizedString("comment_id_nil", comment: "comment_id_nil")]
             let canceledError = NSError(domain: "vuukle",
                                         code: 100502,
@@ -321,14 +319,13 @@ class NetworkManager {
     
     func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
         //if Global.setMostPopularArticleVisible {
+        
         Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
                     
                     let array = JSON as? NSArray
-                    
-                    
                     var responseArray = [MostPopularArticle]()
                     
                     for feed in array! {

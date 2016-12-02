@@ -59,6 +59,8 @@
 		049D0B871D9D562000507DC3 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B701D9D562000507DC3 /* twitter.png */; };
 		049D0B881D9D562000507DC3 /* vuukle_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B711D9D562000507DC3 /* vuukle_logo.jpg */; };
 		049D0B891D9D562000507DC3 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B721D9D562000507DC3 /* WebViewCell.xib */; };
+		900B70341DF07403000DF6C7 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B70331DF07403000DF6C7 /* LoginCell.swift */; };
+		900B70361DF07409000DF6C7 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900B70351DF07409000DF6C7 /* LoginCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -116,6 +118,8 @@
 		049D0B701D9D562000507DC3 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
 		049D0B711D9D562000507DC3 /* vuukle_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vuukle_logo.jpg; sourceTree = "<group>"; };
 		049D0B721D9D562000507DC3 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
+		900B70331DF07403000DF6C7 /* LoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
+		900B70351DF07409000DF6C7 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 				049D0B331D9D560C00507DC3 /* ReplyForm.swift */,
 				049D0B341D9D560C00507DC3 /* LoadMore.swift */,
 				049D0B351D9D560C00507DC3 /* LoadMoreCell.swift */,
+				900B70331DF07403000DF6C7 /* LoginCell.swift */,
 				049D0B361D9D560C00507DC3 /* MoreView.swift */,
 				049D0B371D9D560C00507DC3 /* NetworkManager.swift */,
 				049D0B381D9D560C00507DC3 /* ParametersConstructor.swift */,
@@ -190,6 +195,7 @@
 				049D0B5D1D9D562000507DC3 /* AddCommentCell.xib */,
 				049D0B5E1D9D562000507DC3 /* CommentCell.xib */,
 				049D0B5F1D9D562000507DC3 /* ContentWebViewCell.xib */,
+				900B70351DF07409000DF6C7 /* LoginCell.xib */,
 				049D0B601D9D562000507DC3 /* EmoticonCell.xib */,
 				049D0B611D9D562000507DC3 /* facebook.png */,
 				049D0B621D9D562000507DC3 /* images.png */,
@@ -296,6 +302,7 @@
 				049D0B791D9D562000507DC3 /* images.png in Resources */,
 				049D0B7B1D9D562000507DC3 /* Main.storyboard in Resources */,
 				049D0B7D1D9D562000507DC3 /* non_secure.html in Resources */,
+				900B70361DF07409000DF6C7 /* LoginCell.xib in Resources */,
 				049D0B861D9D562000507DC3 /* thumb-up.png in Resources */,
 				049D0B841D9D562000507DC3 /* Solid_gray.png in Resources */,
 				049D0B7E1D9D562000507DC3 /* smile-amused.png in Resources */,
@@ -340,6 +347,7 @@
 				049D0B591D9D560C00507DC3 /* TotalCommentsCount.swift in Sources */,
 				049D0B4A1D9D560C00507DC3 /* EmoteRating.swift in Sources */,
 				049D0B5A1D9D560C00507DC3 /* WebView.swift in Sources */,
+				900B70341DF07403000DF6C7 /* LoginCell.swift in Sources */,
 				049D0B451D9D560C00507DC3 /* CommentsBuilder.swift in Sources */,
 				049D0B571D9D560C00507DC3 /* Saver.swift in Sources */,
 			);

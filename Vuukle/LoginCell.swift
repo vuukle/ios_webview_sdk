@@ -13,7 +13,7 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var background: UIView!
     @IBOutlet weak var emailField: UITextField!
-
+    
     @IBOutlet weak var loginButtonOutlet: UIButton!
     
     @IBAction func loginButton(_ sender: AnyObject) {
@@ -57,6 +57,55 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         // Initialization code
     }
     
+    //MARK: - Handling of keyboard for UITextField
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        
+        let superView = textField.superview?.superview?.superview?.superview?.superview?.superview?.superview?.superview
+        
+        if superView is UIScrollView {
+            
+            var scrollView = superView as! UIScrollView
+            print("\n \(scrollView)")
+            
+            var pointInScroll: CGPoint = textField.superview!.convert(textField.frame.origin, to: scrollView)
+            
+            var contentOffset: CGPoint = scrollView.contentOffset
+            contentOffset.y  = pointInScroll.y
+            
+            if let accessoryView = textField.inputAccessoryView {
+                
+                if (UIDevice.current.orientation.isLandscape) {
+                    switch UIScreen.main.bounds.height {
+                    case 375:
+                        contentOffset.y -= accessoryView.frame.size.height + 20
+                    case 414:
+                        contentOffset.y -= accessoryView.frame.size.height + 40
+                    default:
+                        contentOffset.y -= accessoryView.frame.size.height
+                    }
+                } else {
+                    switch UIScreen.main.bounds.width {
+                    case 320:
+                        switch UIScreen.main.bounds.height {
+                        case 480:
+                            contentOffset.y -= accessoryView.frame.size.height + 40
+                        default:
+                            contentOffset.y -= accessoryView.frame.size.height + 100
+                        }
+                    case 375:
+                        contentOffset.y -= accessoryView.frame.size.height + 170
+                    case 414:
+                        contentOffset.y -= accessoryView.frame.size.height + 210
+                    default:
+                        contentOffset.y -= accessoryView.frame.size.height + 80
+                    }
+                }
+            }
+            scrollView.setContentOffset(contentOffset, animated: true)
+        }
+        return true
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         if nameField.text == "name" {
             nameField.text = ""
@@ -79,9 +128,10 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         nameField.resignFirstResponder()
         emailField.resignFirstResponder()
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
