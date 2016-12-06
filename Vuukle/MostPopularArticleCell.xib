@@ -92,6 +92,7 @@
                 <outlet property="aboutArticleLabel" destination="CoJ-fg-H78" id="Z7j-W3-piZ"/>
                 <outlet property="articleImage" destination="6f1-4N-td7" id="nVB-jJ-s0T"/>
                 <outlet property="commentsCount" destination="FvN-T8-l1Z" id="HZ0-eo-IbD"/>
+                <outlet property="showButton" destination="ixW-JN-gg8" id="MMj-91-TKS"/>
             </connections>
             <point key="canvasLocation" x="102.5" y="80"/>
         </tableViewCell>

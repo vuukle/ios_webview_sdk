@@ -5,7 +5,7 @@ import Alamofire
 protocol MostPopularArticleCellDelegate {
     
     func showArticleButtonPressed(_ tableCell : MostPopularArticleCell , _ showArticle : AnyObject )
-
+    
 }
 
 class MostPopularArticleCell: UITableViewCell {
@@ -15,7 +15,9 @@ class MostPopularArticleCell: UITableViewCell {
     @IBOutlet weak var commentsCount: UILabel!
     @IBOutlet weak var articleImage: UIImageView!
     @IBOutlet weak var aboutArticleLabel: UILabel!
-
+    
+    @IBOutlet weak var showButton: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -45,12 +47,16 @@ class MostPopularArticleCell: UITableViewCell {
     
     @IBAction func showArticleButton(_ sender: AnyObject) {
         self.delegate?.showArticleButtonPressed(self, sender)
+        
+        showButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.showButton.isEnabled = true
+        }
     }
     
-
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     

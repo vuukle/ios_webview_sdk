@@ -16,6 +16,8 @@ class LoadMoreCell: UITableViewCell {
     @IBOutlet weak var heightButton: NSLayoutConstraint!
     @IBOutlet weak var heightActivitiIndicator: NSLayoutConstraint!
     
+    @IBOutlet weak var vuukleButton: UIButton!
+    
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,6 +29,11 @@ class LoadMoreCell: UITableViewCell {
     
     @IBAction func openVuukleButton(_ sender: AnyObject) {
         self.delegate?.openVuukleButtonButtonPressed(self, openVuukleButtonPressed: sender)
+        
+        vuukleButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.vuukleButton.isEnabled = true
+        }
     }
     
     @IBAction func loadMoreButton(_ sender: AnyObject) {
@@ -37,7 +44,10 @@ class LoadMoreCell: UITableViewCell {
         activityIndicator.startAnimating()
         
         loadMore.isHidden = true
-        
+        loadMore.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.loadMore.isEnabled = true
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,5 +55,6 @@ class LoadMoreCell: UITableViewCell {
         
         // Configure the view for the selected state
     }
-    
+
 }
+

@@ -238,6 +238,7 @@
                 <outlet property="countLabel" destination="mTb-9N-ojD" id="dO8-vP-RWn"/>
                 <outlet property="countReplyWidth" destination="IOF-gV-kco" id="c1v-KV-Xzo"/>
                 <outlet property="dateLabel" destination="c6t-kd-PjZ" id="0Cn-du-wXH"/>
+                <outlet property="downVoteButton" destination="cfv-vm-dA8" id="Ayf-Wd-vJQ"/>
                 <outlet property="imageLeftCostraint" destination="uNw-cZ-APL" id="iWT-NB-02R"/>
                 <outlet property="initialsLabel" destination="auN-Bb-TbM" id="NRf-aR-MeX"/>
                 <outlet property="initialsLabelLeftConstraints" destination="o46-HR-k8v" id="d9a-jh-o8Y"/>
@@ -249,6 +250,7 @@
                 <outlet property="showButtonWidth" destination="nxz-oq-BlB" id="GBL-Rw-q5W"/>
                 <outlet property="showReply" destination="sN2-LF-kru" id="prO-sR-beW"/>
                 <outlet property="totalCountLeftConstraint" destination="3iz-1L-G6S" id="gDK-2i-oYE"/>
+                <outlet property="upVoteButton" destination="AcI-cT-RuQ" id="c5i-XT-qoh"/>
                 <outlet property="upvoteButtonLeftConstraint" destination="sei-zo-jp6" id="YgN-Hn-0is"/>
                 <outlet property="upvoteCountLabel" destination="D94-L2-Oi4" id="VgD-Uh-HeW"/>
                 <outlet property="userImage" destination="UBo-mb-86z" id="fcP-gq-77n"/>

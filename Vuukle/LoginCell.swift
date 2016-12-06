@@ -18,6 +18,11 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     
     @IBAction func loginButton(_ sender: AnyObject) {
         self.delegate?.loginButtonPressed(tableCell: self, pressed: sender)
+        
+        loginButtonOutlet.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.loginButtonOutlet.isEnabled = true
+        }
     }
     
     

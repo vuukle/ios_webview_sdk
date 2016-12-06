@@ -31,6 +31,8 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var showReply: UIButton!
     @IBOutlet weak var replyButton: UIButton!
     
+    @IBOutlet weak var upVoteButton: UIButton!
+    @IBOutlet weak var downVoteButton: UIButton!
     
     @IBOutlet weak var imageLeftCostraint: NSLayoutConstraint!
     @IBOutlet weak var totalCountLeftConstraint: NSLayoutConstraint!
@@ -44,22 +46,54 @@ class CommentCell: UITableViewCell {
     
     @IBAction func upvoteButton(_ sender: AnyObject) {
         self.delegate?.upvoteButtonPressed(self , upvoteButtonPressed: sender)
+        
+        upVoteButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.upVoteButton.isEnabled = true
+        }
     }
+    
     @IBAction func downvoteButton(_ sender: AnyObject) {
         self.delegate?.downvoteButtonPressed(self , downvoteButtonPressed: sender)
+        
+        downVoteButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.downVoteButton.isEnabled = true
+        }
     }
+    
     @IBAction func replyButton(_ sender: AnyObject) {
         self.delegate?.replyButtonPressed(self , replyButtonPressed: sender)
+        
+        replyButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.replyButton.isEnabled = true
+        }
     }
+    
     @IBAction func moreButton(_ sender: AnyObject) {
         self.delegate?.moreButtonPressed(self , moreButtonPressed: sender)
+        
+        reportButton.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.reportButton.isEnabled = true
+        }
     }
+    
     @IBAction func showReplyButton(_ sender: AnyObject) {
         self.delegate?.showReplyButtonPressed(self , showReplyButtonPressed: sender)
+        
+        showReply.isEnabled = false
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.showReply.isEnabled = true
+        }
     }
+    
     @IBAction func shareButton(_ sender: AnyObject) {
         self.delegate?.shareButtonPressed(self, shareButtonPressed: sender)
-    }    
+    }
     
     var request: Request?
     

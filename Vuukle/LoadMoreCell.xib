@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="447" height="108"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHS-Ms-WX5" id="fp9-kw-wnK">
-                <rect key="frame" x="0.0" y="0.0" width="447" height="107"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="107.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUh-hH-ZsC">
@@ -55,12 +55,11 @@
                             <constraint firstAttribute="width" constant="80" id="e4d-cS-1ff"/>
                         </constraints>
                         <connections>
-                            <action selector="openVuukleButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="Ggt-6o-FUA"/>
                             <action selector="openVuukleButtonWithSender:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="1AX-4X-Lj8"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
-                        <rect key="frame" x="186" y="92" width="76" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                        <rect key="frame" x="186.5" y="92" width="76.5" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <nil key="highlightedColor"/>
@@ -89,6 +88,7 @@
                 <outlet property="heightActivitiIndicator" destination="WXb-GB-0mY" id="X1M-Ke-K8Z"/>
                 <outlet property="heightButton" destination="Y7u-pq-FNi" id="W1i-5A-RhS"/>
                 <outlet property="loadMore" destination="oUh-hH-ZsC" id="KPx-EX-6Hk"/>
+                <outlet property="vuukleButton" destination="TNa-3u-1tQ" id="9dO-hd-SL8"/>
             </connections>
             <point key="canvasLocation" x="517.5" y="375"/>
         </tableViewCell>

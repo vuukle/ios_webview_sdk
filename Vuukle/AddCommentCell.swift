@@ -41,26 +41,22 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBAction func postButton(sender: AnyObject) {
         
-        //        if self.defaults.object(forKey: "name") as? String == nil || self.defaults.object(forKey: "name") as? String == "" {
-        //            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-        //        } else {
-        //            self.defaults.removeObject(forKey: "name")
-        //            self.defaults.set("\(nameTextField.text!)", forKey: "name")
-        //        }
-        //
-        //        if self.defaults.object(forKey: "email") as? String == nil || self.defaults.object(forKey: "email") as? String == "" {
-        //            self.defaults.set("\(emailTextField.text!)", forKey: "email")
-        //        } else {
-        //
-        //            self.defaults.removeObject(forKey: "email")
-        //            self.defaults.set("\(emailTextField.text!)", forKey: "email")
-        //        }
-        //        self.defaults.synchronize()
         self.delegate?.postButtonPressed(tableCell: self ,pressed : sender)
+        
+        postButtonOutlet.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.postButtonOutlet.isEnabled = true
+        }
     }
     
     @IBAction func logOutButton(sender: AnyObject) {
+        
         self.delegate?.logOutButtonPressed(tableCell: self, pressed: sender)
+        
+        logOut.isEnabled = false
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+            self.logOut.isEnabled = true
+        }
     }
     
     

@@ -16,21 +16,17 @@ class ParametersConstructor  {
     }
     
     func checkFields(_ name : String , email : String , comment : String) -> Bool {
-        var allFill = false
         
+        var allFill = false
         if name.characters.first == " " {
             showAlert("Error", message: "Name cannot start from space!")
             return false
         }
-        
-        let lemail = removeSpace(stroke: email)
-        
-        if name != "" && email != "" && comment != "" && comment != "Please write a comment..."{
-            if ((lemail.range(of: "@")) != nil) && ((lemail.range(of: ".")) != nil) && checkStringForSpaces(string: lemail){
-                allFill = true
-            } else {
+        if name != "" && email != "" && comment != "" && comment != "Please write a comment..." {
+            
+            allFill = verifyEmail(email: email)
+            if (allFill == false) {
                 showAlert( "Please enter a correct email!",message: "")
-                allFill = false
             }
         } else if name == "" || name == " " {
             showAlert("Please enter your name", message: "")
@@ -42,6 +38,9 @@ class ParametersConstructor  {
             showAlert("Please enter the comment", message: "")
             allFill = false
         }
+        
+        //FIXME: Method with email
+        
         return allFill
     }
     
@@ -239,8 +238,8 @@ class ParametersConstructor  {
             strArray.append(String(value))
         }
         if strArray.count > 2{
-        if strArray[strArray.count - 1] == " " {
-            strArray.popLast()
+            if strArray[strArray.count - 1] == " " {
+                strArray.popLast()
             }
         }
         var output = ""
@@ -251,11 +250,5 @@ class ParametersConstructor  {
     }
     
 }
-
-
-
-
-
-
 
 

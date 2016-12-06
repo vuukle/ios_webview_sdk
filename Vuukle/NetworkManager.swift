@@ -70,7 +70,9 @@ class NetworkManager {
     
     // MARK: Post Comment
     
-    func posComment(_ name : String ,email : String ,comment : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+    func postComment(_ name : String, email : String, comment : String, cell: AddCommentCell,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+        
+        cell.commentTextView.text = ""
         
         let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
         
@@ -94,12 +96,10 @@ class NetworkManager {
                 } else {
                     respon.isModeration = "false" as? String
                 }
-                
                 completion(respon , nil)
                 
             } else {
                 
-                self.counter = 0
                 completion(nil,response.result.error as NSError?)
                 print("Status cod = \(response.response?.statusCode)")
             }
@@ -124,11 +124,17 @@ class NetworkManager {
     
     //MARK: Post Reply for Comment
     
-    func postReplyForComment(_ name : String ,email : String ,comment : String ,comment_id : String,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+    func postReplyForComment(_ name : String, email : String, comment : String, comment_id : String, cell: AddCommentCell, completion : @escaping (ResponseToComment? , NSError?) -> Void) {
+        
+        cell.commentTextView.text = ""
         
         if (comment_id != nil) {
             
             let url = "https://vuukle.com/api.asmx/postReply?name=\(name as String)&email=\(email as String)&comment=\(comment as String)&host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&resource_id=\(Global.resource_id as String)&url=\(Global.articleUrl as String)"
+            
+            //let url = "https://vuukle.com/api.asmx/postReply?name=JSON_test&email=json@email.com&comment=Test%20good%20reply&host=test.vuukle.com&article_id=00048&api_key=777854cd-9454-4e9f-8441-ef0ee894139e&secret_key=07115720-6848-11e5-9bc9-002590f371ee&comment_id=R9007233&resource_id=195975687&url=myArticleUrl"
+            
+            print("\n \(url)")
             
             Alamofire.request(url).responseJSON { response in
                 
@@ -304,15 +310,15 @@ class NetworkManager {
     
     func logOut(){
         
-        Alamofire.request( "http://vuukle.com/api.asmx/logout")
-            .responseJSON { response in
+        Alamofire.request("http://vuukle.com/api.asmx/logoutUser").responseJSON { response in
+            
+            if let JSON = response.result.value {
                 
-                if let JSON = response.result.value {
-                    
-                } else {
-                    print("Status cod = \(response.response?.statusCode)")
-                }
-                
+                self.jsonArray = JSON as? NSDictionary
+            } else {
+                print("Status cod = \(response.response?.statusCode)")
+            }
+            
         }
     }
     
