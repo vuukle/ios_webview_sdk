@@ -596,7 +596,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 let indexPath = NSIndexPath.init(row: tableCell.tag , section: 0)
                 let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
                 
-                if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text, cell: tableCell) == true {
+                if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text) == true {
                     
                     morePost = false
                     
@@ -682,7 +682,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let indexPath = NSIndexPath.init(row: tableCell.tag, section: 0)
             let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
             
-            if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text, cell: tableCell) == true {
+            if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text) == true {
                 let nameText = ParametersConstructor.sharedInstance.encodingString(cell.nameTextField.text!)
                 let emailText = ParametersConstructor.sharedInstance.encodingString(cell.emailTextField.text!)
                 let commentText = ParametersConstructor.sharedInstance.encodingString(cell.commentTextView.text!)
@@ -859,7 +859,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let name = tableCell.nameField.text!
         let email = tableCell.emailField.text!
         
-        if ParametersConstructor.sharedInstance.checkFields(name, email: email, comment: "JustTesting", cell: tableCell) {
+        if ParametersConstructor.sharedInstance.checkFields(name, email: email, comment: "JustTesting") {
             
             ParametersConstructor.sharedInstance.setUserInfo(name: name, email: email)
             self.view.endEditing(true)
