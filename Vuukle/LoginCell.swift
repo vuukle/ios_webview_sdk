@@ -17,6 +17,11 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var loginButtonOutlet: UIButton!
     
     @IBAction func loginButton(_ sender: AnyObject) {
+        
+        endEditing(true)
+        self.nameField.resignFirstResponder()
+        self.emailField.resignFirstResponder()
+        
         self.delegate?.loginButtonPressed(tableCell: self, pressed: sender)
         
         loginButtonOutlet.isEnabled = false
@@ -54,62 +59,86 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         nameField.inputAccessoryView = viewForDoneButtonOnKeyboard
         emailField.inputAccessoryView = viewForDoneButtonOnKeyboard
         
-        nameField.returnKeyType = UIReturnKeyType.next
-        emailField.returnKeyType = UIReturnKeyType.next
+        nameField.returnKeyType = UIReturnKeyType.done
+        emailField.returnKeyType = UIReturnKeyType.done
         
-        nameField.enablesReturnKeyAutomatically = true
-        emailField.enablesReturnKeyAutomatically = true
+        //nameField.enablesReturnKeyAutomatically = true
+        //emailField.enablesReturnKeyAutomatically = true
         // Initialization code
     }
     
     //MARK: - Handling of keyboard for UITextField
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        let superView = textField.superview?.superview?.superview?.superview?.superview?.superview?.superview?.superview
+        var superView = textField.superview?.superview?.superview?.superview?.superview
+        var isСontinueSearch = true
         
-        if superView is UIScrollView {
+        while isСontinueSearch {
             
-            var scrollView = superView as! UIScrollView
-            print("\n \(scrollView)")
-            
-            var pointInScroll: CGPoint = textField.superview!.convert(textField.frame.origin, to: scrollView)
-            
-            var contentOffset: CGPoint = scrollView.contentOffset
-            contentOffset.y  = pointInScroll.y
-            
-            if let accessoryView = textField.inputAccessoryView {
+            if !(superView is UIWindow) {
                 
-                if (UIDevice.current.orientation.isLandscape) {
-                    switch UIScreen.main.bounds.height {
-                    case 375:
-                        contentOffset.y -= accessoryView.frame.size.height + 20
-                    case 414:
-                        contentOffset.y -= accessoryView.frame.size.height + 40
-                    default:
-                        contentOffset.y -= accessoryView.frame.size.height
-                    }
-                } else {
-                    switch UIScreen.main.bounds.width {
-                    case 320:
-                        switch UIScreen.main.bounds.height {
-                        case 480:
-                            contentOffset.y -= accessoryView.frame.size.height + 40
-                        default:
-                            contentOffset.y -= accessoryView.frame.size.height + 100
+                if superView?.superview is UIScrollView {
+                    
+                    isСontinueSearch = false
+                    
+                    superView = superView?.superview
+                    
+                    var scrollView = superView as! UIScrollView
+                    print("\n \(scrollView)")
+                    
+                    var pointInScroll: CGPoint = textField.superview!.convert(textField.frame.origin, to: scrollView)
+                    
+                    var contentOffset: CGPoint = scrollView.contentOffset
+                    contentOffset.y  = pointInScroll.y
+                    
+                    if let accessoryView = textField.inputAccessoryView {
+                        
+                        if (UIDevice.current.orientation.isLandscape) {
+                            switch UIScreen.main.bounds.height {
+                            case 375:
+                                contentOffset.y -= accessoryView.frame.size.height + 20
+                            case 414:
+                                contentOffset.y -= accessoryView.frame.size.height + 40
+                            default:
+                                contentOffset.y -= accessoryView.frame.size.height
+                            }
+                        } else {
+                            switch UIScreen.main.bounds.width {
+                            case 320:
+                                switch UIScreen.main.bounds.height {
+                                case 480:
+                                    contentOffset.y -= accessoryView.frame.size.height + 40
+                                default:
+                                    contentOffset.y -= accessoryView.frame.size.height + 100
+                                }
+                            case 375:
+                                contentOffset.y -= accessoryView.frame.size.height + 170
+                            case 414:
+                                contentOffset.y -= accessoryView.frame.size.height + 210
+                            default:
+                                contentOffset.y -= accessoryView.frame.size.height + 80
+                            }
                         }
-                    case 375:
-                        contentOffset.y -= accessoryView.frame.size.height + 170
-                    case 414:
-                        contentOffset.y -= accessoryView.frame.size.height + 210
-                    default:
-                        contentOffset.y -= accessoryView.frame.size.height + 80
                     }
+                    scrollView.setContentOffset(contentOffset, animated: true)
+                    
+                } else {
+                    superView = superView?.superview
                 }
+            } else {
+                print("\n-- Stop...")
+                isСontinueSearch = false
             }
-            scrollView.setContentOffset(contentOffset, animated: true)
         }
         return true
     }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if nameField.text == "name" {

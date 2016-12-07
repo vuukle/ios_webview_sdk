@@ -253,6 +253,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableCell.showProgress()
         var position = tableCell.tag
         
+        tableCell.showReply.setTitle("  Show", for: .normal)
         closeForms()
         
         if arrayObjectsForCell[position] is CommentsFeed {
@@ -273,18 +274,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         if firstLevel == secondLevel && loadReply == true || firstLevel > secondLevel{
             loadReply = false
-            getReplies(index: position , comment: self.arrayObjectsForCell[position] as! CommentsFeed)
+            getReplies(index: position , comment: self.arrayObjectsForCell[position] as! CommentsFeed,cell: tableCell)
             
         } else if firstLevel < secondLevel {
             removeObjectFromSortedArray(indexObject: tableCell.tag)
         }
-        
-        tableCell.showReply.setTitle("hide", for: UIControlState.normal)
         setHeight(sender: self)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
-            tableCell.hideProgress()
-        }
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
@@ -294,6 +289,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         
         if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
+            
             var mail = ""
             if self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil {
                 mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
@@ -320,7 +316,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         
                         tableCell.hideProgress()
                         
-                        // FIXME: New alert with "Send Report" button
+                        // MARK: New alert with "Send Report" button
                         var urlCommentID = "no_id"
                         
                         if (commen.comment_id != nil) {
@@ -386,7 +382,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                         
                         tableCell.hideProgress()
                         
-                        // FIXME: New alert with "Send Report" button
+                        // MARK: New alert with "Send Report" button
                         var urlCommentID = "no_id"
                         
                         if (commen.comment_id != nil) {
@@ -422,6 +418,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
+        
         let user = ParametersConstructor.sharedInstance.getUserInfo()
         let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
         if user["isLoggedIn"] == "true" {
@@ -517,7 +514,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         tableView.reloadData()
     }
     
-    func getReplies(index : Int ,comment : CommentsFeed ) {
+    func getReplies(index: Int , comment: CommentsFeed, cell: CommentCell) {
+        
+        cell.showReply.setTitle("  Hide", for: .normal)
+        cell.showReply.isEnabled = false
         
         NetworkManager.sharedInstance.getRepliesForComment(comment.comment_id!, parent_id: comment.parent_id! , completion: { (arrayReplies , error) in
             
@@ -534,17 +534,18 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 if let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? CommentCell {
                     
                     cell.hideProgress()
-                    //cell.showReply.isEnabled = true
                 }
+                cell.showReply.isEnabled = true
                 
             } else {
                 
                 if let cell = self.tableView.cellForRow(at: IndexPath.init(row: index, section: 0)) as? CommentCell {
                     
                     cell.hideProgress()
+                    cell.showReply.setTitle("  Show", for: .normal)
                     //cell.showReply.isEnabled = true
                 }
-                
+                cell.showReply.isEnabled = true
                 //self.getReplies(index: index, comment: comment)
             }
         })
@@ -595,7 +596,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                 let indexPath = NSIndexPath.init(row: tableCell.tag , section: 0)
                 let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
                 
-                if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text) == true {
+                if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text, cell: tableCell) == true {
                     
                     morePost = false
                     
@@ -638,7 +639,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                 self.showSimpleAlert(title: "Repeat Comment!", message: nil)
                                 
                             } else {
-                                // FIXME: New alert with "Send Report" button
+                                // MARK: New alert with "Send Report" button
                                 let logUrl = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
                                 
                                 var logResult = "nil"
@@ -681,7 +682,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let indexPath = NSIndexPath.init(row: tableCell.tag, section: 0)
             let cell = tableView.cellForRow(at: indexPath as IndexPath) as! AddCommentCell
             
-            if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text) == true {
+            if ParametersConstructor.sharedInstance.checkFields(cell.nameTextField.text!, email: cell.emailTextField.text!, comment: cell.commentTextView.text, cell: tableCell) == true {
                 let nameText = ParametersConstructor.sharedInstance.encodingString(cell.nameTextField.text!)
                 let emailText = ParametersConstructor.sharedInstance.encodingString(cell.emailTextField.text!)
                 let commentText = ParametersConstructor.sharedInstance.encodingString(cell.commentTextView.text!)
@@ -723,7 +724,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                                     self.showSimpleAlert(title: "Repeat Comment!", message: nil)
                                     
                                 } else {
-                                    // FIXME: New alert with "Send Report" button
+                                    // MARK: New alert with "Send Report" button
                                     var urlCommentID = "no_id"
                                     
                                     if (commen.comment_id != nil) {
@@ -857,7 +858,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         let name = tableCell.nameField.text!
         let email = tableCell.emailField.text!
-        if ParametersConstructor.sharedInstance.checkFields(name, email: email, comment: "JustTesting") {
+        
+        if ParametersConstructor.sharedInstance.checkFields(name, email: email, comment: "JustTesting", cell: tableCell) {
+            
             ParametersConstructor.sharedInstance.setUserInfo(name: name, email: email)
             self.view.endEditing(true)
             closeForms()
@@ -1097,11 +1100,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     }
     
     func setHeight(sender: AnyObject) {
+        
         let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+        
         DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
+            
             let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
             NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")
+            
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ContentHeightDidChaingedNotification"), object: myNumber)
+            
         })
     }
     
@@ -1153,35 +1161,47 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         loginOpened = true
     }
     
+    
+    //FIXME: - In work now
     func reportComment(user: [String:String], cellId: String) {
+        
         self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
             , redHandler: {
                 
-                let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
-                let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
-                
-                NetworkManager.sharedInstance.reportComment(commentID: cellId, name: name, email: email, completion: { result, error in
+                if self.defaults.object(forKey: "\(cellId)") as? String == nil {
                     
-                    if result! {
-                        ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
-                    } else {
+                    self.defaults.set("\(cellId)", forKey: "\(cellId)")
+                    
+                    let name = ParametersConstructor.sharedInstance.encodingString(user["name"]!)
+                    let email = ParametersConstructor.sharedInstance.encodingString(user["email"]!)
+                    
+                    NetworkManager.sharedInstance.reportComment(commentID: cellId, name: name, email: email, completion: { result, error in
                         
-                        // FIXME: New alert with "Send Report" button
-                        let logUrl = "\(Global.baseURL)flagCommentOrReply?comment_id=\(cellId)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)"
-                        
-                        var logErrDescription = "nil"
-                        var logErrFailureReason = "nil"
-                        
-                        if ((error) != nil) {
-                            logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
-                            logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                        if result! {
+                            ParametersConstructor.sharedInstance.showAlert("Reported!", message: "Comment was successfully reported")
+                        } else {
+                            
+                            self.defaults.removeObject(forKey: cellId)
+                            
+                            // MARK: New alert with "Send Report" button
+                            let logUrl = "\(Global.baseURL)flagCommentOrReply?comment_id=\(cellId)&api_key=\(Global.api_key)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id)&name=\(name)&email=\(email)"
+                            
+                            var logErrDescription = "nil"
+                            var logErrFailureReason = "nil"
+                            
+                            if ((error) != nil) {
+                                logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                                logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                            }
+                            
+                            var logMessage = "URL - \(logUrl). Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
+                            
+                            self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
                         }
-                        
-                        var logMessage = "URL - \(logUrl). Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
-                        
-                        self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
-                    }
-                })
+                    })
+                } else {
+                    self.showSimpleAlert(title: "You have already reported!", message: nil)
+                }
         }
             , blueHandler: {
                 print("Canceled")

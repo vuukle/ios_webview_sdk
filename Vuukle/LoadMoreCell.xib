@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="447" height="108"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qHS-Ms-WX5" id="fp9-kw-wnK">
-                <rect key="frame" x="0.0" y="0.0" width="447" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="447" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUh-hH-ZsC">
@@ -55,11 +54,11 @@
                             <constraint firstAttribute="width" constant="80" id="e4d-cS-1ff"/>
                         </constraints>
                         <connections>
-                            <action selector="openVuukleButtonWithSender:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="1AX-4X-Lj8"/>
+                            <action selector="openVuukleButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="Ya7-Xu-ffs"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.18" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
-                        <rect key="frame" x="186.5" y="92" width="76.5" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.19" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                        <rect key="frame" x="186" y="92" width="77" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <nil key="highlightedColor"/>
