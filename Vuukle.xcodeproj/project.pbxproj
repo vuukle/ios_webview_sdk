@@ -59,6 +59,7 @@
 		900B70361DF07409000DF6C7 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900B70351DF07409000DF6C7 /* LoginCell.xib */; };
 		901279E81DF8367100F3D185 /* LoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901279E71DF8367100F3D185 /* LoadMoreCell.xib */; };
 		901279EA1DF8367B00F3D185 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901279E91DF8367B00F3D185 /* LoadMoreCell.swift */; };
+		901279EE1DF8434A00F3D185 /* reported_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 901279ED1DF8434A00F3D185 /* reported_flag.png */; };
 		9053A8821DF1C44400E3A26E /* MostPopularArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */; };
 		9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8831DF1C64500E3A26E /* AddCommentCell.xib */; };
 		9053A8881DF1C64500E3A26E /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8841DF1C64500E3A26E /* CommentCell.xib */; };
@@ -121,6 +122,7 @@
 		900B70351DF07409000DF6C7 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCell.xib; sourceTree = "<group>"; };
 		901279E71DF8367100F3D185 /* LoadMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreCell.xib; sourceTree = "<group>"; };
 		901279E91DF8367B00F3D185 /* LoadMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
+		901279ED1DF8434A00F3D185 /* reported_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reported_flag.png; sourceTree = "<group>"; };
 		9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostPopularArticleCell.swift; sourceTree = "<group>"; };
 		9053A8831DF1C64500E3A26E /* AddCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCommentCell.xib; sourceTree = "<group>"; };
 		9053A8841DF1C64500E3A26E /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				049D0B661D9D562000507DC3 /* non_secure.html */,
 				9053A8831DF1C64500E3A26E /* AddCommentCell.xib */,
 				9053A8841DF1C64500E3A26E /* CommentCell.xib */,
+				901279ED1DF8434A00F3D185 /* reported_flag.png */,
 				9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */,
 				049D0B671D9D562000507DC3 /* smile-amused.png */,
 				049D0B681D9D562000507DC3 /* smile-angry.png */,
@@ -320,6 +323,7 @@
 				049D0B891D9D562000507DC3 /* WebViewCell.xib in Resources */,
 				049D0B821D9D562000507DC3 /* smile-indifferent.png in Resources */,
 				049D0B761D9D562000507DC3 /* ContentWebViewCell.xib in Resources */,
+				901279EE1DF8434A00F3D185 /* reported_flag.png in Resources */,
 				049D0B811D9D562000507DC3 /* smile-happy.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

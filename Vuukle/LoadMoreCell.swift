@@ -28,15 +28,19 @@ class LoadMoreCell: UITableViewCell {
     }
     
     @IBAction func openVuukleButton(_ sender: AnyObject) {
-        self.delegate?.openVuukleButtonButtonPressed(self, openVuukleButtonPressed: sender)
         
         vuukleButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        
+        self.delegate?.openVuukleButtonButtonPressed(self, openVuukleButtonPressed: sender)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.vuukleButton.isEnabled = true
         }
     }
     
     @IBAction func loadMoreButton(_ sender: AnyObject) {
+        
+        loadMore.isEnabled = false
         
         self.delegate?.loadMoreButtonPressed(self, loadMoreButtonPressed: sender)
         activityIndicator.isHidden = false
@@ -44,8 +48,8 @@ class LoadMoreCell: UITableViewCell {
         activityIndicator.startAnimating()
         
         loadMore.isHidden = true
-        loadMore.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.loadMore.isEnabled = true
         }
     }

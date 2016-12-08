@@ -12,7 +12,10 @@ class ParametersConstructor  {
     
     func showAlert(_ title : String ,message : String) {
         let ErrorAlert = UIAlertView(title: "\(title)", message: "\(message)", delegate: self, cancelButtonTitle: "Ok")
-        ErrorAlert.show()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [unowned self] in
+            ErrorAlert.show()
+        }
     }
     
     func checkFields(_ name : String , email : String , comment : String) -> Bool {

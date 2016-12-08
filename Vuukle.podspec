@@ -7,7 +7,7 @@ s.name         = "Vuukle"
 s.summary      = "Vuukle.com"
 
 # 2
-s.version      = "1.0.19"
+s.version      = "1.0.21"
 
 # 3
 s.license      = { :type => "MIT", :file => "LICENSE" }

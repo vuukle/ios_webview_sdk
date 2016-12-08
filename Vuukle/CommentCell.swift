@@ -3,6 +3,9 @@
 import UIKit
 import Alamofire
 
+let STOP_ALL_PROGRESS_KEY = Notification.Name(rawValue: "STOP_ALL_PROGRESS_KEY")
+
+
 protocol CommentCellDelegate {
     
     func upvoteButtonPressed(_ tableCell : CommentCell ,upvoteButtonPressed upvoteButton : AnyObject )
@@ -45,48 +48,56 @@ class CommentCell: UITableViewCell {
     
     
     @IBAction func upvoteButton(_ sender: AnyObject) {
-        self.delegate?.upvoteButtonPressed(self , upvoteButtonPressed: sender)
         
         upVoteButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        
+        self.delegate?.upvoteButtonPressed(self , upvoteButtonPressed: sender)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.upVoteButton.isEnabled = true
         }
     }
     
     @IBAction func downvoteButton(_ sender: AnyObject) {
-        self.delegate?.downvoteButtonPressed(self , downvoteButtonPressed: sender)
         
         downVoteButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        
+        self.delegate?.downvoteButtonPressed(self , downvoteButtonPressed: sender)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.downVoteButton.isEnabled = true
         }
     }
     
     @IBAction func replyButton(_ sender: AnyObject) {
-        self.delegate?.replyButtonPressed(self , replyButtonPressed: sender)
         
         replyButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        
+        self.delegate?.replyButtonPressed(self , replyButtonPressed: sender)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.replyButton.isEnabled = true
         }
     }
     
     @IBAction func moreButton(_ sender: AnyObject) {
-        self.delegate?.moreButtonPressed(self , moreButtonPressed: sender)
         
         reportButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        
+        self.delegate?.moreButtonPressed(self , moreButtonPressed: sender)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
             self.reportButton.isEnabled = true
         }
     }
     
     @IBAction func showReplyButton(_ sender: AnyObject) {
-        self.delegate?.showReplyButtonPressed(self , showReplyButtonPressed: sender)
         
         showReply.isEnabled = false
         
+        self.delegate?.showReplyButtonPressed(self , showReplyButtonPressed: sender)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [unowned self] in
             self.showReply.isEnabled = true
         }
     }
@@ -126,7 +137,10 @@ class CommentCell: UITableViewCell {
         initialsLabel.layer.cornerRadius = 22
         initialsLabel.layer.masksToBounds = true
         
-        
+        NotificationCenter.default.addObserver(forName: STOP_ALL_PROGRESS_KEY, object: nil, queue: nil) { notification in
+            
+            self.hideProgress()
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

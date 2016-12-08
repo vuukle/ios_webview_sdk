@@ -41,24 +41,19 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     @IBAction func postButton(sender: AnyObject) {
         
-        self.delegate?.postButtonPressed(tableCell: self ,pressed : sender)
-        
         postButtonOutlet.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
-            self.postButtonOutlet.isEnabled = true
-        }
+        self.delegate?.postButtonPressed(tableCell: self ,pressed: sender)
     }
     
     @IBAction func logOutButton(sender: AnyObject) {
         
+        logOut.isEnabled = false
         self.delegate?.logOutButtonPressed(tableCell: self, pressed: sender)
         
-        logOut.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [unowned self] in
             self.logOut.isEnabled = true
         }
     }
-    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -111,7 +106,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         logOut.layer.masksToBounds = true
     }
     
-
+    
     //MARK: - Handling of keyboard for UITextField
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
@@ -245,7 +240,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
         emailTextField.resignFirstResponder()
         commentTextView.resignFirstResponder()
     }
-
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         
         if commentTextView.textColor == UIColor.lightGray {
@@ -286,6 +281,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     }
     
     func hideProgress() {
+        
         progressIndicator.isHidden = true
         progressIndicator.stopAnimating()
         self.alpha = 1
