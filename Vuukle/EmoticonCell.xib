@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,10 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="552" height="165"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <frame key="frameInset" width="552" height="164"/>
+                <rect key="frame" x="0.0" y="0.0" width="552" height="164"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for voting!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adH-OB-WGU">
+                        <rect key="frame" x="24" y="16" width="504" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Pob-5r-UBA"/>
                         </constraints>
@@ -24,8 +29,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vcI-ef-Nvp">
+                        <rect key="frame" x="8" y="41" width="87.5" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3re-cX-awA">
+                                <rect key="frame" x="3" y="3" width="81.5" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="yfJ-Qi-iwk"/>
                                 </constraints>
@@ -34,17 +41,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-happy.png" translatesAutoresizingMaskIntoConstraints="NO" id="KX4-ar-bYH">
+                                <rect key="frame" x="23" y="28" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="QRh-Ya-gN9"/>
                                     <constraint firstAttribute="width" constant="42" id="yHd-gw-sJZ"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOr-3e-R3h">
+                                <rect key="frame" x="8" y="82" width="71.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4AX-BM-LFS">
+                                <rect key="frame" x="0.0" y="0.0" width="87.5" height="108"/>
                                 <connections>
                                     <action selector="firstEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="qvh-9H-LU9"/>
                                 </connections>
@@ -69,8 +79,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fYb-mT-eSh">
+                        <rect key="frame" x="97.5" y="41" width="88" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ra5-xt-Gcn">
+                                <rect key="frame" x="3" y="3" width="82" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="sJ4-0q-8dF"/>
                                 </constraints>
@@ -79,17 +91,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-indifferent.png" translatesAutoresizingMaskIntoConstraints="NO" id="lh4-e0-25K">
+                                <rect key="frame" x="23" y="28" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="FMy-bl-xAi"/>
                                     <constraint firstAttribute="width" constant="42" id="oA8-IF-N8o"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="4rq-dN-B3w">
+                                <rect key="frame" x="8" y="81" width="72" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kX8-0C-oEZ">
+                                <rect key="frame" x="0.0" y="0.0" width="88" height="108"/>
                                 <connections>
                                     <action selector="secondEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ks7-6X-hSt"/>
                                 </connections>
@@ -114,8 +129,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBO-PC-gPu">
+                        <rect key="frame" x="187.5" y="41" width="87.5" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNU-ZI-iHp">
+                                <rect key="frame" x="3" y="3" width="81.5" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="pT0-oO-XiR"/>
                                 </constraints>
@@ -124,17 +141,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-amused.png" translatesAutoresizingMaskIntoConstraints="NO" id="1Xe-u8-ILf">
+                                <rect key="frame" x="22.5" y="28" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="ENB-0I-6bc"/>
                                     <constraint firstAttribute="width" constant="42" id="eqL-ec-v8M"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="19%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Qg1-dh-B2b">
+                                <rect key="frame" x="8" y="81" width="71.5" height="19"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cP7-Wy-y50">
+                                <rect key="frame" x="0.0" y="0.0" width="87.5" height="108"/>
                                 <connections>
                                     <action selector="thirdEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="YRt-Qe-SrC"/>
                                 </connections>
@@ -159,8 +179,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cvf-Wy-H7T">
+                        <rect key="frame" x="277" y="41" width="87.5" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HJL-ZR-WpH">
+                                <rect key="frame" x="3" y="3" width="81.5" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="JDI-qM-das"/>
                                 </constraints>
@@ -169,17 +191,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-excited.png" translatesAutoresizingMaskIntoConstraints="NO" id="yF6-tG-kuv">
+                                <rect key="frame" x="20" y="28" width="48" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="0bh-M1-uOX"/>
                                     <constraint firstAttribute="width" constant="48" id="tpa-1f-8Qr"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="k7B-wq-nPG">
+                                <rect key="frame" x="8" y="81" width="71.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Jv-ea-wJq">
+                                <rect key="frame" x="0.0" y="0.0" width="87.5" height="108"/>
                                 <connections>
                                     <action selector="fourthEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Jtb-A0-0xy"/>
                                 </connections>
@@ -204,8 +229,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x33-8f-ajg">
+                        <rect key="frame" x="366.5" y="41" width="88" height="108"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EOI-6t-fZW">
+                                <rect key="frame" x="3" y="3" width="82" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="hOL-4i-1WF"/>
                                 </constraints>
@@ -214,17 +241,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-angry.png" translatesAutoresizingMaskIntoConstraints="NO" id="Pdr-3f-Iw7">
+                                <rect key="frame" x="23" y="28" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="bBc-eZ-FFb"/>
                                     <constraint firstAttribute="width" constant="42" id="kt3-id-XvS"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="37%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="NQc-ky-TKj">
+                                <rect key="frame" x="8" y="81" width="69" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxn-vU-kYp">
+                                <rect key="frame" x="0.0" y="0.0" width="88" height="108"/>
                                 <connections>
                                     <action selector="fifthEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iCX-qb-cFl"/>
                                 </connections>
@@ -249,8 +279,10 @@
                         </constraints>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9B-Ev-0FS">
+                        <rect key="frame" x="456.5" y="41" width="87.5" height="111"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hdN-ye-bC2">
+                                <rect key="frame" x="3" y="3" width="81.5" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="Yim-oX-Ptn"/>
                                 </constraints>
@@ -259,17 +291,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smile-sad-full.png" translatesAutoresizingMaskIntoConstraints="NO" id="1ht-6Q-Cib">
+                                <rect key="frame" x="22.5" y="28" width="42" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="LhJ-ue-aET"/>
                                     <constraint firstAttribute="width" constant="42" id="ndc-Fp-kpN"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ab4-1K-6ez">
+                                <rect key="frame" x="8" y="81" width="71.5" height="22"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdA-O6-Mcg">
+                                <rect key="frame" x="0.0" y="0.0" width="87.5" height="111"/>
                                 <connections>
                                     <action selector="sixthEmoticonButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uBb-mG-unR"/>
                                 </connections>
@@ -331,7 +366,7 @@
                     <constraint firstAttribute="bottom" secondItem="vcI-ef-Nvp" secondAttribute="bottom" constant="8" id="zof-UH-yQD"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="countFifthEmoticonLabel" destination="EOI-6t-fZW" id="Por-LO-Uy3"/>
                 <outlet property="countFirstEmoticonLabel" destination="3re-cX-awA" id="Nz7-fx-dfT"/>

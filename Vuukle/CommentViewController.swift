@@ -82,11 +82,15 @@
                 tableView.addSubview(refreshControl)
                 refresh(sender: refreshControl!)
             }
-            
             getComments()
-            
         }
         CommentViewController.shared = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -100,6 +104,7 @@
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
     
     //MARK: - Table view data source
     
@@ -128,6 +133,7 @@
             }
             
             if objectForCell.isReply! {
+                
                 cell = CellConstructor.sharedInstance.returnReplyCell(cell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name)) as! CommentCell
             } else {
                 
@@ -156,6 +162,7 @@
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+            
         case is MostPopularArticle:
             let objectForCell = object as! MostPopularArticle
             var cell = tableView.dequeueReusableCell(withIdentifier: "MostPopularArticleCell") as! MostPopularArticleCell
@@ -166,6 +173,7 @@
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+            
         case is ReplyForm:
             let objectForCell = object as! ReplyForm
             var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
@@ -179,6 +187,7 @@
             }
             cell.tag = indexPath.row
             return cell
+            
         case is CommentForm:
             let objectForCell = object as! CommentForm
             var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
@@ -189,6 +198,7 @@
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+            
         case is LoginForm:
             let objectForCell = object as! LoginForm
             var cell = tableView.dequeueReusableCell(withIdentifier: "LoginCell") as! LoginCell
@@ -199,7 +209,9 @@
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+            
         case is Emoticon:
+            
             let objectForCell = object as! Emoticon
             var cell = tableView.dequeueReusableCell(withIdentifier: "EmoticonCell") as! EmoticonCell
             if cell == nil {
@@ -209,6 +221,7 @@
             cell.delegate = self
             cell.tag = indexPath.row
             return cell
+            
         case is LoadMore:
             let objectForCell = object as! LoadMore
             var cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell") as! LoadMoreCell
@@ -220,6 +233,7 @@
             cell.tag = indexPath.row
             return cell
         case is WebView:
+            
             let objectForcell : WebView = object as! WebView
             if objectForcell.advertisingBanner == true {
                 let  cell = tableView.dequeueReusableCell(withIdentifier: "WebViewCell") as! WebViewCell
@@ -230,10 +244,19 @@
                 cell.tag = indexPath.row
                 return cell
             }
+            
         default:
             break
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -505,6 +528,7 @@
         }
         
         if canGetCommentsFeed == true {
+            
             canGetCommentsFeed = false
             if Global.setYourWebContent == true && Global.articleUrl != ""{
                 let webView = WebView()
@@ -654,10 +678,10 @@
                             if (allow == "true") {
                                 
                                 ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
-                                tableCell.hideProgress()
+                                //tableCell.hideProgress()
+                                //self.closeForms()
                                 tableCell.commentTextView.text = ""
                                 self.reloadAddCommentField()
-                                cell.commentTextView.text = ""
                                 
                             } else {
                                 
@@ -699,7 +723,7 @@
                                     logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
                                 }
                                 
-                                var logMessage = "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
+                                var logMessage = "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), Status code: \(respon?.statusCode)."
                                 
                                 self.showAlertToSendReport(title: "Error", message: "Something went wrong", errorMessage:logMessage)
                                 
@@ -747,7 +771,8 @@
                                 
                                 if moderation == "true" {
                                     
-                                    ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
+                                    ParametersConstructor.sharedInstance.showAlert("Your reply has been submitted and is under moderation", message: "")
+                                    tableCell.hideProgress()
                                     self.reloadAddCommentField()
                                     
                                 } else {
@@ -798,7 +823,7 @@
                                         logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
                                     }
                                     
-                                    var logMessage = "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
+                                    var logMessage = "URL - \(logUrl).    Response - result: \(logResult), commment_id: \(logCommentID),    isModeration: \(logIsModeraion).    Error - localizedDescription: \(logErrDescription), Status code: \(responce?.statusCode)"
                                     
                                     print("\(logMessage)")
                                     
@@ -880,12 +905,17 @@
     
     func showAlertToSendReport(title: String, message: String, errorMessage: String) {
         
+        print("\n\(errorMessage)\n")
+        
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let mailComposeVC = configureMailComposerViewController(errorMessage: errorMessage)
         mailComposeVC.modalPresentationStyle = .overCurrentContext
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { [unowned self] action -> Void in
+            alertVC.dismiss(animated: true, completion: nil)
+            self.tableView.reloadData()
+        }
         let sendAction = UIAlertAction(title: "Send bug report", style: .default) { [unowned self] action -> Void in
             
             if MFMailComposeViewController.canSendMail() {
@@ -897,7 +927,6 @@
         
         alertVC.addAction(cancelAction)
         alertVC.addAction(sendAction)
-        
         self.present(alertVC, animated: true, completion: nil)
     }
     
@@ -1086,8 +1115,14 @@
         
         if array.count >= Global.countLoadCommentsInPagination {
             
-            self.arrayObjectsForCell.append(WebView())
-            self.arrayObjectsForCell.append(Emoticon())
+            if Global.setAdsVisible == true {
+                self.arrayObjectsForCell.append(WebView())
+            }
+            if Global.showEmoticonCell == true {
+                self.arrayObjectsForCell.append(Emoticon())
+            }
+            
+            
             let addComment = CommentForm()
             addComment.addComment = true
             self.arrayObjectsForCell.append(addComment)
@@ -1101,8 +1136,14 @@
             
         } else {
             
-            self.arrayObjectsForCell.append(WebView())
-            self.arrayObjectsForCell.append(Emoticon())
+            if Global.setAdsVisible == true {
+                self.arrayObjectsForCell.append(WebView())
+            }
+            
+            if Global.showEmoticonCell == true {
+                self.arrayObjectsForCell.append(Emoticon())
+            }
+            
             let addComment = CommentForm()
             addComment.addComment = true
             
@@ -1332,10 +1373,14 @@
     //The add comment field(main form to send comment) will be reloaded
     
     func reloadAddCommentField() {
-        if arrayObjectsForCell.count > 2 {
-            tableView.reloadRows(at: [IndexPath.init(row: 2, section: 0)], with: .none)
-        } else {
-            print("Vuukle is not found")
+        
+        for i in 0..<arrayObjectsForCell.count {
+            
+            if (arrayObjectsForCell[i] is CommentForm || arrayObjectsForCell[i] is ReplyForm) {
+                
+                tableView.reloadRows(at: [IndexPath.init(row: i, section: 0)], with: .none)
+                print("-- Iter")
+            }
         }
     }
  }

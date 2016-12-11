@@ -110,7 +110,6 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     //MARK: - Handling of keyboard for UITextField
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         
-        
         var superView = textField.superview?.superview?.superview?.superview?.superview
         var isСontinueSearch = true
         
@@ -136,9 +135,9 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
                         if (UIDevice.current.orientation.isLandscape) {
                             switch UIScreen.main.bounds.height {
                             case 375:
-                                contentOffset.y -= accessoryView.frame.size.height + 20
+                                contentOffset.y -= accessoryView.frame.size.height
                             case 414:
-                                contentOffset.y -= accessoryView.frame.size.height + 40
+                                contentOffset.y -= accessoryView.frame.size.height + 20
                             default:
                                 contentOffset.y -= accessoryView.frame.size.height
                             }
@@ -147,16 +146,16 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
                             case 320:
                                 switch UIScreen.main.bounds.height {
                                 case 480:
-                                    contentOffset.y -= accessoryView.frame.size.height + 50
+                                    contentOffset.y -= accessoryView.frame.size.height + 30
                                 default:
-                                    contentOffset.y -= accessoryView.frame.size.height + 140
+                                    contentOffset.y -= accessoryView.frame.size.height + 120
                                 }
                             case 375:
-                                contentOffset.y -= accessoryView.frame.size.height + 210
+                                contentOffset.y -= accessoryView.frame.size.height + 190
                             case 414:
-                                contentOffset.y -= accessoryView.frame.size.height + 250
+                                contentOffset.y -= accessoryView.frame.size.height + 230
                             default:
-                                contentOffset.y -= accessoryView.frame.size.height + 120
+                                contentOffset.y -= accessoryView.frame.size.height + 100
                             }
                         }
                     }
@@ -207,16 +206,16 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
                             case 320:
                                 switch UIScreen.main.bounds.height {
                                 case 480:
-                                    contentOffset.y -= accessoryView.frame.size.height + 10
+                                    contentOffset.y -= accessoryView.frame.size.height
                                 default:
-                                    contentOffset.y -= accessoryView.frame.size.height + 40
+                                    contentOffset.y -= accessoryView.frame.size.height + 30
                                 }
                             case 375:
-                                contentOffset.y -= accessoryView.frame.size.height + 70
+                                contentOffset.y -= accessoryView.frame.size.height + 50
                             case 414:
-                                contentOffset.y -= accessoryView.frame.size.height + 100
+                                contentOffset.y -= accessoryView.frame.size.height + 80
                             default:
-                                contentOffset.y -= accessoryView.frame.size.height + 20
+                                contentOffset.y -= accessoryView.frame.size.height
                             }
                         }
                     }

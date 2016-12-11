@@ -82,7 +82,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="aet-KA-mPs" secondAttribute="trailing" id="yzr-fU-K6V"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
+            <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="background" destination="aet-KA-mPs" id="k54-1Y-ZiT"/>
                 <outlet property="emailField" destination="abp-w7-VqW" id="Ruk-Rk-02q"/>

@@ -148,6 +148,7 @@ class NetworkManager {
                     let respon = ResponseToComment()
                     respon.result = self.jsonArray!["result"] as? String
                     respon.comment_id = self.jsonArray!["comment_id"] as? String
+                    respon.statusCode = response.response?.statusCode
                     
                     let res = self.jsonArray?["isModeration"]
                     respon.isModeration = self.jsonArray!["isModeration"] as? String
@@ -166,8 +167,14 @@ class NetworkManager {
                     
                 } else {
                     
+                    let respon = ResponseToComment()
+                    
                     cell.postButtonOutlet.isEnabled = true
                     completion(nil, response.result.error as NSError?)
+                    
+                    if (response.response?.statusCode != nil) {
+                        respon.statusCode = response.response?.statusCode
+                    }
                     print("Status cod = \(response.response?.statusCode)")
                 }
             }

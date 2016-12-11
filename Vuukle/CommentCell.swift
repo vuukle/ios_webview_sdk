@@ -139,6 +139,7 @@ class CommentCell: UITableViewCell {
         
         NotificationCenter.default.addObserver(forName: STOP_ALL_PROGRESS_KEY, object: nil, queue: nil) { notification in
             
+            
             self.hideProgress()
         }
     }
