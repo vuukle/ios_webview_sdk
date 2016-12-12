@@ -2,6 +2,8 @@
  import Alamofire
  import MessageUI
  
+ let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NOTIFCATION")
+ 
  
  class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate, MFMailComposeViewControllerDelegate {
     
@@ -138,25 +140,34 @@
             } else {
                 
                 cell = CellConstructor.sharedInstance.returnCommentCell(cell as! CommentCell, comment: objectForCell, date: ParametersConstructor.sharedInstance.setDateInFofmat(objectForCell.ts!) as Date, newComment: ParametersConstructor.sharedInstance.decodingString(objectForCell.comment), newName: ParametersConstructor.sharedInstance.decodingString(objectForCell.name)) as! CommentCell
+            }
+            
+            var lname = self.defaults.object(forKey: "name")
+            var lemail = self.defaults.object(forKey: "email")
+            
+            if (self.defaults.object(forKey: "name") != nil && self.defaults.object(forKey: "email") != nil) {
                 
-                var lname = self.defaults.object(forKey: "name")
-                var lemail = self.defaults.object(forKey: "email")
-                
-                if (self.defaults.object(forKey: "name") != nil && self.defaults.object(forKey: "email") != nil) {
+                if self.defaults.object(forKey: "\(objectForCell.comment_id!)reported\(self.defaults.object(forKey: "name")!)\(self.defaults.object(forKey: "email")!)") as? String != nil {
                     
-                    if self.defaults.object(forKey: "\(objectForCell.comment_id!)reported\(self.defaults.object(forKey: "name")!)\(self.defaults.object(forKey: "email")!)") as? String != nil {
-                        
-                        let image = UIImage(named: "reported_flag", in: Bundle(for: type(of: self)), compatibleWith: nil)
-                        print("\nIMAGE: \(image)\n")
-                        cell.reportButton.setImage(image, for: .normal)
-                    }
+                    let image = UIImage(named: "reported_flag", in: Bundle(for: type(of: self)), compatibleWith: nil)
+                    print("\nIMAGE: \(image)\n")
+                    cell.reportButton.setImage(image, for: .normal)
                 } else {
+                    
+                    print("/nNOT REPORTED!/n")
                     
                     let image = UIImage(named: "flag-variant", in: Bundle(for: type(of: self)), compatibleWith: nil)
                     print("\nIMAGE: \(image)\n")
                     cell.reportButton.setImage(image, for: .normal)
                 }
+            } else {
+                
+                let image = UIImage(named: "flag-variant", in: Bundle(for: type(of: self)), compatibleWith: nil)
+                print("\nIMAGE: \(image)\n")
+                cell.reportButton.setImage(image, for: .normal)
             }
+            
+            cell.cellIndex = indexPath.row
             cell.userImage.layer.masksToBounds = true
             cell.userImage.layer.cornerRadius = 22
             cell.delegate = self
@@ -175,6 +186,7 @@
             return cell
             
         case is ReplyForm:
+            
             let objectForCell = object as! ReplyForm
             var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
             if cell == nil {
@@ -189,6 +201,7 @@
             return cell
             
         case is CommentForm:
+            
             let objectForCell = object as! CommentForm
             var cell = tableView.dequeueReusableCell(withIdentifier: "AddCommentCell") as! AddCommentCell
             if cell == nil {
@@ -200,11 +213,15 @@
             return cell
             
         case is LoginForm:
+            
             let objectForCell = object as! LoginForm
+            
             var cell = tableView.dequeueReusableCell(withIdentifier: "LoginCell") as! LoginCell
             if cell == nil {
                 cell = LoginCell() as! LoginCell
             }
+            
+            cell.commentCellReference = objectForCell.commetCellReference
             cell = CellConstructor.sharedInstance.returnLoginCell(cell, object: objectForCell) as! LoginCell
             cell.delegate = self
             cell.tag = indexPath.row
@@ -330,151 +347,197 @@
     }
     
     func upvoteButtonPressed(_ tableCell: CommentCell, upvoteButtonPressed upvoteButton: AnyObject) {
+        
         tableCell.showProgress()
         closeForms()
         
-        let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
-        
         if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
             
-            var mail = ""
-            if self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil {
-                mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
-                let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
-                self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
-                self.defaults.synchronize()
-                
-                NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
-                    if error == nil {
-                        commen.up_votes! += 1
-                        let sum = commen.up_votes! - commen.down_votes!
-                        tableCell.upvoteCountLabel.text = String(sum)
-                        if sum == 0 {
-                            tableCell.upvoteCountLabel.textColor = UIColor.lightGray
-                        } else if sum < 0{
-                            tableCell.upvoteCountLabel.textColor = UIColor.red
-                        } else {
-                            tableCell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
-                        }
-                        
-                        tableCell.hideProgress()
-                    } else {
-                        self.defaults.set(nil, forKey: "\(commen.comment_id)")
-                        
-                        tableCell.hideProgress()
-                        
-                        // MARK: New alert with "Send Report" button
-                        var urlCommentID = "no_id"
-                        
-                        if (commen.comment_id != nil) {
-                            urlCommentID = commen.comment_id!
-                        }
-                        
-                        let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("1")&name=\(name as String)&email=\(mail as String)"
-                        
-                        var logErrDescription = "nil"
-                        var logErrFailureReason = "nil"
-                        
-                        if ((error) != nil) {
-                            logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
-                            logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
-                        }
-                        
-                        var logMessage = "URL - \(logUrl).  Type - VoteUP.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
-                        
-                        self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
-                    }
-                })
-            } else {
-                ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-                tableCell.hideProgress()
-            }
-        }else {
+            upvoteComment(tableCell: tableCell)
+            
+        } else {
+            
             lastAction = .upvote
             lastActionPosition = tableCell.tag
-            askToLogin(position: tableCell.tag)
+            askToLogin(position: tableCell.tag, activeCell: tableCell)
             tableCell.hideProgress()
         }
     }
     
-    func downvoteButtonPressed(_ tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
-        tableCell.showProgress()
-        closeForms()
+    func upvoteComment(tableCell: CommentCell) {
         
         let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
+        var mail = ""
         
-        if  self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
-            var mail = ""
-            if self.defaults.object(forKey: "\(commen.comment_id)") as? String == nil {
-                mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
-                let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
-                self.defaults.set("\(commen.comment_id)", forKey: "\(commen.comment_id)")
-                self.defaults.synchronize()
-                NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
-                    if error == nil {
-                        commen.up_votes! += -1
-                        let sum = commen.up_votes! - commen.down_votes!
-                        tableCell.upvoteCountLabel.text = String(sum)
-                        if sum == 0 {
-                            tableCell.upvoteCountLabel.textColor = UIColor.lightGray
-                        } else if sum < 0{
-                            tableCell.upvoteCountLabel.textColor = UIColor.red
-                        } else {
-                            tableCell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
-                        }
-                        
-                        tableCell.hideProgress()
+        var lName = self.defaults.object(forKey: "name")
+        var lemail = self.defaults.object(forKey: "email")
+        
+        let lKey = "\(commen.comment_id)reported\(lName!)\(lemail!)"
+        
+        if self.defaults.object(forKey: lKey) as? String == nil {
+            
+            mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
+            
+            let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
+            
+            self.defaults.set(lKey, forKey: lKey)
+            self.defaults.synchronize()
+            
+            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "1", completion: { (string , error) in
+                
+                if error == nil {
+                    
+                    commen.up_votes! += 1
+                    let sum = commen.up_votes! - commen.down_votes!
+                    tableCell.upvoteCountLabel.text = String(sum)
+                    if sum == 0 {
+                        tableCell.upvoteCountLabel.textColor = UIColor.lightGray
+                    } else if sum < 0{
+                        tableCell.upvoteCountLabel.textColor = UIColor.red
                     } else {
-                        self.defaults.set(nil, forKey: "\(commen.comment_id)")
-                        
-                        tableCell.hideProgress()
-                        
-                        // MARK: New alert with "Send Report" button
-                        var urlCommentID = "no_id"
-                        
-                        if (commen.comment_id != nil) {
-                            urlCommentID = commen.comment_id!
-                        }
-                        
-                        let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("-1")&name=\(name as String)&email=\(mail as String)"
-                        
-                        var logErrDescription = "nil"
-                        var logErrFailureReason = "nil"
-                        
-                        if ((error) != nil) {
-                            logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
-                            logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
-                        }
-                        
-                        var logMessage = "URL - \(logUrl).  Type - VoteDOWN.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
-                        
-                        self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
+                        tableCell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
                     }
-                })
-            } else {
-                ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
-                tableCell.hideProgress()
-            }
+                    
+                    tableCell.hideProgress()
+                    
+                } else {
+                    
+                    self.defaults.removeObject(forKey: lKey)
+                    tableCell.hideProgress()
+                    
+                    // MARK: New alert with "Send Report" button
+                    var urlCommentID = "no_id"
+                    
+                    if (commen.comment_id != nil) {
+                        urlCommentID = commen.comment_id!
+                    }
+                    
+                    let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("1")&name=\(name as String)&email=\(mail as String)"
+                    
+                    var logErrDescription = "nil"
+                    var logErrFailureReason = "nil"
+                    
+                    if ((error) != nil) {
+                        logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                        logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                    }
+                    
+                    var logMessage = "URL - \(logUrl).  Type - VoteUP.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
+                    
+                    self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
+                }
+            })
         } else {
-            lastAction = .downvote
-            lastActionPosition = tableCell.tag
-            askToLogin(position: tableCell.tag)
+            ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
             tableCell.hideProgress()
         }
     }
+    
+    
+    
+    func downvoteButtonPressed(_ tableCell: CommentCell, downvoteButtonPressed downvoteButton: AnyObject) {
+        
+        tableCell.showProgress()
+        closeForms()
+        
+        if  self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
+            
+            downvoteComment(tableCell: tableCell)
+            
+        } else {
+            
+            lastAction = .downvote
+            lastActionPosition = tableCell.tag
+            askToLogin(position: tableCell.tag, activeCell: tableCell)
+            tableCell.hideProgress()
+        }
+    }
+    
+    func downvoteComment(tableCell: CommentCell) {
+        
+        let commen = arrayObjectsForCell[tableCell.tag] as! CommentsFeed
+        
+        var mail = ""
+        
+        var lName = self.defaults.object(forKey: "name")
+        var lemail = self.defaults.object(forKey: "email")
+        
+        let lKey = "\(commen.comment_id)reported\(lName!)\(lemail!)"
+        
+        if self.defaults.object(forKey: lKey) as? String == nil {
+            
+            mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
+            
+            let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
+            
+            self.defaults.set(lKey, forKey: lKey)
+            self.defaults.synchronize()
+            
+            NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
+                if error == nil {
+                    commen.up_votes! += -1
+                    let sum = commen.up_votes! - commen.down_votes!
+                    tableCell.upvoteCountLabel.text = String(sum)
+                    if sum == 0 {
+                        tableCell.upvoteCountLabel.textColor = UIColor.lightGray
+                    } else if sum < 0{
+                        tableCell.upvoteCountLabel.textColor = UIColor.red
+                    } else {
+                        tableCell.upvoteCountLabel.textColor = ParametersConstructor.sharedInstance.UIColorFromRGB(rgbValue: 0x3487FF)
+                    }
+                    
+                    tableCell.hideProgress()
+                    
+                } else {
+                    
+                    self.defaults.removeObject(forKey: lKey)
+                    
+                    tableCell.hideProgress()
+                    
+                    // MARK: New alert with "Send Report" button
+                    var urlCommentID = "no_id"
+                    
+                    if (commen.comment_id != nil) {
+                        urlCommentID = commen.comment_id!
+                    }
+                    
+                    let logUrl = "\(Global.baseURL as String)setCommentVote?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(urlCommentID as! String)&up_down=\("-1")&name=\(name as String)&email=\(mail as String)"
+                    
+                    var logErrDescription = "nil"
+                    var logErrFailureReason = "nil"
+                    
+                    if ((error) != nil) {
+                        logErrDescription = (error?.localizedDescription != nil) ? (error?.localizedDescription)! : "nil"
+                        logErrFailureReason = (error?.localizedFailureReason != nil) ? (error?.localizedFailureReason)! : "nil"
+                    }
+                    
+                    var logMessage = "URL - \(logUrl).  Type - VoteDOWN.  Error - localizedDescription: \(logErrDescription), localizedFailureRiason: \(logErrFailureReason)."
+                    
+                    self.showAlertToSendReport(title: "Error", message: "Please try again later", errorMessage:logMessage)
+                }
+            })
+        } else {
+            ParametersConstructor.sharedInstance.showAlert("You have already voted!", message: "")
+            tableCell.hideProgress()
+        }
+    }
+    
     
     func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
         // moreView()
         
         let user = ParametersConstructor.sharedInstance.getUserInfo()
         let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
+        
         if user["isLoggedIn"] == "true" {
             reportComment(user: user, cellId: cell.comment_id!, cell: tableCell)
+            
         } else {
+            
             lastAction = .report
             lastActionPosition = tableCell.tag
             reportId = cell.comment_id!
-            askToLogin(position: tableCell.tag)
+            askToLogin(position: tableCell.tag, activeCell: tableCell)
             tableCell.hideProgress()
         }
     }
@@ -678,8 +741,6 @@
                             if (allow == "true") {
                                 
                                 ParametersConstructor.sharedInstance.showAlert("Your comment has been submitted and is under moderation", message: "")
-                                //tableCell.hideProgress()
-                                //self.closeForms()
                                 tableCell.commentTextView.text = ""
                                 self.reloadAddCommentField()
                                 
@@ -687,7 +748,7 @@
                                 
                                 ParametersConstructor.sharedInstance.showAlert("Your comment was published", message: "")
                                 
-                                self.closeForms()
+                                self.reloadAddCommentField()
                                 self.addLocalCommentObjectToTableView(cell: cell, commentText: comment, nameText: name, emailText: email,commentID: (respon?.comment_id)! , index : tableCell.tag)
                             }
                             
@@ -932,8 +993,7 @@
     
     
     //MARK: - LoadMoreCell delegate
-    
-    func loginButtonPressed(tableCell: LoginCell, pressed loginButton: AnyObject) {
+    func loginButtonPressed(tableCell: LoginCell, activeCommentCell: CommentCell, pressed loginButton: AnyObject) {
         
         let name = tableCell.nameField.text!
         let email = tableCell.emailField.text!
@@ -944,7 +1004,8 @@
             self.view.endEditing(true)
             closeForms()
             self.tableView.reloadData()
-            continueAction()
+            
+            continueAction(commentCell: activeCommentCell)
         }
     }
     
@@ -1058,15 +1119,21 @@
         CellConstructor.sharedInstance.totalComentsCount += 1
     }
     
-    func addLocalCommentObjectToTableView(cell : AddCommentCell, commentText : String,nameText : String , emailText : String , commentID : String ,index : Int) {
+    func addLocalCommentObjectToTableView(cell : AddCommentCell, commentText : String, nameText: String , emailText: String , commentID: String , index: Int) {
+        
         closeForms()
+        
         let date = NSDate()
         let dateFormat = DateFormatter.init()
         dateFormat.dateStyle = .full
         dateFormat.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        
         let stringOfDateInNewFornat = dateFormat.string(from: date as Date)
+        
         Saver.sharedInstance.savingWhenPostButtonPressed(cell.nameTextField.text!, email: cell.emailTextField.text!)
+        
         let addComment = LocalCommentsConstructor.sharedInstance.addComment(commentText, name: nameText, ts: stringOfDateInNewFornat, email: emailText, up_votes: 0, down_votes: 0, comment_id: commentID, replies: 0, user_id: "", avatar_url: "", parent_id: "-1", user_points: 0, myComment: true, level : 0 )
+        
         self.arrayObjectsForCell.insert(addComment, at: index + 1)
         self.totalComentsCount += 1
         self.tableView.reloadData()
@@ -1074,6 +1141,8 @@
         cell.commentTextView.textColor = UIColor.lightGray
         self.morePost = true
         CellConstructor.sharedInstance.totalComentsCount += 1
+        
+        NotificationCenter.default.post(name: UPDATE_FLAGS_NOTIFCATION, object: self.arrayObjectsForCell)
     }
     
     func addMoreCommentsToArrayOfObjects(array : [CommentsFeed]) {
@@ -1224,37 +1293,35 @@
     
     //Function, which continues previous action after logination
     
-    func continueAction() {
+    func continueAction(commentCell: CommentCell) {
+        
         if lastActionPosition != -1 {
+            
             let cell = arrayObjectsForCell[lastActionPosition] as! CommentsFeed
             switch lastAction {
+                
             case .upvote:
-                if self.defaults.object(forKey: "\(cell.comment_id)") as? String == nil {
-                    cell.up_votes = cell.up_votes! + 1
-                    ParametersConstructor.sharedInstance.showAlert("Success", message: "Thanks for voting")
-                } else {
-                    ParametersConstructor.sharedInstance.showAlert("You have already voted", message: "")
-                }
+                upvoteComment(tableCell: commentCell)
             case .downvote:
-                if self.defaults.object(forKey: "\(cell.comment_id)") as? String == nil {
-                    cell.down_votes = cell.down_votes! + 1
-                    ParametersConstructor.sharedInstance.showAlert("Success", message: "Thanks for voting")
-                } else {
-                    ParametersConstructor.sharedInstance.showAlert("You have already voted", message: "")
-                }
+                downvoteComment(tableCell: commentCell)
             case .report:
-                print("bla-bla-bla")
-            //reportComment(user: ParametersConstructor.sharedInstance.getUserInfo(), cellId: reportId)
+                reportComment(user: ParametersConstructor.sharedInstance.getUserInfo(), cellId: reportId, cell: commentCell)
             default:
                 break
             }
         }
     }
     
-    func askToLogin(position: Int) {
+    func askToLogin(position: Int, activeCell: CommentCell) {
+        
         var newCellPosition = position + 1
         closeForms()
-        arrayObjectsForCell.insert(LoginForm(), at: newCellPosition)
+        
+        let loginForm = LoginForm()
+        loginForm.commetCellReference = activeCell
+        
+        arrayObjectsForCell.insert(loginForm, at: newCellPosition)
+        
         insertCell(position: newCellPosition)
         lastLoginID = newCellPosition
         loginOpened = true
@@ -1321,6 +1388,7 @@
     }
     
     func insertCell(position: Int) {
+        
         tableView.beginUpdates()
         let indexPath = IndexPath.init(row: position, section: 0)
         tableView.insertRows(at: [indexPath], with: .right)
@@ -1366,7 +1434,15 @@
     
     func updateIndexes(from index: Int) {
         for i in index..<arrayObjectsForCell.count {
-            tableView.cellForRow(at: IndexPath.init(row: i, section: 0))?.tag = i
+            
+            let index = IndexPath.init(row: i, section: 0)
+            tableView.cellForRow(at: index)?.tag = i
+            
+            if tableView.cellForRow(at: index) is CommentCell {
+                
+                let lCommentCell = tableView.cellForRow(at: index) as! CommentCell
+                lCommentCell.cellIndex = i
+            }
         }
     }
     
@@ -1377,9 +1453,7 @@
         for i in 0..<arrayObjectsForCell.count {
             
             if (arrayObjectsForCell[i] is CommentForm || arrayObjectsForCell[i] is ReplyForm) {
-                
                 tableView.reloadRows(at: [IndexPath.init(row: i, section: 0)], with: .none)
-                print("-- Iter")
             }
         }
     }

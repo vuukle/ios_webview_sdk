@@ -1,7 +1,7 @@
 import UIKit
 
 protocol LoginCellDelegate {
-    func loginButtonPressed(tableCell: LoginCell, pressed loginButton: AnyObject)
+    func loginButtonPressed(tableCell: LoginCell, activeCommentCell: CommentCell, pressed loginButton: AnyObject)
 }
 
 class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
@@ -9,6 +9,8 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     let defaults : UserDefaults = UserDefaults.standard
     
     var indexRow = 1
+    
+    var commentCellReference: CommentCell?
     
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var background: UIView!
@@ -22,7 +24,7 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         self.nameField.resignFirstResponder()
         self.emailField.resignFirstResponder()
         
-        self.delegate?.loginButtonPressed(tableCell: self, pressed: sender)
+        self.delegate?.loginButtonPressed(tableCell: self, activeCommentCell: commentCellReference!, pressed: sender)
         
         loginButtonOutlet.isEnabled = false
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
@@ -40,30 +42,17 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         loginButtonOutlet.layer.cornerRadius = 5
         nameField.layer.cornerRadius = 5
         emailField.layer.cornerRadius = 5
-        let viewForDoneButtonOnKeyboard = UIToolbar()
-        viewForDoneButtonOnKeyboard.sizeToFit()
-        let btnDoneOnKeyboard = UIBarButtonItem(title: "Done",
-                                                style: .plain,
-                                                target: self,
-                                                action: #selector(doneBtnFromKeyboardClicked(sender:)))
-        viewForDoneButtonOnKeyboard.setItems([btnDoneOnKeyboard], animated: false)
+        
+        addToolbarToTextObjects(arrayTextObjects: [nameField, emailField])
+        
         nameField.delegate = self
         emailField.delegate = self
-        
-        nameField.layer.borderWidth = 1
-        nameField.layer.borderColor = UIColor.lightGray.cgColor
-        
-        emailField.layer.borderWidth = 1
-        emailField.layer.borderColor = UIColor.lightGray.cgColor
-        
-        nameField.inputAccessoryView = viewForDoneButtonOnKeyboard
-        emailField.inputAccessoryView = viewForDoneButtonOnKeyboard
         
         nameField.returnKeyType = UIReturnKeyType.done
         emailField.returnKeyType = UIReturnKeyType.done
         
-        //nameField.enablesReturnKeyAutomatically = true
-        //emailField.enablesReturnKeyAutomatically = true
+        nameField.enablesReturnKeyAutomatically = true
+        emailField.enablesReturnKeyAutomatically = true
         // Initialization code
     }
     
@@ -169,4 +158,74 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        nameField.text = ""
+        emailField.text = ""
+    }
+    
+    
+    func addToolbarToTextObjects(arrayTextObjects: NSArray) {
+        
+        let BACK_IMAGE = UIImage(named: "toolbar-back-button", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        let NEXT_IMAGE = UIImage(named: "toolbar-next-button", in: Bundle(for: type(of: self)), compatibleWith: nil)
+        
+        for i in 0..<arrayTextObjects.count {
+            
+            var lTextObject = arrayTextObjects[i]
+            
+            let lKeyboardToolbar = UIToolbar.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 44))
+            lKeyboardToolbar.barStyle = .default
+            
+            var lToolbarItems = [UIBarButtonItem]()
+            
+            
+            var lBarSpacer = UIBarButtonItem.init(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            var lDoneBarButton = UIBarButtonItem.init(title: "Done", style: .done, target: lTextObject, action: #selector(resignFirstResponder))
+            
+            lToolbarItems.append(lDoneBarButton)
+            lToolbarItems.append(lBarSpacer)
+            
+            if arrayTextObjects.count > 1 {
+                
+                var lBackButton = UIButton(frame: CGRect(x: 0, y: 0, width: 44, height: 44))
+                lBackButton.setImage(BACK_IMAGE, for: .normal)
+                lBackButton.imageEdgeInsets = UIEdgeInsetsMake(10, 14, 10, 14)
+                
+                var lNextButton = UIButton(frame: CGRect(x: (44 + 10), y: 0, width: 44, height: 44))
+                lNextButton.setImage(NEXT_IMAGE, for: .normal)
+                lNextButton.imageEdgeInsets = UIEdgeInsetsMake(10, 14, 10, 14)
+                
+                var lBackBarButtonItem = UIBarButtonItem.init(customView: lBackButton)
+                var lNextBarButtonItem = UIBarButtonItem.init(customView: lNextButton)
+                
+                if (i - 1) >= 0 {
+                    lBackButton.addTarget(arrayTextObjects[i - 1], action: #selector(becomeFirstResponder), for: .touchUpInside)
+                } else {
+                    lBackBarButtonItem.isEnabled = false
+                }
+                
+                if (i + 1) < arrayTextObjects.count {
+                    lNextButton.addTarget(arrayTextObjects[i + 1], action: #selector(becomeFirstResponder), for: .touchUpInside)
+                } else {
+                    lNextBarButtonItem.isEnabled = false
+                }
+                
+                lToolbarItems.append(lBackBarButtonItem)
+                lToolbarItems.append(lNextBarButtonItem)
+            }
+            
+            lKeyboardToolbar.items = lToolbarItems
+            
+            if lTextObject is UITextField {
+                
+                var lTextField = lTextObject as! UITextField
+                lTextField.inputAccessoryView = lKeyboardToolbar
+                
+            } else if lTextObject is UITextView {
+                
+                var lTextView = lTextObject as! UITextView
+                lTextView.inputAccessoryView = lKeyboardToolbar
+            }
+        }
+    }
 }

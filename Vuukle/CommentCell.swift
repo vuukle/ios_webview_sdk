@@ -18,8 +18,9 @@ protocol CommentCellDelegate {
 
 class CommentCell: UITableViewCell {
     
-    var delegate : CommentCellDelegate?
+    var delegate: CommentCellDelegate?
     var leftCostraint = 16
+    var cellIndex = 0
     
     @IBOutlet weak var progressIndicator: UIActivityIndicatorView!
     @IBOutlet weak var userImage: UIImageView!
@@ -138,8 +139,6 @@ class CommentCell: UITableViewCell {
         initialsLabel.layer.masksToBounds = true
         
         NotificationCenter.default.addObserver(forName: STOP_ALL_PROGRESS_KEY, object: nil, queue: nil) { notification in
-            
-            
             self.hideProgress()
         }
     }
@@ -161,5 +160,6 @@ class CommentCell: UITableViewCell {
         progressIndicator.stopAnimating()
         self.alpha = 1
     }
+    
     
 }

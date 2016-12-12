@@ -64,6 +64,9 @@
 		9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8831DF1C64500E3A26E /* AddCommentCell.xib */; };
 		9053A8881DF1C64500E3A26E /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8841DF1C64500E3A26E /* CommentCell.xib */; };
 		9053A88A1DF1C64500E3A26E /* MostPopularArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */; };
+		9083BD791DFF0F4700000068 /* toolbar-back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD771DFF0F4700000068 /* toolbar-back-button.png */; };
+		9083BD7A1DFF0F4700000068 /* toolbar-next-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD781DFF0F4700000068 /* toolbar-next-button.png */; };
+		9083BD7C1DFF104500000068 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9083BD7B1DFF104500000068 /* LoginForm.swift */; };
 		90C747F41DF6A03200D78639 /* EmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C747F31DF6A03200D78639 /* EmailVerificator.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +130,9 @@
 		9053A8831DF1C64500E3A26E /* AddCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCommentCell.xib; sourceTree = "<group>"; };
 		9053A8841DF1C64500E3A26E /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
 		9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularArticleCell.xib; sourceTree = "<group>"; };
+		9083BD771DFF0F4700000068 /* toolbar-back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-back-button.png"; sourceTree = "<group>"; };
+		9083BD781DFF0F4700000068 /* toolbar-next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-next-button.png"; sourceTree = "<group>"; };
+		9083BD7B1DFF104500000068 /* LoginForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
 		90C747F31DF6A03200D78639 /* EmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,6 +185,7 @@
 				049D0B331D9D560C00507DC3 /* ReplyForm.swift */,
 				049D0B341D9D560C00507DC3 /* LoadMore.swift */,
 				900B70331DF07403000DF6C7 /* LoginCell.swift */,
+				9083BD7B1DFF104500000068 /* LoginForm.swift */,
 				901279E91DF8367B00F3D185 /* LoadMoreCell.swift */,
 				049D0B361D9D560C00507DC3 /* MoreView.swift */,
 				9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */,
@@ -212,6 +219,8 @@
 				901279E71DF8367100F3D185 /* LoadMoreCell.xib */,
 				049D0B661D9D562000507DC3 /* non_secure.html */,
 				9053A8831DF1C64500E3A26E /* AddCommentCell.xib */,
+				9083BD771DFF0F4700000068 /* toolbar-back-button.png */,
+				9083BD781DFF0F4700000068 /* toolbar-next-button.png */,
 				9053A8841DF1C64500E3A26E /* CommentCell.xib */,
 				901279ED1DF8434A00F3D185 /* reported_flag.png */,
 				9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */,
@@ -309,7 +318,9 @@
 				9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */,
 				049D0B731D9D562000507DC3 /* 122.png in Resources */,
 				049D0B851D9D562000507DC3 /* thumb-down.png in Resources */,
+				9083BD7A1DFF0F4700000068 /* toolbar-next-button.png in Resources */,
 				049D0B7F1D9D562000507DC3 /* smile-angry.png in Resources */,
+				9083BD791DFF0F4700000068 /* toolbar-back-button.png in Resources */,
 				049D0B881D9D562000507DC3 /* vuukle_logo.jpg in Resources */,
 				049D0B801D9D562000507DC3 /* smile-excited.png in Resources */,
 				049D0B791D9D562000507DC3 /* images.png in Resources */,
@@ -358,6 +369,7 @@
 				049D0B4B1D9D560C00507DC3 /* Emoticon.swift in Sources */,
 				049D0B411D9D560C00507DC3 /* AddCommentCell.swift in Sources */,
 				049D0B541D9D560C00507DC3 /* ParametersConstructor.swift in Sources */,
+				9083BD7C1DFF104500000068 /* LoginForm.swift in Sources */,
 				049D0B431D9D560C00507DC3 /* CommentForm.swift in Sources */,
 				90C747F41DF6A03200D78639 /* EmailVerificator.swift in Sources */,
 				049D0B591D9D560C00507DC3 /* TotalCommentsCount.swift in Sources */,
