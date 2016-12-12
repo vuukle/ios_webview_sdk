@@ -42,7 +42,7 @@
                         <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </activityIndicatorView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vuukle_logo.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="tmT-lE-c8a">
-                        <rect key="frame" x="184" y="65.5" width="80" height="34"/>
+                        <rect key="frame" x="184" y="66" width="80" height="34"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="34" id="2hS-C4-OeQ"/>
                             <constraint firstAttribute="width" constant="80" id="K7h-3q-1Qn"/>
@@ -58,7 +58,7 @@
                             <action selector="openVuukleButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="Ya7-Xu-ffs"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
                         <rect key="frame" x="191" y="95" width="67" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>

@@ -1,11 +1,11 @@
- import UIKit
- import Alamofire
- import MessageUI
- 
- let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NOTIFCATION")
- 
- 
- class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate, MFMailComposeViewControllerDelegate {
+import UIKit
+import Alamofire
+import MessageUI
+
+let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NOTIFCATION")
+
+
+class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate, MFMailComposeViewControllerDelegate {
     
     static let sharedInstance = Global()
     static var shared : CommentViewController?
@@ -149,12 +149,14 @@
                 
                 if self.defaults.object(forKey: "\(objectForCell.comment_id!)reported\(self.defaults.object(forKey: "name")!)\(self.defaults.object(forKey: "email")!)") as? String != nil {
                     
+                    print("\nNOT REPORTED!\n")
+                    
                     let image = UIImage(named: "reported_flag", in: Bundle(for: type(of: self)), compatibleWith: nil)
-                    print("\nIMAGE: \(image)\n")
                     cell.reportButton.setImage(image, for: .normal)
+                    
                 } else {
                     
-                    print("/nNOT REPORTED!/n")
+                    print("\nNOT REPORTED!\n")
                     
                     let image = UIImage(named: "flag-variant", in: Bundle(for: type(of: self)), compatibleWith: nil)
                     print("\nIMAGE: \(image)\n")
@@ -372,7 +374,7 @@
         var lName = self.defaults.object(forKey: "name")
         var lemail = self.defaults.object(forKey: "email")
         
-        let lKey = "\(commen.comment_id)reported\(lName!)\(lemail!)"
+        let lKey = "\(commen.comment_id!)voted\(lName!)\(lemail!)"
         
         if self.defaults.object(forKey: lKey) as? String == nil {
             
@@ -399,6 +401,7 @@
                     }
                     
                     tableCell.hideProgress()
+                    self.showSimpleAlert(title: "Successfuly voted up!", message: nil)
                     
                 } else {
                     
@@ -462,16 +465,15 @@
         var lName = self.defaults.object(forKey: "name")
         var lemail = self.defaults.object(forKey: "email")
         
-        let lKey = "\(commen.comment_id)reported\(lName!)\(lemail!)"
+        let lKey = "\(commen.comment_id!)voted\(lName!)\(lemail!)"
         
-        if self.defaults.object(forKey: lKey) as? String == nil {
+        if UserDefaults.standard.object(forKey: lKey) as? String == nil {
             
             mail = ParametersConstructor.sharedInstance.encodingString(self.defaults.object(forKey: "email") as! String)
             
             let name = ParametersConstructor.sharedInstance.encodingString(commen.name!)
             
-            self.defaults.set(lKey, forKey: lKey)
-            self.defaults.synchronize()
+            UserDefaults.standard.set(lKey, forKey: lKey)
             
             NetworkManager.sharedInstance.setCommentVote(name, email: mail, comment_id: commen.comment_id!, up_down: "-1", completion: { (string , error) in
                 if error == nil {
@@ -487,6 +489,7 @@
                     }
                     
                     tableCell.hideProgress()
+                    self.showSimpleAlert(title: "Successfuly voted down!", message: nil)
                     
                 } else {
                     
@@ -1457,4 +1460,4 @@
             }
         }
     }
- }
+}
