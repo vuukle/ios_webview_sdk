@@ -284,7 +284,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     //MARK: CommentCellDelegate
     
-    func shareButtonPressed(_ tableCell: CommentCell, shareButtonPressed shareButton: AnyObject) {
+    func shareButtonPressed(_ tableCell: CommentCell, shareButtonPressed shareButton: UIButton) {
         
         if (tableCell.userNameLabel.text != nil &&
             tableCell.commentLabel.text != nil &&
@@ -299,15 +299,22 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             let shareURL = NSURL(string: "\(Global.articleUrl)")
             let shareItems: [Any] = [shareText, shareURL]
             
-            let activityViewController = UIActivityViewController(activityItems: shareItems,
-                                                                  applicationActivities: nil)
-            // so that iPads won't crash
-            activityViewController.popoverPresentationController?.sourceView = self.view
-            activityViewController.excludedActivityTypes = []
+            let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
             
-            activityViewController.modalPresentationStyle = .overCurrentContext
-            
-            self.present(activityViewController, animated: true, completion: nil)
+            if (UIDevice.current.userInterfaceIdiom == .phone) {
+                
+                activityViewController.modalPresentationStyle = .overCurrentContext
+                self.present(activityViewController, animated: true, completion: nil)
+                
+            } else if (UIDevice.current.userInterfaceIdiom == .pad) {
+                
+                activityViewController.modalPresentationStyle = .popover
+                present(activityViewController, animated: true, completion: nil)
+                
+                let popoverPresentationController = activityViewController.popoverPresentationController
+                popoverPresentationController?.sourceView = shareButton
+                popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
+            }
         }
     }
     
@@ -401,7 +408,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                     
                     tableCell.hideProgress()
-                    self.showSimpleAlert(title: "Successfuly voted up!", message: nil)
+                    self.showSimpleAlert(title: "Successfully voted up!", message: nil)
                     
                 } else {
                     
@@ -489,7 +496,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
                     }
                     
                     tableCell.hideProgress()
-                    self.showSimpleAlert(title: "Successfuly voted down!", message: nil)
+                    self.showSimpleAlert(title: "Successfully voted down!", message: nil)
                     
                 } else {
                     
@@ -1059,28 +1066,81 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     //Mark: EmoticonCellDelegate
     
     func firstEmoticonButtonPressed(_ tableCell: EmoticonCell, firstEmoticonButtonPressed firstEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 1, tableView: tableView)
+        voteForEmotion(emoteIndex: 1, articleID: Global.article_id)
     }
     
     func secondEmoticonButtonPressed(_ tableCell: EmoticonCell, secondEmoticonButtonPressed secondEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 2, tableView: tableView)
+        voteForEmotion(emoteIndex: 2, articleID: Global.article_id)
     }
     
     func thirdEmoticonButtonPressed(_ tableCell: EmoticonCell, thirdEmoticonButtonPressed thirdEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 3, tableView: tableView)
+        voteForEmotion(emoteIndex: 3, articleID: Global.article_id)
     }
     
     func fourthEmoticonButtonPressed(_ tableCell: EmoticonCell, fourthEmoticonButtonPressed fourthEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 4, tableView: tableView)
+        voteForEmotion(emoteIndex: 4, articleID: Global.article_id)
     }
     
     func fifthEmoticonButtonPressed(_ tableCell: EmoticonCell, fifthEmoticonButtonPressed fifthEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 5, tableView: tableView)
+        voteForEmotion(emoteIndex: 5, articleID: Global.article_id)
     }
     
     func sixthEmoticonButtonPressed(_ tableCell: EmoticonCell, sixthEmoticonButtonPressed sixthEmoticonButton: AnyObject) {
-        ParametersConstructor.sharedInstance.setRate(Global.article_id, emote: 6, tableView: tableView)
+        voteForEmotion(emoteIndex: 6, articleID: Global.article_id)
     }
+    
+    
+    func voteForEmotion(emoteIndex: Int, articleID : String) {
+        
+        let lKey = "\(articleID)votedEmotion"
+        var lEmotion = ""
+        
+        if UserDefaults.standard.object(forKey: lKey) as? String == nil {
+            
+            switch emoteIndex {
+                
+            case 1:
+                Global.firstEmoticonVotesCount += 1
+                UserDefaults.standard.set("firstEmoticonSelected", forKey: lKey)
+                lEmotion = "😄"
+            case 2:
+                Global.secondEmoticonVotesCount += 1
+                UserDefaults.standard.set("secondEmoticonSelected", forKey: lKey)
+                lEmotion = "😐"
+            case 3:
+                Global.thirdEmoticonVotesCount += 1
+                UserDefaults.standard.set("thirdEmoticonSelected", forKey: lKey)
+                lEmotion = "😏"
+            case 4:
+                Global.fourthEmoticonVotesCount += 1
+                UserDefaults.standard.set("fourthEmoticonSelected", forKey: lKey)
+                lEmotion = "😂"
+            case 5:
+                Global.fifthEmoticonVotesCount += 1
+                UserDefaults.standard.set("fifthEmoticonSelected", forKey: lKey)
+                lEmotion = "😡"
+            case 6:
+                Global.sixthEmoticonVotesCount += 1
+                UserDefaults.standard.set("sixtEmoticonSelected", forKey: lKey)
+                lEmotion = "☹️"
+            default:
+                break
+            }
+            
+            NetworkManager.sharedInstance.setRaring(articleID, emote: emoteIndex) { [unowned self] (response, error) in
+                
+                if error == nil {
+                    self.showSimpleAlert(title: "Voted successfuly for \(lEmotion)!", message: nil)
+                    self.reloadEmotionCell()
+                } else {
+                    UserDefaults.standard.removeObject(forKey: lKey)
+                }
+            }
+        } else {
+            showSimpleAlert(title: "You have alredy voted!", message: nil)
+        }
+    }
+    
     
     //MARK: MostPopularArticleCellDelegate
     
@@ -1343,7 +1403,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         self.showAlert(title: "Report comment?", message: "Do you really want to report this comment?", redButton: "Report", blueButton: "Cancel"
             , redHandler: {
                 
-                if (self.defaults.object(forKey: lKey) as? String == nil) {
+                if (UserDefaults.standard.object(forKey: lKey) as? String == nil) {
                     
                     self.defaults.set(lKey, forKey: lKey)
                     
@@ -1457,6 +1517,17 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
             
             if (arrayObjectsForCell[i] is CommentForm || arrayObjectsForCell[i] is ReplyForm) {
                 tableView.reloadRows(at: [IndexPath.init(row: i, section: 0)], with: .none)
+            }
+        }
+    }
+    
+    func reloadEmotionCell() {
+        
+        for i in 0..<arrayObjectsForCell.count {
+            
+            if (arrayObjectsForCell[i] is Emoticon) {
+                tableView.reloadRows(at: [IndexPath.init(row: i, section: 0)], with: .none)
+                return
             }
         }
     }

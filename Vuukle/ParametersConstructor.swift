@@ -123,47 +123,6 @@ class ParametersConstructor  {
         return output
     }
     
-    
-    
-    func setRate(_ article_id : String ,emote : Int , tableView : UITableView) {
-        
-        if  self.defaults.object(forKey: "\(article_id)") as? String == nil{
-            
-            showAlert( "Voted!",message: "Thanks for voting!")
-            NetworkManager.sharedInstance.setRaring(article_id, emote: emote) { (response) in
-                switch emote {
-                case 1:
-                    Global.firstEmoticonVotesCount += 1
-                    self.defaults.set("firstEmoticonSelected", forKey: "\(article_id)")
-                case 2:
-                    Global.secondEmoticonVotesCount += 1
-                    self.defaults.set("secondEmoticonSelected", forKey: "\(article_id)")
-                case 3:
-                    Global.thirdEmoticonVotesCount += 1
-                    self.defaults.set("thirdEmoticonSelected", forKey: "\(article_id)")
-                case 4:
-                    Global.fourthEmoticonVotesCount += 1
-                    self.defaults.set("fourthEmoticonSelected", forKey: "\(article_id)")
-                case 5:
-                    Global.fifthEmoticonVotesCount += 1
-                    self.defaults.set("fifthEmoticonSelected", forKey: "\(article_id)")
-                case 6:
-                    Global.sixthEmoticonVotesCount += 1
-                    self.defaults.set("sixtEmoticonSelected", forKey: "\(article_id)")
-                default:
-                    break
-                }
-                self.defaults.synchronize()
-                tableView.reloadData()
-            }
-            
-        } else {
-            showAlert( "You have already voted!",message: "")
-        }
-    }
-    
-    
-    
     func setEmoticonCountVotes (_ data : EmoteRating){
         Global.firstEmoticonVotesCount = data.first
         Global.secondEmoticonVotesCount = data.second
@@ -172,8 +131,6 @@ class ParametersConstructor  {
         Global.fifthEmoticonVotesCount = data.fifth
         Global.sixthEmoticonVotesCount = data.sixth
         Global.votes = data
-        
-        
     }
     
     func checkStringForSpaces(string : String) -> Bool {

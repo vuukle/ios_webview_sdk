@@ -34,7 +34,7 @@
                         </connections>
                     </button>
                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Y1H-Aa-ZfM">
-                        <rect key="frame" x="205" y="23" width="37" height="37"/>
+                        <rect key="frame" x="205" y="24" width="37" height="37"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="WXb-GB-0mY"/>
                             <constraint firstAttribute="width" constant="37" id="vRh-RE-FC7"/>
@@ -49,7 +49,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TNa-3u-1tQ">
-                        <rect key="frame" x="184" y="65" width="80" height="37"/>
+                        <rect key="frame" x="184" y="66" width="80" height="37"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="Bkq-dt-yIi"/>
                             <constraint firstAttribute="width" constant="80" id="e4d-cS-1ff"/>
@@ -58,9 +58,9 @@
                             <action selector="openVuukleButton:" destination="qHS-Ms-WX5" eventType="touchUpInside" id="Ya7-Xu-ffs"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
-                        <rect key="frame" x="191" y="95" width="67" height="12"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 1.0.25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hjx-Lw-WKR">
+                        <rect key="frame" x="197" y="96" width="55" height="11"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>

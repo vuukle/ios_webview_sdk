@@ -13,7 +13,7 @@ protocol CommentCellDelegate {
     func replyButtonPressed(_ tableCell : CommentCell ,replyButtonPressed replyButton : AnyObject )
     func moreButtonPressed(_ tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
     func showReplyButtonPressed(_ tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
-    func shareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton : AnyObject )
+    func shareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton: UIButton )
 }
 
 class CommentCell: UITableViewCell {
@@ -103,9 +103,11 @@ class CommentCell: UITableViewCell {
         }
     }
     
-    @IBAction func shareButton(_ sender: AnyObject) {
+    @IBAction func shareButtonAction(_ sender: UIButton) {
+        
         self.delegate?.shareButtonPressed(self, shareButtonPressed: sender)
     }
+    
     
     var request: Request?
     

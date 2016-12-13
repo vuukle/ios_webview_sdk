@@ -134,7 +134,7 @@ class NetworkManager {
         
         if (comment_id != nil) {
             
-            let url = "https://vuukle.com/api.asmx/postReply?name=\(name as String)&email=\(email as String)&comment=\(comment as String)&host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&resource_id=\(Global.resource_id as String)&url=\(Global.articleUrl as String)"
+            let url = "\(Global.baseURL as String)postReply?name=\(name as String)&email=\(email as String)&comment=\(comment as String)&host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&comment_id=\(comment_id as! String)&resource_id=\(Global.resource_id as String)&url=\(Global.articleUrl as String)"
             
             print("\n \(url)")
             
@@ -276,24 +276,28 @@ class NetworkManager {
     
     //MARK: Set rating
     
-    func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating) -> Void) {
+    func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating?, NSError?) -> Void) {
         
-        Alamofire.request("\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)")
-            .responseJSON { response in
+        let url = "\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)"
+        
+        print("\n\(url)\n")
+        
+        Alamofire.request(url).responseJSON { response in
+            
+            if let JSON = response.result.value {
                 
+                self.jsonArray = JSON as? NSDictionary
                 
-                if let JSON = response.result.value {
-                    self.jsonArray = JSON as? NSDictionary
-                    
-                    let respon = ResponseToEmoteRating()
-                    respon.result = self.jsonArray!["result"] as? Bool
-                    
-                    completion(respon)
-                    
-                } else {
-                    print("Status cod = \(response.response!.statusCode)")
-                }
+                let respon = ResponseToEmoteRating()
+                respon.result = self.jsonArray!["result"] as? Bool
                 
+                completion(respon, nil)
+                
+            } else {
+                
+                completion(nil, response.result.error as NSError?)
+                print("Status cod = \(response.response!.statusCode)")
+            }
         }
     }
     
@@ -324,7 +328,7 @@ class NetworkManager {
     
     func logOut(){
         
-        Alamofire.request("http://vuukle.com/api.asmx/logoutUser").responseJSON { response in
+        Alamofire.request("\(Global.baseURL as String)logoutUser").responseJSON { response in
             
             if let JSON = response.result.value {
                 
@@ -342,7 +346,7 @@ class NetworkManager {
     func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
         //if Global.setMostPopularArticleVisible {
         
-        Alamofire.request("https://vuukle.com/api.asmx/getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
+        Alamofire.request("\(Global.baseURL as String)getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)")
             .responseJSON { response in
                 
                 if let JSON = response.result.value {
