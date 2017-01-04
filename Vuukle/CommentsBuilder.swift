@@ -263,8 +263,8 @@ open class VuukleCommentsBuilder : NSObject {
         let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewController(withIdentifier: "CommentViewController")
         view.frame = vc.view.frame
         view.addSubview(vc.view)
-}
-
+    }
+    
     /*
      Function which returns Height of Vuukle
      
@@ -291,7 +291,15 @@ open class VuukleCommentsBuilder : NSObject {
     
     open static func setUserInfo(name: String, email: String) {
         ParametersConstructor.sharedInstance.setUserInfo(name: name, email: email)
-        CommentViewController.shared?.reloadAddCommentField()
+        //CommentViewController.shared?.reloadAddCommentField()
+    }
+    
+    /*
+     Function to set OAuth tokens for Twitter
+     */
+    open static func setTitterOAuth(token: String, verifier: String) {
+        
+        SocialNetworksTracker.sharedTracker.setTitterOAuth(token: token, verifier: verifier)
     }
     
 }

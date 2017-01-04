@@ -8,6 +8,7 @@ class ResponseToComment {
     var comment_id: String?
     var isModeration: String?
     var statusCode: Int?
+    var requestURL: String?
     
     static func getResponseToComment(_ pDict : NSDictionary) -> ResponseToComment {
         
@@ -16,6 +17,7 @@ class ResponseToComment {
         lResponseToComment.comment_id = pDict["comment_id"] as? String ?? ""
         lResponseToComment.isModeration = pDict["isModeration"] as? String ?? ""
         lResponseToComment.statusCode = pDict["statusCode"] as? Int ?? 0
+        lResponseToComment.isModeration = pDict["requestURL"] as? String ?? ""
         
         return lResponseToComment
     }

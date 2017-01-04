@@ -50,3 +50,4 @@ class CommentsFeed {
         return lGetCommentsFeed
     }
 }
+

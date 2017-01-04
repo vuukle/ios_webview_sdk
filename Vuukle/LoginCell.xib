@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="182" id="KGk-i7-Jjw" customClass="LoginCell" customModule="Vuukle" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="473" height="182"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="212" id="KGk-i7-Jjw" customClass="LoginCell" customModule="Vuukle" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="473" height="212"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="473" height="181"/>
+                <rect key="frame" x="0.0" y="0.0" width="473" height="211"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aet-KA-mPs">
-                        <rect key="frame" x="8" y="8" width="457" height="165"/>
+                        <rect key="frame" x="8" y="8" width="457" height="195"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please, log in!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pds-kV-aTi">
-                                <rect key="frame" x="8" y="8" width="106" height="20.5"/>
+                                <rect key="frame" x="8" y="8" width="106" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -34,8 +34,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVa-ng-WBL">
+                                <rect key="frame" x="8" y="44" width="441" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="441" id="EHL-RU-G53"/>
+                                </constraints>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdq-LJ-fKA">
-                                <rect key="frame" x="8" y="120" width="441" height="33"/>
+                                <rect key="frame" x="8" y="154" width="441" height="33"/>
                                 <color key="backgroundColor" red="0.20774459838867188" green="0.5265691876411438" blue="0.98582178354263306" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="441" id="SwP-KI-sV2"/>
@@ -48,26 +57,63 @@
                                     <action selector="loginButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="liH-Xz-aR3"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVa-ng-WBL">
-                                <rect key="frame" x="8" y="44" width="441" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Log in with:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000002384185791" translatesAutoresizingMaskIntoConstraints="NO" id="Hwv-PK-L8F">
+                                <rect key="frame" x="8" y="124" width="88" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcR-iz-rr2">
+                                <rect key="frame" x="104" y="120" width="27" height="27"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="441" id="EHL-RU-G53"/>
+                                    <constraint firstAttribute="width" constant="27" id="3cx-sA-F00"/>
+                                    <constraint firstAttribute="height" constant="27" id="yXX-Dy-tgP"/>
                                 </constraints>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <state key="normal" backgroundImage="facebook.png"/>
+                                <connections>
+                                    <action selector="facebookLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4jo-V2-F5T"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVc-ek-jiI">
+                                <rect key="frame" x="139" y="120" width="27" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="4HV-Ky-LD6"/>
+                                    <constraint firstAttribute="width" constant="27" id="cxw-wX-YRs"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="twitter.png"/>
+                                <connections>
+                                    <action selector="twitterLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jj1-ab-QPQ"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dmj-iJ-GBP">
+                                <rect key="frame" x="210" y="79" width="37" height="37"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="DA3-QI-2GC"/>
+                                    <constraint firstAttribute="height" constant="37" id="uUW-xj-JxA"/>
+                                </constraints>
+                                <color key="color" cocoaTouchSystemColor="darkTextColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.9018816351890564" green="0.9020114541053772" blue="0.90185326337814331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mdq-LJ-fKA" firstAttribute="top" secondItem="abp-w7-VqW" secondAttribute="bottom" constant="8" id="Ayt-rM-smW"/>
+                            <constraint firstItem="dmj-iJ-GBP" firstAttribute="centerX" secondItem="aet-KA-mPs" secondAttribute="centerX" id="1HC-5Z-Ids"/>
+                            <constraint firstItem="KVc-ek-jiI" firstAttribute="leading" secondItem="IcR-iz-rr2" secondAttribute="trailing" constant="8" id="3Nt-MF-Kcz"/>
+                            <constraint firstItem="dmj-iJ-GBP" firstAttribute="centerY" secondItem="aet-KA-mPs" secondAttribute="centerY" id="8cX-dw-clG"/>
+                            <constraint firstItem="IcR-iz-rr2" firstAttribute="leading" secondItem="Hwv-PK-L8F" secondAttribute="trailing" constant="7.5" id="9Ah-CK-rpG"/>
+                            <constraint firstItem="mdq-LJ-fKA" firstAttribute="top" secondItem="abp-w7-VqW" secondAttribute="bottom" constant="42" id="Ayt-rM-smW"/>
+                            <constraint firstItem="KVc-ek-jiI" firstAttribute="firstBaseline" secondItem="IcR-iz-rr2" secondAttribute="firstBaseline" id="EJ5-yo-uTw"/>
                             <constraint firstItem="Pds-kV-aTi" firstAttribute="leading" secondItem="aet-KA-mPs" secondAttribute="leading" constant="8" id="GRF-hg-daV"/>
+                            <constraint firstItem="IcR-iz-rr2" firstAttribute="centerY" secondItem="Hwv-PK-L8F" secondAttribute="centerY" constant="-1" id="Ne3-jQ-jOS"/>
                             <constraint firstItem="abp-w7-VqW" firstAttribute="top" secondItem="JVa-ng-WBL" secondAttribute="bottom" constant="8" id="OSD-ym-jpf"/>
                             <constraint firstItem="Pds-kV-aTi" firstAttribute="top" secondItem="aet-KA-mPs" secondAttribute="top" constant="8" id="Ofd-sb-CeJ"/>
                             <constraint firstAttribute="trailing" secondItem="mdq-LJ-fKA" secondAttribute="trailing" constant="8" id="UIh-m4-Xee"/>
-                            <constraint firstAttribute="height" constant="165" id="Uqh-1U-hLO"/>
+                            <constraint firstItem="Hwv-PK-L8F" firstAttribute="leading" secondItem="abp-w7-VqW" secondAttribute="leading" id="ULL-kY-uJy"/>
+                            <constraint firstAttribute="height" constant="195" id="Uqh-1U-hLO"/>
+                            <constraint firstItem="IcR-iz-rr2" firstAttribute="top" secondItem="abp-w7-VqW" secondAttribute="bottom" constant="8" symbolic="YES" id="jlf-RM-mPd"/>
+                            <constraint firstItem="IcR-iz-rr2" firstAttribute="baseline" secondItem="KVc-ek-jiI" secondAttribute="baseline" id="ky1-WG-itu"/>
                             <constraint firstItem="JVa-ng-WBL" firstAttribute="top" secondItem="aet-KA-mPs" secondAttribute="top" constant="44" id="t8g-qs-2ug"/>
                             <constraint firstItem="mdq-LJ-fKA" firstAttribute="leading" secondItem="aet-KA-mPs" secondAttribute="leading" constant="8" id="yhc-SI-b9G"/>
+                            <constraint firstItem="IcR-iz-rr2" firstAttribute="top" secondItem="KVc-ek-jiI" secondAttribute="top" id="zsX-1s-DnT"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -86,10 +132,17 @@
             <connections>
                 <outlet property="background" destination="aet-KA-mPs" id="k54-1Y-ZiT"/>
                 <outlet property="emailField" destination="abp-w7-VqW" id="Ruk-Rk-02q"/>
+                <outlet property="facebookLoginButton" destination="IcR-iz-rr2" id="Ccb-7F-z63"/>
                 <outlet property="loginButtonOutlet" destination="mdq-LJ-fKA" id="U7l-it-iMA"/>
                 <outlet property="nameField" destination="JVa-ng-WBL" id="fhh-LC-K7G"/>
+                <outlet property="progressIndicator" destination="dmj-iJ-GBP" id="kbt-fm-ihk"/>
+                <outlet property="twitterLoginButton" destination="KVc-ek-jiI" id="DpZ-Dn-hFd"/>
             </connections>
             <point key="canvasLocation" x="106.5" y="130"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="facebook.png" width="256" height="256"/>
+        <image name="twitter.png" width="256" height="256"/>
+    </resources>
 </document>

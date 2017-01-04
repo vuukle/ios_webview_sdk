@@ -224,6 +224,12 @@ ___________________________________________________________________
 
 1.VuukleCommentsBuilder.getHeight()                            -[Returns height of comments view] (CGFloat value)
 
+
+2.VuukleCommentsBuilder.getCommentsCount()                     -[Returns count of comments under article] (Int value)
+
+3.VuukleCommentsBuilder.setUserInfo(name: String, email: String) -[Log in vuukle] (Void)
+
+
 2.VuukleCommentsBuilder.getCommentsCount()                     -[Returns count of comments under article] (Int value)
 
 3.VuukleCommentsBuilder.setUserInfo(name: String, email: String) -[Log in vuukle] (Void)

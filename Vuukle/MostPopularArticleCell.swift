@@ -32,15 +32,14 @@ class MostPopularArticleCell: UITableViewCell {
     
     var imageForCell: String? {
         didSet {
-            if let lImage = imageForCell {
+            if let lImageURL = imageForCell {
                 
-                request?.cancel()
-                request = NetworkManager.sharedInstance.getImageWhihURL(lImage, completion: { (image) in
-                    if let lResponseImage = image {
-                        self.articleImage.image = lResponseImage
+                NetworkManager.sharedInstance.getImageWhihURL(lImageURL, completion: { (image, error) in
+                    
+                    if error == nil, image != nil {
+                        self.articleImage.image = image
                     }
                 })
-                
             }
         }
     }
