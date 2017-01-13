@@ -151,6 +151,7 @@ class ParametersConstructor  {
   
   
   func searchUpperChracters(_ fullName: String) -> String{
+    
     var output1 = ""
     var output2 = ""
     var output = ""

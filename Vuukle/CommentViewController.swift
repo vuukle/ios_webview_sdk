@@ -11,8 +11,14 @@ let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NO
 
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate, MFMailComposeViewControllerDelegate {
   
+  
+  @IBOutlet weak var BUTTON: UIButton!
+  
+  
   static let sharedInstance = Global()
+  
   static var shared : CommentViewController?
+  
   var arrayObjectsForCell = [AnyObject]()
   var rating = EmoteRating()
   var showRepleiCell = -1
@@ -117,6 +123,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    
     NotificationCenter.default.addObserver(self,
                                            selector: #selector(setHeight(sender:)),
                                            name: NSNotification.Name.UIApplicationDidChangeStatusBarOrientation,

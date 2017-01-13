@@ -13,7 +13,7 @@ protocol CommentCellDelegate {
   func replyButtonPressed(_ tableCell : CommentCell ,replyButtonPressed replyButton : AnyObject )
   func moreButtonPressed(_ tableCell : CommentCell ,moreButtonPressed moreButton : AnyObject )
   func showReplyButtonPressed(_ tableCell : CommentCell ,showReplyButtonPressed showReplyButton : AnyObject )
-  func shareButtonPressed(_ tableCell : CommentCell ,shareButtonPressed shareButton: UIButton )
+  func shareButtonPressed(_ tableCell : CommentCell , shareButtonPressed shareButton: UIButton )
 }
 
 class CommentCell: UITableViewCell {
@@ -129,6 +129,7 @@ class CommentCell: UITableViewCell {
   
   override func awakeFromNib() {
     super.awakeFromNib()
+    
     upvoteCountLabel.layer.cornerRadius = 5
     replyCount.layer.cornerRadius = 4
     replyCount.layer.masksToBounds = true

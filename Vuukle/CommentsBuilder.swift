@@ -259,8 +259,10 @@ open class VuukleCommentsBuilder : NSObject {
      Set : "self.view"
      */
     open func buildVuukle(_ view : UIView){
+      
         let bundle = Bundle(for: CommentViewController.self)
         let vc = UIStoryboard.init(name: "Main", bundle: bundle).instantiateViewController(withIdentifier: "CommentViewController")
+      
         view.frame = vc.view.frame
         view.addSubview(vc.view)
     }

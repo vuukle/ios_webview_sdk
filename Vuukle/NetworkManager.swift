@@ -21,6 +21,7 @@ class NetworkManager {
     Alamofire.request(url).responseJSON { response in
       
       if let JSON = response.result.value as? NSArray{
+        
         let data : NSArray = JSON
         var responseArray = [CommentsFeed]()
         
@@ -43,6 +44,7 @@ class NetworkManager {
     Alamofire.request("\(Global.baseURL as String)getCommentFeed?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key as String)&secret_key=\(Global.secret_key as String)&time_zone=\(Global.time_zone)&from_count=0&to_count=\(Global.countLoadCommentsInPagination)")
       .responseJSON { response in
         if let result = response.result.value {
+         
           let JSON = result
           self.jsonArray = JSON as? NSDictionary
           
