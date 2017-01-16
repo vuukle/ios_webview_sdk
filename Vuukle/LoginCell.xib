@@ -69,9 +69,9 @@
                                     <constraint firstAttribute="width" constant="27" id="3cx-sA-F00"/>
                                     <constraint firstAttribute="height" constant="27" id="yXX-Dy-tgP"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="facebook.png"/>
+                                <state key="normal" backgroundImage="twitter.png"/>
                                 <connections>
-                                    <action selector="facebookLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="4jo-V2-F5T"/>
+                                    <action selector="twitterLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZCt-cN-Ci2"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVc-ek-jiI">
@@ -80,9 +80,9 @@
                                     <constraint firstAttribute="height" constant="27" id="4HV-Ky-LD6"/>
                                     <constraint firstAttribute="width" constant="27" id="cxw-wX-YRs"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="twitter.png"/>
+                                <state key="normal" backgroundImage="facebook.png"/>
                                 <connections>
-                                    <action selector="twitterLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jj1-ab-QPQ"/>
+                                    <action selector="facebookLoginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="vTN-9Y-CbF"/>
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dmj-iJ-GBP">
@@ -132,11 +132,11 @@
             <connections>
                 <outlet property="background" destination="aet-KA-mPs" id="k54-1Y-ZiT"/>
                 <outlet property="emailField" destination="abp-w7-VqW" id="Ruk-Rk-02q"/>
-                <outlet property="facebookLoginButton" destination="IcR-iz-rr2" id="Ccb-7F-z63"/>
+                <outlet property="facebookLoginButton" destination="KVc-ek-jiI" id="xy6-qc-brc"/>
                 <outlet property="loginButtonOutlet" destination="mdq-LJ-fKA" id="U7l-it-iMA"/>
                 <outlet property="nameField" destination="JVa-ng-WBL" id="fhh-LC-K7G"/>
                 <outlet property="progressIndicator" destination="dmj-iJ-GBP" id="kbt-fm-ihk"/>
-                <outlet property="twitterLoginButton" destination="KVc-ek-jiI" id="DpZ-Dn-hFd"/>
+                <outlet property="twitterLoginButton" destination="IcR-iz-rr2" id="bo1-wQ-cdG"/>
             </connections>
             <point key="canvasLocation" x="106.5" y="130"/>
         </tableViewCell>

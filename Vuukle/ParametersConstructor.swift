@@ -139,7 +139,7 @@ class ParametersConstructor  {
     }
   }
   
-  
+
   func setRatePercent (_ first : Int , second : Int , thirt : Int , fourth : Int , fifth : Int , sixt : Int , element : Int) -> Int {
     let sume : Int = first + second + thirt + fourth + fifth + sixt
     if sume == 0 {
@@ -238,6 +238,8 @@ class ParametersConstructor  {
     lname = lname.replacingOccurrences(of: "%", with: "")
     self.defaults.set(lname, forKey: "name")
     self.defaults.set(lemail, forKey: "email")
+    
+    UserDefaults.standard.removeObject(forKey: "IS_LOGIN_FORM_OPENED")
     
     NotificationCenter.default.post(name: Notification.Name("Set_SocialLogin_Hidden"), object: nil)
   }

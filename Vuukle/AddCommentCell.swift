@@ -28,7 +28,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
       UserDefaults.standard.set(newValue, forKey: "isSocialLoginHidden")
       
       logInWithLabel.isHidden = newValue
-      facebookLogin.isHidden = newValue
+      //facebookLogin.isHidden = newValue
       twitterLogin.isHidden = newValue
       //linkedinLogin.isHidden = newValue
     }
@@ -99,6 +99,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
     
     otherLogin.isHidden = true
     linkedinLogin.isHidden = true
+    facebookLogin.isHidden = true
     
     background.layer.cornerRadius = 5
     postButtonOutlet.layer.cornerRadius = 5
@@ -172,7 +173,7 @@ class AddCommentCell: UITableViewCell , UITextViewDelegate , UITextFieldDelegate
   @IBAction func facebookLoginButton(_ sender: Any) {
     self.delegate?.facebookLoginButtonPressed(tableCell: self, pressed: sender as AnyObject)
   }
-  
+
   @IBAction func twitterLoginButton(_ sender: Any) {
     self.delegate?.twitterLoginButtonPressed(tableCell: self, pressed: sender as AnyObject)
   }

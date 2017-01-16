@@ -63,7 +63,8 @@ class LoginCell: UITableViewCell, UITextViewDelegate, UITextFieldDelegate {
     
     nameField.enablesReturnKeyAutomatically = true
     emailField.enablesReturnKeyAutomatically = true
-    // Initialization code
+    
+    facebookLoginButton.isHidden = true
   }
   
   //MARK: - Handling of keyboard for UITextField

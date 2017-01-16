@@ -14,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="501" height="326"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="501" height="325"/>
+                <rect key="frame" x="0.0" y="0.0" width="501" height="326"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lB-jC-hQ5">
@@ -74,9 +74,9 @@
                                     <constraint firstAttribute="height" constant="27" id="7aW-Zw-0kO"/>
                                     <constraint firstAttribute="width" constant="27" id="Kde-Tl-7Rp"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="facebook.png"/>
+                                <state key="normal" backgroundImage="twitter.png"/>
                                 <connections>
-                                    <action selector="facebookLoginButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="RBg-FN-ZZE"/>
+                                    <action selector="twitterLoginButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cff-1U-cxy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBL-rG-2kd">
@@ -86,9 +86,6 @@
                                     <constraint firstAttribute="height" constant="27" id="Xw5-vJ-C81"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="twitter.png"/>
-                                <connections>
-                                    <action selector="twitterLoginButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="D8R-Ud-kav"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Un-7N-aXF" userLabel="Linkedin Login">
                                 <rect key="frame" x="176" y="161" width="27" height="27"/>
@@ -113,7 +110,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XRW-Wf-Jjc">
-                                <rect key="frame" x="448.5" y="161" width="38.5" height="27"/>
+                                <rect key="frame" x="448" y="161" width="39" height="27"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="27" id="EXs-gn-yGA"/>
                                 </constraints>
@@ -206,7 +203,7 @@
                 <outlet property="chartersCountLabel" destination="XRW-Wf-Jjc" id="ImX-a5-Gfh"/>
                 <outlet property="commentTextView" destination="aPu-Aw-7Lq" id="RfB-Dd-uZN"/>
                 <outlet property="emailTextField" destination="GWR-1y-50J" id="2Qh-nq-9gC"/>
-                <outlet property="facebookLogin" destination="95O-0L-pwU" id="OGR-zx-nF0"/>
+                <outlet property="facebookLogin" destination="iBL-rG-2kd" id="W13-iF-GHK"/>
                 <outlet property="greetingLabel" destination="0FV-s6-lah" id="2ar-Cw-fmA"/>
                 <outlet property="leftConstrainSize" destination="47C-4K-W4t" id="8Mv-PB-j9V"/>
                 <outlet property="linkedinLogin" destination="8Un-7N-aXF" id="5Dt-Ki-lUW"/>
@@ -219,13 +216,12 @@
                 <outlet property="progressIndicator" destination="SxS-A2-Uk4" id="jeh-AS-UZq"/>
                 <outlet property="totalCount" destination="hCq-Oh-NT9" id="Y3q-v5-tbA"/>
                 <outlet property="totalCountHeight" destination="x8d-qO-dsb" id="rMS-e9-Xsv"/>
-                <outlet property="twitterLogin" destination="iBL-rG-2kd" id="7Tp-1l-lZF"/>
+                <outlet property="twitterLogin" destination="95O-0L-pwU" id="Tgo-Qi-kZ5"/>
             </connections>
             <point key="canvasLocation" x="637.5" y="381"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="facebook.png" width="256" height="256"/>
         <image name="linkedin.png" width="256" height="256"/>
         <image name="twitter.png" width="256" height="256"/>
     </resources>

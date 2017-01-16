@@ -52,6 +52,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   var scrollIs = false
   var keyboardOpened = false
   
+  var isLoginFormOpened: Bool?
+  var tableCellIndex: Int?
+  
+  
   //loginInfo
   var loginType : LoginType = .none
   
@@ -447,16 +451,52 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     tableCell.showProgress()
     closeForms()
     
+    if tableCellIndex == nil {
+      if let lIndex = tableView.indexPath(for: tableCell) {
+        tableCellIndex = lIndex.row
+      }
+    }
+    
     if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
       
       upvoteComment(tableCell: tableCell)
       
     } else {
       
-      lastAction = .upvote
-      lastActionPosition = tableCell.tag
-      askToLogin(position: tableCell.tag, activeCell: tableCell)
-      tableCell.hideProgress()
+      if let lIndex = tableCellIndex, let lCurrentIndexPath = tableView.indexPath(for: tableCell) {
+        
+        if lIndex == lCurrentIndexPath.row {
+          
+          print("\nIS OPENED = \(loginOpened)\n")
+          
+          if let isOpened = isLoginFormOpened, isOpened == true {
+            
+            tableCell.hideProgress()
+            isLoginFormOpened = false
+            closeForms()
+            
+          } else {
+            
+            isLoginFormOpened = true
+            
+            lastAction = .upvote
+            lastActionPosition = tableCell.tag
+            askToLogin(position: tableCell.tag, activeCell: tableCell)
+            tableCell.hideProgress()
+          }
+        } else {
+          
+          tableCellIndex = lCurrentIndexPath.row
+
+          isLoginFormOpened = true
+          
+          lastAction = .upvote
+          lastActionPosition = tableCell.tag
+          askToLogin(position: tableCell.tag, activeCell: tableCell)
+          tableCell.hideProgress()
+        }
+      }
+      
     }
   }
   
@@ -537,16 +577,54 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     tableCell.showProgress()
     closeForms()
     
-    if  self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
+    
+    if tableCellIndex == nil {
+      if let lIndex = tableView.indexPath(for: tableCell) {
+        tableCellIndex = lIndex.row
+      }
+    }
+    
+    
+    if self.defaults.object(forKey: "email") as? String != nil && self.defaults.object(forKey: "email") as? String != "" {
       
       downvoteComment(tableCell: tableCell)
       
     } else {
       
-      lastAction = .downvote
-      lastActionPosition = tableCell.tag
-      askToLogin(position: tableCell.tag, activeCell: tableCell)
-      tableCell.hideProgress()
+      if let lIndex = tableCellIndex, let lCurrentIndexPath = tableView.indexPath(for: tableCell) {
+        
+        if lIndex == lCurrentIndexPath.row {
+          
+          print("\nIS OPENED = \(loginOpened)\n")
+          
+          if let isOpened = isLoginFormOpened, isOpened == true {
+            
+            tableCell.hideProgress()
+            isLoginFormOpened = false
+            closeForms()
+            
+          } else {
+            
+            isLoginFormOpened = true
+            
+            lastAction = .downvote
+            lastActionPosition = tableCell.tag
+            askToLogin(position: tableCell.tag, activeCell: tableCell)
+            tableCell.hideProgress()
+          }
+        } else {
+          
+          tableCellIndex = lCurrentIndexPath.row
+          
+          isLoginFormOpened = true
+          
+          lastAction = .downvote
+          lastActionPosition = tableCell.tag
+          askToLogin(position: tableCell.tag, activeCell: tableCell)
+          tableCell.hideProgress()
+        }
+      }
+      
     }
   }
   
@@ -622,6 +700,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   
   func moreButtonPressed(_ tableCell: CommentCell, moreButtonPressed moreButton: AnyObject) {
     
+    if tableCellIndex == nil {
+      if let lIndex = tableView.indexPath(for: tableCell) {
+        tableCellIndex = lIndex.row
+      }
+    }
+    
     let user = ParametersConstructor.sharedInstance.getUserInfo()
     let cell = self.arrayObjectsForCell[tableCell.tag] as! CommentsFeed
     
@@ -630,13 +714,43 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       
     } else {
       
-      closeForms()
-    
-      lastAction = .report
-      lastActionPosition = tableCell.tag
-      reportId = cell.comment_id!
-      askToLogin(position: lastActionPosition, activeCell: tableCell)
-      tableCell.hideProgress()
+      if let lIndex = tableCellIndex, let lCurrentIndexPath = tableView.indexPath(for: tableCell) {
+        
+        if lIndex == lCurrentIndexPath.row {
+          
+          print("\nIS OPENED = \(loginOpened)\n")
+          
+          if let isOpened = isLoginFormOpened, isOpened == true {
+            
+            tableCell.hideProgress()
+            isLoginFormOpened = false
+            closeForms()
+            
+          } else {
+            
+            isLoginFormOpened = true
+            
+            lastAction = .report
+            lastActionPosition = tableCell.tag
+            reportId = cell.comment_id!
+            askToLogin(position: lastActionPosition, activeCell: tableCell)
+            tableCell.hideProgress()
+          }
+        } else {
+          
+          closeForms()
+          tableCellIndex = lCurrentIndexPath.row
+          
+          isLoginFormOpened = true
+          
+          lastAction = .report
+          lastActionPosition = tableCell.tag
+          reportId = cell.comment_id!
+          askToLogin(position: lastActionPosition, activeCell: tableCell)
+          tableCell.hideProgress()
+        }
+      }
+      
     }
   }
   
@@ -1718,14 +1832,12 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     insertCell(position: newCellPosition)
     lastLoginID = newCellPosition
-    loginOpened = true
   }
   
   
   func reportComment(user: [String:String], cellId: String, cell: CommentCell) {
     
     let lKey = "\(cellId)reported\(user["name"]!)\(user["email"]!)"
-    
     
     if (UserDefaults.standard.object(forKey: lKey) as? String == nil) {
       
@@ -1792,6 +1904,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     tableView.insertRows(at: [indexPath], with: .right)
     tableView.endUpdates()
     updateIndexes(from: position)
+    
+    UserDefaults.standard.set(true, forKey: "IS_LOGIN_FORM_OPENED")
     //changeHeight()
     //tableView.scrollToRow(at: IndexPath.init(row: position - 1, section: 0), at: .bottom, animated: true)
   }
@@ -1909,6 +2023,10 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   func twitterLoginButtonPressed(tableCell : AddCommentCell, pressed twitterLoginButton: AnyObject) {
     
     tableCell.showProgress()
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+      tableCell.hideProgress()
+    }
     
     SocialNetworksTracker.sharedTracker.logInTwitter(successClosure: { [unowned self] (dict) in
       
