@@ -130,7 +130,11 @@ class ParametersConstructor  {
       output = output?.replacingOccurrences(of: "&#8217;", with: "'")
       output = output?.replacingOccurrences(of: "%20", with: " ")
       output = output?.replacingOccurrences(of: "%2520", with: " ")
-      return (output?.removingPercentEncoding)!
+      output = output?.removingPercentEncoding
+      
+      output = output?.replacingOccurrences(of: "<br/>", with: "\n")
+      
+      return output!
       
     } else {
       

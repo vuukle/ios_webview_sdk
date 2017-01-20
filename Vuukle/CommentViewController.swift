@@ -10,10 +10,7 @@ let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NO
 
 
 class CommentViewController: UIViewController , UITableViewDelegate , UITableViewDataSource ,  UITextFieldDelegate , AddCommentCellDelegate , CommentCellDelegate ,AddLoadMoreCellDelegate , EmoticonCellDelegate , UITextViewDelegate , MostPopularArticleCellDelegate, LoginCellDelegate, MFMailComposeViewControllerDelegate {
-  
-  
-  @IBOutlet weak var BUTTON: UIButton!
-  
+
   
   static let sharedInstance = Global()
   
@@ -116,6 +113,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       getComments()
     }
     CommentViewController.shared = self
+    
+    UITextView.appearance().tintColor = UIColor.gray
+    UITextField.appearance().tintColor = UIColor.gray
   }
   
   
@@ -307,6 +307,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       cell.delegate = self
       cell.tag = indexPath.row
       return cell
+      
     case is LoadMore:
       let objectForCell = object as! LoadMore
       var cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell") as! LoadMoreCell
@@ -318,17 +319,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       cell.tag = indexPath.row
       return cell
       
-      cell.delegate = self
-      cell.tag = indexPath.row
-      return cell
-      
-    case is LoadMore:
-      let objectForCell = object as! LoadMore
-      var cell = tableView.dequeueReusableCell(withIdentifier: "LoadMoreCell") as! LoadMoreCell
-      if cell == nil {
-        cell = LoadMoreCell() as! LoadMoreCell
-      }
-      cell = CellConstructor.sharedInstance.returnLoadMoreCell(cell, object: objectForCell) as! LoadMoreCell
       cell.delegate = self
       cell.tag = indexPath.row
       return cell
@@ -372,6 +362,13 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   //MARK: CommentCellDelegate
   
   func shareButtonPressed(_ tableCell: CommentCell, shareButtonPressed shareButton: UIButton) {
+    
+    if let lName = tableCell.userNameLabel.text, let lText = tableCell.commentLabel.text {
+      
+      print("\n[VUUKLE - UserName]   \(lName)")
+      print("\n[VUUKLE - Comment]    \(lText)")
+      print("\n[VUUKLE - ArticleURL] \(Global.articleUrl)\n")
+    }
     
     if (tableCell.userNameLabel.text != nil &&
       tableCell.commentLabel.text != nil &&
@@ -868,6 +865,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         self.loadReply = true
         
         for r in repliesArray! {
+          
           r.level = comment.level! + 1
           //if index
           self.arrayObjectsForCell.insert(r, at: index + 1)
@@ -1696,6 +1694,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
           for article in responArray! {
             self.arrayObjectsForCell.append(article)
           }
+       
           if reload {
             self.tableView.reloadData()
           }

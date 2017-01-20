@@ -26,8 +26,10 @@ class NetworkManager {
         var responseArray = [CommentsFeed]()
         
         for objectDict in data  {
+          
           responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: objectDict as! NSDictionary))
         }
+        responseArray = responseArray.reversed()
         
         completion(responseArray ,nil)
       } else {
@@ -387,7 +389,7 @@ class NetworkManager {
     
     let url = "\(Global.baseURL as String)getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)"
     
-    print("\n\(url)\n")
+    print("\n[VUUKLE - TopArticle URL] \(url)\n")
     
     Alamofire.request(url).responseJSON { response in
       
@@ -399,6 +401,8 @@ class NetworkManager {
         for mostPopular in array! {
           responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: mostPopular as! NSDictionary))
         }
+        print("\n[VUUKLE - TopArticle Responce] \(responseArray)\n")
+        
         completion(responseArray, nil)
         
       } else {
