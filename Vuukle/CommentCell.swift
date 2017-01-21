@@ -150,15 +150,27 @@ class CommentCell: UITableViewCell {
   }
   
   func showProgress() {
+    
+    self.contentView.isUserInteractionEnabled = false
+    
     progressIndicator.startAnimating()
     progressIndicator.isHidden = false
     self.alpha = 0.4
   }
   
   func hideProgress() {
-    progressIndicator.isHidden = true
-    progressIndicator.stopAnimating()
-    self.alpha = 1
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in
+      
+      guard let exSelf = self else {
+        return
+      }
+      exSelf.contentView.isUserInteractionEnabled = true
+      
+      exSelf.progressIndicator.isHidden = true
+      exSelf.progressIndicator.stopAnimating()
+      exSelf.alpha = 1
+    }
   }
   
   

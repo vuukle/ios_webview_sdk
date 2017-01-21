@@ -123,23 +123,18 @@ class ParametersConstructor  {
   
   func decodingString(_ string : String?) -> String{
     
-    if string != nil {
+    if let lText = string {
       
-      var output = string
-      output = output?.replacingOccurrences(of: "&#8216;", with: "'")
-      output = output?.replacingOccurrences(of: "&#8217;", with: "'")
-      output = output?.replacingOccurrences(of: "%20", with: " ")
-      output = output?.replacingOccurrences(of: "%2520", with: " ")
-      output = output?.removingPercentEncoding
-      
-      output = output?.replacingOccurrences(of: "<br/>", with: "\n")
-      
-      return output!
-      
+      if let lDecodedText = lText.removingPercentEncoding {
+        
+        let lText = lDecodedText.replacingOccurrences(of: "<br/>", with: "\n")
+        return lText
+        
+      } else {
+        return lText
+      }
     } else {
-      
-      var output = "empty_field"
-      return output
+      return "empty_field"
     }
   }
   
