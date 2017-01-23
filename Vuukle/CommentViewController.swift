@@ -2,8 +2,8 @@ import UIKit
 import Alamofire
 import Social
 //import FBSDKCoreKit
-import FBSDKLoginKit
-import STTwitter
+//import FBSDKLoginKit
+//import STTwitter
 import MessageUI
 
 let UPDATE_FLAGS_NOTIFCATION = Notification.Name.init(rawValue: "UPDATE_FLAGS_NOTIFCATION")

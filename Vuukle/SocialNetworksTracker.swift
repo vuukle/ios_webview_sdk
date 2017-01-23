@@ -1,9 +1,9 @@
 import UIKit
 import Alamofire
-import Social
-import FBSDKCoreKit
-import FBSDKLoginKit
-import STTwitter
+//import Social
+//import FBSDKCoreKit
+//import FBSDKLoginKit
+//import STTwitter
 
 
 class SocialNetworksTracker: NSObject {
@@ -12,7 +12,7 @@ class SocialNetworksTracker: NSObject {
   static let sharedTracker : SocialNetworksTracker = SocialNetworksTracker()
   
   //MARK: - Facebook properties
-  var facebookLoginManager = FBSDKLoginManager()
+  //var facebookLoginManager = FBSDKLoginManager()
   
   //MARK: Facebook methods
   func logInFacebook(successClosure: @escaping (Dictionary<String, String>?) -> (),
@@ -76,7 +76,7 @@ class SocialNetworksTracker: NSObject {
   typealias twitterCompletionClosureType = (Dictionary<String, Any>?) -> (Void)
   typealias twitterErrorClosureType = (Error?) -> ()
   
-  var twitterAPI = STTwitterAPI()
+  //var twitterAPI = STTwitterAPI()
   let twitterConsumerKey = "WiMW1eZLZBYuJb6J3xJ9A0KoR"
   let twitterConsumerSecret = "BA8murNNEBHi3tZ77cGcW7cc5ehxzCILDQmBM03xK3jUPWa6fw"
   
