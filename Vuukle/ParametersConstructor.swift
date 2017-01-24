@@ -6,6 +6,7 @@ import Social
 
 
 class ParametersConstructor  {
+  
   static let sharedInstance = ParametersConstructor()
   let defaults : UserDefaults = UserDefaults.standard
   
@@ -104,7 +105,8 @@ class ParametersConstructor  {
   
   
   
-  func setDateInFofmat(_ dateInString : String) -> Date{
+  func setDateInFofmat(_ dateInString : String) -> Date {
+    
     var date = Date()
     if dateInString != "" {
       let dateString:String = dateInString
@@ -118,7 +120,11 @@ class ParametersConstructor  {
   
   func encodingString(_ string : String) -> String {
     
-    return string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+    if let lText = string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
+      return lText
+    } else {
+      return "dont_encoded_string"
+    }
   }
   
   func decodingString(_ string : String?) -> String{

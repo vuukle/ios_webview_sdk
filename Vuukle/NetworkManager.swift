@@ -78,9 +78,7 @@ class NetworkManager {
   
   func postComment(_ name : String, email : String, comment : String, cell: AddCommentCell,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
     
-    let lTitle = ParametersConstructor.sharedInstance.encodingString(Global.title)
-    
-    let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(lTitle as String)&url=\(Global.articleUrl as String)"
+    let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
     
     
     print("\n\(url)\n")
@@ -317,10 +315,8 @@ class NetworkManager {
   //MARK: Set rating
   
   func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating?, NSError?) -> Void) {
-    
-    let lTitle = ParametersConstructor.sharedInstance.encodingString(Global.title)
-    
-    let url = "\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(lTitle as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)"
+ 
+    let url = "\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)"
     
     print("\n\(url)\n")
     

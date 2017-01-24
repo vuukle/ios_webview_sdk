@@ -76,7 +76,9 @@ open class VuukleCommentsBuilder : NSObject {
      
      */
     open func setVuukleHost(_ host : String) -> VuukleCommentsBuilder{
-        Global.host = host.lowercased()
+      
+        let host = host.lowercased()
+        Global.host = ParametersConstructor.sharedInstance.encodingString(host)
         return self
     }
     
@@ -97,7 +99,7 @@ open class VuukleCommentsBuilder : NSObject {
      
      */
     open func setVuukleApiKey(_ apiKey : String) -> VuukleCommentsBuilder{
-        Global.api_key = apiKey
+        Global.api_key = ParametersConstructor.sharedInstance.encodingString(apiKey)
         return self
     }
     
@@ -118,7 +120,7 @@ open class VuukleCommentsBuilder : NSObject {
      
      */
     open func setVuukleSecretKey(_ secretKey : String) -> VuukleCommentsBuilder{
-        Global.secret_key = secretKey
+        Global.secret_key = ParametersConstructor.sharedInstance.encodingString(secretKey)
         return self
     }
     
@@ -131,7 +133,7 @@ open class VuukleCommentsBuilder : NSObject {
      <url>https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</url>
      */
     open func setVuukleTimeZone(_ timeZone : String) -> VuukleCommentsBuilder{
-        Global.time_zone = timeZone
+        Global.time_zone = ParametersConstructor.sharedInstance.encodingString(timeZone)
         return self
     }
     
@@ -148,7 +150,7 @@ open class VuukleCommentsBuilder : NSObject {
      for each article like URL, TAGS, TITLE.
      */
     open func firstVuukleTag(_ tag : String) -> VuukleCommentsBuilder{
-        Global.tag1 = tag.replacingOccurrences(of: " ", with: "")
+        Global.tag1 = ParametersConstructor.sharedInstance.encodingString(tag)
         return self
     }
     
@@ -165,7 +167,7 @@ open class VuukleCommentsBuilder : NSObject {
      for each article like URL, TAGS, TITLE.
      */
     @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  open func secondVuukleTag(_ tag : String) -> VuukleCommentsBuilder{
-        Global.tag2 = tag.replacingOccurrences(of: " ", with: "")
+        Global.tag2 = ParametersConstructor.sharedInstance.encodingString(tag)
         return self
     }
     
@@ -175,7 +177,7 @@ open class VuukleCommentsBuilder : NSObject {
      For example: "http:vuukle.com/test_files/test48.html"
      */
     @available(*, deprecated: 1.0, obsoleted: 2.0, message: "deprecated !")  open func setVuukleUrl(_ url : String) -> VuukleCommentsBuilder{
-        Global.url = url
+        Global.url = ParametersConstructor.sharedInstance.encodingString(url)
         return self
     }
     
@@ -185,7 +187,7 @@ open class VuukleCommentsBuilder : NSObject {
      Set your Title.
      */
     open func setVuukleTitle(_ title : String) -> VuukleCommentsBuilder{
-        Global.title = title.replacingOccurrences(of: " ", with: "")
+        Global.title = ParametersConstructor.sharedInstance.encodingString(title)
         return self
     }
     
@@ -195,7 +197,7 @@ open class VuukleCommentsBuilder : NSObject {
      Set your Article Title.
      */
     open func setVuukleArticleTitle (_ articleTitle : String) -> VuukleCommentsBuilder{
-        Global.article_title = articleTitle.replacingOccurrences(of: " ", with: "")
+        Global.article_title = articleTitle
         return self
     }
     
@@ -205,7 +207,7 @@ open class VuukleCommentsBuilder : NSObject {
      Set your application name.
      */
     open func setAppName (_ appName : String) -> VuukleCommentsBuilder{
-        Global.appName = appName.replacingOccurrences(of: " ", with: "")
+        Global.appName = ParametersConstructor.sharedInstance.encodingString(appName)
         return self
     }
     
@@ -215,7 +217,7 @@ open class VuukleCommentsBuilder : NSObject {
      Set your article url.
      */
     open func setArticleUrl (_ articleUrl : String) -> VuukleCommentsBuilder{
-        Global.articleUrl = articleUrl
+        Global.articleUrl = ParametersConstructor.sharedInstance.encodingString(articleUrl)
         return self
     }
     
@@ -225,7 +227,7 @@ open class VuukleCommentsBuilder : NSObject {
      Set your application id.
      */
     open func setAppID (_ appID : String) -> VuukleCommentsBuilder{
-        Global.appId = appID
+        Global.appId = ParametersConstructor.sharedInstance.encodingString(appID)
         return self
     }
     
