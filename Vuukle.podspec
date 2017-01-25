@@ -7,7 +7,7 @@ s.name         = "Vuukle"
 s.summary      = "Vuukle.com"
 
 # 2
-s.version      = "1.0.34"
+s.version      = "1.0.35"
 
 # 3
 s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -23,8 +23,8 @@ s.source       = { :git => "https://github.com/vuukle/vuukle_iOS_SDK", :tag => "
 
 # 7
 s.framework    = "UIKit"
-s.dependency 'Alamofire', '~> 4.0'
-s.dependency 'AlamofireImage', '~> 3.0'
+s.dependency 'Alamofire'
+s.dependency 'AlamofireImage'
 
 # 8
 s.source_files  = "Vuukle/**/*.{swift}"

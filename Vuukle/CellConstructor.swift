@@ -91,6 +91,7 @@ open class  CellConstructor {
     
     
     var cell = CellConstraintsConstructor.sharedInstance.setCommentCellConstraints(cell)
+   
     cell.hideProgress()
     //cell.userNameLabel.textColor = UIColor.blue
     cell.commentLabel.text = newComment.replacingOccurrences(of: "<br/>", with: " ", options: NSString.CompareOptions.literal, range: nil)
@@ -141,6 +142,7 @@ open class  CellConstructor {
   }
   
   func returnMostPopularArticleCell (_ cell : MostPopularArticleCell , object : MostPopularArticle ) -> MostPopularArticleCell {
+    
     cell.layer.borderWidth = 1.0
     cell.layer.borderColor = UIColor.lightGray.cgColor
     if object.imgUrl != "" && object.imgUrl != nil {

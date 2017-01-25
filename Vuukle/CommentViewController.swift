@@ -368,36 +368,63 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       print("\n[VUUKLE - UserName]   \(lName)")
       print("\n[VUUKLE - Comment]    \(lText)")
       print("\n[VUUKLE - ArticleURL] \(Global.articleUrl)\n")
-    }
-    
-    if (tableCell.userNameLabel.text != nil &&
-      tableCell.commentLabel.text != nil &&
-      Global.articleUrl != nil) {
-      
-      let shareText = "\((tableCell.userNameLabel.text! as String)) commented: \"\((tableCell.commentLabel.text! as String))\" on:"
+
+      var shareText = "\(lName) commented: \"\(lText))\" on: "
+      var shareItems = [Any]()
       
       if (shareText != nil) {
         UIPasteboard.general.string = shareText
       }
-      
-      let shareURL = NSURL(string: "\(Global.articleUrl)")
-      let shareItems: [Any] = [shareText, shareURL]
-      
-      let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-      
-      if (UIDevice.current.userInterfaceIdiom == .phone) {
+     
+      ParametersConstructor.sharedInstance.checkTextIsURL(Global.articleUrl) { isURL in
         
-        activityViewController.modalPresentationStyle = .overCurrentContext
-        self.present(activityViewController, animated: true, completion: nil)
-        
-      } else if (UIDevice.current.userInterfaceIdiom == .pad) {
-        
-        activityViewController.modalPresentationStyle = .popover
-        present(activityViewController, animated: true, completion: nil)
-        
-        let popoverPresentationController = activityViewController.popoverPresentationController
-        popoverPresentationController?.sourceView = shareButton
-        popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
+        if isURL {
+          
+          let shareURL = NSURL(string: "\(Global.articleUrl)")
+          shareItems.append(shareText)
+          shareItems.append(shareURL)
+          
+          
+          let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+          
+          if (UIDevice.current.userInterfaceIdiom == .phone) {
+            
+            activityViewController.modalPresentationStyle = .overCurrentContext
+            self.present(activityViewController, animated: true, completion: nil)
+            
+          } else if (UIDevice.current.userInterfaceIdiom == .pad) {
+            
+            activityViewController.modalPresentationStyle = .popover
+            self.present(activityViewController, animated: true, completion: nil)
+            
+            let popoverPresentationController = activityViewController.popoverPresentationController
+            popoverPresentationController?.sourceView = shareButton
+            popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
+          }
+
+          
+        } else {
+          
+          shareText.append(Global.articleUrl)
+          shareItems.append(shareText)
+          
+          let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+          
+          if (UIDevice.current.userInterfaceIdiom == .phone) {
+            
+            activityViewController.modalPresentationStyle = .overCurrentContext
+            self.present(activityViewController, animated: true, completion: nil)
+            
+          } else if (UIDevice.current.userInterfaceIdiom == .pad) {
+            
+            activityViewController.modalPresentationStyle = .popover
+            self.present(activityViewController, animated: true, completion: nil)
+            
+            let popoverPresentationController = activityViewController.popoverPresentationController
+            popoverPresentationController?.sourceView = shareButton
+            popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
+          }
+        }
       }
     }
   }

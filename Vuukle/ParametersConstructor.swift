@@ -103,6 +103,21 @@ class ParametersConstructor  {
     return allFill
   }
   
+  func checkTextIsURL(_ text: String, complition: @escaping (Bool) -> Void) {
+    
+    let checkTypes: NSTextCheckingResult.CheckingType = [.link]
+    let detector = try? NSDataDetector(types: checkTypes.rawValue)
+    
+    detector?.enumerateMatches(in: text,
+                               options: .reportCompletion,
+                               range: NSRange.init(location: 0, length: text.characters.count)) { (result, _, _) in
+      if let lResult = result {
+        complition(true)
+      }
+      complition(false)
+    }
+  }
+  
   
   
   func setDateInFofmat(_ dateInString : String) -> Date {

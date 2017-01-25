@@ -36,9 +36,17 @@ class MostPopularArticleCell: UITableViewCell {
                 
                 NetworkManager.sharedInstance.getImageWhihURL(lImageURL, completion: { (image, error) in
                     
-                    if error == nil, image != nil {
-                        self.articleImage.image = image
-                    }
+                    if error == nil && image != nil {
+                      
+                      self.articleImage.image = image
+                      self.articleImage.layer.cornerRadius = 6
+                      self.articleImage.layer.masksToBounds = true
+                      
+                    } else {
+                      self.articleImage.image = UIImage(named: "PlaceholderArticle", in: Bundle(for: CommentViewController.self), compatibleWith: nil)
+                      self.articleImage.layer.cornerRadius = 6
+                      self.articleImage.layer.masksToBounds = true
+                  }
                 })
             }
         }
