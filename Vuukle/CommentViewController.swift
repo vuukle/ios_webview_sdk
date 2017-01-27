@@ -122,7 +122,8 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    self.tableView.contentInset = Global.edgeInserts
+    self.tableView.isScrollEnabled = Global.scrolingTableView
   }
   
   override func viewDidAppear(_ animated: Bool) {

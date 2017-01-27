@@ -43,6 +43,7 @@ class Global {
     static var fifthEmoticonVotesCount  = 0
     static var sixthEmoticonVotesCount = 0
     static var votes = EmoteRating()
+    static var edgeInserts = UIEdgeInsetsMake(0, 0, 0, 0)
     
     func checkAllParameters() -> Bool{
         if Global.article_id != "" && Global.host != "" && Global.api_key != "" && Global.secret_key != "" && Global.time_zone != "" && Global.title != "" && Global.article_title != "" && Global.appName != "" && Global.articleUrl != "" && Global.appId != ""{

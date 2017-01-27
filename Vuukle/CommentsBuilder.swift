@@ -37,7 +37,15 @@ open class VuukleCommentsBuilder : NSObject {
         Global.showRefreshControl = isVisible
         return self
     }
-    
+  
+    /**
+     Set edge inserts
+    */
+    open func setVuukleEdgeInserts(_ edgeInserts: UIEdgeInsets) -> VuukleCommentsBuilder {
+      Global.edgeInserts = edgeInserts
+      return self
+    }
+  
     /**
      Set true for visible your WebContent from Aticle URL!
      */
@@ -286,6 +294,7 @@ open class VuukleCommentsBuilder : NSObject {
     open static func getCommentsCount() -> Int{
         return VuukleInfo.getCommentsCount()
     }
+
     
     /*
      Function which allows you to log in users
