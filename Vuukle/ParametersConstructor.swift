@@ -103,19 +103,22 @@ class ParametersConstructor  {
     return allFill
   }
   
-  func checkTextIsURL(_ text: String, complition: @escaping (Bool) -> Void) {
+  func checkTextIsURL(_ text: String) -> URL? {
     
-    let checkTypes: NSTextCheckingResult.CheckingType = [.link]
-    let detector = try? NSDataDetector(types: checkTypes.rawValue)
+    var urlFromString: URL?
     
-    detector?.enumerateMatches(in: text,
-                               options: .reportCompletion,
-                               range: NSRange.init(location: 0, length: text.characters.count)) { (result, _, _) in
-      if let lResult = result {
-        complition(true)
+    let lCheckTypes: NSTextCheckingResult.CheckingType = [.link]
+    let lDetector = try? NSDataDetector(types: lCheckTypes.rawValue)
+    
+    let lRange = NSRange.init(location: 0, length: text.characters.count)
+    
+    lDetector?.enumerateMatches(in: text, options: .reportCompletion, range: lRange) { (result, _, _) in
+      
+      if let lUrl = result?.url {
+        urlFromString = lUrl
       }
-      complition(false)
     }
+    return urlFromString
   }
   
   
@@ -142,7 +145,7 @@ class ParametersConstructor  {
     }
   }
   
-  func decodingString(_ string : String?) -> String{
+  func decodingString(_ string : String?) -> String {
     
     if let lText = string {
       

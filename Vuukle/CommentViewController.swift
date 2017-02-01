@@ -370,62 +370,32 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       print("\n[VUUKLE - Comment]    \(lText)")
       print("\n[VUUKLE - ArticleURL] \(Global.articleUrl)\n")
 
-      var shareText = "\(lName) commented: \"\(lText))\" on: "
+      var shareText = "\(lName) commented: \"\(lText))\" on: \(Global.articleUrl)"
       var shareItems = [Any]()
       
       if (shareText != nil) {
         UIPasteboard.general.string = shareText
       }
      
-      ParametersConstructor.sharedInstance.checkTextIsURL(Global.articleUrl) { isURL in
+      if let shareURL = ParametersConstructor.sharedInstance.checkTextIsURL(Global.articleUrl) {
+        shareItems.append(shareURL)
+      }
+      
+      let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+      
+      if (UIDevice.current.userInterfaceIdiom == .phone) {
         
-        if isURL {
-          
-          let shareURL = NSURL(string: "\(Global.articleUrl)")
-          shareItems.append(shareText)
-          shareItems.append(shareURL)
-          
-          
-          let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-          
-          if (UIDevice.current.userInterfaceIdiom == .phone) {
-            
-            activityViewController.modalPresentationStyle = .overCurrentContext
-            self.present(activityViewController, animated: true, completion: nil)
-            
-          } else if (UIDevice.current.userInterfaceIdiom == .pad) {
-            
-            activityViewController.modalPresentationStyle = .popover
-            self.present(activityViewController, animated: true, completion: nil)
-            
-            let popoverPresentationController = activityViewController.popoverPresentationController
-            popoverPresentationController?.sourceView = shareButton
-            popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
-          }
-
-          
-        } else {
-          
-          shareText.append(Global.articleUrl)
-          shareItems.append(shareText)
-          
-          let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
-          
-          if (UIDevice.current.userInterfaceIdiom == .phone) {
-            
-            activityViewController.modalPresentationStyle = .overCurrentContext
-            self.present(activityViewController, animated: true, completion: nil)
-            
-          } else if (UIDevice.current.userInterfaceIdiom == .pad) {
-            
-            activityViewController.modalPresentationStyle = .popover
-            self.present(activityViewController, animated: true, completion: nil)
-            
-            let popoverPresentationController = activityViewController.popoverPresentationController
-            popoverPresentationController?.sourceView = shareButton
-            popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
-          }
-        }
+        activityViewController.modalPresentationStyle = .overCurrentContext
+        self.present(activityViewController, animated: true, completion: nil)
+        
+      } else if (UIDevice.current.userInterfaceIdiom == .pad) {
+        
+        activityViewController.modalPresentationStyle = .popover
+        self.present(activityViewController, animated: true, completion: nil)
+        
+        let popoverPresentationController = activityViewController.popoverPresentationController
+        popoverPresentationController?.sourceView = shareButton
+        popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
       }
     }
   }
@@ -1719,9 +1689,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         
         if error == nil && responArray != nil {
           
-          for article in responArray! {
-            self.arrayObjectsForCell.append(article)
-          }
+//          for article in responArray! {
+//            self.arrayObjectsForCell.append(article)
+//          }
        
           if reload {
             self.tableView.reloadData()

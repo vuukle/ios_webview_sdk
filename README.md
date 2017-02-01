@@ -147,8 +147,23 @@ For example :
 App Transport Security Settings  Dictionary  (1 item)
 Allow Arbitary               Boolean     YES
 
+5. Subscribe your controller to notification 
 
-5.Everything is ready, you can run the project.
+NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+
+[nc addObserver:self
+selector:@selector(successfullyRetrievedObjects:)
+name:Constants.ContentHeightDidChaingedNotification
+object:nil];
+
+6. Dynamiccally change height of UIView
+
+- (void) successfullyRetrievedObjects:(NSNotification*) notification {
+
+self.vuukleHeightConstraint.constant = [notification.object floatValue];
+}
+
+7.Everything is ready, you can run the project.
 
 ___________________________________________________________________
 
@@ -258,3 +273,5 @@ Example Podfile - Objective-c (If Xcode version is higher than 8.0):
     end
 
 * It's all! In your Vuukle library is Facebook logination!
+
+
