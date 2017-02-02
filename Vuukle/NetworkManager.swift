@@ -80,7 +80,6 @@ class NetworkManager {
     
     let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
     
-    
     print("\n\(url)\n")
     
     Alamofire.request(url).responseJSON { response in
@@ -389,17 +388,20 @@ class NetworkManager {
     
     Alamofire.request(url).responseJSON { response in
       
-      if let JSON = response.result.value {
-        
-        let array = JSON as? NSArray
-        var responseArray = [MostPopularArticle]()
-        
-        for mostPopular in array! {
-          responseArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: mostPopular as! NSDictionary))
-        }
-        print("\n[VUUKLE - TopArticle Responce] \(responseArray)\n")
-        
-        completion(responseArray, nil)
+      if let JSON = response.result.value, let responseArray = JSON as? NSArray {
+          
+          var topArticlesArray = [MostPopularArticle]()
+          
+          for mostPopularInfo in responseArray {
+            
+            if let mostPopularInfo = mostPopularInfo as? NSDictionary {
+              
+              topArticlesArray.append(MostPopularArticle.getMostPopularArticleArray(pDict: mostPopularInfo))
+            }
+          }
+          print("\n[VUUKLE - TopArticle Responce] \(responseArray)\n")
+          
+          completion(topArticlesArray, nil)
         
       } else {
         print("Status cod = \(response.response?.statusCode)")
@@ -412,6 +414,7 @@ class NetworkManager {
     var result = false
     
     Alamofire.request("\(Global.baseURL as String)flagCommentOrReply?comment_id=\(commentID)&api_key=\(Global.api_key as String)&article_id=\(Global.article_id)&resource_id=\(Global.resource_id as String)&name=\(name)&email=\(email)")
+      
       .responseJSON { response in
         if let JSON = response.result.value {
           self.jsonArray = JSON as? NSDictionary

@@ -67,6 +67,7 @@
 		9083BD791DFF0F4700000068 /* toolbar-back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD771DFF0F4700000068 /* toolbar-back-button.png */; };
 		9083BD7A1DFF0F4700000068 /* toolbar-next-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD781DFF0F4700000068 /* toolbar-next-button.png */; };
 		9083BD7C1DFF104500000068 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9083BD7B1DFF104500000068 /* LoginForm.swift */; };
+		90A397DA1E43504B00354D2E /* PlaceholderArticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 90A397D91E43504B00354D2E /* PlaceholderArticle.png */; };
 		90C747F41DF6A03200D78639 /* EmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C747F31DF6A03200D78639 /* EmailVerificator.swift */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +134,7 @@
 		9083BD771DFF0F4700000068 /* toolbar-back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-back-button.png"; sourceTree = "<group>"; };
 		9083BD781DFF0F4700000068 /* toolbar-next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-next-button.png"; sourceTree = "<group>"; };
 		9083BD7B1DFF104500000068 /* LoginForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
+		90A397D91E43504B00354D2E /* PlaceholderArticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceholderArticle.png; sourceTree = "<group>"; };
 		90C747F31DF6A03200D78639 /* EmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -234,6 +236,7 @@
 				049D0B6E1D9D562000507DC3 /* thumb-down.png */,
 				049D0B6F1D9D562000507DC3 /* thumb-up.png */,
 				049D0B701D9D562000507DC3 /* twitter.png */,
+				90A397D91E43504B00354D2E /* PlaceholderArticle.png */,
 				049D0B711D9D562000507DC3 /* vuukle_logo.jpg */,
 				049D0B721D9D562000507DC3 /* WebViewCell.xib */,
 			);
@@ -314,6 +317,7 @@
 				9053A8881DF1C64500E3A26E /* CommentCell.xib in Resources */,
 				049D0B771D9D562000507DC3 /* EmoticonCell.xib in Resources */,
 				049D0B831D9D562000507DC3 /* smile-sad-full.png in Resources */,
+				90A397DA1E43504B00354D2E /* PlaceholderArticle.png in Resources */,
 				901279E81DF8367100F3D185 /* LoadMoreCell.xib in Resources */,
 				9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */,
 				049D0B731D9D562000507DC3 /* 122.png in Resources */,

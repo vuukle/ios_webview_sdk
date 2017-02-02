@@ -61,6 +61,9 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    self.tableView.contentInset = Global.edgeInserts
+    self.tableView.isScrollEnabled = Global.scrolingTableView
+    
     if Global.sharedInstance.checkAllParameters() == true {
       let bundleCommentCell = Bundle(for: CommentCell.self)
       let bundleAddCommentCell = Bundle(for: CommentCell.self)
@@ -116,14 +119,6 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
     
     UITextView.appearance().tintColor = UIColor.gray
     UITextField.appearance().tintColor = UIColor.gray
-  }
-  
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    self.tableView.contentInset = Global.edgeInserts
-    self.tableView.isScrollEnabled = Global.scrolingTableView
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -1687,11 +1682,11 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       
       NetworkManager.sharedInstance.getMostPopularArticle { [unowned self] (responArray, error) in
         
-        if error == nil && responArray != nil {
+        if error == nil, let topArticlesArray = responArray  {
           
-//          for article in responArray! {
-//            self.arrayObjectsForCell.append(article)
-//          }
+          for article in topArticlesArray {
+            self.arrayObjectsForCell.append(article)
+          }
        
           if reload {
             self.tableView.reloadData()
