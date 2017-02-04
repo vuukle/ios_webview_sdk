@@ -165,6 +165,26 @@ self.vuukleHeightConstraint.constant = [notification.object floatValue];
 
 7.Everything is ready, you can run the project.
 
+Optional: 
+
+8. If you use most popular articles, add observer for notification ""
+
+[[NSNotificationCenter defaultCenter] addObserver: self
+                                         selector: @selector(openMostPopularArticle:)
+                                             name: @"VuukleOpenMostPopularArticle"
+                                           object: nil];
+
+9. Add this method, witch will be called by notification
+
+- (void)openMostPopularArticle:(NSNotification *)notification {
+
+  NSString *articleURL = [notification object];
+
+  // Do what you need with this top article
+
+}
+
+
 ___________________________________________________________________
 
                     Information about parameters:

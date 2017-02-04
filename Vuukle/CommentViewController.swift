@@ -1415,10 +1415,16 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   
   func showArticleButtonPressed(_ tableCell: MostPopularArticleCell, _ showArticle: AnyObject) {
     closeForms()
+    
     var popularArticle = arrayObjectsForCell[tableCell.tag] as! MostPopularArticle
+    
     if let articleUrl = popularArticle.articleUrl {
-      UIApplication.shared.openURL(URL(string: articleUrl)!)
+      
+      NotificationCenter.default.post(name: Notification.Name("VuukleOpenMostPopularArticle"),
+                                      object: articleUrl)
+      //UIApplication.shared.openURL(URL(string: articleUrl)!)
     }
+    
     //You can uncomment next fields to change comments
     
     //        Global.articleUrl = popularArticle.articleUrl!
@@ -1735,7 +1741,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   
   func setHeight(sender: AnyObject) {
     
-    let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
     
     DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
       
@@ -1966,7 +1972,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
   }
   
   func changeHeight() {
-    let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.4 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    let dispatchTime: DispatchTime = DispatchTime.now() + Double(Int64(0.6 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
     DispatchQueue.main.asyncAfter(deadline: dispatchTime, execute: {
       let myNumber = NSNumber(value: Float(self.tableView.contentSize.height))
       NSLog("\n \n Vuukle Library: Content Height was changed to \(myNumber) \n \n")

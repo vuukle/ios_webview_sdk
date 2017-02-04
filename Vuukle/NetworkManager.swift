@@ -53,6 +53,10 @@ class NetworkManager {
           let commentFeedArray : NSArray = [self.jsonArray!["comment_feed"]!]
           Global.resource_id = "\((self.jsonArray!["resource_id"] as? Int)!)"
           
+          if let jsonArray = self.jsonArray, let count = jsonArray["comments"] as? Int {
+            VuukleInfo.totalCommentsCount = count
+          }
+          
           var responseArray = [CommentsFeed]()
           
           for feed in commentFeedArray.firstObject as! NSArray {
@@ -272,6 +276,9 @@ class NetworkManager {
         
         self.jsonArray = JSON as? NSDictionary
         
+        if let jsonArray = self.jsonArray, let count = jsonArray["comments"] as? Int {
+          VuukleInfo.totalCommentsCount = count
+        }
         
         let commentFeedArray : NSArray = [self.jsonArray!["comment_feed"]!]
         
@@ -281,6 +288,7 @@ class NetworkManager {
           responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))
         }
         
+
         completion(responseArray, nil)
         
       } else {
@@ -450,6 +458,11 @@ class NetworkManager {
         let commentFeedArray : NSArray = [jsonArray!["comment_feed"]!]
         var responseArray = [CommentsFeed]()
         
+        if let jsonArray = jsonArray, let count = jsonArray["comments"] as? Int {
+          VuukleInfo.totalCommentsCount = count
+        }
+        
+
         for feed in commentFeedArray.firstObject as! NSArray {
           
           responseArray.append(CommentsFeed.getCommentsFeedWhithArray(pDict: feed as! NSDictionary))

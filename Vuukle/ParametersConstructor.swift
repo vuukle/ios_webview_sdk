@@ -138,8 +138,10 @@ class ParametersConstructor  {
   
   func encodingString(_ string : String) -> String {
     
-    if let lText = string.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {
-      return lText
+    var text = string.replacingOccurrences(of: "&", with: " ")
+    
+    if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+      return encodedText
     } else {
       return "dont_encoded_string"
     }

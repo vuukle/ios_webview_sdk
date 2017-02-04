@@ -53,10 +53,11 @@ class MostPopularArticleCell: UITableViewCell {
     }
     
     @IBAction func showArticleButton(_ sender: AnyObject) {
-        self.delegate?.showArticleButtonPressed(self, sender)
+      
+      self.delegate?.showArticleButtonPressed(self, sender)
         
         showButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [unowned self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) { [unowned self] in
             self.showButton.isEnabled = true
         }
     }
