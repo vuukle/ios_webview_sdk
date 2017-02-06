@@ -381,16 +381,23 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
       if (UIDevice.current.userInterfaceIdiom == .phone) {
         
         activityViewController.modalPresentationStyle = .overCurrentContext
-        self.present(activityViewController, animated: true, completion: nil)
         
+        if let baseVC = Global.baseVC {
+          
+          baseVC.present(activityViewController, animated: true, completion: nil)
+        }
       } else if (UIDevice.current.userInterfaceIdiom == .pad) {
         
         activityViewController.modalPresentationStyle = .popover
-        self.present(activityViewController, animated: true, completion: nil)
+        
+        if let baseVC = Global.baseVC {
+          baseVC.present(activityViewController, animated: true, completion: nil)
+        }
         
         let popoverPresentationController = activityViewController.popoverPresentationController
         popoverPresentationController?.sourceView = shareButton
         popoverPresentationController?.sourceRect = CGRect(x: 0, y: 0, width: shareButton.frame.size.width, height: shareButton.frame.size.height)
+        
       }
     }
   }
@@ -1394,7 +1401,7 @@ class CommentViewController: UIViewController , UITableViewDelegate , UITableVie
         break
       }
       
-      NetworkManager.sharedInstance.setRaring(articleID, emote: emoteIndex) { [unowned self] (response, error) in
+      NetworkManager.sharedInstance.setRaring(articleID, emote: emoteIndex) { (response, error) in
         
         if error == nil {
           

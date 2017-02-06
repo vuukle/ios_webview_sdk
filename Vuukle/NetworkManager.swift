@@ -81,7 +81,7 @@ class NetworkManager {
   // MARK: Post Comment
   
   func postComment(_ name : String, email : String, comment : String, cell: AddCommentCell,completion : @escaping (ResponseToComment? , NSError?) -> Void) {
-    
+
     let url = "\(Global.baseURL as String)postComment?host=\(Global.host as String)&article_id=\(Global.article_id as String)&api_key=\(Global.api_key)&secret_key=\(Global.secret_key as String)&name=\(name as String)&email=\(email as String)&comment=\(comment as String)&tags=\(Global.tag1 as String)&title=\(Global.title as String)&url=\(Global.articleUrl as String)"
     
     print("\n\(url)\n")
@@ -321,27 +321,21 @@ class NetworkManager {
   
   //MARK: Set rating
   
-  func setRaring(_ article_id : String ,emote : Int,completion : @escaping (ResponseToEmoteRating?, NSError?) -> Void) {
+  func setRaring(_ article_id: String ,emote: Int ,completion : @escaping (ResponseToEmoteRating?, NSError?) -> Void) {
  
     let url = "\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)"
     
     print("\n\(url)\n")
     
-    Alamofire.request(url).responseJSON { response in
-      
-      if let JSON = response.result.value {
+    Alamofire.request(url).responseJSON { alamofireResponce in
+
+    
+      if let JSON = alamofireResponce.result.value {
         
-        self.jsonArray = JSON as? NSDictionary
         
-        let respon = ResponseToEmoteRating()
-        respon.result = self.jsonArray!["result"] as? Bool
-        
-        completion(respon, nil)
         
       } else {
-        
-        completion(nil, response.result.error as NSError?)
-        print("Status cod = \(response.response!.statusCode)")
+        completion(nil, alamofireResponce.result.error as NSError?)
       }
     }
   }
@@ -390,7 +384,7 @@ class NetworkManager {
   
   func getMostPopularArticle(_ completion: @escaping ([MostPopularArticle]?, NSError?) -> Void) {
     
-    let url = "\(Global.baseURL as String)getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=24&count=\(Global.countLoadMostPopularArticle)"
+    let url = "\(Global.baseURL as String)getRecentMostCommentedByHostByTime?bizId=\(Global.api_key as String)&host=\(Global.host as String)&tag=&hours=168&count=\(Global.countLoadMostPopularArticle)"
     
     print("\n[VUUKLE - TopArticle URL] \(url)\n")
     

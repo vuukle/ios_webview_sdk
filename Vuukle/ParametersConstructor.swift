@@ -139,6 +139,22 @@ class ParametersConstructor  {
   func encodingString(_ string : String) -> String {
     
     var text = string.replacingOccurrences(of: "&", with: " ")
+    text = string.replacingOccurrences(of: "=", with: " ")
+    text = string.replacingOccurrences(of: "\\s+", with: " ", options: .regularExpression)
+    
+    if text.hasPrefix(" ") {
+      
+      while text.characters.first == " " {
+        text.remove(at: text.startIndex)
+      }
+    }
+    
+    if text.hasSuffix(" ") {
+      
+      while text.characters.last == " " {
+        text.remove(at: text.index(before: text.endIndex))
+      }
+    }
     
     if let encodedText = text.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
       return encodedText

@@ -258,7 +258,13 @@ open class VuukleCommentsBuilder : NSObject {
         Global.countLoadMostPopularArticle = count
         return self
     }
-    
+  
+  
+  
+    open func setVuukleBaseViewController(_ viewController: UIViewController) -> VuukleCommentsBuilder{
+        Global.baseVC = viewController
+        return self
+    }
     /**
      Required field!
      
@@ -275,14 +281,46 @@ open class VuukleCommentsBuilder : NSObject {
       
         view.frame = vc.view.frame
         view.addSubview(vc.view)
+      
+        let topConstraint = NSLayoutConstraint(item: vc.view,
+                                               attribute: .top,
+                                               relatedBy: .equal,
+                                               toItem: view,
+                                               attribute: .top,
+                                               multiplier: 1.0,
+                                               constant: 0)
+      
+        let bottomConstraint = NSLayoutConstraint(item: vc.view,
+                                                  attribute: .bottom,
+                                                  relatedBy: .equal,
+                                                  toItem: view,
+                                                  attribute: .bottom,
+                                                  multiplier: 1.0,
+                                                  constant: 0)
+      
+        let leadingConstraint = NSLayoutConstraint(item: vc.view,
+                                                   attribute: .leading,
+                                                   relatedBy: .equal,
+                                                   toItem: view,
+                                                   attribute: .leading,
+                                                   multiplier: 1.0,
+                                                   constant: 0)
+      
+        let tralingConstraint = NSLayoutConstraint(item: vc.view,
+                                                   attribute: .trailing,
+                                                   relatedBy: .equal,
+                                                   toItem: view,
+                                                   attribute: .trailing,
+                                                   multiplier: 1.0,
+                                                   constant: 0)
     }
-    
+  
     /*
      Function which returns Height of Vuukle
-     
+   
      We recommend to work with notifications!
      */
-    
+  
     open static func getHeight() -> CGFloat{
         return VuukleInfo.getCommentsHeight()
     }
