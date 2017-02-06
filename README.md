@@ -109,7 +109,8 @@ super.viewDidLoad()
         .setAppID("myApId")
         .setVuukleRefreshVisible(true)
         .addWebViewArticleURL(false)
-        .setScrolingVuukleTableView(true)
+        .setScrolingVuukleTableView(false)
+        .setVuukleBaseViewController(self)
         .buildVuukle(self.view)
 }
 ----------------------------------------------------------------
@@ -136,8 +137,8 @@ VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
             setVuukleRefreshVisible:YES]
             addWebViewArticleURL:NO]
             setScrolingVuukleTableView:NO]
+            setVuukleBaseViewController: self]
             buildVuukle:self.vuukleView];
-
 }
 
 4.Please add into "Info.plist" fields with values
@@ -247,11 +248,13 @@ ___________________________________________________________________
 
 15. setVuuklePaginationCount(10)                               -[By default, 10 items!] Optional field! (Int value)
 
-16. buildVuukle(self.view)                                     -[Set your View name where should be displayed Vuukle!For example: "myView".] Required field!
+16. setVuukleBaseViewController                                -[Set your base view controller, with contains view with comments]
 
-17. setVuukleMostPopularArticleVisible(true)                   -[By default false] Optional field! (Bool value)
+17. buildVuukle(self.view)                                     -[Set your View name where should be displayed Vuukle!For example: "myView".] Required field!
 
-18. setVuukleMostPopularArticleCount(5)                        -[By default 6] Optional field! (Int value)
+18. setVuukleMostPopularArticleVisible(true)                   -[By default false] Optional field! (Bool value)
+
+19. setVuukleMostPopularArticleCount(5)                        -[By default 6] Optional field! (Int value)
 
 ___________________________________________________________________
 

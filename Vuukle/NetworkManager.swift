@@ -323,17 +323,32 @@ class NetworkManager {
   
   func setRaring(_ article_id: String ,emote: Int ,completion : @escaping (ResponseToEmoteRating?, NSError?) -> Void) {
  
-    let url = "\(Global.baseURL as String)setEmoteRating?host=\(Global.host as String)&api_key=\(Global.api_key as String)&article_id=\(article_id as String)&article_title=\(Global.article_title as String)&article_image=\(Global.article_image as String)&emote=\(emote)&url=\(Global.articleUrl as String)"
+    var url = "\(Global.baseURL)setEmoteRating"
     
-    print("\n\(url)\n")
-    
-    Alamofire.request(url).responseJSON { alamofireResponce in
+    url.append("?host=\(Global.host)")
+    url.append("&api_key=\(Global.api_key)")
+    url.append("&article_id=\(article_id)")
+    url.append("&article_title=\(ParametersConstructor.sharedInstance.encodingString(Global.article_title))")
+    url.append("&article_image=\(Global.article_image)")
+    url.append("&emote=\(emote)")
+    url.append("&url=\(Global.articleUrl)")
 
+    print("\n\(url)\n")
+
+    Alamofire.request(url).responseJSON { alamofireResponce in
+      
+      print("DESCRIPTION - \(alamofireResponce.description)")
     
-      if let JSON = alamofireResponce.result.value {
+      if let statusCode = alamofireResponce.response?.statusCode {
+        print("\nSTATUS CODE: \(statusCode)")
+      }
+   
+      if let JSON = alamofireResponce.result.value as? NSDictionary {
+       
+        print(JSON)
+        let emoteRating = ResponseToEmoteRating.setResponseToEmoteRating(JSON)
         
-        
-        
+        completion(emoteRating, nil)
       } else {
         completion(nil, alamofireResponce.result.error as NSError?)
       }
