@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		9000BFC61E55DD05006F8CA5 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9000BFC41E55DD05006F8CA5 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		90A366531E6AFA70007EFA0E /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A366521E6AFA70007EFA0E /* Vuukle.framework */; };
+		90A367271E6B101F007EFA0E /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A367261E6B101F007EFA0E /* Vuukle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9000BFC11E55DD05006F8CA5 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9000BFC41E55DD05006F8CA5 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		9000BFC51E55DD05006F8CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		90A366521E6AFA70007EFA0E /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
+		90A367261E6B101F007EFA0E /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90A366531E6AFA70007EFA0E /* Vuukle.framework in Frameworks */,
+				90A367271E6B101F007EFA0E /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,19 +49,11 @@
 		9000BFC31E55DD05006F8CA5 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				90A366521E6AFA70007EFA0E /* Vuukle.framework */,
-				9000BFD01E55DD96006F8CA5 /* Support frameworks */,
+				90A367261E6B101F007EFA0E /* Vuukle.framework */,
 				9000BFC41E55DD05006F8CA5 /* Vuukle.h */,
 				9000BFC51E55DD05006F8CA5 /* Info.plist */,
 			);
 			path = Vuukle;
-			sourceTree = "<group>";
-		};
-		9000BFD01E55DD96006F8CA5 /* Support frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Support frameworks";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
