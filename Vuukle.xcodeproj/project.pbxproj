@@ -8,22 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		9000BFC61E55DD05006F8CA5 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9000BFC41E55DD05006F8CA5 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9003D99E1E5731740005D002 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9003D99D1E5731740005D002 /* Vuukle.framework */; };
-		9003D9DC1E573CDD0005D002 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9003D9D81E573CDD0005D002 /* Alamofire.framework */; };
-		9003D9DD1E573CDD0005D002 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9003D9D91E573CDD0005D002 /* AlamofireImage.framework */; };
-		9003D9DE1E573CDD0005D002 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9003D9DA1E573CDD0005D002 /* MBProgressHUD.framework */; };
-		9003D9DF1E573CDD0005D002 /* NSDate_TimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9003D9DB1E573CDD0005D002 /* NSDate_TimeAgo.framework */; };
+		90A366531E6AFA70007EFA0E /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A366521E6AFA70007EFA0E /* Vuukle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9000BFC11E55DD05006F8CA5 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9000BFC41E55DD05006F8CA5 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		9000BFC51E55DD05006F8CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9003D99D1E5731740005D002 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
-		9003D9D81E573CDD0005D002 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Frameworks/Alamofire.framework; sourceTree = "<group>"; };
-		9003D9D91E573CDD0005D002 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = Frameworks/AlamofireImage.framework; sourceTree = "<group>"; };
-		9003D9DA1E573CDD0005D002 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = Frameworks/MBProgressHUD.framework; sourceTree = "<group>"; };
-		9003D9DB1E573CDD0005D002 /* NSDate_TimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDate_TimeAgo.framework; path = Frameworks/NSDate_TimeAgo.framework; sourceTree = "<group>"; };
+		90A366521E6AFA70007EFA0E /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,11 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9003D9DE1E573CDD0005D002 /* MBProgressHUD.framework in Frameworks */,
-				9003D9DF1E573CDD0005D002 /* NSDate_TimeAgo.framework in Frameworks */,
-				9003D9DD1E573CDD0005D002 /* AlamofireImage.framework in Frameworks */,
-				9003D99E1E5731740005D002 /* Vuukle.framework in Frameworks */,
-				9003D9DC1E573CDD0005D002 /* Alamofire.framework in Frameworks */,
+				90A366531E6AFA70007EFA0E /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,7 +49,7 @@
 		9000BFC31E55DD05006F8CA5 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				9003D99D1E5731740005D002 /* Vuukle.framework */,
+				90A366521E6AFA70007EFA0E /* Vuukle.framework */,
 				9000BFD01E55DD96006F8CA5 /* Support frameworks */,
 				9000BFC41E55DD05006F8CA5 /* Vuukle.h */,
 				9000BFC51E55DD05006F8CA5 /* Info.plist */,
@@ -72,10 +60,6 @@
 		9000BFD01E55DD96006F8CA5 /* Support frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9003D9D81E573CDD0005D002 /* Alamofire.framework */,
-				9003D9D91E573CDD0005D002 /* AlamofireImage.framework */,
-				9003D9DA1E573CDD0005D002 /* MBProgressHUD.framework */,
-				9003D9DB1E573CDD0005D002 /* NSDate_TimeAgo.framework */,
 			);
 			name = "Support frameworks";
 			sourceTree = "<group>";

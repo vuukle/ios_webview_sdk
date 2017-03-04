@@ -161,16 +161,16 @@ SWIFT_CLASS("_TtC6Vuukle17VUCommentsBuilder")
   REQUIRED: This method initializes and puts Vuukle Comments to specific UIView You set.
   \param baseVC UIViewController wich contains contentView for comments.
 
-  \param baseScrollView OPTIONAL PARAMETER: If you use nested comments you have to set base UIScrollView.
+  \param baseScrollView OPTIONAL PARAMETER: If You use nested comments You have to set base UIScrollView.
 
   \param contentView Vuukle Comments will be added to this UIView as subview.
 
-  \param contentHeightConstraint OPTIONAL PARAMETER: If you use nested comments you have to set height NSLayoutConstraint of contentView for comments.
+  \param contentHeightConstraint OPTIONAL PARAMETER: If You use nested comments, You have to set height NSLayoutConstraint of contentView for comments.
 
-  \param vuukleApiKey Set your API key for API. To get API KEY you need:
+  \param vuukleApiKey Set your API key for API. To get API KEY You need:
   <ol>
     <li>
-      Sign in to dashboard thouth <a href="vuukle.com">vuukle.com</a>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
     </li>
     <li>
       Navigate to domain from home page of dashboard (first page after signing in).
@@ -179,23 +179,23 @@ SWIFT_CLASS("_TtC6Vuukle17VUCommentsBuilder")
       Choose in menu Integration, then API Docs from the dropdown.
     </li>
     <li>
-      Then you will be able to see API and secret keys.
+      Then You will be able to see API and secret keys.
     </li>
   </ol>
   — OR —
   <ol>
     <li>
-      Sign in to dashboard thouth vuukle.com
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
     </li>
     <li>
-      After signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
+      After signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
     </li>
   </ol>
 
-  \param vuukleSecretKey Set your SecretKey for API. To get SECRET KEY you need:
+  \param vuukleSecretKey Set your SecretKey for API. To get SECRET KEY You need:
   <ol>
     <li>
-      Sign in to dashboard through <a href="vuukle.com">vuukle.com</a>
+      Sign in to dashboard through <a href="http://vuukle.com/">vuukle.com</a>
     </li>
     <li>
       Navigate to domain from home page of dashboard (first page after signing in).
@@ -204,16 +204,16 @@ SWIFT_CLASS("_TtC6Vuukle17VUCommentsBuilder")
       Choose in menu Integration, then API Docs from the dropdown.
     </li>
     <li>
-      Then you will be able to see api and SECRET keys.
+      Then You will be able to see api and SECRET keys.
     </li>
   </ol>
   — OR —
   <ol>
     <li>
-      Sign in to dashboard thouth vuukle.com
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
     </li>
     <li>
-      after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.
+      after signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
     </li>
   </ol>
 
@@ -224,17 +224,17 @@ SWIFT_CLASS("_TtC6Vuukle17VUCommentsBuilder")
   \param vuukleTimeZone You have to set string with format like “Europe/Kiev”.
   Get your timezone from this resource: <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of tz database time zones</a>
 
-  \param articleID Get ID from <a href="vuukle.com">vuukle.com</a>. Every article has unique ID.
+  \param articleID Get ID from <a href="http://vuukle.com/">vuukle.com</a>. Every article has unique ID.
 
   \param articleTag Tag of your article, it should be NOT empty string.
   FOR EXAMPLE:
-  If you article is about sport news, set this parameter “Sport” etc.
+  If You article is about sport news, set this parameter “Sport” etc.
 
   \param articleTitle Your Article Title, it should be NOT empty string.
 
   \param articleURL Your Article URL, it should be valide URL and NOT empty string.
 
-  \param isScrollEnabled OPTIONAL PARAMETER: Set “true”, if you want to enable own scroll of comments UITableView.
+  \param isScrollEnabled OPTIONAL PARAMETER: Set “true”, if You want to enable own scroll of comments UITableView.
 
   \param edgeInserts OPTIONAL PARAMETER: UIEdgeInsets of comments UITableView, default value is UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)/
 
@@ -245,11 +245,171 @@ SWIFT_CLASS("_TtC6Vuukle17VUCommentsBuilder")
 */
 + (void)updateAllHeights;
 /**
-  OPTIONAL: Y
+  OPTIONAL: This method initializes and puts Vuukle Emoji to specific UIView You set.
+  \param baseVC UIViewController wich contains contentView for Emoji.
+
+  \param emojiContentView Vuukle Emoji will be added to this UIView as subview.
+
+  \param emojiHeightConstraint You have to set height NSLayoutConstraint of contentView for Emoji.
+
+  \param vuukleApiKey Set your API key for API. To get API KEY You need:
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      Navigate to domain from home page of dashboard (first page after signing in).
+    </li>
+    <li>
+      Choose in menu Integration, then API Docs from the dropdown.
+    </li>
+    <li>
+      Then You will be able to see API and secret keys.
+    </li>
+  </ol>
+  — OR —
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      After signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
+    </li>
+  </ol>
+
+  \param vuukleSecretKey Set your SecretKey for API. To get SECRET KEY You need:
+  <ol>
+    <li>
+      Sign in to dashboard through <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      Navigate to domain from home page of dashboard (first page after signing in).
+    </li>
+    <li>
+      Choose in menu Integration, then API Docs from the dropdown.
+    </li>
+    <li>
+      Then You will be able to see api and SECRET keys.
+    </li>
+  </ol>
+  — OR —
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      after signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
+    </li>
+  </ol>
+
+  \param vuukleHost This is domain of the publisher’s site(e.g. indianexpress.com, thehindu.com etc.).
+
+  \param articleID Get ID from <a href="http://vuukle.com/">vuukle.com</a>. Every article has unique ID.
+
+  \param articleTitle Your Article Title, it should be NOT empty string.
+
+  \param articleURL Your Article URL, it should be valide URL and NOT empty string.
+
+*/
++ (void)addVuukleEmojiWithBaseVC:(UIViewController * _Nonnull)baseVC emojiContentView:(UIView * _Nonnull)emojiContentView emojiHeightConstraint:(NSLayoutConstraint * _Nonnull)emojiHeightConstraint vuukleApiKey:(NSString * _Nonnull)vuukleApiKey vuukleSecretKey:(NSString * _Nonnull)vuukleSecretKey vuukleHost:(NSString * _Nonnull)vuukleHost articleTitle:(NSString * _Nonnull)articleTitle articleID:(NSString * _Nonnull)articleID articleURL:(NSString * _Nonnull)articleURL;
+/**
+  OPTIONAL: This method initializes and puts Vuukle TalkOfTheTown to specific UIView You set.
+  \param baseVC UIViewController wich contains contentView for TalkOfTheTown.
+
+  \param topArticleContentView Vuukle TalkOfTheTown will be added to this UIView as subview.
+
+  \param topArticleHeightConstraint You have to set height NSLayoutConstraint of contentView for TalkOfTheTown.
+
+  \param vuukleApiKey Set your API key for API. To get API KEY You need:
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      Navigate to domain from home page of dashboard (first page after signing in).
+    </li>
+    <li>
+      Choose in menu Integration, then API Docs from the dropdown.
+    </li>
+    <li>
+      Then You will be able to see API and secret keys.
+    </li>
+  </ol>
+  — OR —
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      After signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
+    </li>
+  </ol>
+
+  \param vuukleSecretKey Set your SecretKey for API. To get SECRET KEY You need:
+  <ol>
+    <li>
+      Sign in to dashboard through <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      Navigate to domain from home page of dashboard (first page after signing in).
+    </li>
+    <li>
+      Choose in menu Integration, then API Docs from the dropdown.
+    </li>
+    <li>
+      Then You will be able to see api and SECRET keys.
+    </li>
+  </ol>
+  — OR —
+  <ol>
+    <li>
+      Sign in to dashboard thouth <a href="http://vuukle.com/">vuukle.com</a>
+    </li>
+    <li>
+      after signing in, in header You can find ‘Integration’ click -> choose API docs in the drop-down.
+    </li>
+  </ol>
+
+  \param vuukleHost This is domain of the publisher’s site(e.g. indianexpress.com, thehindu.com etc.).
+  FOR EXAMPLE:
+  You are the owner of indianexpress.com and have own app where want’s to setup this library, so when library installed on your app, You should paste domain for ‘host’ property without http:// or https:// or www.
+
+  \param articleID Get ID from <a href="http://vuukle.com/">vuukle.com</a>. Every article has unique ID.
+
+  \param articleTitle Your Article Title, it should be NOT empty string.
+
+  \param articleURL Your Article URL, it should be valide URL and NOT empty string.
+
+*/
++ (void)addVuukleTalkOfTheTownWithBaseVC:(UIViewController * _Nonnull)baseVC talkContentView:(UIView * _Nonnull)talkContentView talkHeightConstraint:(NSLayoutConstraint * _Nonnull)talkHeightConstraint vuukleApiKey:(NSString * _Nonnull)vuukleApiKey vuukleSecretKey:(NSString * _Nonnull)vuukleSecretKey vuukleHost:(NSString * _Nonnull)vuukleHost articleTitle:(NSString * _Nonnull)articleTitle articleID:(NSString * _Nonnull)articleID articleURL:(NSString * _Nonnull)articleURL;
+/**
+  OPTIONAL: This method initializes and puts Vuukle Talk of The Town to specific UIView You set.
+  \param baseVC UIViewController wich contains contentView for TalkOfTheTown.
+
+  \param addsContentView Vuukle TalkOfTheTown will be added to this UIView as subview.
+
+  \param addsHeightConstraint You have to set height NSLayoutConstraint of contentView for TalkOfTheTown.
+
+  \param appName 
+
+  \param appID 
+
+  \param articleURL Your Article URL, it should be valide URL and NOT empty string.
+
+*/
++ (void)addVuukleAddsWithBaseVC:(UIViewController * _Nonnull)baseVC addsContentView:(UIView * _Nonnull)addsContentView addsHeightConstraint:(NSLayoutConstraint * _Nonnull)addsHeightConstraint appName:(NSString * _Nonnull)appName appID:(NSString * _Nonnull)appID articleURL:(NSString * _Nonnull)articleURL;
+/**
+  OPTIONAL: You can hide Vuukle Adds
 */
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL isVuukleAdsHiden;)
 + (BOOL)isVuukleAdsHiden;
 + (void)setIsVuukleAdsHiden:(BOOL)newValue;
+/**
+  OPTIONAL: You can hide Vuukle Emoji.
+*/
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class) BOOL isEmojiVotingHiden;)
++ (BOOL)isEmojiVotingHiden;
++ (void)setIsEmojiVotingHiden:(BOOL)newValue;
 /**
   OPTIONAL: You can change comments pagination (in range 0 to 40, default value is 10).
 */
