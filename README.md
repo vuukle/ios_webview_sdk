@@ -69,10 +69,16 @@
     • 'MBProgressHUD'  (version >= 1.0.0)
     • 'NSDate+TimeAgo' (version >= 1.0.6)
 
+[3. Please add to info.plist next parameter]
+
+  Select info.plist in your project and add "App Transport Security Settings" and change type "String" to
+  "Dictionary". Then add to "App Transport Security Settings" - Allow Arbitrary Loads type "Boolean" value
+  "YES". 
+  http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
 
 ## IMPORT SWIFT
 -----------------------------------------------------------------------------------------
-[3. Add Vuukle to Embedded Binaries] 
+[4. Add Vuukle to Embedded Binaries] 
 
   # Open generated after installation .xcworkspace file.
     • EXAMPLE: In project directory open ExampleProject.xcworkspace 
@@ -89,7 +95,7 @@
     • Tap on '+' button and select 'Add Other...'
     • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
 
-[4. Import Vuukle] 
+[5. Import Vuukle] 
 
   # Simple add 'import Vuukle' in the top of .swift file after other framworks your use.
 
@@ -104,7 +110,7 @@
 
 ## IMPORT OBJECTIVE-C
 -----------------------------------------------------------------------------------------
-[3. Open workspace and import Vuukle] 
+[6. Open workspace and import Vuukle] 
 
   # Open generated after installation .xcworkspace file.
     EXAMPLE: In project directory open ExampleProject.xcworkspace 
@@ -121,7 +127,7 @@
   • Tap on '+' button and select 'Add Other...'
   • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
 
-[4. Import Vuukle] 
+[7. Import Vuukle] 
 
   # Simple add '#import <Vuukle/Vuukle-Swift.h>' before @interface in .m file.
 
@@ -140,7 +146,7 @@
 ## USAGE SWIFT: 
 -----------------------------------------------------------------------------------------
 
-[5. Add vuukle comments to conent view for it]
+[8. Add vuukle comments to conent view for it]
   
    # [!] You have add comments in this method of UIViewController:
 
@@ -185,7 +191,7 @@
 
 
 
-[6. Update all heights]
+[9. Update all heights]
 
   # [!] You have update all hights in this method of UIViewController:
   
@@ -206,11 +212,10 @@
     VUCommentsBuilder.updateAllHeights()
   }
 
-[7. LogIn through your application]
+[10. LogIn through your application]
 
   VUCommentsBuilder.loginUser(name: [Your name], email: [Your email])
 
   VUCommentsBuilder.logOut()
 
-
-[8. Everything is ready, you can run the Project]
+[11. Everything is ready, you can run the Project]
