@@ -206,4 +206,11 @@
     VUCommentsBuilder.updateAllHeights()
   }
 
-[7. Everything is ready, you can run the Project]
+[7. LogIn through your application]
+
+  VUCommentsBuilder.loginUser(name: [Your name], email: [Your email])
+
+  VUCommentsBuilder.logOut()
+
+
+[8. Everything is ready, you can run the Project]

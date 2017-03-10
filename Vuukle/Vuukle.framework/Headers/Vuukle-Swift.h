@@ -460,6 +460,25 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class) NSInteger talkOfTheTownHours;)
   DESIGN: This methods will update all colors of framework.
 */
 + (void)updateDesingColors;
+/**
+  REQUIRED: This method takes name and email for login.
+  <ul>
+    <li>
+      parameters:
+    </li>
+    <li>
+      name: String with contains your name
+    </li>
+    <li>
+      email: String with contains your email adress
+    </li>
+  </ul>
+*/
++ (void)loginUserWithName:(NSString * _Nonnull)name email:(NSString * _Nonnull)email;
+/**
+  OPTIONAL: This method makes logOut
+*/
++ (void)logOut;
 @end
 
 #pragma clang diagnostic pop
