@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04EC8B8F1E7AADED00303AE0 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04EC8B8E1E7AADED00303AE0 /* Vuukle.framework */; };
 		9000BFC61E55DD05006F8CA5 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9000BFC41E55DD05006F8CA5 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9C00BEFC1E7DA6C1008731E7 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		04EC8B8E1E7AADED00303AE0 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 		9000BFC11E55DD05006F8CA5 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9000BFC41E55DD05006F8CA5 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		9000BFC51E55DD05006F8CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04EC8B8F1E7AADED00303AE0 /* Vuukle.framework in Frameworks */,
+				9C00BEFC1E7DA6C1008731E7 /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,8 +49,8 @@
 		9000BFC31E55DD05006F8CA5 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
+				9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */,
 				9000BFC41E55DD05006F8CA5 /* Vuukle.h */,
-				04EC8B8E1E7AADED00303AE0 /* Vuukle.framework */,
 				9000BFC51E55DD05006F8CA5 /* Info.plist */,
 			);
 			path = Vuukle;
