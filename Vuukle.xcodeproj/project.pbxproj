@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04B89D8B1E8282880002DF90 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B89D8A1E8282880002DF90 /* Vuukle.framework */; };
 		9000BFC61E55DD05006F8CA5 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9000BFC41E55DD05006F8CA5 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9C00BEFC1E7DA6C1008731E7 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04B89D8A1E8282880002DF90 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 		9000BFC11E55DD05006F8CA5 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9000BFC41E55DD05006F8CA5 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		9000BFC51E55DD05006F8CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C00BEFC1E7DA6C1008731E7 /* Vuukle.framework in Frameworks */,
+				04B89D8B1E8282880002DF90 /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,7 +49,7 @@
 		9000BFC31E55DD05006F8CA5 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				9C00BEFB1E7DA6C1008731E7 /* Vuukle.framework */,
+				04B89D8A1E8282880002DF90 /* Vuukle.framework */,
 				9000BFC41E55DD05006F8CA5 /* Vuukle.h */,
 				9000BFC51E55DD05006F8CA5 /* Info.plist */,
 			);
@@ -269,6 +269,7 @@
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -304,6 +305,7 @@
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
