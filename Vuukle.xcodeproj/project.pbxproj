@@ -6,265 +6,615 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		048C74881E825E4400911178 /* VuukleUniverse */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 048C748B1E825E4400911178 /* Build configuration list for PBXAggregateTarget "VuukleUniverse" */;
+			buildPhases = (
+				048C748C1E825E4800911178 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = VuukleUniverse;
+			productName = VuukleUniverse;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		04114E1C1D75B9C300113721 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 04114E1B1D75B9C300113721 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		049D0B401D9D560C00507DC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B241D9D560C00507DC3 /* AppDelegate.swift */; };
-		049D0B411D9D560C00507DC3 /* AddCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B251D9D560C00507DC3 /* AddCommentCell.swift */; };
-		049D0B421D9D560C00507DC3 /* CellConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B261D9D560C00507DC3 /* CellConstructor.swift */; };
-		049D0B431D9D560C00507DC3 /* CommentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B271D9D560C00507DC3 /* CommentForm.swift */; };
-		049D0B441D9D560C00507DC3 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B281D9D560C00507DC3 /* CommentCell.swift */; };
-		049D0B451D9D560C00507DC3 /* CommentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B291D9D560C00507DC3 /* CommentsBuilder.swift */; };
-		049D0B461D9D560C00507DC3 /* CellConstraintsConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2A1D9D560C00507DC3 /* CellConstraintsConstructor.swift */; };
-		049D0B471D9D560C00507DC3 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2B1D9D560C00507DC3 /* CommentViewController.swift */; };
-		049D0B481D9D560C00507DC3 /* ContentWebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2C1D9D560C00507DC3 /* ContentWebViewCell.swift */; };
-		049D0B491D9D560C00507DC3 /* LocalCommentsConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2D1D9D560C00507DC3 /* LocalCommentsConstructor.swift */; };
-		049D0B4A1D9D560C00507DC3 /* EmoteRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2E1D9D560C00507DC3 /* EmoteRating.swift */; };
-		049D0B4B1D9D560C00507DC3 /* Emoticon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B2F1D9D560C00507DC3 /* Emoticon.swift */; };
-		049D0B4C1D9D560C00507DC3 /* EmoticonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B301D9D560C00507DC3 /* EmoticonCell.swift */; };
-		049D0B4D1D9D560C00507DC3 /* CommentsFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B311D9D560C00507DC3 /* CommentsFeed.swift */; };
-		049D0B4E1D9D560C00507DC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B321D9D560C00507DC3 /* Global.swift */; };
-		049D0B4F1D9D560C00507DC3 /* ReplyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B331D9D560C00507DC3 /* ReplyForm.swift */; };
-		049D0B501D9D560C00507DC3 /* LoadMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B341D9D560C00507DC3 /* LoadMore.swift */; };
-		049D0B521D9D560C00507DC3 /* MoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B361D9D560C00507DC3 /* MoreView.swift */; };
-		049D0B531D9D560C00507DC3 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B371D9D560C00507DC3 /* NetworkManager.swift */; };
-		049D0B541D9D560C00507DC3 /* ParametersConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B381D9D560C00507DC3 /* ParametersConstructor.swift */; };
-		049D0B551D9D560C00507DC3 /* ResponseToComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B391D9D560C00507DC3 /* ResponseToComment.swift */; };
-		049D0B561D9D560C00507DC3 /* ResponseToEmoteRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3A1D9D560C00507DC3 /* ResponseToEmoteRating.swift */; };
-		049D0B571D9D560C00507DC3 /* Saver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3B1D9D560C00507DC3 /* Saver.swift */; };
-		049D0B581D9D560C00507DC3 /* TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3C1D9D560C00507DC3 /* TimeAgo.swift */; };
-		049D0B591D9D560C00507DC3 /* TotalCommentsCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3D1D9D560C00507DC3 /* TotalCommentsCount.swift */; };
-		049D0B5A1D9D560C00507DC3 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3E1D9D560C00507DC3 /* WebView.swift */; };
-		049D0B5B1D9D560C00507DC3 /* WebViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049D0B3F1D9D560C00507DC3 /* WebViewCell.swift */; };
-		049D0B731D9D562000507DC3 /* 122.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B5C1D9D562000507DC3 /* 122.png */; };
-		049D0B761D9D562000507DC3 /* ContentWebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B5F1D9D562000507DC3 /* ContentWebViewCell.xib */; };
-		049D0B771D9D562000507DC3 /* EmoticonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B601D9D562000507DC3 /* EmoticonCell.xib */; };
-		049D0B781D9D562000507DC3 /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B611D9D562000507DC3 /* facebook.png */; };
-		049D0B791D9D562000507DC3 /* images.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B621D9D562000507DC3 /* images.png */; };
-		049D0B7B1D9D562000507DC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B641D9D562000507DC3 /* Main.storyboard */; };
-		049D0B7C1D9D562000507DC3 /* MoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B651D9D562000507DC3 /* MoreView.xib */; };
-		049D0B7D1D9D562000507DC3 /* non_secure.html in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B661D9D562000507DC3 /* non_secure.html */; };
-		049D0B7E1D9D562000507DC3 /* smile-amused.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B671D9D562000507DC3 /* smile-amused.png */; };
-		049D0B7F1D9D562000507DC3 /* smile-angry.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B681D9D562000507DC3 /* smile-angry.png */; };
-		049D0B801D9D562000507DC3 /* smile-excited.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B691D9D562000507DC3 /* smile-excited.png */; };
-		049D0B811D9D562000507DC3 /* smile-happy.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6A1D9D562000507DC3 /* smile-happy.png */; };
-		049D0B821D9D562000507DC3 /* smile-indifferent.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6B1D9D562000507DC3 /* smile-indifferent.png */; };
-		049D0B831D9D562000507DC3 /* smile-sad-full.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6C1D9D562000507DC3 /* smile-sad-full.png */; };
-		049D0B841D9D562000507DC3 /* Solid_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6D1D9D562000507DC3 /* Solid_gray.png */; };
-		049D0B851D9D562000507DC3 /* thumb-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6E1D9D562000507DC3 /* thumb-down.png */; };
-		049D0B861D9D562000507DC3 /* thumb-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B6F1D9D562000507DC3 /* thumb-up.png */; };
-		049D0B871D9D562000507DC3 /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B701D9D562000507DC3 /* twitter.png */; };
-		049D0B881D9D562000507DC3 /* vuukle_logo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B711D9D562000507DC3 /* vuukle_logo.jpg */; };
-		049D0B891D9D562000507DC3 /* WebViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049D0B721D9D562000507DC3 /* WebViewCell.xib */; };
-		900B70341DF07403000DF6C7 /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900B70331DF07403000DF6C7 /* LoginCell.swift */; };
-		900B70361DF07409000DF6C7 /* LoginCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900B70351DF07409000DF6C7 /* LoginCell.xib */; };
-		901279E81DF8367100F3D185 /* LoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 901279E71DF8367100F3D185 /* LoadMoreCell.xib */; };
-		901279EA1DF8367B00F3D185 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901279E91DF8367B00F3D185 /* LoadMoreCell.swift */; };
-		901279EE1DF8434A00F3D185 /* reported_flag.png in Resources */ = {isa = PBXBuildFile; fileRef = 901279ED1DF8434A00F3D185 /* reported_flag.png */; };
-		9053A8821DF1C44400E3A26E /* MostPopularArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */; };
-		9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8831DF1C64500E3A26E /* AddCommentCell.xib */; };
-		9053A8881DF1C64500E3A26E /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8841DF1C64500E3A26E /* CommentCell.xib */; };
-		9053A88A1DF1C64500E3A26E /* MostPopularArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */; };
-		9083BD791DFF0F4700000068 /* toolbar-back-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD771DFF0F4700000068 /* toolbar-back-button.png */; };
-		9083BD7A1DFF0F4700000068 /* toolbar-next-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9083BD781DFF0F4700000068 /* toolbar-next-button.png */; };
-		9083BD7C1DFF104500000068 /* LoginForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9083BD7B1DFF104500000068 /* LoginForm.swift */; };
-		90A397DA1E43504B00354D2E /* PlaceholderArticle.png in Resources */ = {isa = PBXBuildFile; fileRef = 90A397D91E43504B00354D2E /* PlaceholderArticle.png */; };
-		90C747F41DF6A03200D78639 /* EmailVerificator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C747F31DF6A03200D78639 /* EmailVerificator.swift */; };
+		04D813CB1E7D68720088E671 /* VUCommentsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813C91E7D68720088E671 /* VUCommentsBuilder.swift */; };
+		04D813CC1E7D68720088E671 /* VUDesignHUB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813CA1E7D68720088E671 /* VUDesignHUB.swift */; };
+		04D813CE1E7D69450088E671 /* VUControllSum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813CD1E7D69450088E671 /* VUControllSum.swift */; };
+		04D813D01E7D696D0088E671 /* VUTopArticleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813CF1E7D696D0088E671 /* VUTopArticleVC.swift */; };
+		04D813D71E7D69880088E671 /* VUAdvertisingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813D21E7D69880088E671 /* VUAdvertisingView.swift */; };
+		04D813D81E7D69880088E671 /* VUAdvertisingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D813D31E7D69880088E671 /* VUAdvertisingView.xib */; };
+		04D813D91E7D69880088E671 /* VUEmojiVoitingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D813D51E7D69880088E671 /* VUEmojiVoitingView.swift */; };
+		04D813DA1E7D69880088E671 /* VUEmojiVoitingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04D813D61E7D69880088E671 /* VUEmojiVoitingView.xib */; };
+		9000BF451E55D39B006F8CA5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9000BF441E55D39B006F8CA5 /* Alamofire.framework */; };
+		9000BF471E55D39F006F8CA5 /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9000BF461E55D39F006F8CA5 /* AlamofireImage.framework */; };
+		9000BF491E55D3A2006F8CA5 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9000BF481E55D3A2006F8CA5 /* MBProgressHUD.framework */; };
+		9000BF4B1E55D3A6006F8CA5 /* NSDate_TimeAgo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9000BF4A1E55D3A6006F8CA5 /* NSDate_TimeAgo.framework */; };
+		905CD7581E0E913200AC9E10 /* Vuukle.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 905CD7571E0E913200AC9E10 /* Vuukle.xcassets */; };
+		9080773F1E07FF4600C20694 /* VuukleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9080773E1E07FF4600C20694 /* VuukleTests.swift */; };
+		908077411E07FF4600C20694 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 908077331E07FF4500C20694 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9093B0F11E55B82500EC11ED /* String+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A31E55B82500EC11ED /* String+Vuukle.swift */; };
+		9093B0F21E55B82500EC11ED /* String+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A31E55B82500EC11ED /* String+Vuukle.swift */; };
+		9093B0F31E55B82500EC11ED /* UIButton+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A41E55B82500EC11ED /* UIButton+Vuukle.swift */; };
+		9093B0F41E55B82500EC11ED /* UIButton+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A41E55B82500EC11ED /* UIButton+Vuukle.swift */; };
+		9093B0F51E55B82500EC11ED /* UIColor+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A51E55B82500EC11ED /* UIColor+Vuukle.swift */; };
+		9093B0F61E55B82500EC11ED /* UIColor+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A51E55B82500EC11ED /* UIColor+Vuukle.swift */; };
+		9093B0F71E55B82500EC11ED /* UIDevice+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A61E55B82500EC11ED /* UIDevice+Vuukle.swift */; };
+		9093B0F81E55B82500EC11ED /* UIDevice+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A61E55B82500EC11ED /* UIDevice+Vuukle.swift */; };
+		9093B0F91E55B82500EC11ED /* UIImage+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A71E55B82500EC11ED /* UIImage+Vuukle.swift */; };
+		9093B0FA1E55B82500EC11ED /* UIImage+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A71E55B82500EC11ED /* UIImage+Vuukle.swift */; };
+		9093B0FB1E55B82500EC11ED /* UIImageView+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A81E55B82500EC11ED /* UIImageView+Vuukle.swift */; };
+		9093B0FC1E55B82500EC11ED /* UIImageView+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A81E55B82500EC11ED /* UIImageView+Vuukle.swift */; };
+		9093B0FD1E55B82500EC11ED /* UIToolbar+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A91E55B82500EC11ED /* UIToolbar+Vuukle.swift */; };
+		9093B0FE1E55B82500EC11ED /* UIToolbar+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0A91E55B82500EC11ED /* UIToolbar+Vuukle.swift */; };
+		9093B0FF1E55B82500EC11ED /* UIViewController+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AA1E55B82500EC11ED /* UIViewController+Vuukle.swift */; };
+		9093B1001E55B82500EC11ED /* UIViewController+Vuukle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AA1E55B82500EC11ED /* UIViewController+Vuukle.swift */; };
+		9093B1031E55B82500EC11ED /* VUEmums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AD1E55B82500EC11ED /* VUEmums.swift */; };
+		9093B1041E55B82500EC11ED /* VUEmums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AD1E55B82500EC11ED /* VUEmums.swift */; };
+		9093B1051E55B82500EC11ED /* VUGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AE1E55B82500EC11ED /* VUGlobals.swift */; };
+		9093B1061E55B82500EC11ED /* VUGlobals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AE1E55B82500EC11ED /* VUGlobals.swift */; };
+		9093B1071E55B82500EC11ED /* VUIdentifiersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AF1E55B82500EC11ED /* VUIdentifiersUI.swift */; };
+		9093B1081E55B82500EC11ED /* VUIdentifiersUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0AF1E55B82500EC11ED /* VUIdentifiersUI.swift */; };
+		9093B1091E55B82500EC11ED /* VUCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B21E55B82500EC11ED /* VUCommentsVC.swift */; };
+		9093B10A1E55B82500EC11ED /* VUCommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B21E55B82500EC11ED /* VUCommentsVC.swift */; };
+		9093B10B1E55B82500EC11ED /* VUFailureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B31E55B82500EC11ED /* VUFailureVC.swift */; };
+		9093B10C1E55B82500EC11ED /* VUFailureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B31E55B82500EC11ED /* VUFailureVC.swift */; };
+		9093B10D1E55B82500EC11ED /* VUCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B61E55B82500EC11ED /* VUCommentModel.swift */; };
+		9093B10E1E55B82500EC11ED /* VUCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B61E55B82500EC11ED /* VUCommentModel.swift */; };
+		9093B10F1E55B82500EC11ED /* VUEmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B71E55B82500EC11ED /* VUEmojiModel.swift */; };
+		9093B1101E55B82500EC11ED /* VUEmojiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B71E55B82500EC11ED /* VUEmojiModel.swift */; };
+		9093B1111E55B82500EC11ED /* VUEmojiVotingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B81E55B82500EC11ED /* VUEmojiVotingModel.swift */; };
+		9093B1121E55B82500EC11ED /* VUEmojiVotingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B81E55B82500EC11ED /* VUEmojiVotingModel.swift */; };
+		9093B1131E55B82500EC11ED /* VUPostResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B91E55B82500EC11ED /* VUPostResponceModel.swift */; };
+		9093B1141E55B82500EC11ED /* VUPostResponceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0B91E55B82500EC11ED /* VUPostResponceModel.swift */; };
+		9093B1151E55B82500EC11ED /* VURequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BA1E55B82500EC11ED /* VURequestError.swift */; };
+		9093B1161E55B82500EC11ED /* VURequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BA1E55B82500EC11ED /* VURequestError.swift */; };
+		9093B1171E55B82500EC11ED /* VUTopArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BB1E55B82500EC11ED /* VUTopArticleModel.swift */; };
+		9093B1181E55B82500EC11ED /* VUTopArticleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BB1E55B82500EC11ED /* VUTopArticleModel.swift */; };
+		9093B1191E55B82500EC11ED /* VUCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BD1E55B82500EC11ED /* VUCurrentUser.swift */; };
+		9093B11A1E55B82500EC11ED /* VUCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BD1E55B82500EC11ED /* VUCurrentUser.swift */; };
+		9093B11B1E55B82500EC11ED /* VUAlertsHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BF1E55B82500EC11ED /* VUAlertsHub.swift */; };
+		9093B11C1E55B82500EC11ED /* VUAlertsHub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0BF1E55B82500EC11ED /* VUAlertsHub.swift */; };
+		9093B11D1E55B82500EC11ED /* VUBugReportsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C01E55B82500EC11ED /* VUBugReportsFactory.swift */; };
+		9093B11E1E55B82500EC11ED /* VUBugReportsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C01E55B82500EC11ED /* VUBugReportsFactory.swift */; };
+		9093B11F1E55B82500EC11ED /* VUDebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C11E55B82500EC11ED /* VUDebugPrint.swift */; };
+		9093B1201E55B82500EC11ED /* VUDebugPrint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C11E55B82500EC11ED /* VUDebugPrint.swift */; };
+		9093B1211E55B82500EC11ED /* VUInternetChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C31E55B82500EC11ED /* VUInternetChecker.swift */; };
+		9093B1221E55B82500EC11ED /* VUInternetChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C31E55B82500EC11ED /* VUInternetChecker.swift */; };
+		9093B1231E55B82500EC11ED /* VUParametersChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C41E55B82500EC11ED /* VUParametersChecker.swift */; };
+		9093B1241E55B82500EC11ED /* VUParametersChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C41E55B82500EC11ED /* VUParametersChecker.swift */; };
+		9093B1251E55B82500EC11ED /* VUShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C51E55B82500EC11ED /* VUShareConfigurator.swift */; };
+		9093B1261E55B82500EC11ED /* VUShareConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C51E55B82500EC11ED /* VUShareConfigurator.swift */; };
+		9093B1271E55B82500EC11ED /* VUInternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C71E55B82500EC11ED /* VUInternetReachability.swift */; };
+		9093B1281E55B82500EC11ED /* VUInternetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C71E55B82500EC11ED /* VUInternetReachability.swift */; };
+		9093B1291E55B82500EC11ED /* VUServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C81E55B82500EC11ED /* VUServerManager.swift */; };
+		9093B12A1E55B82500EC11ED /* VUServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0C81E55B82500EC11ED /* VUServerManager.swift */; };
+		9093B12B1E55B82500EC11ED /* VUAdvertisingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CA1E55B82500EC11ED /* VUAdvertisingModel.swift */; };
+		9093B12C1E55B82500EC11ED /* VUAdvertisingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CA1E55B82500EC11ED /* VUAdvertisingModel.swift */; };
+		9093B12D1E55B82500EC11ED /* VULoadMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CB1E55B82500EC11ED /* VULoadMoreModel.swift */; };
+		9093B12E1E55B82500EC11ED /* VULoadMoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CB1E55B82500EC11ED /* VULoadMoreModel.swift */; };
+		9093B12F1E55B82500EC11ED /* VULoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CC1E55B82500EC11ED /* VULoginModel.swift */; };
+		9093B1301E55B82500EC11ED /* VULoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CC1E55B82500EC11ED /* VULoginModel.swift */; };
+		9093B1311E55B82500EC11ED /* VUNewCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CD1E55B82500EC11ED /* VUNewCommentModel.swift */; };
+		9093B1321E55B82500EC11ED /* VUNewCommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CD1E55B82500EC11ED /* VUNewCommentModel.swift */; };
+		9093B1331E55B82500EC11ED /* VUNewReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CE1E55B82500EC11ED /* VUNewReplyModel.swift */; };
+		9093B1341E55B82500EC11ED /* VUNewReplyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CE1E55B82500EC11ED /* VUNewReplyModel.swift */; };
+		9093B1351E55B82500EC11ED /* VUCommentsBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CF1E55B82500EC11ED /* VUCommentsBuilderModel.swift */; };
+		9093B1361E55B82500EC11ED /* VUCommentsBuilderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0CF1E55B82500EC11ED /* VUCommentsBuilderModel.swift */; };
+		9093B1371E55B82500EC11ED /* VUModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D01E55B82500EC11ED /* VUModelsFactory.swift */; };
+		9093B1381E55B82500EC11ED /* VUModelsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D01E55B82500EC11ED /* VUModelsFactory.swift */; };
+		9093B1391E55B82500EC11ED /* VUTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D11E55B82500EC11ED /* VUTableViewManager.swift */; };
+		9093B13A1E55B82500EC11ED /* VUTableViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D11E55B82500EC11ED /* VUTableViewManager.swift */; };
+		9093B13B1E55B82500EC11ED /* VUAdvertisingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D41E55B82500EC11ED /* VUAdvertisingCell.swift */; };
+		9093B13C1E55B82500EC11ED /* VUAdvertisingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D41E55B82500EC11ED /* VUAdvertisingCell.swift */; };
+		9093B13D1E55B82500EC11ED /* VUAdvertisingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0D51E55B82500EC11ED /* VUAdvertisingCell.xib */; };
+		9093B13E1E55B82500EC11ED /* VUAdvertisingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0D51E55B82500EC11ED /* VUAdvertisingCell.xib */; };
+		9093B13F1E55B82500EC11ED /* VUCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D71E55B82500EC11ED /* VUCommentCell.swift */; };
+		9093B1401E55B82500EC11ED /* VUCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0D71E55B82500EC11ED /* VUCommentCell.swift */; };
+		9093B1411E55B82500EC11ED /* VUCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0D81E55B82500EC11ED /* VUCommentCell.xib */; };
+		9093B1421E55B82500EC11ED /* VUCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0D81E55B82500EC11ED /* VUCommentCell.xib */; };
+		9093B1431E55B82500EC11ED /* VUEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0DB1E55B82500EC11ED /* VUEmojiCell.swift */; };
+		9093B1441E55B82500EC11ED /* VUEmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0DB1E55B82500EC11ED /* VUEmojiCell.swift */; };
+		9093B1451E55B82500EC11ED /* VUEmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0DC1E55B82500EC11ED /* VUEmojiCell.xib */; };
+		9093B1461E55B82500EC11ED /* VUEmojiCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0DC1E55B82500EC11ED /* VUEmojiCell.xib */; };
+		9093B1471E55B82500EC11ED /* VUEmojiVotingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0DD1E55B82500EC11ED /* VUEmojiVotingCell.swift */; };
+		9093B1481E55B82500EC11ED /* VUEmojiVotingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0DD1E55B82500EC11ED /* VUEmojiVotingCell.swift */; };
+		9093B1491E55B82500EC11ED /* VUEmojiVotingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0DE1E55B82500EC11ED /* VUEmojiVotingCell.xib */; };
+		9093B14A1E55B82500EC11ED /* VUEmojiVotingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0DE1E55B82500EC11ED /* VUEmojiVotingCell.xib */; };
+		9093B14B1E55B82500EC11ED /* VULoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E01E55B82500EC11ED /* VULoadMoreCell.swift */; };
+		9093B14C1E55B82500EC11ED /* VULoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E01E55B82500EC11ED /* VULoadMoreCell.swift */; };
+		9093B14D1E55B82500EC11ED /* VULoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E11E55B82500EC11ED /* VULoadMoreCell.xib */; };
+		9093B14E1E55B82500EC11ED /* VULoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E11E55B82500EC11ED /* VULoadMoreCell.xib */; };
+		9093B14F1E55B82500EC11ED /* VULoginFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E31E55B82500EC11ED /* VULoginFormCell.swift */; };
+		9093B1501E55B82500EC11ED /* VULoginFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E31E55B82500EC11ED /* VULoginFormCell.swift */; };
+		9093B1511E55B82500EC11ED /* VULoginFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E41E55B82500EC11ED /* VULoginFormCell.xib */; };
+		9093B1521E55B82500EC11ED /* VULoginFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E41E55B82500EC11ED /* VULoginFormCell.xib */; };
+		9093B1531E55B82500EC11ED /* VUNewCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E61E55B82500EC11ED /* VUNewCommentCell.swift */; };
+		9093B1541E55B82500EC11ED /* VUNewCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E61E55B82500EC11ED /* VUNewCommentCell.swift */; };
+		9093B1551E55B82500EC11ED /* VUNewCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E71E55B82500EC11ED /* VUNewCommentCell.xib */; };
+		9093B1561E55B82500EC11ED /* VUNewCommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0E71E55B82500EC11ED /* VUNewCommentCell.xib */; };
+		9093B1571E55B82500EC11ED /* VUTopArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E91E55B82500EC11ED /* VUTopArticleCell.swift */; };
+		9093B1581E55B82500EC11ED /* VUTopArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0E91E55B82500EC11ED /* VUTopArticleCell.swift */; };
+		9093B1591E55B82500EC11ED /* VUTopArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0EA1E55B82500EC11ED /* VUTopArticleCell.xib */; };
+		9093B15A1E55B82500EC11ED /* VUTopArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0EA1E55B82500EC11ED /* VUTopArticleCell.xib */; };
+		9093B15D1E55B82500EC11ED /* VUAdsFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0EE1E55B82500EC11ED /* VUAdsFile.html */; };
+		9093B15E1E55B82500EC11ED /* VUAdsFile.html in Resources */ = {isa = PBXBuildFile; fileRef = 9093B0EE1E55B82500EC11ED /* VUAdsFile.html */; };
+		9093B15F1E55B82500EC11ED /* VUBridgeHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9093B0EF1E55B82500EC11ED /* VUBridgeHeader.h */; };
+		9093B1601E55B82500EC11ED /* VUCutomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0F01E55B82500EC11ED /* VUCutomButton.swift */; };
+		9093B1611E55B82500EC11ED /* VUCutomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9093B0F01E55B82500EC11ED /* VUCutomButton.swift */; };
+		9093B1631E55B83100EC11ED /* Vuukle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9093B1621E55B83100EC11ED /* Vuukle.storyboard */; };
+		9093B1641E55B83100EC11ED /* Vuukle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9093B1621E55B83100EC11ED /* Vuukle.storyboard */; };
+		9093B1981E55C4B000EC11ED /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 908077301E07FF4500C20694 /* Vuukle.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		A6D7FEA51EE919E5D4058354 /* Pods_Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B176E456D8CF55A8D7423D1F /* Pods_Vuukle.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9080773B1E07FF4600C20694 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 908077271E07FF4500C20694 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9080772F1E07FF4500C20694;
+			remoteInfo = Vuukle;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		04114E181D75B9C300113721 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		04114E1B1D75B9C300113721 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
-		04114E1D1D75B9C300113721 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		049D0B241D9D560C00507DC3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		049D0B251D9D560C00507DC3 /* AddCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCommentCell.swift; sourceTree = "<group>"; };
-		049D0B261D9D560C00507DC3 /* CellConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellConstructor.swift; sourceTree = "<group>"; };
-		049D0B271D9D560C00507DC3 /* CommentForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentForm.swift; sourceTree = "<group>"; };
-		049D0B281D9D560C00507DC3 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
-		049D0B291D9D560C00507DC3 /* CommentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsBuilder.swift; sourceTree = "<group>"; };
-		049D0B2A1D9D560C00507DC3 /* CellConstraintsConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellConstraintsConstructor.swift; sourceTree = "<group>"; };
-		049D0B2B1D9D560C00507DC3 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
-		049D0B2C1D9D560C00507DC3 /* ContentWebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentWebViewCell.swift; sourceTree = "<group>"; };
-		049D0B2D1D9D560C00507DC3 /* LocalCommentsConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalCommentsConstructor.swift; sourceTree = "<group>"; };
-		049D0B2E1D9D560C00507DC3 /* EmoteRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoteRating.swift; sourceTree = "<group>"; };
-		049D0B2F1D9D560C00507DC3 /* Emoticon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emoticon.swift; sourceTree = "<group>"; };
-		049D0B301D9D560C00507DC3 /* EmoticonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmoticonCell.swift; sourceTree = "<group>"; };
-		049D0B311D9D560C00507DC3 /* CommentsFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsFeed.swift; sourceTree = "<group>"; };
-		049D0B321D9D560C00507DC3 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		049D0B331D9D560C00507DC3 /* ReplyForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReplyForm.swift; sourceTree = "<group>"; };
-		049D0B341D9D560C00507DC3 /* LoadMore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMore.swift; sourceTree = "<group>"; };
-		049D0B361D9D560C00507DC3 /* MoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreView.swift; sourceTree = "<group>"; };
-		049D0B371D9D560C00507DC3 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		049D0B381D9D560C00507DC3 /* ParametersConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParametersConstructor.swift; sourceTree = "<group>"; };
-		049D0B391D9D560C00507DC3 /* ResponseToComment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseToComment.swift; sourceTree = "<group>"; };
-		049D0B3A1D9D560C00507DC3 /* ResponseToEmoteRating.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseToEmoteRating.swift; sourceTree = "<group>"; };
-		049D0B3B1D9D560C00507DC3 /* Saver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Saver.swift; sourceTree = "<group>"; };
-		049D0B3C1D9D560C00507DC3 /* TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAgo.swift; sourceTree = "<group>"; };
-		049D0B3D1D9D560C00507DC3 /* TotalCommentsCount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TotalCommentsCount.swift; sourceTree = "<group>"; };
-		049D0B3E1D9D560C00507DC3 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		049D0B3F1D9D560C00507DC3 /* WebViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewCell.swift; sourceTree = "<group>"; };
-		049D0B5C1D9D562000507DC3 /* 122.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 122.png; sourceTree = "<group>"; };
-		049D0B5F1D9D562000507DC3 /* ContentWebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContentWebViewCell.xib; sourceTree = "<group>"; };
-		049D0B601D9D562000507DC3 /* EmoticonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmoticonCell.xib; sourceTree = "<group>"; };
-		049D0B611D9D562000507DC3 /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		049D0B621D9D562000507DC3 /* images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = images.png; sourceTree = "<group>"; };
-		049D0B641D9D562000507DC3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		049D0B651D9D562000507DC3 /* MoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MoreView.xib; sourceTree = "<group>"; };
-		049D0B661D9D562000507DC3 /* non_secure.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = non_secure.html; sourceTree = "<group>"; };
-		049D0B671D9D562000507DC3 /* smile-amused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-amused.png"; sourceTree = "<group>"; };
-		049D0B681D9D562000507DC3 /* smile-angry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-angry.png"; sourceTree = "<group>"; };
-		049D0B691D9D562000507DC3 /* smile-excited.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-excited.png"; sourceTree = "<group>"; };
-		049D0B6A1D9D562000507DC3 /* smile-happy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-happy.png"; sourceTree = "<group>"; };
-		049D0B6B1D9D562000507DC3 /* smile-indifferent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-indifferent.png"; sourceTree = "<group>"; };
-		049D0B6C1D9D562000507DC3 /* smile-sad-full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smile-sad-full.png"; sourceTree = "<group>"; };
-		049D0B6D1D9D562000507DC3 /* Solid_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Solid_gray.png; sourceTree = "<group>"; };
-		049D0B6E1D9D562000507DC3 /* thumb-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-down.png"; sourceTree = "<group>"; };
-		049D0B6F1D9D562000507DC3 /* thumb-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumb-up.png"; sourceTree = "<group>"; };
-		049D0B701D9D562000507DC3 /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
-		049D0B711D9D562000507DC3 /* vuukle_logo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = vuukle_logo.jpg; sourceTree = "<group>"; };
-		049D0B721D9D562000507DC3 /* WebViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewCell.xib; sourceTree = "<group>"; };
-		900B70331DF07403000DF6C7 /* LoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
-		900B70351DF07409000DF6C7 /* LoginCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginCell.xib; sourceTree = "<group>"; };
-		901279E71DF8367100F3D185 /* LoadMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadMoreCell.xib; sourceTree = "<group>"; };
-		901279E91DF8367B00F3D185 /* LoadMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
-		901279ED1DF8434A00F3D185 /* reported_flag.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reported_flag.png; sourceTree = "<group>"; };
-		9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MostPopularArticleCell.swift; sourceTree = "<group>"; };
-		9053A8831DF1C64500E3A26E /* AddCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddCommentCell.xib; sourceTree = "<group>"; };
-		9053A8841DF1C64500E3A26E /* CommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentCell.xib; sourceTree = "<group>"; };
-		9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostPopularArticleCell.xib; sourceTree = "<group>"; };
-		9083BD771DFF0F4700000068 /* toolbar-back-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-back-button.png"; sourceTree = "<group>"; };
-		9083BD781DFF0F4700000068 /* toolbar-next-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toolbar-next-button.png"; sourceTree = "<group>"; };
-		9083BD7B1DFF104500000068 /* LoginForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginForm.swift; sourceTree = "<group>"; };
-		90A397D91E43504B00354D2E /* PlaceholderArticle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceholderArticle.png; sourceTree = "<group>"; };
-		90C747F31DF6A03200D78639 /* EmailVerificator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailVerificator.swift; sourceTree = "<group>"; };
+		04D813C91E7D68720088E671 /* VUCommentsBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VUCommentsBuilder.swift; path = "Vuukle/Open Framework Classes/VUCommentsBuilder.swift"; sourceTree = SOURCE_ROOT; };
+		04D813CA1E7D68720088E671 /* VUDesignHUB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VUDesignHUB.swift; path = "Vuukle/Open Framework Classes/VUDesignHUB.swift"; sourceTree = SOURCE_ROOT; };
+		04D813CD1E7D69450088E671 /* VUControllSum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUControllSum.swift; sourceTree = "<group>"; };
+		04D813CF1E7D696D0088E671 /* VUTopArticleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUTopArticleVC.swift; sourceTree = "<group>"; };
+		04D813D21E7D69880088E671 /* VUAdvertisingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUAdvertisingView.swift; sourceTree = "<group>"; };
+		04D813D31E7D69880088E671 /* VUAdvertisingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUAdvertisingView.xib; sourceTree = "<group>"; };
+		04D813D51E7D69880088E671 /* VUEmojiVoitingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmojiVoitingView.swift; sourceTree = "<group>"; };
+		04D813D61E7D69880088E671 /* VUEmojiVoitingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUEmojiVoitingView.xib; sourceTree = "<group>"; };
+		188A1472839BC9D1ACE1A499 /* Pods-Vuukle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vuukle.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vuukle/Pods-Vuukle.release.xcconfig"; sourceTree = "<group>"; };
+		9000BF441E55D39B006F8CA5 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../Library/Developer/Xcode/DerivedData/Vuukle-axdwmgdwjaitykdtpzthkfusolmq/Build/Products/Debug-iphonesimulator/Alamofire/Alamofire.framework"; sourceTree = "<group>"; };
+		9000BF461E55D39F006F8CA5 /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = "../../Library/Developer/Xcode/DerivedData/Vuukle-axdwmgdwjaitykdtpzthkfusolmq/Build/Products/Debug-iphonesimulator/AlamofireImage/AlamofireImage.framework"; sourceTree = "<group>"; };
+		9000BF481E55D3A2006F8CA5 /* MBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MBProgressHUD.framework; path = "../../Library/Developer/Xcode/DerivedData/Vuukle-axdwmgdwjaitykdtpzthkfusolmq/Build/Products/Debug-iphonesimulator/MBProgressHUD/MBProgressHUD.framework"; sourceTree = "<group>"; };
+		9000BF4A1E55D3A6006F8CA5 /* NSDate_TimeAgo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NSDate_TimeAgo.framework; path = "../../Library/Developer/Xcode/DerivedData/Vuukle-axdwmgdwjaitykdtpzthkfusolmq/Build/Products/Debug-iphonesimulator/NSDate+TimeAgo/NSDate_TimeAgo.framework"; sourceTree = "<group>"; };
+		905CD7571E0E913200AC9E10 /* Vuukle.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Vuukle.xcassets; sourceTree = "<group>"; };
+		908077301E07FF4500C20694 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		908077331E07FF4500C20694 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
+		908077341E07FF4500C20694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		908077391E07FF4600C20694 /* VuukleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VuukleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9080773E1E07FF4600C20694 /* VuukleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuukleTests.swift; sourceTree = "<group>"; };
+		908077401E07FF4600C20694 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9093B0A31E55B82500EC11ED /* String+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A41E55B82500EC11ED /* UIButton+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A51E55B82500EC11ED /* UIColor+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A61E55B82500EC11ED /* UIDevice+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A71E55B82500EC11ED /* UIImage+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A81E55B82500EC11ED /* UIImageView+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0A91E55B82500EC11ED /* UIToolbar+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIToolbar+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0AA1E55B82500EC11ED /* UIViewController+Vuukle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Vuukle.swift"; sourceTree = "<group>"; };
+		9093B0AD1E55B82500EC11ED /* VUEmums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmums.swift; sourceTree = "<group>"; };
+		9093B0AE1E55B82500EC11ED /* VUGlobals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUGlobals.swift; sourceTree = "<group>"; };
+		9093B0AF1E55B82500EC11ED /* VUIdentifiersUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUIdentifiersUI.swift; sourceTree = "<group>"; };
+		9093B0B21E55B82500EC11ED /* VUCommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCommentsVC.swift; sourceTree = "<group>"; };
+		9093B0B31E55B82500EC11ED /* VUFailureVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUFailureVC.swift; sourceTree = "<group>"; };
+		9093B0B61E55B82500EC11ED /* VUCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCommentModel.swift; sourceTree = "<group>"; };
+		9093B0B71E55B82500EC11ED /* VUEmojiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmojiModel.swift; sourceTree = "<group>"; };
+		9093B0B81E55B82500EC11ED /* VUEmojiVotingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmojiVotingModel.swift; sourceTree = "<group>"; };
+		9093B0B91E55B82500EC11ED /* VUPostResponceModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUPostResponceModel.swift; sourceTree = "<group>"; };
+		9093B0BA1E55B82500EC11ED /* VURequestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VURequestError.swift; sourceTree = "<group>"; };
+		9093B0BB1E55B82500EC11ED /* VUTopArticleModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUTopArticleModel.swift; sourceTree = "<group>"; };
+		9093B0BD1E55B82500EC11ED /* VUCurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCurrentUser.swift; sourceTree = "<group>"; };
+		9093B0BF1E55B82500EC11ED /* VUAlertsHub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUAlertsHub.swift; sourceTree = "<group>"; };
+		9093B0C01E55B82500EC11ED /* VUBugReportsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUBugReportsFactory.swift; sourceTree = "<group>"; };
+		9093B0C11E55B82500EC11ED /* VUDebugPrint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUDebugPrint.swift; sourceTree = "<group>"; };
+		9093B0C31E55B82500EC11ED /* VUInternetChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUInternetChecker.swift; sourceTree = "<group>"; };
+		9093B0C41E55B82500EC11ED /* VUParametersChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUParametersChecker.swift; sourceTree = "<group>"; };
+		9093B0C51E55B82500EC11ED /* VUShareConfigurator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUShareConfigurator.swift; sourceTree = "<group>"; };
+		9093B0C71E55B82500EC11ED /* VUInternetReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUInternetReachability.swift; sourceTree = "<group>"; };
+		9093B0C81E55B82500EC11ED /* VUServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUServerManager.swift; sourceTree = "<group>"; };
+		9093B0CA1E55B82500EC11ED /* VUAdvertisingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUAdvertisingModel.swift; sourceTree = "<group>"; };
+		9093B0CB1E55B82500EC11ED /* VULoadMoreModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VULoadMoreModel.swift; sourceTree = "<group>"; };
+		9093B0CC1E55B82500EC11ED /* VULoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VULoginModel.swift; sourceTree = "<group>"; };
+		9093B0CD1E55B82500EC11ED /* VUNewCommentModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUNewCommentModel.swift; sourceTree = "<group>"; };
+		9093B0CE1E55B82500EC11ED /* VUNewReplyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUNewReplyModel.swift; sourceTree = "<group>"; };
+		9093B0CF1E55B82500EC11ED /* VUCommentsBuilderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCommentsBuilderModel.swift; sourceTree = "<group>"; };
+		9093B0D01E55B82500EC11ED /* VUModelsFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUModelsFactory.swift; sourceTree = "<group>"; };
+		9093B0D11E55B82500EC11ED /* VUTableViewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUTableViewManager.swift; sourceTree = "<group>"; };
+		9093B0D41E55B82500EC11ED /* VUAdvertisingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUAdvertisingCell.swift; sourceTree = "<group>"; };
+		9093B0D51E55B82500EC11ED /* VUAdvertisingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUAdvertisingCell.xib; sourceTree = "<group>"; };
+		9093B0D71E55B82500EC11ED /* VUCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCommentCell.swift; sourceTree = "<group>"; };
+		9093B0D81E55B82500EC11ED /* VUCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUCommentCell.xib; sourceTree = "<group>"; };
+		9093B0DB1E55B82500EC11ED /* VUEmojiCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmojiCell.swift; sourceTree = "<group>"; };
+		9093B0DC1E55B82500EC11ED /* VUEmojiCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUEmojiCell.xib; sourceTree = "<group>"; };
+		9093B0DD1E55B82500EC11ED /* VUEmojiVotingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUEmojiVotingCell.swift; sourceTree = "<group>"; };
+		9093B0DE1E55B82500EC11ED /* VUEmojiVotingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUEmojiVotingCell.xib; sourceTree = "<group>"; };
+		9093B0E01E55B82500EC11ED /* VULoadMoreCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VULoadMoreCell.swift; sourceTree = "<group>"; };
+		9093B0E11E55B82500EC11ED /* VULoadMoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VULoadMoreCell.xib; sourceTree = "<group>"; };
+		9093B0E31E55B82500EC11ED /* VULoginFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VULoginFormCell.swift; sourceTree = "<group>"; };
+		9093B0E41E55B82500EC11ED /* VULoginFormCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VULoginFormCell.xib; sourceTree = "<group>"; };
+		9093B0E61E55B82500EC11ED /* VUNewCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUNewCommentCell.swift; sourceTree = "<group>"; };
+		9093B0E71E55B82500EC11ED /* VUNewCommentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUNewCommentCell.xib; sourceTree = "<group>"; };
+		9093B0E91E55B82500EC11ED /* VUTopArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUTopArticleCell.swift; sourceTree = "<group>"; };
+		9093B0EA1E55B82500EC11ED /* VUTopArticleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VUTopArticleCell.xib; sourceTree = "<group>"; };
+		9093B0EE1E55B82500EC11ED /* VUAdsFile.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = VUAdsFile.html; sourceTree = "<group>"; };
+		9093B0EF1E55B82500EC11ED /* VUBridgeHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VUBridgeHeader.h; sourceTree = "<group>"; };
+		9093B0F01E55B82500EC11ED /* VUCutomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VUCutomButton.swift; sourceTree = "<group>"; };
+		9093B1621E55B83100EC11ED /* Vuukle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Vuukle.storyboard; sourceTree = "<group>"; };
+		B176E456D8CF55A8D7423D1F /* Pods_Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3F02F92010664119DEB515B /* Pods-Vuukle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vuukle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vuukle/Pods-Vuukle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		04114E141D75B9C300113721 /* Frameworks */ = {
+		9080772C1E07FF4500C20694 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9000BF4B1E55D3A6006F8CA5 /* NSDate_TimeAgo.framework in Frameworks */,
+				9000BF491E55D3A2006F8CA5 /* MBProgressHUD.framework in Frameworks */,
+				9000BF471E55D39F006F8CA5 /* AlamofireImage.framework in Frameworks */,
+				9000BF451E55D39B006F8CA5 /* Alamofire.framework in Frameworks */,
+				A6D7FEA51EE919E5D4058354 /* Pods_Vuukle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		908077361E07FF4600C20694 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9093B1981E55C4B000EC11ED /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04114E0E1D75B9C300113721 = {
+		04D813D11E7D69880088E671 /* VUAdvertisingView */ = {
 			isa = PBXGroup;
 			children = (
-				04114E1A1D75B9C300113721 /* Vuukle */,
-				04114E191D75B9C300113721 /* Products */,
+				04D813D21E7D69880088E671 /* VUAdvertisingView.swift */,
+				04D813D31E7D69880088E671 /* VUAdvertisingView.xib */,
+			);
+			path = VUAdvertisingView;
+			sourceTree = "<group>";
+		};
+		04D813D41E7D69880088E671 /* VUEmojiView */ = {
+			isa = PBXGroup;
+			children = (
+				04D813D51E7D69880088E671 /* VUEmojiVoitingView.swift */,
+				04D813D61E7D69880088E671 /* VUEmojiVoitingView.xib */,
+			);
+			path = VUEmojiView;
+			sourceTree = "<group>";
+		};
+		908077261E07FF4500C20694 = {
+			isa = PBXGroup;
+			children = (
+				908077321E07FF4500C20694 /* Vuukle */,
+				9080773D1E07FF4600C20694 /* VuukleTests */,
+				908077311E07FF4500C20694 /* Products */,
+				AE72536DB022E2F2AFC63A5B /* Pods */,
+				FF1F450C24A335CB87A477AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		04114E191D75B9C300113721 /* Products */ = {
+		908077311E07FF4500C20694 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				04114E181D75B9C300113721 /* Vuukle.framework */,
+				908077301E07FF4500C20694 /* Vuukle.framework */,
+				908077391E07FF4600C20694 /* VuukleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		04114E1A1D75B9C300113721 /* Vuukle */ = {
+		908077321E07FF4500C20694 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				049D0B241D9D560C00507DC3 /* AppDelegate.swift */,
-				049D0B251D9D560C00507DC3 /* AddCommentCell.swift */,
-				049D0B261D9D560C00507DC3 /* CellConstructor.swift */,
-				049D0B271D9D560C00507DC3 /* CommentForm.swift */,
-				049D0B281D9D560C00507DC3 /* CommentCell.swift */,
-				049D0B291D9D560C00507DC3 /* CommentsBuilder.swift */,
-				049D0B2A1D9D560C00507DC3 /* CellConstraintsConstructor.swift */,
-				049D0B2B1D9D560C00507DC3 /* CommentViewController.swift */,
-				049D0B2C1D9D560C00507DC3 /* ContentWebViewCell.swift */,
-				049D0B2D1D9D560C00507DC3 /* LocalCommentsConstructor.swift */,
-				90C747F31DF6A03200D78639 /* EmailVerificator.swift */,
-				049D0B2E1D9D560C00507DC3 /* EmoteRating.swift */,
-				049D0B2F1D9D560C00507DC3 /* Emoticon.swift */,
-				049D0B301D9D560C00507DC3 /* EmoticonCell.swift */,
-				049D0B311D9D560C00507DC3 /* CommentsFeed.swift */,
-				049D0B321D9D560C00507DC3 /* Global.swift */,
-				049D0B331D9D560C00507DC3 /* ReplyForm.swift */,
-				049D0B341D9D560C00507DC3 /* LoadMore.swift */,
-				900B70331DF07403000DF6C7 /* LoginCell.swift */,
-				9083BD7B1DFF104500000068 /* LoginForm.swift */,
-				901279E91DF8367B00F3D185 /* LoadMoreCell.swift */,
-				049D0B361D9D560C00507DC3 /* MoreView.swift */,
-				9053A8811DF1C44400E3A26E /* MostPopularArticleCell.swift */,
-				049D0B371D9D560C00507DC3 /* NetworkManager.swift */,
-				049D0B381D9D560C00507DC3 /* ParametersConstructor.swift */,
-				049D0B391D9D560C00507DC3 /* ResponseToComment.swift */,
-				049D0B3A1D9D560C00507DC3 /* ResponseToEmoteRating.swift */,
-				049D0B3B1D9D560C00507DC3 /* Saver.swift */,
-				049D0B3C1D9D560C00507DC3 /* TimeAgo.swift */,
-				049D0B3D1D9D560C00507DC3 /* TotalCommentsCount.swift */,
-				049D0B3E1D9D560C00507DC3 /* WebView.swift */,
-				049D0B3F1D9D560C00507DC3 /* WebViewCell.swift */,
-				049D0AF51D9D557E00507DC3 /* Resourse */,
-				04114E1B1D75B9C300113721 /* Vuukle.h */,
-				04114E1D1D75B9C300113721 /* Info.plist */,
+				9093B0A21E55B82500EC11ED /* Extensions */,
+				9093B0AB1E55B82500EC11ED /* Globals and Constants */,
+				9093B0B01E55B82500EC11ED /* MVC */,
+				9093B0EB1E55B82500EC11ED /* Open framework class */,
+				9093B0ED1E55B82500EC11ED /* Support Files */,
+				908077331E07FF4500C20694 /* Vuukle.h */,
+				9080774F1E0809A700C20694 /* Resources */,
 			);
 			path = Vuukle;
 			sourceTree = "<group>";
 		};
-		049D0AF51D9D557E00507DC3 /* Resourse */ = {
+		9080773D1E07FF4600C20694 /* VuukleTests */ = {
 			isa = PBXGroup;
 			children = (
-				049D0B5C1D9D562000507DC3 /* 122.png */,
-				049D0B5F1D9D562000507DC3 /* ContentWebViewCell.xib */,
-				900B70351DF07409000DF6C7 /* LoginCell.xib */,
-				049D0B601D9D562000507DC3 /* EmoticonCell.xib */,
-				049D0B611D9D562000507DC3 /* facebook.png */,
-				049D0B621D9D562000507DC3 /* images.png */,
-				049D0B641D9D562000507DC3 /* Main.storyboard */,
-				049D0B651D9D562000507DC3 /* MoreView.xib */,
-				901279E71DF8367100F3D185 /* LoadMoreCell.xib */,
-				049D0B661D9D562000507DC3 /* non_secure.html */,
-				9053A8831DF1C64500E3A26E /* AddCommentCell.xib */,
-				9083BD771DFF0F4700000068 /* toolbar-back-button.png */,
-				9083BD781DFF0F4700000068 /* toolbar-next-button.png */,
-				9053A8841DF1C64500E3A26E /* CommentCell.xib */,
-				901279ED1DF8434A00F3D185 /* reported_flag.png */,
-				9053A8861DF1C64500E3A26E /* MostPopularArticleCell.xib */,
-				049D0B671D9D562000507DC3 /* smile-amused.png */,
-				049D0B681D9D562000507DC3 /* smile-angry.png */,
-				049D0B691D9D562000507DC3 /* smile-excited.png */,
-				049D0B6A1D9D562000507DC3 /* smile-happy.png */,
-				049D0B6B1D9D562000507DC3 /* smile-indifferent.png */,
-				049D0B6C1D9D562000507DC3 /* smile-sad-full.png */,
-				049D0B6D1D9D562000507DC3 /* Solid_gray.png */,
-				049D0B6E1D9D562000507DC3 /* thumb-down.png */,
-				049D0B6F1D9D562000507DC3 /* thumb-up.png */,
-				049D0B701D9D562000507DC3 /* twitter.png */,
-				90A397D91E43504B00354D2E /* PlaceholderArticle.png */,
-				049D0B711D9D562000507DC3 /* vuukle_logo.jpg */,
-				049D0B721D9D562000507DC3 /* WebViewCell.xib */,
+				9080773E1E07FF4600C20694 /* VuukleTests.swift */,
+				908077401E07FF4600C20694 /* Info.plist */,
 			);
-			name = Resourse;
+			path = VuukleTests;
+			sourceTree = "<group>";
+		};
+		9080774F1E0809A700C20694 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9093B1621E55B83100EC11ED /* Vuukle.storyboard */,
+				905CD7571E0E913200AC9E10 /* Vuukle.xcassets */,
+				908077341E07FF4500C20694 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		9093B0A21E55B82500EC11ED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0A31E55B82500EC11ED /* String+Vuukle.swift */,
+				9093B0A41E55B82500EC11ED /* UIButton+Vuukle.swift */,
+				9093B0A51E55B82500EC11ED /* UIColor+Vuukle.swift */,
+				9093B0A61E55B82500EC11ED /* UIDevice+Vuukle.swift */,
+				9093B0A71E55B82500EC11ED /* UIImage+Vuukle.swift */,
+				9093B0A81E55B82500EC11ED /* UIImageView+Vuukle.swift */,
+				9093B0A91E55B82500EC11ED /* UIToolbar+Vuukle.swift */,
+				9093B0AA1E55B82500EC11ED /* UIViewController+Vuukle.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9093B0AB1E55B82500EC11ED /* Globals and Constants */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0AD1E55B82500EC11ED /* VUEmums.swift */,
+				9093B0AE1E55B82500EC11ED /* VUGlobals.swift */,
+				9093B0AF1E55B82500EC11ED /* VUIdentifiersUI.swift */,
+			);
+			path = "Globals and Constants";
+			sourceTree = "<group>";
+		};
+		9093B0B01E55B82500EC11ED /* MVC */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0B11E55B82500EC11ED /* Controllers */,
+				9093B0B41E55B82500EC11ED /* Models */,
+				9093B0D21E55B82500EC11ED /* Views */,
+			);
+			path = MVC;
+			sourceTree = "<group>";
+		};
+		9093B0B11E55B82500EC11ED /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0B21E55B82500EC11ED /* VUCommentsVC.swift */,
+				04D813CF1E7D696D0088E671 /* VUTopArticleVC.swift */,
+				9093B0B31E55B82500EC11ED /* VUFailureVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9093B0B41E55B82500EC11ED /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				04D813CD1E7D69450088E671 /* VUControllSum.swift */,
+				9093B0B51E55B82500EC11ED /* APIs Responce Models */,
+				9093B0BC1E55B82500EC11ED /* Current User */,
+				9093B0BE1E55B82500EC11ED /* Debug and Bug Reports */,
+				9093B0C21E55B82500EC11ED /* Different Utilities */,
+				9093B0C61E55B82500EC11ED /* Internet and APIs */,
+				9093B0C91E55B82500EC11ED /* Local Models */,
+				9093B0CF1E55B82500EC11ED /* VUCommentsBuilderModel.swift */,
+				9093B0D01E55B82500EC11ED /* VUModelsFactory.swift */,
+				9093B0D11E55B82500EC11ED /* VUTableViewManager.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		9093B0B51E55B82500EC11ED /* APIs Responce Models */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0B61E55B82500EC11ED /* VUCommentModel.swift */,
+				9093B0B71E55B82500EC11ED /* VUEmojiModel.swift */,
+				9093B0B81E55B82500EC11ED /* VUEmojiVotingModel.swift */,
+				9093B0B91E55B82500EC11ED /* VUPostResponceModel.swift */,
+				9093B0BA1E55B82500EC11ED /* VURequestError.swift */,
+				9093B0BB1E55B82500EC11ED /* VUTopArticleModel.swift */,
+			);
+			path = "APIs Responce Models";
+			sourceTree = "<group>";
+		};
+		9093B0BC1E55B82500EC11ED /* Current User */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0BD1E55B82500EC11ED /* VUCurrentUser.swift */,
+			);
+			path = "Current User";
+			sourceTree = "<group>";
+		};
+		9093B0BE1E55B82500EC11ED /* Debug and Bug Reports */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0BF1E55B82500EC11ED /* VUAlertsHub.swift */,
+				9093B0C01E55B82500EC11ED /* VUBugReportsFactory.swift */,
+				9093B0C11E55B82500EC11ED /* VUDebugPrint.swift */,
+			);
+			path = "Debug and Bug Reports";
+			sourceTree = "<group>";
+		};
+		9093B0C21E55B82500EC11ED /* Different Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0C31E55B82500EC11ED /* VUInternetChecker.swift */,
+				9093B0C41E55B82500EC11ED /* VUParametersChecker.swift */,
+				9093B0C51E55B82500EC11ED /* VUShareConfigurator.swift */,
+			);
+			path = "Different Utilities";
+			sourceTree = "<group>";
+		};
+		9093B0C61E55B82500EC11ED /* Internet and APIs */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0C71E55B82500EC11ED /* VUInternetReachability.swift */,
+				9093B0C81E55B82500EC11ED /* VUServerManager.swift */,
+			);
+			path = "Internet and APIs";
+			sourceTree = "<group>";
+		};
+		9093B0C91E55B82500EC11ED /* Local Models */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0CA1E55B82500EC11ED /* VUAdvertisingModel.swift */,
+				9093B0CB1E55B82500EC11ED /* VULoadMoreModel.swift */,
+				9093B0CC1E55B82500EC11ED /* VULoginModel.swift */,
+				9093B0CD1E55B82500EC11ED /* VUNewCommentModel.swift */,
+				9093B0CE1E55B82500EC11ED /* VUNewReplyModel.swift */,
+			);
+			path = "Local Models";
+			sourceTree = "<group>";
+		};
+		9093B0D21E55B82500EC11ED /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04D813D11E7D69880088E671 /* VUAdvertisingView */,
+				04D813D41E7D69880088E671 /* VUEmojiView */,
+				9093B0D31E55B82500EC11ED /* VUAdvertisingCell */,
+				9093B0D61E55B82500EC11ED /* VUCommentCell */,
+				9093B0D91E55B82500EC11ED /* VUEmojiVotingCell */,
+				9093B0DF1E55B82500EC11ED /* VULoadMoreCell */,
+				9093B0E21E55B82500EC11ED /* VULoginCell */,
+				9093B0E51E55B82500EC11ED /* VUNewCommentCell */,
+				9093B0E81E55B82500EC11ED /* VUTopArticleCell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		9093B0D31E55B82500EC11ED /* VUAdvertisingCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0D41E55B82500EC11ED /* VUAdvertisingCell.swift */,
+				9093B0D51E55B82500EC11ED /* VUAdvertisingCell.xib */,
+			);
+			path = VUAdvertisingCell;
+			sourceTree = "<group>";
+		};
+		9093B0D61E55B82500EC11ED /* VUCommentCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0D71E55B82500EC11ED /* VUCommentCell.swift */,
+				9093B0D81E55B82500EC11ED /* VUCommentCell.xib */,
+			);
+			path = VUCommentCell;
+			sourceTree = "<group>";
+		};
+		9093B0D91E55B82500EC11ED /* VUEmojiVotingCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0DA1E55B82500EC11ED /* VUEmojiCell */,
+				9093B0DD1E55B82500EC11ED /* VUEmojiVotingCell.swift */,
+				9093B0DE1E55B82500EC11ED /* VUEmojiVotingCell.xib */,
+			);
+			path = VUEmojiVotingCell;
+			sourceTree = "<group>";
+		};
+		9093B0DA1E55B82500EC11ED /* VUEmojiCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0DB1E55B82500EC11ED /* VUEmojiCell.swift */,
+				9093B0DC1E55B82500EC11ED /* VUEmojiCell.xib */,
+			);
+			path = VUEmojiCell;
+			sourceTree = "<group>";
+		};
+		9093B0DF1E55B82500EC11ED /* VULoadMoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0E01E55B82500EC11ED /* VULoadMoreCell.swift */,
+				9093B0E11E55B82500EC11ED /* VULoadMoreCell.xib */,
+			);
+			path = VULoadMoreCell;
+			sourceTree = "<group>";
+		};
+		9093B0E21E55B82500EC11ED /* VULoginCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0E31E55B82500EC11ED /* VULoginFormCell.swift */,
+				9093B0E41E55B82500EC11ED /* VULoginFormCell.xib */,
+			);
+			path = VULoginCell;
+			sourceTree = "<group>";
+		};
+		9093B0E51E55B82500EC11ED /* VUNewCommentCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0E61E55B82500EC11ED /* VUNewCommentCell.swift */,
+				9093B0E71E55B82500EC11ED /* VUNewCommentCell.xib */,
+			);
+			path = VUNewCommentCell;
+			sourceTree = "<group>";
+		};
+		9093B0E81E55B82500EC11ED /* VUTopArticleCell */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0E91E55B82500EC11ED /* VUTopArticleCell.swift */,
+				9093B0EA1E55B82500EC11ED /* VUTopArticleCell.xib */,
+			);
+			path = VUTopArticleCell;
+			sourceTree = "<group>";
+		};
+		9093B0EB1E55B82500EC11ED /* Open framework class */ = {
+			isa = PBXGroup;
+			children = (
+				04D813C91E7D68720088E671 /* VUCommentsBuilder.swift */,
+				04D813CA1E7D68720088E671 /* VUDesignHUB.swift */,
+			);
+			path = "Open framework class";
+			sourceTree = "<group>";
+		};
+		9093B0ED1E55B82500EC11ED /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				9093B0EE1E55B82500EC11ED /* VUAdsFile.html */,
+				9093B0EF1E55B82500EC11ED /* VUBridgeHeader.h */,
+				9093B0F01E55B82500EC11ED /* VUCutomButton.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		AE72536DB022E2F2AFC63A5B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				188A1472839BC9D1ACE1A499 /* Pods-Vuukle.release.xcconfig */,
+				C3F02F92010664119DEB515B /* Pods-Vuukle.debug.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FF1F450C24A335CB87A477AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9000BF4A1E55D3A6006F8CA5 /* NSDate_TimeAgo.framework */,
+				9000BF481E55D3A2006F8CA5 /* MBProgressHUD.framework */,
+				9000BF461E55D39F006F8CA5 /* AlamofireImage.framework */,
+				9000BF441E55D39B006F8CA5 /* Alamofire.framework */,
+				B176E456D8CF55A8D7423D1F /* Pods_Vuukle.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		04114E151D75B9C300113721 /* Headers */ = {
+		9080772D1E07FF4500C20694 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04114E1C1D75B9C300113721 /* Vuukle.h in Headers */,
+				908077411E07FF4600C20694 /* Vuukle.h in Headers */,
+				9093B15F1E55B82500EC11ED /* VUBridgeHeader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		04114E171D75B9C300113721 /* Vuukle */ = {
+		9080772F1E07FF4500C20694 /* Vuukle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 04114E201D75B9C300113721 /* Build configuration list for PBXNativeTarget "Vuukle" */;
+			buildConfigurationList = 908077441E07FF4600C20694 /* Build configuration list for PBXNativeTarget "Vuukle" */;
 			buildPhases = (
-				04114E131D75B9C300113721 /* Sources */,
-				04114E141D75B9C300113721 /* Frameworks */,
-				04114E151D75B9C300113721 /* Headers */,
-				04114E161D75B9C300113721 /* Resources */,
+				1E7F1B0AD49A2E18A989DD65 /* [CP] Check Pods Manifest.lock */,
+				9080772B1E07FF4500C20694 /* Sources */,
+				9080772C1E07FF4500C20694 /* Frameworks */,
+				9080772D1E07FF4500C20694 /* Headers */,
+				9080772E1E07FF4500C20694 /* Resources */,
+				D7FA990F055979FE7D2C6AB6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -272,123 +622,301 @@
 			);
 			name = Vuukle;
 			productName = Vuukle;
-			productReference = 04114E181D75B9C300113721 /* Vuukle.framework */;
+			productReference = 908077301E07FF4500C20694 /* Vuukle.framework */;
 			productType = "com.apple.product-type.framework";
+		};
+		908077381E07FF4600C20694 /* VuukleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 908077471E07FF4600C20694 /* Build configuration list for PBXNativeTarget "VuukleTests" */;
+			buildPhases = (
+				908077351E07FF4600C20694 /* Sources */,
+				908077361E07FF4600C20694 /* Frameworks */,
+				908077371E07FF4600C20694 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9080773C1E07FF4600C20694 /* PBXTargetDependency */,
+			);
+			name = VuukleTests;
+			productName = VuukleTests;
+			productReference = 908077391E07FF4600C20694 /* VuukleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		04114E0F1D75B9C300113721 /* Project object */ = {
+		908077271E07FF4500C20694 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
-				ORGANIZATIONNAME = Midgets;
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = "Alex Chaku";
 				TargetAttributes = {
-					04114E171D75B9C300113721 = {
-						CreatedOnToolsVersion = 7.3.1;
+					048C74881E825E4400911178 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = QZ8GL87UF9;
+						ProvisioningStyle = Automatic;
+					};
+					9080772F1E07FF4500C20694 = {
+						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					908077381E07FF4600C20694 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = QZ8GL87UF9;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = 04114E121D75B9C300113721 /* Build configuration list for PBXProject "Vuukle" */;
+			buildConfigurationList = 9080772A1E07FF4500C20694 /* Build configuration list for PBXProject "Vuukle" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 04114E0E1D75B9C300113721;
-			productRefGroup = 04114E191D75B9C300113721 /* Products */;
+			mainGroup = 908077261E07FF4500C20694;
+			productRefGroup = 908077311E07FF4500C20694 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				04114E171D75B9C300113721 /* Vuukle */,
+				9080772F1E07FF4500C20694 /* Vuukle */,
+				908077381E07FF4600C20694 /* VuukleTests */,
+				048C74881E825E4400911178 /* VuukleUniverse */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		04114E161D75B9C300113721 /* Resources */ = {
+		9080772E1E07FF4500C20694 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049D0B871D9D562000507DC3 /* twitter.png in Resources */,
-				049D0B7C1D9D562000507DC3 /* MoreView.xib in Resources */,
-				049D0B781D9D562000507DC3 /* facebook.png in Resources */,
-				9053A8881DF1C64500E3A26E /* CommentCell.xib in Resources */,
-				049D0B771D9D562000507DC3 /* EmoticonCell.xib in Resources */,
-				049D0B831D9D562000507DC3 /* smile-sad-full.png in Resources */,
-				90A397DA1E43504B00354D2E /* PlaceholderArticle.png in Resources */,
-				901279E81DF8367100F3D185 /* LoadMoreCell.xib in Resources */,
-				9053A8871DF1C64500E3A26E /* AddCommentCell.xib in Resources */,
-				049D0B731D9D562000507DC3 /* 122.png in Resources */,
-				049D0B851D9D562000507DC3 /* thumb-down.png in Resources */,
-				9083BD7A1DFF0F4700000068 /* toolbar-next-button.png in Resources */,
-				049D0B7F1D9D562000507DC3 /* smile-angry.png in Resources */,
-				9083BD791DFF0F4700000068 /* toolbar-back-button.png in Resources */,
-				049D0B881D9D562000507DC3 /* vuukle_logo.jpg in Resources */,
-				049D0B801D9D562000507DC3 /* smile-excited.png in Resources */,
-				049D0B791D9D562000507DC3 /* images.png in Resources */,
-				049D0B7B1D9D562000507DC3 /* Main.storyboard in Resources */,
-				049D0B7D1D9D562000507DC3 /* non_secure.html in Resources */,
-				9053A88A1DF1C64500E3A26E /* MostPopularArticleCell.xib in Resources */,
-				900B70361DF07409000DF6C7 /* LoginCell.xib in Resources */,
-				049D0B861D9D562000507DC3 /* thumb-up.png in Resources */,
-				049D0B841D9D562000507DC3 /* Solid_gray.png in Resources */,
-				049D0B7E1D9D562000507DC3 /* smile-amused.png in Resources */,
-				049D0B891D9D562000507DC3 /* WebViewCell.xib in Resources */,
-				049D0B821D9D562000507DC3 /* smile-indifferent.png in Resources */,
-				049D0B761D9D562000507DC3 /* ContentWebViewCell.xib in Resources */,
-				901279EE1DF8434A00F3D185 /* reported_flag.png in Resources */,
-				049D0B811D9D562000507DC3 /* smile-happy.png in Resources */,
+				04D813D81E7D69880088E671 /* VUAdvertisingView.xib in Resources */,
+				9093B1511E55B82500EC11ED /* VULoginFormCell.xib in Resources */,
+				9093B1491E55B82500EC11ED /* VUEmojiVotingCell.xib in Resources */,
+				905CD7581E0E913200AC9E10 /* Vuukle.xcassets in Resources */,
+				9093B1591E55B82500EC11ED /* VUTopArticleCell.xib in Resources */,
+				9093B1411E55B82500EC11ED /* VUCommentCell.xib in Resources */,
+				9093B14D1E55B82500EC11ED /* VULoadMoreCell.xib in Resources */,
+				04D813DA1E7D69880088E671 /* VUEmojiVoitingView.xib in Resources */,
+				9093B15D1E55B82500EC11ED /* VUAdsFile.html in Resources */,
+				9093B1551E55B82500EC11ED /* VUNewCommentCell.xib in Resources */,
+				9093B1631E55B83100EC11ED /* Vuukle.storyboard in Resources */,
+				9093B13D1E55B82500EC11ED /* VUAdvertisingCell.xib in Resources */,
+				9093B1451E55B82500EC11ED /* VUEmojiCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		908077371E07FF4600C20694 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9093B14A1E55B82500EC11ED /* VUEmojiVotingCell.xib in Resources */,
+				9093B1421E55B82500EC11ED /* VUCommentCell.xib in Resources */,
+				9093B14E1E55B82500EC11ED /* VULoadMoreCell.xib in Resources */,
+				9093B1461E55B82500EC11ED /* VUEmojiCell.xib in Resources */,
+				9093B15E1E55B82500EC11ED /* VUAdsFile.html in Resources */,
+				9093B1521E55B82500EC11ED /* VULoginFormCell.xib in Resources */,
+				9093B1641E55B83100EC11ED /* Vuukle.storyboard in Resources */,
+				9093B1561E55B82500EC11ED /* VUNewCommentCell.xib in Resources */,
+				9093B13E1E55B82500EC11ED /* VUAdvertisingCell.xib in Resources */,
+				9093B15A1E55B82500EC11ED /* VUTopArticleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		048C748C1E825E4800911178 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/sh\n\nUNIVERSAL_OUTPUTFOLDER=${BUILD_DIR}/${CONFIGURATION}-universal\n\n# make sure the output directory exists\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}/iOS\"\n\n# Step 1. Build Device and Simulator versions on iOS\nxcodebuild -workspace \"${PROJECT_NAME}.xcworkspace\" -scheme \"${PROJECT_NAME}\"  -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6' clean build\nxcodebuild -workspace \"${PROJECT_NAME}.xcworkspace\" -scheme \"${PROJECT_NAME}\" -sdk iphoneos clean build\n\n# Step 2. Copy the framework structure (from iphoneos build) to the universal folder\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework\" \"${UNIVERSAL_OUTPUTFOLDER}/iOS\"\n\n# Step 3. Create universal binary file using lipo and place the combined executable in the copied framework directory\nlipo -create -output \"${UNIVERSAL_OUTPUTFOLDER}/iOS/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.framework/${PROJECT_NAME}\" \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${PROJECT_NAME}.framework/${PROJECT_NAME}\"\n\n# Step 4. Convenience step to copy the framework to the project's directory\nmkdir -p \"${TMPDIR}/${PROJECT_NAME}/Frameworks/iOS\"\n\ncp -R \"${UNIVERSAL_OUTPUTFOLDER}/iOS/${PROJECT_NAME}.framework\" \"${TMPDIR}/${PROJECT_NAME}/Frameworks/iOS\"\n\n\n# Step 6. Create .tar.gz file for posting on the binary repository\ncd \"${TMPDIR}\"\n\n# We nest the framework inside a Frameworks folder so that it unarchives correctly\ntar -zcf \"${PROJECT_NAME}.framework.tar.gz\" \"${PROJECT_NAME}/Frameworks/\"\nmv \"${PROJECT_NAME}.framework.tar.gz\" \"${PROJECT_DIR}/\"\n\n# Step 7. Convenience step to open the project's directory in Finder\nopen \"${PROJECT_DIR}\"";
+		};
+		1E7F1B0AD49A2E18A989DD65 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D7FA990F055979FE7D2C6AB6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vuukle/Pods-Vuukle-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		04114E131D75B9C300113721 /* Sources */ = {
+		9080772B1E07FF4500C20694 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				049D0B471D9D560C00507DC3 /* CommentViewController.swift in Sources */,
-				9053A8821DF1C44400E3A26E /* MostPopularArticleCell.swift in Sources */,
-				049D0B481D9D560C00507DC3 /* ContentWebViewCell.swift in Sources */,
-				049D0B461D9D560C00507DC3 /* CellConstraintsConstructor.swift in Sources */,
-				049D0B501D9D560C00507DC3 /* LoadMore.swift in Sources */,
-				049D0B441D9D560C00507DC3 /* CommentCell.swift in Sources */,
-				049D0B5B1D9D560C00507DC3 /* WebViewCell.swift in Sources */,
-				049D0B4C1D9D560C00507DC3 /* EmoticonCell.swift in Sources */,
-				049D0B581D9D560C00507DC3 /* TimeAgo.swift in Sources */,
-				049D0B401D9D560C00507DC3 /* AppDelegate.swift in Sources */,
-				049D0B421D9D560C00507DC3 /* CellConstructor.swift in Sources */,
-				049D0B4D1D9D560C00507DC3 /* CommentsFeed.swift in Sources */,
-				049D0B4E1D9D560C00507DC3 /* Global.swift in Sources */,
-				049D0B491D9D560C00507DC3 /* LocalCommentsConstructor.swift in Sources */,
-				049D0B531D9D560C00507DC3 /* NetworkManager.swift in Sources */,
-				901279EA1DF8367B00F3D185 /* LoadMoreCell.swift in Sources */,
-				049D0B4F1D9D560C00507DC3 /* ReplyForm.swift in Sources */,
-				049D0B521D9D560C00507DC3 /* MoreView.swift in Sources */,
-				049D0B561D9D560C00507DC3 /* ResponseToEmoteRating.swift in Sources */,
-				049D0B551D9D560C00507DC3 /* ResponseToComment.swift in Sources */,
-				049D0B4B1D9D560C00507DC3 /* Emoticon.swift in Sources */,
-				049D0B411D9D560C00507DC3 /* AddCommentCell.swift in Sources */,
-				049D0B541D9D560C00507DC3 /* ParametersConstructor.swift in Sources */,
-				9083BD7C1DFF104500000068 /* LoginForm.swift in Sources */,
-				049D0B431D9D560C00507DC3 /* CommentForm.swift in Sources */,
-				90C747F41DF6A03200D78639 /* EmailVerificator.swift in Sources */,
-				049D0B591D9D560C00507DC3 /* TotalCommentsCount.swift in Sources */,
-				049D0B4A1D9D560C00507DC3 /* EmoteRating.swift in Sources */,
-				049D0B5A1D9D560C00507DC3 /* WebView.swift in Sources */,
-				900B70341DF07403000DF6C7 /* LoginCell.swift in Sources */,
-				049D0B451D9D560C00507DC3 /* CommentsBuilder.swift in Sources */,
-				049D0B571D9D560C00507DC3 /* Saver.swift in Sources */,
+				9093B1231E55B82500EC11ED /* VUParametersChecker.swift in Sources */,
+				9093B0F11E55B82500EC11ED /* String+Vuukle.swift in Sources */,
+				9093B1331E55B82500EC11ED /* VUNewReplyModel.swift in Sources */,
+				9093B12F1E55B82500EC11ED /* VULoginModel.swift in Sources */,
+				9093B0F71E55B82500EC11ED /* UIDevice+Vuukle.swift in Sources */,
+				9093B1291E55B82500EC11ED /* VUServerManager.swift in Sources */,
+				9093B1601E55B82500EC11ED /* VUCutomButton.swift in Sources */,
+				9093B1051E55B82500EC11ED /* VUGlobals.swift in Sources */,
+				9093B14B1E55B82500EC11ED /* VULoadMoreCell.swift in Sources */,
+				9093B1371E55B82500EC11ED /* VUModelsFactory.swift in Sources */,
+				9093B12D1E55B82500EC11ED /* VULoadMoreModel.swift in Sources */,
+				9093B1311E55B82500EC11ED /* VUNewCommentModel.swift in Sources */,
+				9093B1271E55B82500EC11ED /* VUInternetReachability.swift in Sources */,
+				9093B1131E55B82500EC11ED /* VUPostResponceModel.swift in Sources */,
+				9093B1071E55B82500EC11ED /* VUIdentifiersUI.swift in Sources */,
+				9093B1251E55B82500EC11ED /* VUShareConfigurator.swift in Sources */,
+				9093B1391E55B82500EC11ED /* VUTableViewManager.swift in Sources */,
+				9093B1171E55B82500EC11ED /* VUTopArticleModel.swift in Sources */,
+				9093B1471E55B82500EC11ED /* VUEmojiVotingCell.swift in Sources */,
+				9093B1151E55B82500EC11ED /* VURequestError.swift in Sources */,
+				9093B11B1E55B82500EC11ED /* VUAlertsHub.swift in Sources */,
+				9093B0FB1E55B82500EC11ED /* UIImageView+Vuukle.swift in Sources */,
+				9093B1531E55B82500EC11ED /* VUNewCommentCell.swift in Sources */,
+				9093B0F91E55B82500EC11ED /* UIImage+Vuukle.swift in Sources */,
+				04D813CB1E7D68720088E671 /* VUCommentsBuilder.swift in Sources */,
+				9093B1211E55B82500EC11ED /* VUInternetChecker.swift in Sources */,
+				04D813D01E7D696D0088E671 /* VUTopArticleVC.swift in Sources */,
+				9093B1191E55B82500EC11ED /* VUCurrentUser.swift in Sources */,
+				9093B0FF1E55B82500EC11ED /* UIViewController+Vuukle.swift in Sources */,
+				9093B0F31E55B82500EC11ED /* UIButton+Vuukle.swift in Sources */,
+				9093B11D1E55B82500EC11ED /* VUBugReportsFactory.swift in Sources */,
+				9093B13B1E55B82500EC11ED /* VUAdvertisingCell.swift in Sources */,
+				9093B1031E55B82500EC11ED /* VUEmums.swift in Sources */,
+				9093B1431E55B82500EC11ED /* VUEmojiCell.swift in Sources */,
+				9093B0FD1E55B82500EC11ED /* UIToolbar+Vuukle.swift in Sources */,
+				9093B10D1E55B82500EC11ED /* VUCommentModel.swift in Sources */,
+				9093B1571E55B82500EC11ED /* VUTopArticleCell.swift in Sources */,
+				9093B1111E55B82500EC11ED /* VUEmojiVotingModel.swift in Sources */,
+				9093B10B1E55B82500EC11ED /* VUFailureVC.swift in Sources */,
+				9093B13F1E55B82500EC11ED /* VUCommentCell.swift in Sources */,
+				04D813D71E7D69880088E671 /* VUAdvertisingView.swift in Sources */,
+				04D813CC1E7D68720088E671 /* VUDesignHUB.swift in Sources */,
+				9093B1351E55B82500EC11ED /* VUCommentsBuilderModel.swift in Sources */,
+				9093B12B1E55B82500EC11ED /* VUAdvertisingModel.swift in Sources */,
+				04D813D91E7D69880088E671 /* VUEmojiVoitingView.swift in Sources */,
+				9093B11F1E55B82500EC11ED /* VUDebugPrint.swift in Sources */,
+				04D813CE1E7D69450088E671 /* VUControllSum.swift in Sources */,
+				9093B10F1E55B82500EC11ED /* VUEmojiModel.swift in Sources */,
+				9093B1091E55B82500EC11ED /* VUCommentsVC.swift in Sources */,
+				9093B14F1E55B82500EC11ED /* VULoginFormCell.swift in Sources */,
+				9093B0F51E55B82500EC11ED /* UIColor+Vuukle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		908077351E07FF4600C20694 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9093B13A1E55B82500EC11ED /* VUTableViewManager.swift in Sources */,
+				9093B1581E55B82500EC11ED /* VUTopArticleCell.swift in Sources */,
+				9093B1361E55B82500EC11ED /* VUCommentsBuilderModel.swift in Sources */,
+				9093B1121E55B82500EC11ED /* VUEmojiVotingModel.swift in Sources */,
+				9093B0FC1E55B82500EC11ED /* UIImageView+Vuukle.swift in Sources */,
+				9093B12C1E55B82500EC11ED /* VUAdvertisingModel.swift in Sources */,
+				9093B1201E55B82500EC11ED /* VUDebugPrint.swift in Sources */,
+				9093B1061E55B82500EC11ED /* VUGlobals.swift in Sources */,
+				9093B13C1E55B82500EC11ED /* VUAdvertisingCell.swift in Sources */,
+				9093B1081E55B82500EC11ED /* VUIdentifiersUI.swift in Sources */,
+				9093B1281E55B82500EC11ED /* VUInternetReachability.swift in Sources */,
+				9093B1341E55B82500EC11ED /* VUNewReplyModel.swift in Sources */,
+				9093B11E1E55B82500EC11ED /* VUBugReportsFactory.swift in Sources */,
+				9093B12A1E55B82500EC11ED /* VUServerManager.swift in Sources */,
+				9093B1141E55B82500EC11ED /* VUPostResponceModel.swift in Sources */,
+				9093B1221E55B82500EC11ED /* VUInternetChecker.swift in Sources */,
+				9093B1161E55B82500EC11ED /* VURequestError.swift in Sources */,
+				9093B1301E55B82500EC11ED /* VULoginModel.swift in Sources */,
+				9093B0FE1E55B82500EC11ED /* UIToolbar+Vuukle.swift in Sources */,
+				9093B11C1E55B82500EC11ED /* VUAlertsHub.swift in Sources */,
+				9093B1101E55B82500EC11ED /* VUEmojiModel.swift in Sources */,
+				9093B1401E55B82500EC11ED /* VUCommentCell.swift in Sources */,
+				9093B1241E55B82500EC11ED /* VUParametersChecker.swift in Sources */,
+				9093B0F41E55B82500EC11ED /* UIButton+Vuukle.swift in Sources */,
+				9093B10C1E55B82500EC11ED /* VUFailureVC.swift in Sources */,
+				9093B1041E55B82500EC11ED /* VUEmums.swift in Sources */,
+				9093B14C1E55B82500EC11ED /* VULoadMoreCell.swift in Sources */,
+				9093B1001E55B82500EC11ED /* UIViewController+Vuukle.swift in Sources */,
+				9093B10A1E55B82500EC11ED /* VUCommentsVC.swift in Sources */,
+				9093B1501E55B82500EC11ED /* VULoginFormCell.swift in Sources */,
+				9093B0FA1E55B82500EC11ED /* UIImage+Vuukle.swift in Sources */,
+				9093B0F81E55B82500EC11ED /* UIDevice+Vuukle.swift in Sources */,
+				9093B1481E55B82500EC11ED /* VUEmojiVotingCell.swift in Sources */,
+				9093B1261E55B82500EC11ED /* VUShareConfigurator.swift in Sources */,
+				9093B1381E55B82500EC11ED /* VUModelsFactory.swift in Sources */,
+				9093B0F21E55B82500EC11ED /* String+Vuukle.swift in Sources */,
+				9093B1181E55B82500EC11ED /* VUTopArticleModel.swift in Sources */,
+				9093B1441E55B82500EC11ED /* VUEmojiCell.swift in Sources */,
+				9080773F1E07FF4600C20694 /* VuukleTests.swift in Sources */,
+				9093B10E1E55B82500EC11ED /* VUCommentModel.swift in Sources */,
+				9093B0F61E55B82500EC11ED /* UIColor+Vuukle.swift in Sources */,
+				9093B1321E55B82500EC11ED /* VUNewCommentModel.swift in Sources */,
+				9093B11A1E55B82500EC11ED /* VUCurrentUser.swift in Sources */,
+				9093B1611E55B82500EC11ED /* VUCutomButton.swift in Sources */,
+				9093B12E1E55B82500EC11ED /* VULoadMoreModel.swift in Sources */,
+				9093B1541E55B82500EC11ED /* VUNewCommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9080773C1E07FF4600C20694 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9080772F1E07FF4500C20694 /* Vuukle */;
+			targetProxy = 9080773B1E07FF4600C20694 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
-		04114E1E1D75B9C300113721 /* Debug */ = {
+		048C74891E825E4400911178 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = QZ8GL87UF9;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		048C748A1E825E4400911178 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = QZ8GL87UF9;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		908077421E07FF4600C20694 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -400,13 +928,16 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -426,10 +957,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -437,7 +969,7 @@
 			};
 			name = Debug;
 		};
-		04114E1F1D75B9C300113721 /* Release */ = {
+		908077431E07FF4600C20694 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -449,13 +981,16 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -469,9 +1004,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -479,63 +1015,116 @@
 			};
 			name = Release;
 		};
-		04114E211D75B9C300113721 /* Debug */ = {
+		908077451E07FF4600C20694 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3F02F92010664119DEB515B /* Pods-Vuukle.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = midgets.Vuukle;
+				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
-		04114E221D75B9C300113721 /* Release */ = {
+		908077461E07FF4600C20694 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 188A1472839BC9D1ACE1A499 /* Pods-Vuukle.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = midgets.Vuukle;
+				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		908077481E07FF4600C20694 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = QZ8GL87UF9;
+				INFOPLIST_FILE = VuukleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = comments.VuukleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		908077491E07FF4600C20694 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = QZ8GL87UF9;
+				INFOPLIST_FILE = VuukleTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = comments.VuukleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		04114E121D75B9C300113721 /* Build configuration list for PBXProject "Vuukle" */ = {
+		048C748B1E825E4400911178 /* Build configuration list for PBXAggregateTarget "VuukleUniverse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				04114E1E1D75B9C300113721 /* Debug */,
-				04114E1F1D75B9C300113721 /* Release */,
+				048C74891E825E4400911178 /* Debug */,
+				048C748A1E825E4400911178 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		04114E201D75B9C300113721 /* Build configuration list for PBXNativeTarget "Vuukle" */ = {
+		9080772A1E07FF4500C20694 /* Build configuration list for PBXProject "Vuukle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				04114E211D75B9C300113721 /* Debug */,
-				04114E221D75B9C300113721 /* Release */,
+				908077421E07FF4600C20694 /* Debug */,
+				908077431E07FF4600C20694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		908077441E07FF4600C20694 /* Build configuration list for PBXNativeTarget "Vuukle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				908077451E07FF4600C20694 /* Debug */,
+				908077461E07FF4600C20694 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		908077471E07FF4600C20694 /* Build configuration list for PBXNativeTarget "VuukleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				908077481E07FF4600C20694 /* Debug */,
+				908077491E07FF4600C20694 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 04114E0F1D75B9C300113721 /* Project object */;
+	rootObject = 908077271E07FF4500C20694 /* Project object */;
 }

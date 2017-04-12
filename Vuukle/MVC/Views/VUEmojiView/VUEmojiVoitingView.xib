@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="VUEmojiVoitingView" customModule="Vuukle" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="136"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your reaction?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRS-uJ-lFr">
+                    <rect key="frame" x="8" y="8" width="272" height="24"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="KKs-KF-3ix"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdf-fv-Z1G">
+                    <rect key="frame" x="288" y="8" width="24" height="24"/>
+                    <color key="backgroundColor" red="0.96846239730000006" green="0.60684880490000004" blue="0.27586760669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="Au5-cg-2Uo"/>
+                        <constraint firstAttribute="height" constant="24" id="sAg-RN-9qb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="xiM-6V-DhK">
+                    <rect key="frame" x="0.0" y="40" width="320" height="88"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="88" id="Ci0-MJ-5lv"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="120" id="Ufa-23-R97"/>
+                        <constraint firstAttribute="width" secondItem="xiM-6V-DhK" secondAttribute="height" multiplier="40:11" priority="750" id="vyy-zA-4S4"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fXj-sX-Ah6">
+                        <size key="itemSize" width="53" height="94"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="iN0-l3-epB" id="9CG-bD-JUN"/>
+                        <outlet property="delegate" destination="iN0-l3-epB" id="dFw-VZ-Cr9"/>
+                    </connections>
+                </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="J0S-Qa-UNg">
+                    <rect key="frame" x="142" y="50" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="37" id="3J7-6L-1td"/>
+                        <constraint firstAttribute="height" constant="37" id="sBY-J5-k3T"/>
+                    </constraints>
+                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sdf-fv-Z1G" secondAttribute="trailing" constant="8" id="3zd-nE-g1Z"/>
+                <constraint firstItem="xiM-6V-DhK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="8Ti-nE-iiq"/>
+                <constraint firstItem="xiM-6V-DhK" firstAttribute="top" secondItem="sdf-fv-Z1G" secondAttribute="bottom" constant="8" id="Bzh-56-CUK"/>
+                <constraint firstItem="lRS-uJ-lFr" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="E4M-xN-wnQ"/>
+                <constraint firstItem="sdf-fv-Z1G" firstAttribute="leading" secondItem="lRS-uJ-lFr" secondAttribute="trailing" constant="8" id="FWc-Pm-uve"/>
+                <constraint firstItem="lRS-uJ-lFr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Rdu-OI-TDF"/>
+                <constraint firstAttribute="trailing" secondItem="xiM-6V-DhK" secondAttribute="trailing" id="Zef-zg-NLS"/>
+                <constraint firstItem="J0S-Qa-UNg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="dA9-Oe-EP3"/>
+                <constraint firstItem="J0S-Qa-UNg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="id3-PW-ZQ1"/>
+                <constraint firstItem="sdf-fv-Z1G" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="ikG-Ff-HeG"/>
+                <constraint firstAttribute="bottom" secondItem="xiM-6V-DhK" secondAttribute="bottom" constant="8" id="wBT-Fc-eWA"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cellActivityIndicator" destination="J0S-Qa-UNg" id="c1w-KS-Hfq"/>
+                <outlet property="emojiCollectionView" destination="xiM-6V-DhK" id="Bts-PR-zdN"/>
+                <outlet property="emojiFlowLayout" destination="fXj-sX-Ah6" id="N62-1N-WIf"/>
+                <outlet property="totalVotesLabel" destination="sdf-fv-Z1G" id="Qi0-30-q0i"/>
+                <outlet property="totalVotesWidthConstraint" destination="Au5-cg-2Uo" id="4Ui-0E-KPH"/>
+                <outlet property="votingTitleLabel" destination="lRS-uJ-lFr" id="wsa-Od-8cT"/>
+            </connections>
+            <point key="canvasLocation" x="-52" y="-209"/>
+        </view>
+    </objects>
+</document>

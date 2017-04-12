@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="identifierVULoadMoreCell" rowHeight="121" id="KGk-i7-Jjw" customClass="VULoadMoreCell" customModule="Vuukle" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="124"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="123"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already loaded 0 from 0 comments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="18K-tC-FwX">
+                        <rect key="frame" x="8" y="8" width="304" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Qeq-VQ-H2q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U6a-A2-YKN" customClass="VUCustumButton" customModule="Vuukle">
+                        <rect key="frame" x="86" y="36" width="148" height="34"/>
+                        <color key="backgroundColor" red="0.96846239730000006" green="0.60684880490000004" blue="0.27586760669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="34" id="hlV-iY-H0Z"/>
+                            <constraint firstAttribute="width" constant="148" id="nE7-sX-LAe"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="Load more...">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="selected">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <state key="highlighted">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="loadMoreButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="v8Y-A5-BEn"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5W-0S-kwg" userLabel="Logo Content View">
+                        <rect key="frame" x="124" y="78" width="72" height="37"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version - 2.0.0" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdI-sO-z2Q">
+                                <rect key="frame" x="0.0" y="26" width="72" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="N0u-kw-2Pf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vuukle_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ar9-NU-R9O">
+                                <rect key="frame" x="0.0" y="2" width="72" height="24"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oh7-sj-RVj">
+                                <rect key="frame" x="0.0" y="0.0" width="72" height="37"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="openVuukleButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="H6J-vd-rBK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="DdI-sO-z2Q" secondAttribute="bottom" constant="1" id="2y8-Zb-g9n"/>
+                            <constraint firstItem="Oh7-sj-RVj" firstAttribute="leading" secondItem="DdI-sO-z2Q" secondAttribute="leading" id="7Ye-To-lp5"/>
+                            <constraint firstItem="Oh7-sj-RVj" firstAttribute="trailing" secondItem="ar9-NU-R9O" secondAttribute="trailing" id="BHW-PQ-ezm"/>
+                            <constraint firstItem="DdI-sO-z2Q" firstAttribute="top" secondItem="ar9-NU-R9O" secondAttribute="bottom" id="FnG-qT-qfl"/>
+                            <constraint firstItem="ar9-NU-R9O" firstAttribute="top" secondItem="G5W-0S-kwg" secondAttribute="top" constant="2" id="KAV-dP-ikb"/>
+                            <constraint firstAttribute="height" constant="37" id="KfT-1s-IiW"/>
+                            <constraint firstItem="ar9-NU-R9O" firstAttribute="trailing" secondItem="DdI-sO-z2Q" secondAttribute="trailing" id="L3s-La-4zs"/>
+                            <constraint firstAttribute="bottom" secondItem="Oh7-sj-RVj" secondAttribute="bottom" id="Zbm-4A-f5h"/>
+                            <constraint firstAttribute="trailing" secondItem="ar9-NU-R9O" secondAttribute="trailing" id="h7x-Kt-14j"/>
+                            <constraint firstItem="Oh7-sj-RVj" firstAttribute="top" secondItem="G5W-0S-kwg" secondAttribute="top" id="hUo-CT-nCC"/>
+                            <constraint firstAttribute="width" constant="72" id="ncQ-Rr-mBa"/>
+                            <constraint firstItem="ar9-NU-R9O" firstAttribute="leading" secondItem="G5W-0S-kwg" secondAttribute="leading" id="uQE-sk-UoF"/>
+                            <constraint firstItem="ar9-NU-R9O" firstAttribute="leading" secondItem="DdI-sO-z2Q" secondAttribute="leading" id="y67-fR-LnY"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="LHR-aa-iEV">
+                        <rect key="frame" x="142" y="43" width="37" height="37"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="37" id="Pga-kt-2Gz"/>
+                            <constraint firstAttribute="width" constant="37" id="SX6-Tz-EP4"/>
+                        </constraints>
+                        <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </activityIndicatorView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="U6a-A2-YKN" firstAttribute="centerX" secondItem="G5W-0S-kwg" secondAttribute="centerX" id="1b3-Jb-LOe"/>
+                    <constraint firstAttribute="topMargin" secondItem="18K-tC-FwX" secondAttribute="top" id="7oq-o3-Ohk"/>
+                    <constraint firstItem="LHR-aa-iEV" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="JaD-Hi-Ku0"/>
+                    <constraint firstItem="LHR-aa-iEV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="N8d-E9-5vO"/>
+                    <constraint firstItem="18K-tC-FwX" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="XJZ-hH-hPh"/>
+                    <constraint firstItem="18K-tC-FwX" firstAttribute="centerX" secondItem="U6a-A2-YKN" secondAttribute="centerX" id="gMc-9U-DLA"/>
+                    <constraint firstItem="G5W-0S-kwg" firstAttribute="top" secondItem="U6a-A2-YKN" secondAttribute="bottom" constant="8" id="jaN-J2-XI2"/>
+                    <constraint firstItem="18K-tC-FwX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="mPN-QI-UYs"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="G5W-0S-kwg" secondAttribute="bottom" id="tlh-Te-VX2"/>
+                    <constraint firstItem="U6a-A2-YKN" firstAttribute="top" secondItem="18K-tC-FwX" secondAttribute="bottom" constant="8" id="xKY-5K-7zm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <inset key="separatorInset" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+            <connections>
+                <outlet property="alreadyLoadedLabel" destination="18K-tC-FwX" id="7cY-fk-X2J"/>
+                <outlet property="cellActivityIndicator" destination="LHR-aa-iEV" id="rVU-rf-e30"/>
+                <outlet property="loadMoreButton" destination="U6a-A2-YKN" id="mpl-xB-qfz"/>
+                <outlet property="loadMoreButtonHeightConstraint" destination="hlV-iY-H0Z" id="th2-WI-b3O"/>
+                <outlet property="logoAndButtonSpacingConstaint" destination="jaN-J2-XI2" id="HYw-Tr-Oc0"/>
+                <outlet property="openVuukleButton" destination="Oh7-sj-RVj" id="Huf-Kl-EPo"/>
+                <outlet property="versionContentView" destination="G5W-0S-kwg" id="4hn-8f-ygN"/>
+                <outlet property="versionLabel" destination="DdI-sO-z2Q" id="3hg-ww-5Wd"/>
+            </connections>
+            <point key="canvasLocation" x="37" y="171"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Vuukle_Logo" width="200" height="83"/>
+    </resources>
+</document>

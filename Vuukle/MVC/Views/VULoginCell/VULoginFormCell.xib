@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="identifierVULoginFormCell" rowHeight="140" id="KGk-i7-Jjw" customClass="VULoginFormCell" customModule="Vuukle" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="139"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p2d-yh-c70" userLabel="Main Content View">
+                        <rect key="frame" x="8" y="8" width="304" height="124"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your name" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="rSb-pm-Db7">
+                                <rect key="frame" x="8" y="8" width="288" height="30"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="ZLy-0t-5Dj"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email address" textAlignment="natural" minimumFontSize="16" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="My1-Zp-Yat">
+                                <rect key="frame" x="8" y="46" width="288" height="30"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="continue"/>
+                                <connections>
+                                    <outlet property="delegate" destination="KGk-i7-Jjw" id="PnK-WM-EUS"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4S-Zi-CcW" customClass="VUCustumButton" customModule="Vuukle">
+                                <rect key="frame" x="8" y="83" width="288" height="34"/>
+                                <color key="backgroundColor" red="0.96846239730000006" green="0.60684880490000004" blue="0.27586760669999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="34" id="BSl-Yb-Jwr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                <state key="normal" title="Log in">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="selected">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="loginButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="PWF-Vr-5TA"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="124" id="1ct-fR-bOP"/>
+                            <constraint firstItem="My1-Zp-Yat" firstAttribute="leading" secondItem="S4S-Zi-CcW" secondAttribute="leading" id="2vG-4s-Aiy"/>
+                            <constraint firstItem="rSb-pm-Db7" firstAttribute="trailing" secondItem="My1-Zp-Yat" secondAttribute="trailing" id="4mR-cf-Owq"/>
+                            <constraint firstItem="S4S-Zi-CcW" firstAttribute="top" secondItem="My1-Zp-Yat" secondAttribute="bottom" constant="7" id="PYc-P2-EPX"/>
+                            <constraint firstItem="rSb-pm-Db7" firstAttribute="trailing" secondItem="p2d-yh-c70" secondAttribute="trailingMargin" id="ULS-60-jUg"/>
+                            <constraint firstItem="rSb-pm-Db7" firstAttribute="top" secondItem="p2d-yh-c70" secondAttribute="topMargin" id="XAP-Ax-jW7"/>
+                            <constraint firstItem="My1-Zp-Yat" firstAttribute="top" secondItem="rSb-pm-Db7" secondAttribute="bottom" constant="8" symbolic="YES" id="Xkk-Nm-bGi"/>
+                            <constraint firstItem="rSb-pm-Db7" firstAttribute="leading" secondItem="p2d-yh-c70" secondAttribute="leadingMargin" id="YMd-6p-3y2"/>
+                            <constraint firstItem="rSb-pm-Db7" firstAttribute="leading" secondItem="My1-Zp-Yat" secondAttribute="leading" id="hTY-sn-MMY"/>
+                            <constraint firstItem="My1-Zp-Yat" firstAttribute="trailing" secondItem="S4S-Zi-CcW" secondAttribute="trailing" id="jLT-PP-RUK"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="p2d-yh-c70" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="7QO-g6-GBO"/>
+                    <constraint firstAttribute="bottom" secondItem="p2d-yh-c70" secondAttribute="bottom" constant="7" id="9Au-5W-MVD"/>
+                    <constraint firstItem="p2d-yh-c70" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Z0I-YR-Y4b"/>
+                    <constraint firstAttribute="trailing" secondItem="p2d-yh-c70" secondAttribute="trailing" constant="8" id="tdE-cn-dAE"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <inset key="separatorInset" minX="14" minY="0.0" maxX="14" maxY="0.0"/>
+            <connections>
+                <outlet property="emailTextField" destination="My1-Zp-Yat" id="kcv-lN-taa"/>
+                <outlet property="loginButton" destination="S4S-Zi-CcW" id="Qca-Ck-28B"/>
+                <outlet property="mainContentView" destination="p2d-yh-c70" id="qWG-8P-e1Y"/>
+                <outlet property="nameTextField" destination="rSb-pm-Db7" id="pe7-IY-FyO"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="123.5"/>
+        </tableViewCell>
+    </objects>
+</document>

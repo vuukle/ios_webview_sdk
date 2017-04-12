@@ -1,300 +1,223 @@
-This library works with Swift and Objective-C.
+﻿
+'Vuukle' iOS SDK framwork works with Objective-C and Swift 3.0 (or greater)
 
-1.Install the library to your project.
-Example Podfile - Swift (If Xcode version is less than 8.0):
+ • Home page [Vuukle]("https://vuukle.com/")
 
+## INSTALLATION 
+-----------------------------------------------------------------------------------------
 
-        platform :ios, '9.0'
+[0. Create Podfile for your Project] You can skip this step, if you already have Podfile
 
-        use_frameworks!
+  # Open terminal and change default directory to your project directory.
+    -> Run command 'cd [your project path]' (EXAMPLE: 'cd /Users/fedir/Desktop/ExampleProject')
+    
+  # Create Podfile.
+    -> Run command 'pod init' and wait for completion
 
+  # Open Podfile in Xcode.
+    -> Run command 'open -a Xcode podfile'
 
-            target ‘My Project Name’ do
-            use_frameworks!
+[1. Add pod 'Vuukle' to list of pods] 
 
-            pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’ 
+  # If you have just created new Podfile, add following lines of code to it (replace 'ExampleProject' with yor project name).
 
-        end
-------------------------------------------------------------------
+    platform :ios, '9.0'
+     
+    target '[your project name]' do
 
-Example Podfile - Objective-c (If Xcode version is less than 8.0): 
-
-        platform :ios, '9.0'
-
-        use_frameworks!
-
-
-            target ‘VuukleCommentObjective’ do
-
-            pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’
-
-        end
-_________________________________________________________________
-Example Podfile - Swift (If Xcode version is higher than 8.0):
+      use_frameworks!
+      pod 'Vuukle' , :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’
 
 
-        platform :ios, '9.0'
+    end
 
-        use_frameworks!
+  # If you already have Podfile simple add Vuukle to list of your pods.
+    
+    pod 'Vuukle'
 
+  # [!] For OBJECTIVE-C you should define version of Swift after target end.
 
-            target ‘My Project Name’ do
-            use_frameworks!
-
-            pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’ 
-
-        end
+    target '[your project name]' do
+       ...
+    end
 
     post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
+      installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+
+          config.build_settings['SWIFT_VERSION'] = '3.0'
+
         end
+      end
     end
-------------------------------------------------------------------
-
-Example Podfile - Objective-c (If Xcode version is higher than 8.0): 
-
-        platform :ios, '9.0'
-
-        use_frameworks!
 
 
-            target ‘VuukleCommentObjective’ do
+[2. Install pods for Project] 
 
-            pod ‘Vuukle’, :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘swift_3’
+  # Close your project 
+    • EXAMPLE: If you have opened ExampleProject.xcodeproj, close it. After installation of pods you will work with ExampleProject.xcworkspace
 
-        end
+  # (If you closed terminal after step 0.) Open terminal again and change default directory to your project directory.
+    -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
 
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
-        end
-    end
-_________________________________________________________________
+  # Install pods for Project.
+    -> Run command 'pod install' and wait for completion
+    
+    This command will install latest version of pod 'Vuukle' and dependency pods: 
 
-2.Import "Vuukle" framework into your "YourController.swift"
-For example (Swift):
+    • 'Alamofire'      (version >= 4.3.0)
+    • 'AlamofireImage' (version >= 3.2.0) 
+    • 'MBProgressHUD'  (version >= 1.0.0)
+    • 'NSDate+TimeAgo' (version >= 1.0.6)
 
-import Vuukle
------------------------------------------------------------------
-For example (Objective-c):
+[3. Please add to info.plist next parameter]
 
-#import <Vuukle/Vuukle-Swift.h>
+  Select info.plist in your project and add "App Transport Security Settings" and change type "String" to
+  "Dictionary". Then add to "App Transport Security Settings" - Allow Arbitrary Loads type "Boolean" value
+  "YES". 
+  http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
 
-3.Add all "VuukleCommentsBuilder" methods into "viewDidLoad()"
+## IMPORT SWIFT
+-----------------------------------------------------------------------------------------
+[4. Add Vuukle to Embedded Binaries] 
 
-For example (Swift):
+  # Open generated after installation .xcworkspace file.
+    • EXAMPLE: In project directory open ExampleProject.xcworkspace 
 
-@IBOutlet weak var someView: UIView!
+    You can also run using terminal:
+      -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
+      -> Run command 'open ExampleProject.xcworkspace'
 
-override func viewDidLoad() {
-super.viewDidLoad()
+  # Open your project settings.
+    Tap on your project in project navigator (in top left corner)
 
-        let vuukle = VuukleCommentsBuilder()
-        vuukle.firstVuukleTag("articleTag1")
-        .setVuukleApiKey("777854cd-9454-4e9f-8441-ef0ee894139e")
-        .setVuukleArticleId("00048")
-        .setVuukleArticleTitle("myArticleTitle")
-        .setVuukleEmoteVisible(true)
-        .setVuukleHost("your_host")
-        .setVuukleSecretKey("07115720-6848-11e5-9bc9-002590f371ee")
-        .setVuukleTimeZone("Europe/Kiev")
-        .setVuukleTitle("Title")
-        .setAppName("myAppName")
-        .setArticleUrl("myArticleUrl")
-        .setAppID("myApId")
-        .setVuukleRefreshVisible(true)
-        .addWebViewArticleURL(false)
-        .setScrolingVuukleTableView(false)
-        .setVuukleBaseViewController(self)
-        .buildVuukle(self.view)
-}
-----------------------------------------------------------------
-For example (Objective-c):
+  # Add Vuukle to Embedded Binaries
+    • Select 'TARGETS' and scroll down to 'Embedded Binaries'
+    • Tap on '+' button and select 'Add Other...'
+    • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
 
-- (void)viewDidLoad {
-[super viewDidLoad];
+[5. Import Vuukle] 
+
+  # Simple add 'import Vuukle' in the top of .swift file after other framworks your use.
+
+    • EXAMPLE: 
+   
+    import UIKit
+    import Vuukle
+
+    class ExampleViewController: UIViewController {
+    ...
 
 
-VuukleCommentsBuilder *builder = [VuukleCommentsBuilder new];
+## IMPORT OBJECTIVE-C
+-----------------------------------------------------------------------------------------
+[6. Open workspace and import Vuukle] 
 
-    [[[[[[[[[[[[[[[[builder firstVuukleTag:@"articleTag1"]
-            setVuukleApiKey:@"777854cd-9454-4e9f-8441-ef0ee894139e"]
-            setVuukleArticleId:@"00048"]
-            setVuukleEmoteVisible:YES]
-            setVuukleHost:@“your_host”]
-            setVuukleSecretKey:@"07115720-6848-11e5-9bc9-002590f371ee"]
-            setVuukleTimeZone:@"Europe/Kiev"]
-            setVuukleTitle:@"Title"]
-            setAppName:@"myAppName"]
-            setArticleUrl:@"myArticleUrl"]
-            setAppID:@"myApId"]
-            setVuukleArticleTitle:@"myTitle"]
-            setVuukleRefreshVisible:YES]
-            addWebViewArticleURL:NO]
-            setScrolingVuukleTableView:NO]
-            setVuukleBaseViewController: self]
-            buildVuukle:self.vuukleView];
-}
+  # Open generated after installation .xcworkspace file.
+    EXAMPLE: In project directory open ExampleProject.xcworkspace 
 
-4.Please add into "Info.plist" fields with values
+    You can also run using terminal:
+    -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
+    -> Run command 'open ExampleProject.xcworkspace'
 
-For example :
+  # Open your project settings.
+  Tap on your project in project navigator (in top left corner)
 
-App Transport Security Settings  Dictionary  (1 item)
-Allow Arbitary               Boolean     YES
+  # Add Vuukle to Embedded Binaries
+  • Select 'TARGETS' and scroll down to 'Embedded Binaries'
+  • Tap on '+' button and select 'Add Other...'
+  • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
 
-5. Subscribe your controller to notification 
+[7. Import Vuukle] 
 
-NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+  # Simple add '#import <Vuukle/Vuukle-Swift.h>' before @interface in .m file.
 
-[nc addObserver:self
-selector:@selector(successfullyRetrievedObjects:)
-name:Constants.ContentHeightDidChaingedNotification
-object:nil];
+  • EXAMPLE: 
 
-6. Dynamiccally change height of UIView
+  #import <Vuukle/Vuukle-Swift.h>
 
-- (void) successfullyRetrievedObjects:(NSNotification*) notification {
-
-self.vuukleHeightConstraint.constant = [notification.object floatValue];
-}
-
-7.Everything is ready, you can run the project.
-
-Optional: 
-
-8. If you use most popular articles, add observer for notification ""
-
-[[NSNotificationCenter defaultCenter] addObserver: self
-                                         selector: @selector(openMostPopularArticle:)
-                                             name: @"VuukleOpenMostPopularArticle"
-                                           object: nil];
-
-9. Add this method, witch will be called by notification
-
-- (void)openMostPopularArticle:(NSNotification *)notification {
-
-  NSString *articleURL = [notification object];
-
-  // Do what you need with this top article
-
-}
-
-
-___________________________________________________________________
-
-                    Information about parameters:
-
-1. setVuukleEmoteVisible(true)                                -[Set true for visible emote rating!]Optional field.(Bool value)
-
-2. setVuukleAdsVisible(true)                                  -[Set true for visible Ads!]Optional field.(Bool value)
-
-3. setVuukleRefreshVisible(true)                              -[Set true for visible refres!] Optional field.(Bool value)
+  @interface ViewController ()
+    ...
+  @end
  
-4. addWebViewArticleURL(false)                                [Set true for visible your WebContent from Aticle URL!]Optional field.(Bool value)
-
-5. setScrolingVuukleTableView(true)                           -[Set true for the possibility of scroll Vuukle Table View! For example: If you need to add a Vuukle comments on Scroll View near your content,set false!]Optional field.(Bool value)
-
-6. setVuukleArticleId("00000")                                -[Get id from Vuukle site. Every article has unique id!] Required field ! (String value)
-
-7. setVuukleHost("your_host")                                 -[Set host for Api. Host - this is domain of the publisher’s              site(e.g. indianexpress.com, thehindu.com etc.).
-                                                              For example: You are the owner of indianexpress.com and have own app where want’s to setup this library,so when library installed on your app, You should paste domain for ‘host’ property without http:// or https:// or www.] Required field !(String value)
-
-8. setVuukleApiKey("00000000-0000-0000-0000-0000000000")      -[Set your API key for API. To get API KEY you need :
-                                                               1) Sign in to dashboard thouth vuukle.com
-                                                               2) Navigate to domain from home page of dashboard (first page after signing in)
-                                                               3) Choose in menu Integration, then API Docs from the dropdown
-                                                               4) Then you will be able to see API and secret keys]
-                                                            ______________
-                                                                  or
-                                                            ______________
-
-                                                               [1) Sign in to dashboard thouth vuukle.com
-                                                                2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.] Required field ! (String value)
-
-9. setVuukleSecretKey("00000000-0000-0000-0000-0000000000")   -[Set your API key for API. To get SECRET KEY you need :
-                                                                1) Sign in to dashboard through vuukle.com
-                                                                2) Navigate to domain from home page of dashboard (first page after signing in)
-                                                                3) Choose in menu Integration, then API Docs from the dropdown
-                                                                4) Then you will be able to see api and SECRET keys]
-                                                            ______________
-                                                                  or
-                                                            ______________
-
-                                                                [1) Sign in to dashboard thouth vuukle.com
-                                                                2) after signing in, in header you can find ‘Integration’ click -> choose API docs in the drop-down.] Required field ! (String value)
-
-10. setVuukleTimeZone("Europe/Kiev")                           -[Timezone from this resource:
-                                                                <url>https://en.wikipedia.org/wiki/List_of_tz_database_time_zones</url>] Required field! (String value)
-11. firstVuukleTag("your_tag")                                 -[First Tag will be unique for each page where comment box opens.
-
-                                                                These properties You need to fill by yourself.
-
-                                                                For example: You are on the main app page with articles list ->
-                                                                you are choosing article ->
-                                                                it opens and our library should have unique properties
-                                                                for each article like URL, TAGS, TITLE.]
-
-12. setVuukleArticleTitle("your_ArticleTitle")                 -[Set your Article Title.] Required field ! (String value)
-
-13. setAppName("your_AppName")                                 -[Set your article url.] Required field ! (String value)
-
-14. setAppID("your_ApId")                                      -[Set your application id.] Required field ! (String value)
-
-15. setVuuklePaginationCount(10)                               -[By default, 10 items!] Optional field! (Int value)
-
-16. setVuukleBaseViewController                                -[Set your base view controller, with contains view with comments]
-
-17. buildVuukle(self.view)                                     -[Set your View name where should be displayed Vuukle!For example: "myView".] Required field!
-
-18. setVuukleMostPopularArticleVisible(true)                   -[By default false] Optional field! (Bool value)
-
-19. setVuukleMostPopularArticleCount(5)                        -[By default 6] Optional field! (Int value)
-
-___________________________________________________________________
-
-                    Public methods:
-
-1.VuukleCommentsBuilder.getHeight()                            -[Returns height of comments view] (CGFloat value)
-
-2.VuukleCommentsBuilder.getCommentsCount()                     -[Returns count of comments under article] (Int value)
-
-3.VuukleCommentsBuilder.setUserInfo(name: String, email: String) -[Log in vuukle] (Void)
-
-------------------------------------------------------------------
-                    Facebook implementing:
-* Register your application at [Facebook for Developers website](https://developers.facebook.com)
-
-* Complete [QuickStart](https://developers.facebook.com/quickstarts/) for IOS
-
-* Install Vuukle with Facebook logination via pods:
-
-Example Podfile - Objective-c (If Xcode version is higher than 8.0): 
-
-        platform :ios, '9.0'
-
-        use_frameworks!
+  @implementation ViewController
+    ...
 
 
-            target ‘VuukleCommentObjective’ do
+## USAGE SWIFT: 
+-----------------------------------------------------------------------------------------
 
-            pod ‘Vuukle’, :git => 'https://github.com/b13markus/Vuukle_comments_test.git', :branch => ‘swift_3_logination’
+[8. Add vuukle comments to conent view for it]
+  
+   # [!] You have add comments in this method of UIViewController:
 
-        end
+   override func viewWillAppear(_ animated: Bool) {
+     ...
+   }
 
-    post_install do |installer|
-        installer.pods_project.targets.each do |target|
-            target.build_configurations.each do |config|
-                config.build_settings['SWIFT_VERSION'] = '3.0'
-            end
-        end
-    end
+   # For nested comments (hold 'Alt' and click on method in Xcode to see more details):
+   
+   VUCommentsBuilder.addVuukleComments(baseVC: [Your view controller],
+                                       baseScrollView: [Your main scroll view],
+                                       contentView: [Your content view for vuukle],
+                                       contentHeightConstraint: [Your content view height constraint],
+                                       appName: [App name],
+                                       appID: [App bundle ID],
+                                       vuukleApiKey: [Vuukle api key],
+                                       vuukleSecretKey: [Vuukle secret key],
+                                       vuukleHost: [Vuukle host],
+                                       vuukleTimeZone: [Your Time Zone],
+                                       articleTitle: [Article title],
+                                       articleID: [Article ID)],
+                                       articleTag: [Article tag],
+                                       articleURL: [Article URL])
 
-* It's all! In your Vuukle library is Facebook logination!
 
+   # For own comments scroll (hold 'Alt' and click on method in Xcode to see more details):
+   
+   VUCommentsBuilder.addVuukleComments(baseVC: [Your view controller],
+                                       contentView: [Your content view for vuukle],
+                                       appName: [App name],
+                                       appID: [App bundle ID],
+                                       vuukleApiKey: [Vuukle api key],
+                                       vuukleSecretKey: [Vuukle secret key],
+                                       vuukleHost: [Vuukle host],
+                                       vuukleTimeZone: [Your Time Zone],
+                                       articleTitle: [Article title],
+                                       articleID: [Article ID)],
+                                       articleTag: [Article tag],
+                                       articleURL: [Article URL], 
+                                       isScrollEnabled: true,
+                                       edgeInserts: [Edge insrest for comments])
+
+
+
+[9. Update all heights]
+
+  # [!] You have update all hights in this method of UIViewController:
+  
+  override func viewDidAppear(_ animated: Bool) {
+    ...
+  }
+
+  # To update height call method
+
+  VUCommentsBuilder.updateAllHeights()
+
+
+  # If you app supports landscape orintation, you have to call this method after rotation.
+ 
+  • EXAMPLE: 
+
+  override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
+    VUCommentsBuilder.updateAllHeights()
+  }
+
+[10. LogIn through your application]
+
+  VUCommentsBuilder.loginUser(name: [Your name], email: [Your email])
+
+  VUCommentsBuilder.logOut()
+
+[11. Everything is ready, you can run the Project]
 
