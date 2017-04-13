@@ -15,7 +15,7 @@ class VUGlobals {
   
   
   // MARK: - INFO: About framework
-  static let vuukleVersion = "2.0.22"
+  static let vuukleVersion = "2.0.24"
   static let isDebugBuild = false
   static let emojiStrings = ["😄", "😐", "😏", "😂", "😡", "😕"]
   

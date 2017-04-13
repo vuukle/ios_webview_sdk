@@ -319,6 +319,9 @@ class VUParametersChecker {
       VUGlobals.errorFlag = "\(url)"
       return .commentContaintsURL
     }
+    
+    
+    
     return .correct
   }
   
@@ -336,6 +339,7 @@ class VUParametersChecker {
       VUGlobals.errorFlag = "\(url)"
       return .nameContainsURL
     }
+    
     return .correct
   }
   
@@ -377,4 +381,3 @@ class VUParametersChecker {
   }
   
 }
-

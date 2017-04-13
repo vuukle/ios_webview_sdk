@@ -467,7 +467,7 @@ class VUModelsFactory {
           return
       }
       
-      VUCommentsBuilder.delegate?.openArticle(title: topArticleModel.articleTitle,
+      VUCommentsBuilder.delegate?.openArticle!(title: topArticleModel.articleTitle,
                                               apiKey: apiKey,
                                               articleHost: articleHost,
                                               articleID: articleID,
@@ -484,7 +484,7 @@ class VUModelsFactory {
         return
     }
     
-    VUCommentsBuilder.delegate?.openArticle(title: topArticleModel.articleTitle,
+    VUCommentsBuilder.delegate?.openArticle!(title: topArticleModel.articleTitle,
                                             apiKey: apiKey,
                                             articleHost: articleHost,
                                             articleID: articleID,
@@ -961,7 +961,7 @@ class VUModelsFactory {
         
         if let commentID = responceModel.commentID {
           
-          let commentModel = VUCommentModel(comment: responceModel.comment,
+          let commentModel = VUCommentModel(comment: responceModel.comment.decodeEmojis,
                                             commentID: commentID,
                                             name: responceModel.name,
                                             email: responceModel.email)
@@ -978,7 +978,7 @@ class VUModelsFactory {
           let parentModel = parentCommentModel,
           let parentCommentCell = parentCommentCell {
           
-          let replyModel = VUCommentModel(comment: responceModel.comment,
+          let replyModel = VUCommentModel(comment: responceModel.comment.decodeEmojis,
                                           commentID: commentID,
                                           name: responceModel.name,
                                           email: responceModel.email,

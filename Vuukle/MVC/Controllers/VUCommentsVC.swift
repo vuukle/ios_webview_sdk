@@ -501,8 +501,12 @@ extension VUCommentsVC: VUNewCommentCellDelegate {
       if VUCurrentUser.isUserLogined {
         
         if VUParametersChecker.checkComment(&comment) {
-          
-          VUModelsFactory.postNewComment(comment: comment,
+            
+            guard let emojiComment = comment.encodeEmojis else {
+                return
+            }
+            
+          VUModelsFactory.postNewComment(comment: emojiComment,
                                          index: indexPath.row,
                                          newCommentCell: newCommentCell)
         }
@@ -514,7 +518,11 @@ extension VUCommentsVC: VUNewCommentCellDelegate {
           
           if VUParametersChecker.checkComment(&comment) {
             
-            VUModelsFactory.loginAndPostComment(comment,
+            guard let emojiComment = comment.encodeEmojis else {
+                return
+            }
+            
+            VUModelsFactory.loginAndPostComment(emojiComment,
                                                 name: name,
                                                 email: email,
                                                 index: indexPath.row,
@@ -524,7 +532,7 @@ extension VUCommentsVC: VUNewCommentCellDelegate {
       }
     }
   }
-  
+    
   // TODO: • Log Out action
   func logOutButtonPressed(_ newCommentCell: VUNewCommentCell, logOutButton: UIButton) {
     

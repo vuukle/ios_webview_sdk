@@ -202,7 +202,7 @@ class VUServerManager {
     let devR = sharedManager.getRandomHashCode(comment + VUGlobals.requestParametes.vuukleApiKey)
     let devC = sharedManager.getHashCode(comment + "\(VUGlobals.requestParametes.resourceID)" + VUGlobals.requestParametes.vuukleApiKey)
     
-    var requestURL = "\(VUGlobals.vuukleBaseURLCommentAction)postComment"
+    let requestURL = "\(VUGlobals.vuukleBaseURLCommentAction)postComment"
     
     let postHeadersDict = ["user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
                            "Referer": "vuukle.com"]

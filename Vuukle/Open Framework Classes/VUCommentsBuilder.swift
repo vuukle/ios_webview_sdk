@@ -10,9 +10,9 @@ import UIKit
 import Alamofire
 
 // MARK: - VUTalkOfTheTownDelegate
-public protocol VUTalkOfTheTownDelegate {
+@objc public protocol VUTalkOfTheTownDelegate {
   
-  func openArticle(title: String,
+  @objc optional func openArticle(title: String,
                    apiKey: String,
                    articleHost: String,
                    articleID: String,
@@ -24,7 +24,7 @@ public protocol VUTalkOfTheTownDelegate {
 open class VUCommentsBuilder: NSObject {
   
   private override init() { }
-  public static var delegate: VUTalkOfTheTownDelegate?
+  public static weak var delegate: VUTalkOfTheTownDelegate?
   
   // MARK: - REQUIRED: Add Vuukle Comments and Update Height.
   

@@ -66,9 +66,9 @@ class VUCommentModel {
     if let infoComment = info["comment"] as? String {
       
       if let decodedComent = infoComment.jsonDecoded() {
-        comment = decodedComent
+        comment = decodedComent.decodeEmojis
       } else {
-        comment = infoComment
+        comment = infoComment.decodeEmojis
       }
     }
     

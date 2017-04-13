@@ -13,17 +13,20 @@ class VUShareConfigurator {
   static func configure(name: String, comment: String, url: String) -> UIActivityViewController {
   
     var shareText = "User: \"\(name)\" Commented: \"\(comment)\" On: "
+   
     var shareItems = [Any]()
+    
+    if !shareText.isEmpty {
+        UIPasteboard.general.string = shareText
+    }
     
     if let shareURL = NSURL(string: "\(VUGlobals.requestParametes.articleURL)") {
       shareItems.append(shareURL)
-    
     } else {
       shareText.append("\(url)")
     }
     
     shareItems.append(shareText)
-    UIPasteboard.general.string = shareText
 
     return UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
   }

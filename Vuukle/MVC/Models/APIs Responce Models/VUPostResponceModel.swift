@@ -48,26 +48,28 @@ class VUPostResponceModel {
             }
         }
         
-        self.name = (self.infoDictionary?["first_name"] as? String)!
-        self.userAvatarUrl = self.infoDictionary?["avatar"] as? NSURL
-        var result = self.infoDictionary?["result"] as? String
-        var commentID = self.infoDictionary?["comment_id"] as? String
-        var isModeration = self.infoDictionary?["isModeration"] as? String
-        
-        result = result?.lowercased()
-        
-        if commentID == "repeat_comment" {
-            isRepeatComment = true
-            return
-        }
-        self.commentID = commentID
-        
-        if Bool(isModeration!) == false {
-            isUnderModeration = false
-        }
-        
-        if Bool(isModeration!) == true {
-            isUnderModeration = true
+        if (self.infoDictionary != nil) {
+            self.name = (self.infoDictionary?["first_name"] as? String)!
+            self.userAvatarUrl = self.infoDictionary?["avatar"] as? NSURL
+            var result = self.infoDictionary?["result"] as? String
+            let commentID = self.infoDictionary?["comment_id"] as? String
+            let isModeration = self.infoDictionary?["isModeration"] as? String
+            
+            result = result?.lowercased()
+            
+            if commentID == "repeat_comment" {
+                isRepeatComment = true
+                return
+            }
+            self.commentID = commentID
+            
+            if Bool(isModeration!) == false {
+                isUnderModeration = false
+            }
+            
+            if Bool(isModeration!) == true {
+                isUnderModeration = true
+            }
         }
     }
     

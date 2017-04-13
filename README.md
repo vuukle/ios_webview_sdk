@@ -1,4 +1,4 @@
-﻿
+
 'Vuukle' iOS SDK framwork works with Objective-C and Swift 3.0 (or greater)
 
  • Home page [Vuukle]("https://vuukle.com/")
@@ -26,8 +26,7 @@
     target '[your project name]' do
 
       use_frameworks!
-      pod 'Vuukle' , :git => 'https://github.com/vuukle/vuukle_iOS_SDK.git', :branch => ‘master’
-
+      pod 'Vuukle'
 
     end
 
@@ -220,4 +219,3 @@
   VUCommentsBuilder.logOut()
 
 [11. Everything is ready, you can run the Project]
-

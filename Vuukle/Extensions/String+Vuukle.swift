@@ -35,7 +35,27 @@ extension String {
     }
     return nil
   }
+    
+  // MARK - Decode/Encode emojis
+    
+  var encodeEmojis: String? {
+    let encodedStr = NSString(cString: self.cString(using: String.Encoding.nonLossyASCII)!, encoding: String.Encoding.utf8.rawValue)
+      return encodedStr! as String
+  }
   
+  var decodeEmojis: String {
+    let data = self.data(using: String.Encoding.utf8, allowLossyConversion: false)
+      if data != nil {
+        let valueUniCode = NSString(data: data!, encoding: String.Encoding.nonLossyASCII.rawValue) as String?
+          if valueUniCode != nil {
+            return valueUniCode!
+        } else {
+            return self
+        }
+    } else {
+        return self
+    }
+  }
   
   // MARK: - Get initials from name
   func getInitials() -> String {

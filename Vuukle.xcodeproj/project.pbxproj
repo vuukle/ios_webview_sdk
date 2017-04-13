@@ -14,6 +14,7 @@
 				048C748C1E825E4800911178 /* ShellScript */,
 			);
 			dependencies = (
+				04A693841E8D485F001E30A6 /* PBXTargetDependency */,
 			);
 			name = VuukleUniverse;
 			productName = VuukleUniverse;
@@ -152,6 +153,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		04A693831E8D485F001E30A6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 908077271E07FF4500C20694 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9080772F1E07FF4500C20694;
+			remoteInfo = Vuukle;
+		};
 		9080773B1E07FF4600C20694 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 908077271E07FF4500C20694 /* Project object */;
@@ -732,7 +740,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		048C748C1E825E4800911178 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -890,6 +898,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		04A693841E8D485F001E30A6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9080772F1E07FF4500C20694 /* Vuukle */;
+			targetProxy = 04A693831E8D485F001E30A6 /* PBXContainerItemProxy */;
+		};
 		9080773C1E07FF4600C20694 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9080772F1E07FF4500C20694 /* Vuukle */;
@@ -902,7 +915,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = QZ8GL87UF9;
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1029,6 +1042,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1051,6 +1065,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Vuukle/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = comments.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
