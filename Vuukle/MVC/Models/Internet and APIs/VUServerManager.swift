@@ -218,6 +218,7 @@ class VUServerManager {
                       "s": devC,
                       "tags": "debug",
                       "title": VUGlobals.requestParametes.articleTitle,
+                      "img": VUGlobals.imgUrlForPostComment,
                       "url": VUGlobals.requestParametes.articleURL] as [String : Any]
     
     Alamofire.request(requestURL,

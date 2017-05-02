@@ -15,7 +15,7 @@ class VUGlobals {
   
   
   // MARK: - INFO: About framework
-  static let vuukleVersion = "2.0.24"
+  static let vuukleVersion = "2.0.25"
   static let isDebugBuild = false
   static let emojiStrings = ["😄", "😐", "😏", "😂", "😡", "😕"]
   
@@ -52,6 +52,7 @@ class VUGlobals {
   
   // MARK: - DEFAULT: Basic values
   static let defaultPhotoURL = "http://3aa0b40d2aab024f527d-510de3faeb1a65410c7c889a906ce44e.r42.cf6.rackcdn.com/avatar.png"
+  static var imgUrlForPostComment = ""
   static let defaultEdgeInserts = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   
   

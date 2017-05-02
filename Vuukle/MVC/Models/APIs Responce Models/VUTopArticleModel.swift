@@ -51,7 +51,7 @@ class VUTopArticleModel {
                         completeDecodeTitle.append(" \(word)")
                     }
                 }
-            }
+           }
         }
         articleTitle = completeDecodeTitle as String
         }

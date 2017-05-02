@@ -18,7 +18,7 @@ class VUControllSum: NSObject {
       
       let tmp = hash << 5
       hash = (tmp &- hash)
-      hash += text[i].asciiCode
+      hash += Int32(text[i].asciiCode)
     }
     
     return Int(hash)
@@ -33,7 +33,7 @@ class VUControllSum: NSObject {
       
       let tmp = hash << 22
       hash = (tmp &- hash)
-      hash += text[i].asciiCode
+      hash += Int32(text[i].asciiCode)
     }
     
     return Int(hash)
