@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		043F74331E9D20C800C2DA4D /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 043F74321E9D20C800C2DA4D /* Vuukle.framework */; };
+		04B468C61EBA314600691783 /* Vuukle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04B468C51EBA314600691783 /* Vuukle.framework */; };
 		9000BFC61E55DD05006F8CA5 /* Vuukle.h in Headers */ = {isa = PBXBuildFile; fileRef = 9000BFC41E55DD05006F8CA5 /* Vuukle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		043F74321E9D20C800C2DA4D /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
+		04B468C51EBA314600691783 /* Vuukle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Vuukle.framework; sourceTree = "<group>"; };
 		9000BFC11E55DD05006F8CA5 /* Vuukle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Vuukle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9000BFC41E55DD05006F8CA5 /* Vuukle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Vuukle.h; sourceTree = "<group>"; };
 		9000BFC51E55DD05006F8CA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				043F74331E9D20C800C2DA4D /* Vuukle.framework in Frameworks */,
+				04B468C61EBA314600691783 /* Vuukle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,7 +49,7 @@
 		9000BFC31E55DD05006F8CA5 /* Vuukle */ = {
 			isa = PBXGroup;
 			children = (
-				043F74321E9D20C800C2DA4D /* Vuukle.framework */,
+				04B468C51EBA314600691783 /* Vuukle.framework */,
 				9000BFC41E55DD05006F8CA5 /* Vuukle.h */,
 				9000BFC51E55DD05006F8CA5 /* Info.plist */,
 			);
