@@ -15,7 +15,7 @@ class VUGlobals {
   
   
   // MARK: - INFO: About framework
-  static let vuukleVersion = "2.0.25"
+  static let vuukleVersion = "2.0.26"
   static let isDebugBuild = false
   static let emojiStrings = ["😄", "😐", "😏", "😂", "😡", "😕"]
   
@@ -79,7 +79,7 @@ class VUGlobals {
   
   
   // MARK: - ADDITIONAL: Settings and parameters
-  static var commentsPagination = 10
+  static var commentsPagination = 20
   static var isCommentsScrollEnabled = false
   
   static var isEmojiVotingHidden = false

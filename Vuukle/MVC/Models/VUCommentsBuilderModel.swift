@@ -564,6 +564,7 @@ class VUCommentsBuilderModel {
     
     contentView.layer.masksToBounds = true
     contentView.frame = subviewVC.view.frame
+    VUModelsFactory.generateObjectsForCells(true, contentView: contentView)
     contentView.addSubview(subviewVC.view)
   }
   

@@ -402,7 +402,7 @@ class VUServerManager {
                              email: String,
                              completion: @escaping(Bool, VURequestError?) -> Void) {
     
-    var requestURL = "\(VUGlobals.vuukleBaseURLCommentAction)setCommentVote"
+    let requestURL = "\(VUGlobals.vuukleBaseURLCommentAction)setCommentVote"
     
     let postHeadersDict = ["user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36",
                            "Referer": "vuukle.com"]
@@ -472,20 +472,23 @@ class VUServerManager {
     
     var requestURL = "\(VUGlobals.vuukleBaseURL)setEmoteRating"
     
-    requestURL.append("?host=\(VUGlobals.requestParametes.vuukleHost)")
-    requestURL.append("&api_key=\(VUGlobals.requestParametes.vuukleApiKey)")
     requestURL.append("&secret_key=\(VUGlobals.requestParametes.vuukleSecretKey)")
-    
-    requestURL.append("&article_id=\(VUGlobals.requestParametes.articleID)")
-    requestURL.append("&article_title=\(VUGlobals.requestParametes.articleTitle)")
-    
-    requestURL.append("&emote=\(index)")
-    requestURL.append("&url=\(VUGlobals.requestParametes.articleURL)")
-    requestURL.append("&article_image=")
     
     vuuklePrint("[VOTE Emoji] URL: \(requestURL)")
     
-    Alamofire.request(requestURL).responseJSON { alamofireResponse in
+    let parametres = ["api_key": VUGlobals.requestParametes.vuukleApiKey,
+                      "host": VUGlobals.requestParametes.vuukleHost,
+                      "article_id": VUGlobals.requestParametes.articleID,
+                      "article_title": VUGlobals.requestParametes.articleTitle,
+                      "emote": index,
+                      "url": VUGlobals.requestParametes.articleURL,
+                      "article_image": "undefined"] as [String : Any]
+    
+    Alamofire.request(requestURL,
+                      method: .post,
+                      parameters: parametres,
+                      encoding: JSONEncoding.default,
+                      headers: nil).responseJSON { alamofireResponse in
       
       let statusCode = getStatusCode(alamofireResponse.response,
                                      error: alamofireResponse.result.error)
