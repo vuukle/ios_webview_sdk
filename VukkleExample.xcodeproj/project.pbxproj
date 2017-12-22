@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A539AE61FEC172B00FDA47C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4A539AE51FEC172B00FDA47C /* README.md */; };
 		4AC9D3381FEBE0C800383837 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9D3371FEBE0C800383837 /* AppDelegate.swift */; };
 		4AC9D33A1FEBE0C800383837 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9D3391FEBE0C800383837 /* ViewController.swift */; };
 		4AC9D33D1FEBE0C800383837 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AC9D33B1FEBE0C800383837 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A539AE51FEC172B00FDA47C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		4AC9D3341FEBE0C800383837 /* VukkleExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VukkleExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AC9D3371FEBE0C800383837 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AC9D3391FEBE0C800383837 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -38,6 +40,7 @@
 		4AC9D32B1FEBE0C800383837 = {
 			isa = PBXGroup;
 			children = (
+				4A539AE51FEC172B00FDA47C /* README.md */,
 				4AC9D3361FEBE0C800383837 /* VukkleExample */,
 				4AC9D3351FEBE0C800383837 /* Products */,
 			);
@@ -125,6 +128,7 @@
 			files = (
 				4AC9D3421FEBE0C800383837 /* LaunchScreen.storyboard in Resources */,
 				4AC9D33F1FEBE0C800383837 /* Assets.xcassets in Resources */,
+				4A539AE61FEC172B00FDA47C /* README.md in Resources */,
 				4AC9D33D1FEBE0C800383837 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
