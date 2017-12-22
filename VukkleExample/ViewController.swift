@@ -31,7 +31,7 @@ final class ViewController: UIViewController {
     
     private func addWKWebViewForScript() {
         let name = "Ross"
-        let email = "email@sda"
+        let email = "email@gmail.com"
         
         let contentController = WKUserContentController()
         let userScript = WKUserScript(
