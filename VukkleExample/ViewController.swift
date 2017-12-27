@@ -9,9 +9,15 @@
 import UIKit
 import WebKit
 
-final class ViewController: UIViewController {
+final class ViewController: UIViewController, WKNavigationDelegate {
     
+    @IBOutlet weak var containerForWKWebView: UIView!
+    @IBOutlet weak var containerwkWebViewWithScript: UIView!
     @IBOutlet weak var someTextLabel: UILabel!
+    @IBOutlet weak var heightWKWebViewWithScript: NSLayoutConstraint!
+    @IBOutlet weak var heightWKWebViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightScrollView: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var wkWebViewWithScript: WKWebView!
     private var wkWebViewWithEmoji: WKWebView!
@@ -31,7 +37,7 @@ final class ViewController: UIViewController {
     
     private func addWKWebViewForScript() {
         let name = "Ross"
-        let email = "email@gmail.com"
+        let email = "email@sda"
         
         let contentController = WKUserContentController()
         let userScript = WKUserScript(
@@ -42,11 +48,16 @@ final class ViewController: UIViewController {
         contentController.addUserScript(userScript)
         configuration.userContentController = contentController
         
-        let height = self.view.frame.height / 3
-        let wkWebViewWithScriptFrame = CGRect(x: 0, y: someTextLabel.frame.maxY, width: self.view.frame.width, height: height)
-        wkWebViewWithScript = WKWebView(frame: wkWebViewWithScriptFrame, configuration: configuration)
+        wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
+        wkWebViewWithScript.navigationDelegate = self
+        self.containerwkWebViewWithScript.addSubview(wkWebViewWithScript)
         
-        self.view.addSubview(wkWebViewWithScript)
+        wkWebViewWithScript.translatesAutoresizingMaskIntoConstraints = false
+        
+        wkWebViewWithScript.topAnchor.constraint(equalTo: self.containerwkWebViewWithScript.topAnchor).isActive = true
+        wkWebViewWithScript.bottomAnchor.constraint(equalTo: self.containerwkWebViewWithScript.bottomAnchor).isActive = true
+        wkWebViewWithScript.leftAnchor.constraint(equalTo: self.containerwkWebViewWithScript.leftAnchor).isActive = true
+        wkWebViewWithScript.rightAnchor.constraint(equalTo: self.containerwkWebViewWithScript.rightAnchor).isActive = true
         
         let urlString = "https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&darkMode=false&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New&post&22&url=https://smalltester.000webhostapp.com/2017/12/new-post-22&emotesEnabled=true&firstImg=&secondImg=&thirdImg=&fourthImg=&fifthImg=&sixthImg=&refHost=smalltester.000webhostapp.com&authors=JTIySlRWQ0pUZENKVEl5Ym1GdFpTVXlNam9sTWpBbE1qSmhaRzFwYmlVeU1pd2xNakFsTWpKbGJXRnBiQ1V5TWpvbE1qSWxNaklzSlRJeWRIbHdaU1V5TWpvbE1qQWxNakpwYm5SbGNtNWhiQ1V5TWlVM1JDVTFSQT09JTIy&tags=&lang=en&l_d=false&totWideImg=false&articlesProtocol=http&color=108ee9&hideArticles=false&d=false&maxChars=3000&commentsToLoad=5&toxicityLimit=80&gr=false&customText=%7B%7D&hideCommentBox=false"
         
@@ -56,17 +67,49 @@ final class ViewController: UIViewController {
     }
     
     private func addWKWebViewForEmoji() {
-        let height = self.view.frame.height / 3
-        let wkWebViewForEmojiFrame = CGRect(x: 0, y: wkWebViewWithScript.frame.maxY, width: self.view.frame.width, height: height)
-        wkWebViewWithEmoji = WKWebView(frame: wkWebViewForEmojiFrame, configuration: configuration)
+        wkWebViewWithEmoji = WKWebView(frame: .zero, configuration: configuration)
         
-        self.view.addSubview(wkWebViewWithEmoji)
+        self.containerForWKWebView.addSubview(wkWebViewWithEmoji)
+        
+        wkWebViewWithEmoji.translatesAutoresizingMaskIntoConstraints = false
+        
+        wkWebViewWithEmoji.topAnchor.constraint(equalTo: self.containerForWKWebView.topAnchor).isActive = true
+        wkWebViewWithEmoji.bottomAnchor.constraint(equalTo: self.containerForWKWebView.bottomAnchor).isActive = true
+        wkWebViewWithEmoji.leftAnchor.constraint(equalTo: self.containerForWKWebView.leftAnchor).isActive = true
+        wkWebViewWithEmoji.rightAnchor.constraint(equalTo: self.containerForWKWebView.rightAnchor).isActive = true
         
         let urlString = "https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&darkMode=false&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New&post&22&url=https://smalltester.000webhostapp.com/2017/12/new-post-22&emotesEnabled=true&firstImg=&secondImg=&thirdImg=&fourthImg=&fifthImg=&sixthImg=&totWideImg=false&articlesProtocol=http&hideArticles=false&disable=[]&iconsSize=70&first=HAPPY&second=INDIFFERENT&third=AMUSED&fourth=EXCITED&fifth=ANGRY&sixth=SAD&customText=%7B%7D"
         
         if let url = URL(string: urlString) {
             wkWebViewWithEmoji.load(URLRequest(url: url))
         }
+    }
+    
+    // MARK: - Clear cookie
+    
+    private func clearAllCookies() {
+        let cookieJar = HTTPCookieStorage.shared
+        for cookie in cookieJar.cookies! {
+            cookieJar.deleteCookie(cookie)
+        }
+    }
+    
+    private func clearCookiesFromSpecificUrl(yourUrl: String) {
+        let cookieStorage: HTTPCookieStorage = HTTPCookieStorage.shared
+        let cookies = cookieStorage.cookies(for: URL(string: yourUrl)!)
+        for cookie in cookies! {
+            cookieStorage.deleteCookie(cookie as HTTPCookie)
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                webView.evaluateJavaScript("document.body.offsetHeight", completionHandler: { (height, error) in
+                    self.heightWKWebViewWithScript.constant = height as! CGFloat
+                })
+            }
+        })
     }
 
 }

@@ -28,11 +28,29 @@ override func viewDidLoad() {
     }
     
 }
+```
 
+### Example for clear cookie:
+
+```
+private func clearAllCookies() {
+    let cookieJar = HTTPCookieStorage.shared
+
+    for cookie in cookieJar.cookies! {
+        cookieJar.deleteCookie(cookie)
+    }
+}
+
+private func clearCookiesFromSpecificUrl(yourUrl: String) {
+    let cookieStorage: HTTPCookieStorage = HTTPCookieStorage.shared
+    let cookies = cookieStorage.cookies(for: URL(string: yourUrl)!)
+    for cookie in cookies! {
+        cookieStorage.deleteCookie(cookie as HTTPCookie)
+    }
+}
 ```
 
 ### Full example:
-
 
 ```
 import UIKit
@@ -60,7 +78,7 @@ final class ViewController: UIViewController {
 
     private func addWKWebViewForScript() {
         let name = "Ross"
-        let email = "email@gmail.com"
+        let email = "email@sda"
 
         let contentController = WKUserContentController()
         let userScript = WKUserScript(
