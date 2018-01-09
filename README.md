@@ -4,6 +4,38 @@
 
 WKWebView is still not available on Interface Builder. However, it is very easy to add them via code.
 
+You will be working with our iframe URL's
+
+Comment widget iframe looks like this:
+
+https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=Newpost&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1
+
+
+
+Required parameters (for comment widget iframe):
+
+1. apiKey - Your API key  (https://docs.vuukle.com/how-to-embed-vuukle-2.0-via-js/)
+2. host - your site host (Exclude http:// or www.)
+3. articleId -unique article ID
+4. img - article image
+5. title - article title
+6. url - article URL (include http:// or www.)
+
+Emote widget iframe looks like this:
+
+https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New%20post%2022&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1
+
+Required parameters (for emote widget iframe):
+
+1. apiKey - Your API key  (https://docs.vuukle.com/how-to-embed-vuukle-2.0-via-js/)
+2. host - your site host (Exclude http:// or www.)
+3. articleId -unique article ID
+4. img - article image
+5. title - article title
+6. url - article URL (include http:// or www.)
+
+If you have any additional options to include, please contact support@vuukle.com
+
 ### Example:
 
 ```
@@ -77,8 +109,8 @@ final class ViewController: UIViewController {
     }
 
     private func addWKWebViewForScript() {
-        let name = "Ross"
-        let email = "email@sda"
+        let name = "Alex"
+        let email = "email@test.com"
 
         let contentController = WKUserContentController()
         let userScript = WKUserScript(
@@ -95,7 +127,7 @@ final class ViewController: UIViewController {
 
         self.view.addSubview(wkWebViewWithScript)
 
-        let urlString = "https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&darkMode=false&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New&post&22&url=https://smalltester.000webhostapp.com/2017/12/new-post-22&emotesEnabled=true&firstImg=&secondImg=&thirdImg=&fourthImg=&fifthImg=&sixthImg=&refHost=smalltester.000webhostapp.com&authors=JTIySlRWQ0pUZENKVEl5Ym1GdFpTVXlNam9sTWpBbE1qSmhaRzFwYmlVeU1pd2xNakFsTWpKbGJXRnBiQ1V5TWpvbE1qSWxNaklzSlRJeWRIbHdaU1V5TWpvbE1qQWxNakpwYm5SbGNtNWhiQ1V5TWlVM1JDVTFSQT09JTIy&tags=&lang=en&l_d=false&totWideImg=false&articlesProtocol=http&color=108ee9&hideArticles=false&d=false&maxChars=3000&commentsToLoad=5&toxicityLimit=80&gr=false&customText=%7B%7D&hideCommentBox=false"
+        let urlString = "https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=Newpost&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1"
 
         if let url = URL(string: urlString) {
             wkWebViewWithScript.load(URLRequest(url: url))
@@ -109,7 +141,7 @@ final class ViewController: UIViewController {
 
         self.view.addSubview(wkWebViewWithEmoji)
 
-        let urlString = "https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&darkMode=false&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New&post&22&url=https://smalltester.000webhostapp.com/2017/12/new-post-22&emotesEnabled=true&firstImg=&secondImg=&thirdImg=&fourthImg=&fifthImg=&sixthImg=&totWideImg=false&articlesProtocol=http&hideArticles=false&disable=[]&iconsSize=70&first=HAPPY&second=INDIFFERENT&third=AMUSED&fourth=EXCITED&fifth=ANGRY&sixth=SAD&customText=%7B%7D"
+        let urlString = "https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New%20post%2022&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1"
 
         if let url = URL(string: urlString) {
             wkWebViewWithEmoji.load(URLRequest(url: url))
