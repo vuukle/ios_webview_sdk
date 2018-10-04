@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-final class ViewController: UIViewController, WKNavigationDelegate {
+final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     
     @IBOutlet weak var containerForWKWebView: UIView!
     @IBOutlet weak var containerwkWebViewWithScript: UIView!
@@ -22,6 +22,8 @@ final class ViewController: UIViewController, WKNavigationDelegate {
     private var wkWebViewWithScript: WKWebView!
     private var wkWebViewWithEmoji: WKWebView!
     private let configuration = WKWebViewConfiguration()
+    
+    private var isPopUpAppeared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,8 @@ final class ViewController: UIViewController, WKNavigationDelegate {
         wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
         wkWebViewWithScript.navigationDelegate = self
         self.containerwkWebViewWithScript.addSubview(wkWebViewWithScript)
+        
+        wkWebViewWithScript.uiDelegate = self
         
         wkWebViewWithScript.translatesAutoresizingMaskIntoConstraints = false
         
@@ -110,6 +114,27 @@ final class ViewController: UIViewController, WKNavigationDelegate {
                 })
             }
         })
+    }
+    
+    // MARK: - Show authorization tab
+    
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil {
+            let popup = WKWebView(frame: self.view.frame, configuration: configuration)
+            popup.uiDelegate = self
+            self.view.addSubview(popup)
+            isPopUpAppeared = true
+            return popup
+        }
+        return nil
+    }
+    
+    // MARK: - Close authorization tab
+    
+    func webViewDidClose(_ webView: WKWebView) {
+        if isPopUpAppeared {
+            webView.removeFromSuperview()
+        }
     }
 
 }
