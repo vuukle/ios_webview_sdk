@@ -45,7 +45,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         let userScript = WKUserScript(
             source: "signInUser('\(name)', '\(email)')",
             injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
-            forMainFrameOnly: true
+            forMainFrameOnly: false
         )
         contentController.addUserScript(userScript)
         configuration.userContentController = contentController
