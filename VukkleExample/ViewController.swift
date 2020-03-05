@@ -8,8 +8,9 @@
 
 import UIKit
 import WebKit
+import MessageUI
 
-final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var containerForWKWebView: UIView!
     @IBOutlet weak var containerwkWebViewWithScript: UIView!
@@ -51,6 +52,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
         wkWebViewWithScript.navigationDelegate = self
+        wkWebViewWithScript.allowsBackForwardNavigationGestures = true
         self.containerwkWebViewWithScript.addSubview(wkWebViewWithScript)
         
         wkWebViewWithScript.uiDelegate = self
@@ -105,6 +107,33 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         }
     }
     
+    private func openMailApp(text: String?) {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setMessageBody(text ?? "", isHTML: true)
+            present(mail, animated: true)
+        }
+    }
+    
+    private func openMessenger(with url: String) {
+        if let url = URL(string: url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: {
+                (success) in
+                if success == false {
+                    guard let url = URL(string: "https://apps.apple.com/us/app/messenger/id454638411") else { return }
+                    if UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            })
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
         let javascriptString = "var meta = document.createElement('meta'); meta.setAttribute( 'name', 'viewport' ); meta.setAttribute( 'content', 'width = device-width, initial-scale = 1.0, user-scalable = yes' ); document.getElementsByTagName('head')[0].appendChild(meta)"
@@ -135,17 +164,29 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     }
 
     
-    // MARK: - Show authorization tab
+    // MARK: - WKNavigationDelegate
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         if navigationAction.targetFrame == nil {
             let popup = WKWebView(frame: self.view.frame, configuration: configuration)
             popup.uiDelegate = self
+            popup.navigationDelegate = self
+            popup.allowsBackForwardNavigationGestures = true
             self.view.addSubview(popup)
             isPopUpAppeared = true
             return popup
         }
         return nil
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
+            let urlComponents = URLComponents(string: url)
+            openMailApp(text: urlComponents?.queryItems?.last?.value)
+        } else if let url = navigationAction.request.url?.relativeString, url.contains("fb-messenger") {
+            openMessenger(with: url)
+        }
+        decisionHandler(WKNavigationActionPolicy.allow)
     }
     
     // MARK: - Close authorization tab
@@ -155,6 +196,5 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             webView.removeFromSuperview()
         }
     }
-
 }
 
