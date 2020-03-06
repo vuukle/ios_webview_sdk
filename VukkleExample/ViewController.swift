@@ -23,6 +23,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     private var wkWebViewWithScript: WKWebView!
     private var wkWebViewWithEmoji: WKWebView!
     private let configuration = WKWebViewConfiguration()
+    private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     private var isPopUpAppeared = false
     
@@ -31,7 +32,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         addWKWebViewForScript()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -162,7 +163,6 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         self.present(alertController, animated: true, completion: nil)
     }
-
     
     // MARK: - WKNavigationDelegate
     
@@ -171,6 +171,8 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             let popup = WKWebView(frame: self.view.frame, configuration: configuration)
             popup.uiDelegate = self
             popup.navigationDelegate = self
+            let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+            popup.addGestureRecognizer(panGesture)
             popup.allowsBackForwardNavigationGestures = true
             self.view.addSubview(popup)
             isPopUpAppeared = true
@@ -178,7 +180,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         }
         return nil
     }
-
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
             let urlComponents = URLComponents(string: url)
@@ -198,3 +200,28 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     }
 }
 
+extension ViewController {
+    @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
+        guard self.isPopUpAppeared && (lastWebView.backForwardList.backItem == nil) else { return }
+        let touchPoint = sender.location(in: lastWebView.window)
+        let percent = max(sender.translation(in: lastWebView).x, 0) / lastWebView.frame.width
+        let velocity = sender.velocity(in: lastWebView).x
+        
+        if sender.state == UIGestureRecognizer.State.began {
+            originalPosition = touchPoint
+        } else if sender.state == UIGestureRecognizer.State.changed {
+            if touchPoint.x - originalPosition.x > 0 {
+                lastWebView.frame = CGRect(x: touchPoint.x - originalPosition.x, y: 0, width: lastWebView.frame.size.width, height: lastWebView.frame.size.height)
+            }
+        } else if sender.state == UIGestureRecognizer.State.ended || sender.state == UIGestureRecognizer.State.cancelled {
+            if percent > 0.5 || velocity > 500 {
+                lastWebView.removeFromSuperview()
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    lastWebView.frame = CGRect(x: 0, y: 0, width: lastWebView.frame.size.width, height: lastWebView.frame.size.height)
+                })
+            }
+        }
+    }
+}
