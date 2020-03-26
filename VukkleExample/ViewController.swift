@@ -182,6 +182,38 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        guard let urlAsString = navigationAction.request.url?.absoluteString.lowercased() else {
+            return
+        }
+        
+        if urlAsString.range(of: "https://docs.vuukle.com/privacy-and-policy/") != nil {
+            
+            if let urlToOpen = URL(string: "https://docs.vuukle.com/privacy-and-policy/") {
+                
+                if  UIApplication.shared.canOpenURL(urlToOpen) {
+                    
+                    UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+                }
+                
+                if let lastWebView = self.view.subviews.last as? WKWebView {
+                    lastWebView.removeFromSuperview()
+                }
+            }
+        } else if urlAsString.range(of: "https://vuukle.com") != nil {
+            if let urlToOpen = URL(string: "https://vuukle.com") {
+                if  UIApplication.shared.canOpenURL(urlToOpen) {
+                    
+                    UIApplication.shared.open(urlToOpen, options: [:], completionHandler: nil)
+                }
+                if let lastWebView = self.view.subviews.last as? WKWebView {
+                    lastWebView.removeFromSuperview()
+                }
+            }
+        }
+        
+        
+        
         if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
             let urlComponents = URLComponents(string: url)
             openMailApp(text: urlComponents?.queryItems?.last?.value)
@@ -189,6 +221,11 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             openMessenger(with: url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
+    }
+    
+    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+        
+        false
     }
     
     // MARK: - Close authorization tab
@@ -202,6 +239,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
 
 extension ViewController {
     @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        
         guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
         guard self.isPopUpAppeared && (lastWebView.backForwardList.backItem == nil) else { return }
         let touchPoint = sender.location(in: lastWebView.window)
