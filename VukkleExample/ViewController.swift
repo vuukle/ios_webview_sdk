@@ -50,7 +50,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         )
         contentController.addUserScript(userScript)
         configuration.userContentController = contentController
-        
+        configuration.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
         wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
         wkWebViewWithScript.navigationDelegate = self
         wkWebViewWithScript.allowsBackForwardNavigationGestures = true
@@ -147,6 +147,10 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         })
     }
     
+    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+        false
+    }
+    
     // MARK: - Show confirm alert
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
@@ -181,7 +185,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         return nil
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
             let urlComponents = URLComponents(string: url)
             openMailApp(text: urlComponents?.queryItems?.last?.value)
@@ -189,6 +193,29 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             openMessenger(with: url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
+    
+            if let url = navigationAction.request.url?.relativeString {
+            
+            guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
+            if url == "https://docs.vuukle.com/privacy-and-policy/" {
+                
+                if let url = URL(string: "https://docs.vuukle.com/privacy-and-policy/") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        lastWebView.removeFromSuperview()
+                    }
+                }
+            } else if url == "https://vuukle.com/" {
+                if let url = URL(string: "https://vuukle.com/") {
+                    if UIApplication.shared.canOpenURL(url) {
+                        
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                        lastWebView.removeFromSuperview()
+                    }
+                }
+            }
+        }
     }
     
     // MARK: - Close authorization tab
