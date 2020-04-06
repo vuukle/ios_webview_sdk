@@ -1,221 +1,151 @@
+# WebView guide ios
 
-'Vuukle' iOS SDK framwork works with Objective-C and Swift 3.0 (or greater)
+## Getting Started
 
- • Home page [Vuukle]("https://vuukle.com/")
+WKWebView is still not available on Interface Builder. However, it is very easy to add them via code.
 
-## INSTALLATION 
------------------------------------------------------------------------------------------
+You will be working with our iframe URL's
 
-[0. Create Podfile for your Project] You can skip this step, if you already have Podfile
+Comment widget iframe looks like this:
 
-  # Open terminal and change default directory to your project directory.
-    -> Run command 'cd [your project path]' (EXAMPLE: 'cd /Users/fedir/Desktop/ExampleProject')
+https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=Newpost&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1
+
+
+
+Required parameters (for comment widget iframe):
+
+1. apiKey - Your API key  (https://docs.vuukle.com/how-to-embed-vuukle-2.0-via-js/)
+2. host - your site host (Exclude http:// or www.)
+3. articleId -unique article ID
+4. img - article image
+5. title - article title
+6. url - article URL (include http:// or www.)
+
+Emote widget iframe looks like this:
+
+https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New%20post%2022&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1
+
+Required parameters (for emote widget iframe):
+
+1. apiKey - Your API key  (https://docs.vuukle.com/how-to-embed-vuukle-2.0-via-js/)
+2. host - your site host (Exclude http:// or www.)
+3. articleId -unique article ID
+4. img - article image
+5. title - article title
+6. url - article URL (include http:// or www.)
+
+If you have any additional options to include, please contact support@vuukle.com
+
+### Example:
+
+```
+import WebKit
+
+override func viewDidLoad() {
+    super.viewDidLoad()
+
+    // MARK: - Create WKWebView with configuration
+
+    let configuration = WKWebViewConfiguration()
+    let wkWebView = WKWebView(frame: "your frame", configuration: configuration)
     
-  # Create Podfile.
-    -> Run command 'pod init' and wait for completion
-
-  # Open Podfile in Xcode.
-    -> Run command 'open -a Xcode podfile'
-
-[1. Add pod 'Vuukle' to list of pods] 
-
-  # If you have just created new Podfile, add following lines of code to it (replace 'ExampleProject' with yor project name).
-
-    platform :ios, '9.0'
-     
-    target '[your project name]' do
-
-      use_frameworks!
-      pod 'Vuukle'
-
-    end
-
-  # If you already have Podfile simple add Vuukle to list of your pods.
+    // MARk: - Add WKWebView to main view
     
-    pod 'Vuukle'
-
-  # [!] For OBJECTIVE-C you should define version of Swift after target end.
-
-    target '[your project name]' do
-       ...
-    end
-
-    post_install do |installer|
-      installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-
-          config.build_settings['SWIFT_VERSION'] = '3.0'
-
-        end
-      end
-    end
-
-
-[2. Install pods for Project] 
-
-  # Close your project 
-    • EXAMPLE: If you have opened ExampleProject.xcodeproj, close it. After installation of pods you will work with ExampleProject.xcworkspace
-
-  # (If you closed terminal after step 0.) Open terminal again and change default directory to your project directory.
-    -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
-
-  # Install pods for Project.
-    -> Run command 'pod install' and wait for completion
+    self.view.addSubview(wkWebView)
     
-    This command will install latest version of pod 'Vuukle' and dependency pods: 
+    let urlName = "yourUrl"
+    
+    if let url = URL(string: urlName) {
+        wkWebView.load(URLRequest(url: url))
+    }
+    
+}
+```
 
-    • 'Alamofire'      (version >= 4.3.0)
-    • 'AlamofireImage' (version >= 3.2.0) 
-    • 'MBProgressHUD'  (version >= 1.0.0)
-    • 'NSDate+TimeAgo' (version >= 1.0.6)
+### Example for clear cookie:
 
-[3. Please add to info.plist next parameter]
+```
+private func clearAllCookies() {
+    let cookieJar = HTTPCookieStorage.shared
 
-  Select info.plist in your project and add "App Transport Security Settings" and change type "String" to
-  "Dictionary". Then add to "App Transport Security Settings" - Allow Arbitrary Loads type "Boolean" value
-  "YES". 
-  http://stackoverflow.com/questions/31254725/transport-security-has-blocked-a-cleartext-http
+    for cookie in cookieJar.cookies! {
+        cookieJar.deleteCookie(cookie)
+    }
+}
 
-## IMPORT SWIFT
------------------------------------------------------------------------------------------
-[4. Add Vuukle to Embedded Binaries] 
+private func clearCookiesFromSpecificUrl(yourUrl: String) {
+    let cookieStorage: HTTPCookieStorage = HTTPCookieStorage.shared
+    let cookies = cookieStorage.cookies(for: URL(string: yourUrl)!)
+    for cookie in cookies! {
+        cookieStorage.deleteCookie(cookie as HTTPCookie)
+    }
+}
+```
 
-  # Open generated after installation .xcworkspace file.
-    • EXAMPLE: In project directory open ExampleProject.xcworkspace 
+### Full example:
 
-    You can also run using terminal:
-      -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
-      -> Run command 'open ExampleProject.xcworkspace'
+```
+import UIKit
+import WebKit
 
-  # Open your project settings.
-    Tap on your project in project navigator (in top left corner)
+final class ViewController: UIViewController {
 
-  # Add Vuukle to Embedded Binaries
-    • Select 'TARGETS' and scroll down to 'Embedded Binaries'
-    • Tap on '+' button and select 'Add Other...'
-    • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
+    @IBOutlet weak var someTextLabel: UILabel!
 
-[5. Import Vuukle] 
+    private var wkWebViewWithScript: WKWebView!
+    private var wkWebViewWithEmoji: WKWebView!
+    private let configuration = WKWebViewConfiguration()
 
-  # Simple add 'import Vuukle' in the top of .swift file after other framworks your use.
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    • EXAMPLE: 
-   
-    import UIKit
-    import Vuukle
+        addWKWebViewForScript()
+        addWKWebViewForEmoji()
+    }
 
-    class ExampleViewController: UIViewController {
-    ...
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
 
+    private func addWKWebViewForScript() {
+        let name = "Alex"
+        let email = "email@test.com"
 
-## IMPORT OBJECTIVE-C
------------------------------------------------------------------------------------------
-[6. Open workspace and import Vuukle] 
+        let contentController = WKUserContentController()
+        let userScript = WKUserScript(
+            source: "signInUser('\(name)', '\(email)')",
+            injectionTime: WKUserScriptInjectionTime.atDocumentEnd,
+            forMainFrameOnly: true
+        )
+        contentController.addUserScript(userScript)
+        configuration.userContentController = contentController
 
-  # Open generated after installation .xcworkspace file.
-    EXAMPLE: In project directory open ExampleProject.xcworkspace 
+        let height = self.view.frame.height / 3
+        let wkWebViewWithScriptFrame = CGRect(x: 0, y: someTextLabel.frame.maxY, width: self.view.frame.width, height: height)
+        wkWebViewWithScript = WKWebView(frame: wkWebViewWithScriptFrame, configuration: configuration)
 
-    You can also run using terminal:
-    -> Run command 'cd [your project path]' (EXAMPLE: cd /Users/fedir/Desktop/ExampleProject)
-    -> Run command 'open ExampleProject.xcworkspace'
+        self.view.addSubview(wkWebViewWithScript)
 
-  # Open your project settings.
-  Tap on your project in project navigator (in top left corner)
+        let urlString = "https://cdn.vuukle.com/widgets/index.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=Newpost&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1"
 
-  # Add Vuukle to Embedded Binaries
-  • Select 'TARGETS' and scroll down to 'Embedded Binaries'
-  • Tap on '+' button and select 'Add Other...'
-  • Go to 'Pods -> Vuukle -> Vuukle' and select 'Vuukle.framework' file
+        if let url = URL(string: urlString) {
+            wkWebViewWithScript.load(URLRequest(url: url))
+        }
+    }
 
-[7. Import Vuukle] 
+    private func addWKWebViewForEmoji() {
+        let height = self.view.frame.height / 3
+        let wkWebViewForEmojiFrame = CGRect(x: 0, y: wkWebViewWithScript.frame.maxY, width: self.view.frame.width, height: height)
+        wkWebViewWithEmoji = WKWebView(frame: wkWebViewForEmojiFrame, configuration: configuration)
 
-  # Simple add '#import <Vuukle/Vuukle-Swift.h>' before @interface in .m file.
+        self.view.addSubview(wkWebViewWithEmoji)
 
-  • EXAMPLE: 
+        let urlString = "https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New%20post%2022&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1"
 
-  #import <Vuukle/Vuukle-Swift.h>
-
-  @interface ViewController ()
-    ...
-  @end
- 
-  @implementation ViewController
-    ...
-
-
-## USAGE SWIFT: 
------------------------------------------------------------------------------------------
-
-[8. Add vuukle comments to conent view for it]
-  
-   # [!] You have add comments in this method of UIViewController:
-
-   override func viewWillAppear(_ animated: Bool) {
-     ...
-   }
-
-   # For nested comments (hold 'Alt' and click on method in Xcode to see more details):
-   
-   VUCommentsBuilder.addVuukleComments(baseVC: [Your view controller],
-                                       baseScrollView: [Your main scroll view],
-                                       contentView: [Your content view for vuukle],
-                                       contentHeightConstraint: [Your content view height constraint],
-                                       appName: [App name],
-                                       appID: [App bundle ID],
-                                       vuukleApiKey: [Vuukle api key],
-                                       vuukleSecretKey: [Vuukle secret key],
-                                       vuukleHost: [Vuukle host],
-                                       vuukleTimeZone: [Your Time Zone],
-                                       articleTitle: [Article title],
-                                       articleID: [Article ID)],
-                                       articleTag: [Article tag],
-                                       articleURL: [Article URL])
-
-
-   # For own comments scroll (hold 'Alt' and click on method in Xcode to see more details):
-   
-   VUCommentsBuilder.addVuukleComments(baseVC: [Your view controller],
-                                       contentView: [Your content view for vuukle],
-                                       appName: [App name],
-                                       appID: [App bundle ID],
-                                       vuukleApiKey: [Vuukle api key],
-                                       vuukleSecretKey: [Vuukle secret key],
-                                       vuukleHost: [Vuukle host],
-                                       vuukleTimeZone: [Your Time Zone],
-                                       articleTitle: [Article title],
-                                       articleID: [Article ID)],
-                                       articleTag: [Article tag],
-                                       articleURL: [Article URL], 
-                                       isScrollEnabled: true,
-                                       edgeInserts: [Edge insrest for comments])
-
-
-
-[9. Update all heights]
-
-  # [!] You have update all hights in this method of UIViewController:
-  
-  override func viewDidAppear(_ animated: Bool) {
-    ...
-  }
-
-  # To update height call method
-
-  VUCommentsBuilder.updateAllHeights()
-
-
-  # If you app supports landscape orintation, you have to call this method after rotation.
- 
-  • EXAMPLE: 
-
-  override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
-    VUCommentsBuilder.updateAllHeights()
-  }
-
-[10. LogIn through your application]
-
-  VUCommentsBuilder.loginUser(name: [Your name], email: [Your email])
-
-  VUCommentsBuilder.logOut()
-
-[11. Everything is ready, you can run the Project]
+        if let url = URL(string: urlString) {
+            wkWebViewWithEmoji.load(URLRequest(url: url))
+        }
+    }
+}
+```
