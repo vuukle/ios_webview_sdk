@@ -1,47 +1,47 @@
 //
-//  ViewController.swift
+//  ModalViewController.swift
 //  VukkleExample
 //
-//  Created by MAC_7 on 12/21/17.
-//  Copyright © 2017 MAC_7. All rights reserved.
+//  Created by user2020 on 4/13/20.
+//  Copyright © 2020 MAC_7. All rights reserved.
 //
 
 import UIKit
 import WebKit
 import MessageUI
 
-final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, MFMailComposeViewControllerDelegate {
+final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, MFMailComposeViewControllerDelegate {
     
-    @IBOutlet weak var containerForWKWebView: UIView!
-    @IBOutlet weak var containerwkWebViewWithScript: UIView!
+    @IBOutlet private weak var containerwkWebViewWithScript: UIView!
+    @IBOutlet private weak var loadingView: UIView!    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     private var wkWebViewWithScript: WKWebView!
     private var wkWebViewWithEmoji: WKWebView!
     private let configuration = WKWebViewConfiguration()
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
+    public var urlToOpen = ""
+    
     private var isPopUpAppeared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+            
+        self.addWKWebViewForScript()
+        activityIndicator.startAnimating()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
         
-        addWKWebViewForScript()
-        addObservers()
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "needToReload"), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    private func addObservers() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(reloadWebView), name: Notification.Name(rawValue: "needToReload"), object: nil)
-    }
-    
-    @objc private func reloadWebView() {
-        
-        wkWebViewWithScript.reload()
     }
     
     private func addWKWebViewForScript() {
@@ -75,25 +75,6 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         if let url = URL(string: urlString) {
             wkWebViewWithScript.load(URLRequest(url: url))
-        }
-    }
-    
-    private func addWKWebViewForEmoji() {
-        wkWebViewWithEmoji = WKWebView(frame: .zero, configuration: configuration)
-        
-        self.containerForWKWebView.addSubview(wkWebViewWithEmoji)
-        
-        wkWebViewWithEmoji.translatesAutoresizingMaskIntoConstraints = false
-        
-        wkWebViewWithEmoji.topAnchor.constraint(equalTo: self.containerForWKWebView.topAnchor).isActive = true
-        wkWebViewWithEmoji.bottomAnchor.constraint(equalTo: self.containerForWKWebView.bottomAnchor).isActive = true
-        wkWebViewWithEmoji.leftAnchor.constraint(equalTo: self.containerForWKWebView.leftAnchor).isActive = true
-        wkWebViewWithEmoji.rightAnchor.constraint(equalTo: self.containerForWKWebView.rightAnchor).isActive = true
-        
-        let urlString = "https://cdn.vuukle.com/widgets/emotes.html?apiKey=c7368a34-dac3-4f39-9b7c-b8ac2a2da575&host=smalltester.000webhostapp.com&articleId=381&img=https://smalltester.000webhostapp.com/wp-content/uploads/2017/10/wallhaven-303371-825x510.jpg&title=New%20post%2022&url=https://smalltester.000webhostapp.com/2017/12/new-post-22#1"
-        
-        if let url = URL(string: urlString) {
-            wkWebViewWithEmoji.load(URLRequest(url: url))
         }
     }
     
@@ -136,6 +117,19 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             })
         }
     }
+    var isLoaded = false
+    private func configureAuthorisation() {
+        
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) {
+            
+            if let url = URL(string: self.urlToOpen) {
+                
+                let urlRequest = URLRequest(url: url)
+                self.wkWebViewWithScript.load(urlRequest)
+                self.isLoaded = true
+            }
+        }
+    }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
@@ -151,6 +145,15 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
                 webView.evaluateJavaScript("document.body.offsetHeight")
             }
         })
+      
+        if !isLoaded {
+            
+            configureAuthorisation()
+        } else {
+            
+            self.loadingView.isHidden = true
+            self.activityIndicator.stopAnimating()
+        }
     }
     
     func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
@@ -191,7 +194,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         return nil
     }
     
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
             let urlComponents = URLComponents(string: url)
             openMailApp(text: urlComponents?.queryItems?.last?.value)
@@ -199,37 +202,13 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             openMessenger(with: url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
-        
-        if let url = navigationAction.request.url?.relativeString {
+    
+            if let url = navigationAction.request.url?.relativeString {
             
-            guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
-            if url == "https://docs.vuukle.com/privacy-and-policy/" {
+                if url.contains("urth=Excited&fifth=Angry&sixth=Sad&darkMode=false&commentsEnabled=true") {
                 
-                if let url = URL(string: "https://docs.vuukle.com/privacy-and-policy/") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        lastWebView.removeFromSuperview()
-                    }
-                }
-            } else if url == "https://vuukle.com/" {
-                if let url = URL(string: "https://vuukle.com/") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        lastWebView.removeFromSuperview()
-                    }
-                }
-            }
-            
-            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") {
-                
-                if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
                     
-                    vc.urlToOpen = url
-                    present(vc, animated: true)
-                    lastWebView.removeFromSuperview()
-                }
+                
             }
         }
     }
@@ -243,7 +222,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     }
 }
 
-extension ViewController {
+extension ModalViewController {
     @objc private func handlePanGesture(_ sender: UIPanGestureRecognizer) {
         guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
         guard self.isPopUpAppeared && (lastWebView.backForwardList.backItem == nil) else { return }

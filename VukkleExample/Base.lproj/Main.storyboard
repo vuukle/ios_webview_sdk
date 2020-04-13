@@ -74,14 +74,60 @@
                     <connections>
                         <outlet property="containerForWKWebView" destination="fwe-tw-jI9" id="6uW-wn-nQE"/>
                         <outlet property="containerwkWebViewWithScript" destination="5Id-G4-bSW" id="TdV-mF-GYP"/>
-                        <outlet property="heightWKWebViewConstraint" destination="ZT3-lg-Bxe" id="ZOP-Ef-T0L"/>
-                        <outlet property="scrollView" destination="rr4-92-owg" id="xRw-N5-Cg3"/>
-                        <outlet property="someTextLabel" destination="BhJ-DZ-0Dz" id="Xfo-0Y-ALC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="116" y="116.49175412293854"/>
+        </scene>
+        <!--Modal View Controller-->
+        <scene sceneID="Awo-0h-YdE">
+            <objects>
+                <viewController storyboardIdentifier="ModalViewController" id="KIT-nn-Doc" customClass="ModalViewController" customModule="VukkleExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Voa-TI-XIU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HVD-1b-Ues" userLabel="containerwkWebViewWithScript">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cx2-xw-EdH">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="PpI-ah-NpU">
+                                        <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="PpI-ah-NpU" firstAttribute="centerY" secondItem="Cx2-xw-EdH" secondAttribute="centerY" id="4cd-qI-ALd"/>
+                                    <constraint firstItem="PpI-ah-NpU" firstAttribute="centerX" secondItem="Cx2-xw-EdH" secondAttribute="centerX" id="Nvz-s1-9xB"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="13a-5V-7Yu" firstAttribute="trailing" secondItem="HVD-1b-Ues" secondAttribute="trailing" id="8HF-bq-ncf"/>
+                            <constraint firstItem="13a-5V-7Yu" firstAttribute="bottom" secondItem="Cx2-xw-EdH" secondAttribute="bottom" id="P5L-yb-Pyc"/>
+                            <constraint firstItem="HVD-1b-Ues" firstAttribute="leading" secondItem="13a-5V-7Yu" secondAttribute="leading" id="Vks-OR-mas"/>
+                            <constraint firstItem="13a-5V-7Yu" firstAttribute="bottom" secondItem="HVD-1b-Ues" secondAttribute="bottom" id="WGE-aQ-WRz"/>
+                            <constraint firstItem="HVD-1b-Ues" firstAttribute="top" secondItem="13a-5V-7Yu" secondAttribute="top" id="gTv-no-JBl"/>
+                            <constraint firstItem="13a-5V-7Yu" firstAttribute="trailing" secondItem="Cx2-xw-EdH" secondAttribute="trailing" id="gtp-NU-FJ9"/>
+                            <constraint firstItem="Cx2-xw-EdH" firstAttribute="leading" secondItem="13a-5V-7Yu" secondAttribute="leading" id="r93-QL-vvX"/>
+                            <constraint firstItem="Cx2-xw-EdH" firstAttribute="top" secondItem="13a-5V-7Yu" secondAttribute="top" id="xAR-fU-fvI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="13a-5V-7Yu"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="PpI-ah-NpU" id="RQa-WS-qgp"/>
+                        <outlet property="containerwkWebViewWithScript" destination="HVD-1b-Ues" id="VF4-0L-wcP"/>
+                        <outlet property="loadingView" destination="Cx2-xw-EdH" id="7p2-7B-bBS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T4e-3u-vAS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="911" y="116"/>
         </scene>
     </scenes>
 </document>
