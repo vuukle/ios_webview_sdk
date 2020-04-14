@@ -202,33 +202,64 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         if let url = navigationAction.request.url?.relativeString {
             
-            guard let lastWebView = self.view.subviews.last as? WKWebView else { return }
             if url == "https://docs.vuukle.com/privacy-and-policy/" {
-                
-                if let url = URL(string: "https://docs.vuukle.com/privacy-and-policy/") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        lastWebView.removeFromSuperview()
-                    }
-                }
-            } else if url == "https://vuukle.com/" {
-                if let url = URL(string: "https://vuukle.com/") {
-                    if UIApplication.shared.canOpenURL(url) {
-                        
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                        lastWebView.removeFromSuperview()
-                    }
-                }
-            }
-            
-            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") {
                 
                 if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
                     
                     vc.urlToOpen = url
                     present(vc, animated: true)
-                    lastWebView.removeFromSuperview()
+                    if let lastWebView = self.view.subviews.last as? WKWebView {
+                        lastWebView.removeFromSuperview()
+                    }
+                }
+                
+            } else if url == "https://vuukle.com/" {
+                if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
+                    
+                    vc.urlToOpen = url
+                    present(vc, animated: true)
+                    if let lastWebView = self.view.subviews.last as? WKWebView {
+                        lastWebView.removeFromSuperview()
+                    }
+                }
+                
+            }
+            
+            //AUTHORIZATION
+            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") || url == "https://news.vuukle.com/settings/account" {
+                
+                if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
+                    
+                    vc.urlToOpen = url
+                    vc.isAuthorization = true
+                    present(vc, animated: true)
+                    if let lastWebView = self.view.subviews.last as? WKWebView {
+                        lastWebView.removeFromSuperview()
+                    }
+                    
+                    if url == "https://news.vuukle.com/settings/account" {
+                        addWKWebViewForScript()
+                        
+                    }
+                }
+            }
+            
+            //SHARING
+            if url.contains("https://m.facebook.com/share.php") || url.contains("https://twitter.com/share?url") ||  url.contains("ttps://api.whatsapp.com/send?text") || url.contains("ttps://api.whatsapp.com/send?tex")  {
+                
+                if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
+                    
+                    vc.urlToOpen = url
+                    vc.isAuthorization = false
+                    present(vc, animated: true)
+                    if let lastWebView = self.view.subviews.last as? WKWebView {
+                        lastWebView.removeFromSuperview()
+                    }
+                    
+                    if url.contains("ttps://api.whatsapp.com/send?tex") {
+                        addWKWebViewForScript()
+                        
+                    }
                 }
             }
         }

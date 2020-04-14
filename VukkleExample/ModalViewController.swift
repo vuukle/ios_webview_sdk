@@ -21,6 +21,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
     private let configuration = WKWebViewConfiguration()
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
+    public var isAuthorization = false
     public var urlToOpen = ""
     
     private var isPopUpAppeared = false
@@ -145,14 +146,26 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
                 webView.evaluateJavaScript("document.body.offsetHeight")
             }
         })
-      
-        if !isLoaded {
+        
+        if isAuthorization {
             
-            configureAuthorisation()
+            if !isLoaded {
+                
+                configureAuthorisation()
+            } else {
+                
+                self.loadingView.isHidden = true
+                self.activityIndicator.stopAnimating()
+            }
         } else {
             
-            self.loadingView.isHidden = true
-            self.activityIndicator.stopAnimating()
+            if let url = URL(string: self.urlToOpen) {
+                
+                let urlRequest = URLRequest(url: url)
+                self.wkWebViewWithScript.load(urlRequest)
+                self.loadingView.isHidden = true
+                self.activityIndicator.stopAnimating()
+            }
         }
     }
     
