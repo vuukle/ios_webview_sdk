@@ -19,21 +19,28 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     private var wkWebViewWithEmoji: WKWebView!
     private let configuration = WKWebViewConfiguration()
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
-    
+    private var refreshController = UIRefreshControl()
     private var isPopUpAppeared = false
-    private let newsHostName = "news.vuukle.com"
-    private let loginHostName = "login.vuukle.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         addWKWebViewForScript()
         addObservers()
+        configureRefreshController()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    private func configureRefreshController() {
+        
+        refreshController.addTarget(self, action: #selector(reloadWebView), for: .valueChanged)
+        refreshController.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        wkWebViewWithScript.scrollView.addSubview(refreshController)
     }
     
     private func addObservers() {
@@ -44,6 +51,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     @objc private func reloadWebView() {
         
         wkWebViewWithScript.reload()
+        refreshController.endRefreshing()
     }
     
     private func addWKWebViewForScript() {
@@ -228,7 +236,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             }
             
             //AUTHORIZATION
-            if url == "https://\(loginHostName)/auth/facebook" || url == "https://\(loginHostName)/auth/google" || url == "https://\(loginHostName)/auth/twitter" || url == "https://\(loginHostName)/auth/disqus" || url.contains("https://\(newsHostName)profile/") || url == "https://\(newsHostName))/settings/account" || url == "https://\(newsHostName)/forgot-password" {
+            if url.contains("/auth/facebook") || url.contains("/auth/google") || url.contains("/auth/twitter") || url.contains("/auth/disqus") || url.contains("profile/") || url.contains("/settings/account") || url.contains("/forgot-password") {
                 
                 if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
                     
@@ -239,7 +247,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
                         lastWebView.removeFromSuperview()
                     }
                     
-                    if url == "https://\(newsHostName)/settings/account" {
+                    if url.contains("/settings/account") {
                         addWKWebViewForScript()
                         
                     }

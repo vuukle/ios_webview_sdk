@@ -20,12 +20,10 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
     private var wkWebViewWithEmoji: WKWebView!
     private let configuration = WKWebViewConfiguration()
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
+    private var isPopUpAppeared = false
     
     public var isAuthorization = false
     public var urlToOpen = ""
-    
-    private var loginHostName = "login.vuukle.com"
-    private var isPopUpAppeared = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,8 +35,10 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
     override func viewWillDisappear(_ animated: Bool) {
         
         super.viewWillDisappear(animated)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "needToReload"), object: nil)
+        }
         
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "needToReload"), object: nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -223,7 +223,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
             }
             
             
-            if url.contains("https://\(loginHostName)/consent") {
+            if url.contains("/consent") {
                 
                 if UserDefaults.standard.bool(forKey: "firstAtuthorization") {
                                             
