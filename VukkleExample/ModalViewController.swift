@@ -28,7 +28,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        
         self.addWKWebViewForScript()
         activityIndicator.startAnimating()
     }
@@ -207,7 +207,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
         return nil
     }
     
-  func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let url = navigationAction.request.url?.relativeString, url.contains("mailto") {
             let urlComponents = URLComponents(string: url)
             openMailApp(text: urlComponents?.queryItems?.last?.value)
@@ -215,15 +215,23 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
             openMessenger(with: url)
         }
         decisionHandler(WKNavigationActionPolicy.allow)
-    
-            if let url = navigationAction.request.url?.relativeString {
+        
+        if let url = navigationAction.request.url?.relativeString {
             
-                if url.contains("urth=Excited&fifth=Angry&sixth=Sad&darkMode=false&commentsEnabled=true") {
+            if url.contains("urth=Excited&fifth=Angry&sixth=Sad&darkMode=false&commentsEnabled=true") {
             }
-                if url.contains("https://login.vuukle.com/consent") {
-                    
-                        dismiss(animated: true, completion: nil)
+            
+            
+            if url.contains("https://login.vuukle.com/consent") {
+                
+                if UserDefaults.standard.bool(forKey: "firstAtuthorization") {
+                                            
+                        self.dismiss(animated: true)
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "needToReload"), object: nil)
                 }
+                
+                UserDefaults.standard.set(true, forKey: "firstAtuthorization")
+            }
         }
     }
     

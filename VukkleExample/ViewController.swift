@@ -226,7 +226,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             }
             
             //AUTHORIZATION
-            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") || url == "https://news.vuukle.com/settings/account" {
+            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") || url == "https://news.vuukle.com/settings/account" || url == "https://news.vuukle.com/forgot-password" {
                 
                 if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
                     
