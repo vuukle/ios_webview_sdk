@@ -219,10 +219,11 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
             if let url = navigationAction.request.url?.relativeString {
             
                 if url.contains("urth=Excited&fifth=Angry&sixth=Sad&darkMode=false&commentsEnabled=true") {
-                
-                    
-                
             }
+                if url.contains("https://login.vuukle.com/consent") {
+                    
+                        dismiss(animated: true, completion: nil)
+                }
         }
     }
     
