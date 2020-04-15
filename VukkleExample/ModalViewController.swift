@@ -24,6 +24,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
     public var isAuthorization = false
     public var urlToOpen = ""
     
+    private var loginHostName = "login.vuukle.com"
     private var isPopUpAppeared = false
     
     override func viewDidLoad() {
@@ -222,7 +223,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
             }
             
             
-            if url.contains("https://login.vuukle.com/consent") {
+            if url.contains("https://\(loginHostName)/consent") {
                 
                 if UserDefaults.standard.bool(forKey: "firstAtuthorization") {
                                             

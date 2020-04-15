@@ -21,6 +21,8 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     private var originalPosition: CGPoint = CGPoint(x: 0, y: 0)
     
     private var isPopUpAppeared = false
+    private let newsHostName = "news.vuukle.com"
+    private let loginHostName = "login.vuukle.com"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -226,7 +228,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             }
             
             //AUTHORIZATION
-            if url == "https://login.vuukle.com/auth/facebook" || url == "https://login.vuukle.com/auth/google" || url == "https://login.vuukle.com/auth/twitter" || url == "https://login.vuukle.com/auth/disqus" || url.contains("https://news.vuukle.com/profile/") || url == "https://news.vuukle.com/settings/account" || url == "https://news.vuukle.com/forgot-password" {
+            if url == "https://\(loginHostName)/auth/facebook" || url == "https://\(loginHostName)/auth/google" || url == "https://\(loginHostName)/auth/twitter" || url == "https://\(loginHostName)/auth/disqus" || url.contains("https://\(newsHostName)profile/") || url == "https://\(newsHostName))/settings/account" || url == "https://\(newsHostName)/forgot-password" {
                 
                 if let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ModalViewController") as? ModalViewController {
                     
@@ -237,7 +239,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
                         lastWebView.removeFromSuperview()
                     }
                     
-                    if url == "https://news.vuukle.com/settings/account" {
+                    if url == "https://\(newsHostName)/settings/account" {
                         addWKWebViewForScript()
                         
                     }
