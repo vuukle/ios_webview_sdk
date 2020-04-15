@@ -233,7 +233,7 @@ final class ModalViewController: UIViewController, WKNavigationDelegate, WKUIDel
                 UserDefaults.standard.set(true, forKey: "firstAtuthorization")
             }
             
-            if url.contains("https://login.vuukle.com/auth/twitter/callback?denied") {
+            if url.contains("/twitter/callback?denied") {
                 
                 self.dismiss(animated: true)
             }
