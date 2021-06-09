@@ -1,0 +1,18 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "origin"]
+url = https://github.com/lesukk/vuukle_iOS_SDK.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "web_sdk_iOS"]
+	remote = origin
+	merge = refs/heads/web_sdk_iOS
+[user]
+	email = narek1994t@gmail.com
+	name = Narek Dallakyan

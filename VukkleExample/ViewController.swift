@@ -1,50 +1,10 @@
-# WebView guide ios
+//
+//  ViewController.swift
+//  VukkleExample
+//
+//  Created by MAC_7 on 12/21/17.
+//  Copyright © 2017 MAC_7. All rights reserved.
 
-## Getting Started
-
-WKWebView is still not available on Interface Builder. However, it is very easy to add them via code.
-
-### Example:
-
-```
-import WebKit
-
-override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    self.title = "VUUKLE"
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: .UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: .UIKeyboardWillHide, object: nil)
-    setWKWebViewConfigurations()
-    addNewButtonsOnNavigationBar()
-    configureWebView()
-    askCameraAccess()
-}
-```
-
-### Example for clear cookie:
-
-```
-private func clearAllCookies() {
-    let cookieJar = HTTPCookieStorage.shared
-
-    for cookie in cookieJar.cookies! {
-        cookieJar.deleteCookie(cookie)
-    }
-}
-
-private func clearCookiesFromSpecificUrl(yourUrl: String) {
-    let cookieStorage: HTTPCookieStorage = HTTPCookieStorage.shared
-    let cookies = cookieStorage.cookies(for: URL(string: yourUrl)!)
-    for cookie in cookies! {
-        cookieStorage.deleteCookie(cookie as HTTPCookie)
-    }
-}
-```
-
-### Full example:
-
-```
 import UIKit
 import WebKit
 import AVFoundation
@@ -527,5 +487,3 @@ extension ViewController: MFMailComposeViewControllerDelegate {
         controller.dismiss(animated: true)
     }
 }
-
-```
