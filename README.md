@@ -41,6 +41,45 @@ private func clearCookiesFromSpecificUrl(yourUrl: String) {
     }
 }
 ```
+### Use SSO authentication:
+
+```
+// Article to get your PUBLIC_KEY and PRIVATE_KEY
+// https://docs.vuukle.com/how-can-i-fetch-my-public-and-private-api-key/
+
+// Config your private and public keys from GlobalConfig.swift
+// Keys
+//let PUBLISHER_PRIVATE_KEY = "bd3a64e4-7e19-46b2-..........."
+//let PUBLISHER_PUBLIC_KEY = "664e0b85-5b2c-4881-............"
+
+// Login user by SSO using email and username
+
+private func loginBySSO(email: String, username: String) {
+    let authModel = AuthenticationModel(email: email, username: username)
+    
+    do {
+        let authModelData = try JSONEncoder().encode(authModel).base64EncodedString()
+        UserDefaults.standard.setValue(authModelData, forKey: "loginToken")
+        let urlString = VUUKLE_IFRAME + "&sso=true&loginToken=" + (UserDefaults.standard.string(forKey: "loginToken") ?? "")
+        if let url = URL(string: urlString) {
+            wkWebViewWithScript.load(URLRequest(url: url))
+        }
+    } catch {
+        
+    }
+}
+
+// Logout user SSO
+
+@objc func logoutTapped() {
+    UserDefaults.standard.removeObject(forKey: "loginToken")
+    removeCookies()
+    let urlString = VUUKLE_IFRAME
+    if let url = URL(string: urlString) {
+        wkWebViewWithScript.load(URLRequest(url: url))
+    }
+}
+```
 
 ### Full example:
 
