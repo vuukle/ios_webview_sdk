@@ -16,21 +16,21 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     @IBOutlet weak var containerForTopPowerBar: UIView!
     
     @IBOutlet weak var containerTopPowerBarTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var heightWKWebViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var heightScrollView: NSLayoutConstraint!
-    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var heightWKWebViewConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var heightScrollView: NSLayoutConstraint!
+//    @IBOutlet weak var scrollView: UIScrollView!
     
     private var wkWebViewWithScript: WKWebView!
-    private var wkWebViewWithEmoji: WKWebView!
+//    private var wkWebViewWithEmoji: WKWebView!
     private var wkWebViewForTopPowerBar: WKWebView!
     private var wkWebViewForBottonPowerBar: WKWebView!
     
     private let configuration = WKWebViewConfiguration()
-    private var scriptWebViewHeight: CGFloat = 0
-    var newWebviewPopupWindow: WKWebView?
+//    private var scriptWebViewHeight: CGFloat = 0
+//    var newWebviewPopupWindow: WKWebView?
     var isKeyboardOpened = false
-    let name = "Ross"
-    let email = "email@sda"
+//    let name = "Ross"
+//    let email = "email@sda"
     
     private var isWkWebViewWithScriptCreated = false
     
@@ -96,7 +96,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.y > 10 {
-            self.containerTopPowerBarTopConstraint.constant = -100
+            self.containerTopPowerBarTopConstraint.constant = -125
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
