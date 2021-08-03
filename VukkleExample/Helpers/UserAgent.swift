@@ -2,7 +2,7 @@
 //  UserAgent.swift
 //  VukkleExample
 //
-//  Created by Eduard Shahnazaryan on 8/2/21.
+//  Created by Narek Dallakyan on 8/2/21.
 //  Copyright © 2021 MAC_7. All rights reserved.
 //
 
