@@ -89,7 +89,7 @@ class VuukleNewViewController: UIViewController {
         cookies.forEach({ if #available(iOS 11.0, *) {
             config.websiteDataStore.httpCookieStore.setCookie($0, completionHandler: nil)
         } })
-        config.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
+//        config.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
         
         let navBarHeight = UIApplication.shared.statusBarFrame.size.height +
                  (navigationController?.navigationBar.frame.height ?? 0.0)
@@ -97,6 +97,8 @@ class VuukleNewViewController: UIViewController {
         print(safeAreaHeight)
         
         wkWebView = WKWebView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: safeAreaHeight), configuration: config)
+        wkWebView.customUserAgent = UserAgent.mobileUserAgent()
+        wkWebView.allowsLinkPreview = true
         self.view.addSubview(wkWebView)
         
         wkWebView.navigationDelegate = self
@@ -111,7 +113,7 @@ class VuukleNewViewController: UIViewController {
         }
         if let url = URL(string: urlString) {
             
-            let userAgent = USER_AGENT
+            let userAgent = UserAgent.mobileUserAgent()
             var myURLRequest = URLRequest(url: url)
             myURLRequest.setValue(userAgent, forHTTPHeaderField:"user-agent")
             wkWebView.load(myURLRequest)
@@ -183,7 +185,7 @@ extension VuukleNewViewController:  WKNavigationDelegate, WKUIDelegate  {
             completionHandler(.useCredential, URLCredential(trust: serverTrust))
         }
    
-    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+    private func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKContextMenuElementInfo) -> Bool {
         return true
     }
     

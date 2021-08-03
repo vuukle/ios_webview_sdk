@@ -18,6 +18,10 @@
 		6CB8C05E2566E67A00079792 /* GlobalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB8C05D2566E67900079792 /* GlobalConfig.swift */; };
 		6CC4449D256ADF98007288C9 /* VuukleNewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CC4449C256ADF98007288C9 /* VuukleNewViewController.swift */; };
 		6CCFD368256CFBF6006A832C /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CCFD367256CFBF6006A832C /* SafariServices.framework */; };
+		FF53BF1526B87C49003480BD /* UserAgent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BF1426B87C49003480BD /* UserAgent.swift */; };
+		FF53BF1C26B87CB1003480BD /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BF1B26B87CB1003480BD /* AppInfo.swift */; };
+		FF53BF2026B87CE8003480BD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BF1F26B87CE8003480BD /* String+Extension.swift */; };
+		FF53BF2426B87D07003480BD /* DeviceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF53BF2326B87D07003480BD /* DeviceInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,10 @@
 		6CB8C05D2566E67900079792 /* GlobalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConfig.swift; sourceTree = "<group>"; };
 		6CC4449C256ADF98007288C9 /* VuukleNewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VuukleNewViewController.swift; sourceTree = "<group>"; };
 		6CCFD367256CFBF6006A832C /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		FF53BF1426B87C49003480BD /* UserAgent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAgent.swift; sourceTree = "<group>"; };
+		FF53BF1B26B87CB1003480BD /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
+		FF53BF1F26B87CE8003480BD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		FF53BF2326B87D07003480BD /* DeviceInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,15 +78,11 @@
 		4AC9D3361FEBE0C800383837 /* VukkleExample */ = {
 			isa = PBXGroup;
 			children = (
-				4AC9D3371FEBE0C800383837 /* AppDelegate.swift */,
-				4AC9D3391FEBE0C800383837 /* ViewController.swift */,
-				4AC9D33B1FEBE0C800383837 /* Main.storyboard */,
-				4AC9D33E1FEBE0C800383837 /* Assets.xcassets */,
-				4AC9D3401FEBE0C800383837 /* LaunchScreen.storyboard */,
-				4AC9D3431FEBE0C800383837 /* Info.plist */,
-				6CB8C05D2566E67900079792 /* GlobalConfig.swift */,
-				6CC4449C256ADF98007288C9 /* VuukleNewViewController.swift */,
-				50B360A02657C50F00850D5D /* AuthenticationModel.swift */,
+				FF53BF1E26B87CDB003480BD /* Extensions */,
+				FF53BF1726B87C66003480BD /* Helpers */,
+				FF53BF1926B87C84003480BD /* Controllers */,
+				FF53BF1A26B87C94003480BD /* Storyboards */,
+				FF53BF1826B87C77003480BD /* Supporting Files */,
 			);
 			path = VukkleExample;
 			sourceTree = "<group>";
@@ -90,6 +94,54 @@
 				6CCFD367256CFBF6006A832C /* SafariServices.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FF53BF1726B87C66003480BD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FF53BF1426B87C49003480BD /* UserAgent.swift */,
+				FF53BF1B26B87CB1003480BD /* AppInfo.swift */,
+				FF53BF2326B87D07003480BD /* DeviceInfo.swift */,
+				6CB8C05D2566E67900079792 /* GlobalConfig.swift */,
+				50B360A02657C50F00850D5D /* AuthenticationModel.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		FF53BF1826B87C77003480BD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4AC9D3371FEBE0C800383837 /* AppDelegate.swift */,
+				4AC9D33E1FEBE0C800383837 /* Assets.xcassets */,
+				4AC9D3431FEBE0C800383837 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FF53BF1926B87C84003480BD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4AC9D3391FEBE0C800383837 /* ViewController.swift */,
+				6CC4449C256ADF98007288C9 /* VuukleNewViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FF53BF1A26B87C94003480BD /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4AC9D33B1FEBE0C800383837 /* Main.storyboard */,
+				4AC9D3401FEBE0C800383837 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		FF53BF1E26B87CDB003480BD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FF53BF1F26B87CE8003480BD /* String+Extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,11 +171,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = MAC_7;
 				TargetAttributes = {
 					4AC9D3331FEBE0C800383837 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 1240;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -165,11 +218,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF53BF2026B87CE8003480BD /* String+Extension.swift in Sources */,
 				6CC4449D256ADF98007288C9 /* VuukleNewViewController.swift in Sources */,
 				50B360A12657C50F00850D5D /* AuthenticationModel.swift in Sources */,
 				4AC9D33A1FEBE0C800383837 /* ViewController.swift in Sources */,
 				4AC9D3381FEBE0C800383837 /* AppDelegate.swift in Sources */,
+				FF53BF1526B87C49003480BD /* UserAgent.swift in Sources */,
 				6CB8C05E2566E67A00079792 /* GlobalConfig.swift in Sources */,
+				FF53BF2426B87D07003480BD /* DeviceInfo.swift in Sources */,
+				FF53BF1C26B87CB1003480BD /* AppInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +266,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -216,8 +274,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -243,7 +303,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -266,6 +326,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -273,8 +334,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -294,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -310,13 +373,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = FKZ4GGHN8A;
-				INFOPLIST_FILE = VukkleExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/VukkleExample/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eduard.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -329,13 +392,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = FKZ4GGHN8A;
-				INFOPLIST_FILE = VukkleExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				INFOPLIST_FILE = "$(SRCROOT)/VukkleExample/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.eduard.Vuukle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -9,28 +9,29 @@ import UIKit
 import WebKit
 import AVFoundation
 import MessageUI
+import SafariServices
 
-final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate {
+final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate {
     
     @IBOutlet weak var containerwkWebViewWithScript: UIView!
     @IBOutlet weak var containerForTopPowerBar: UIView!
     
     @IBOutlet weak var containerTopPowerBarTopConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var heightWKWebViewConstraint: NSLayoutConstraint!
-//    @IBOutlet weak var heightScrollView: NSLayoutConstraint!
-//    @IBOutlet weak var scrollView: UIScrollView!
+    //    @IBOutlet weak var heightWKWebViewConstraint: NSLayoutConstraint!
+    //    @IBOutlet weak var heightScrollView: NSLayoutConstraint!
+    //    @IBOutlet weak var scrollView: UIScrollView!
     
     private var wkWebViewWithScript: WKWebView!
-//    private var wkWebViewWithEmoji: WKWebView!
+    //    private var wkWebViewWithEmoji: WKWebView!
     private var wkWebViewForTopPowerBar: WKWebView!
     private var wkWebViewForBottonPowerBar: WKWebView!
     
     private let configuration = WKWebViewConfiguration()
-//    private var scriptWebViewHeight: CGFloat = 0
-//    var newWebviewPopupWindow: WKWebView?
+    //    private var scriptWebViewHeight: CGFloat = 0
+    //    var newWebviewPopupWindow: WKWebView?
     var isKeyboardOpened = false
-//    let name = "Ross"
-//    let email = "email@sda"
+    //    let name = "Ross"
+    //    let email = "email@sda"
     
     private var isWkWebViewWithScriptCreated = false
     
@@ -38,8 +39,8 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         super.viewDidLoad()
         
         self.title = "VUUKLE"
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: .UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         setWKWebViewConfigurations()
         addNewButtonsOnNavigationBar()
         configureWebView()
@@ -78,14 +79,14 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         let login = UIBarButtonItem(title: "LOGIN", style: .plain, target: self, action: #selector(loginBySSOTapped))
         login.setBackgroundImage(UIImage(named: "dark_gray"), for: .normal, barMetrics: .default)
         login.setTitleTextAttributes([
-                                        NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
-                                        NSAttributedStringKey.foregroundColor: UIColor.white],
+                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+                                        NSAttributedString.Key.foregroundColor: UIColor.white],
                                      for: .normal)
         let logout = UIBarButtonItem(title: "LOGOUT", style: .plain, target: self, action: #selector(logoutTapped))
         logout.setBackgroundImage(UIImage(named: "dark_gray"), for: .normal, barMetrics: .default)
         logout.setTitleTextAttributes([
-                                        NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
-                                        NSAttributedStringKey.foregroundColor: UIColor.white],
+                                        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+                                        NSAttributedString.Key.foregroundColor: UIColor.white],
                                       for: .normal)
         
         logout.tintColor = .white
@@ -193,6 +194,8 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         configuration.preferences = thePreferences
         
         wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
+        wkWebViewWithScript.customUserAgent = UserAgent.mobileUserAgent()
+        wkWebViewWithScript.allowsLinkPreview = true
         wkWebViewWithScript.navigationDelegate = self
         wkWebViewWithScript.uiDelegate = self
         self.containerwkWebViewWithScript.addSubview(wkWebViewWithScript)
@@ -222,7 +225,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         }
         if let url = URL(string: urlString) {
             
-            let userAgent = USER_AGENT
+            let userAgent = UserAgent.mobileUserAgent()
             var myURLRequest = URLRequest(url: url)
             myURLRequest.setValue(userAgent, forHTTPHeaderField:"user-agent")
             wkWebViewWithScript.load(myURLRequest)
@@ -233,6 +236,8 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     private func addWKWebViewForTopPowerBar() {
         
         wkWebViewForTopPowerBar = WKWebView(frame: .zero, configuration: configuration)
+        wkWebViewForTopPowerBar.customUserAgent = UserAgent.mobileUserAgent()
+        wkWebViewForTopPowerBar.allowsLinkPreview = true
         self.containerForTopPowerBar.addSubview(wkWebViewForTopPowerBar)
         
         wkWebViewForTopPowerBar.translatesAutoresizingMaskIntoConstraints = false
@@ -253,7 +258,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     private func addWKWebViewForBottomPowerBar() {
         
         wkWebViewForBottonPowerBar = WKWebView(frame: .zero, configuration: configuration)
-
+        
         wkWebViewForBottonPowerBar.translatesAutoresizingMaskIntoConstraints = false
         wkWebViewForBottonPowerBar.uiDelegate = self
         wkWebViewForBottonPowerBar.navigationDelegate = self
@@ -289,7 +294,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
                 let appURL = URL(string: newURL)!
                 if UIApplication.shared.canOpenURL(appURL) {
                     if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+                        UIApplication.shared.open(appURL, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                     }
                     else {
                         UIApplication.shared.openURL(appURL)
@@ -330,22 +335,24 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         }))
     }
     
-    func webView(_ webView: WKWebView, previewingViewControllerForElement elementInfo: WKPreviewElementInfo, defaultActions previewActions: [WKPreviewActionItem]) -> UIViewController? {
-        let vc = UIViewController()
-        return vc
-    }
+    //    private func webView(_ webView: WKWebView, previewingViewControllerForElement elementInfo: WKContextMenuElementInfo, defaultActions previewActions: [WKPreviewActionItem]) -> UIViewController? {
+    //        let vc = UIViewController()
+    //        return vc
+    //    }
     
     @available(iOS 13.0, *)
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
         
         print("URL :\(navigationAction.request.url?.absoluteString ?? "")")
-        if navigationAction.request.url?.absoluteString == VUUKLE_SETTINGS {
-            self.openNewWindow(newURL: VUUKLE_SETTINGS, openWindow: true)
-        } else if (navigationAction.request.url?.absoluteString ?? "").hasPrefix(VUUKLE_MAIL_TO_SHARE) {
-            let mailSubjectBody = parsMailSubjextAndBody(mailto: navigationAction.request.url?.absoluteString ?? "")
-            sendEmail(subject: mailSubjectBody.subject, body: mailSubjectBody.body)
-        } else if (navigationAction.request.url?.absoluteString ?? "").hasPrefix(VUUKLE_MESSENGER_SHARE) {
-            openNewWindow(newURL: navigationAction.request.url?.absoluteString ?? "", openWindow: true)
+        if let url = navigationAction.request.url {
+            if url.absoluteString == VUUKLE_SETTINGS {
+                self.openNewWindow(newURL: VUUKLE_SETTINGS, openWindow: true)
+            } else if url.absoluteString.hasPrefix(VUUKLE_MAIL_TO_SHARE) {
+                let mailSubjectBody = parsMailSubjextAndBody(mailto: navigationAction.request.url?.absoluteString ?? "")
+                sendEmail(subject: mailSubjectBody.subject, body: mailSubjectBody.body)
+            } else if url.absoluteString.hasPrefix(VUUKLE_MESSENGER_SHARE) {
+                openNewWindow(newURL: navigationAction.request.url?.absoluteString ?? "", openWindow: true)
+            }
         }
         decisionHandler(WKNavigationActionPolicy.allow, preferences)
     }
@@ -354,7 +361,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         decisionHandler(.allow)
     }
     
-    func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKPreviewElementInfo) -> Bool {
+    private func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKContextMenuElementInfo) -> Bool {
         return true
     }
     
@@ -373,7 +380,16 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         
         webView.evaluateJavaScript("window.close = function() { window.location.href = 'myapp://closewebview'; }", completionHandler: nil)
         print( navigationAction.request.url?.absoluteString )
-        openNewWindow(newURL: navigationAction.request.url?.absoluteString ?? "", openWindow: true)
+        
+        if let url = navigationAction.request.url {
+            print("New URL - \(url)")
+            if url.absoluteString.range(of: "reddit") != nil {
+                print("Opening Safari for Reddit")
+                openSafari(url: url)
+            } else {
+                openNewWindow(newURL: navigationAction.request.url?.absoluteString ?? "", openWindow: true)
+            }
+        }
         
         return nil
     }
@@ -414,6 +430,18 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         } catch {
             
         }
+    }
+    
+    /// Safari Services
+    private func openSafari(url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        safariVC.delegate = self
+        present(safariVC, animated: true, completion: nil)
+        
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -486,4 +514,9 @@ extension ViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+    return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
