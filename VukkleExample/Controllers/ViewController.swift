@@ -97,7 +97,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         if scrollView.contentOffset.y > 10 {
-            self.containerTopPowerBarTopConstraint.constant = -125
+            self.containerTopPowerBarTopConstraint.constant = -100
             self.view.setNeedsLayout()
             UIView.animate(withDuration: 0.25) {
                 self.view.layoutIfNeeded()
@@ -247,7 +247,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         wkWebViewForTopPowerBar.rightAnchor.constraint(equalTo: self.containerForTopPowerBar.rightAnchor).isActive = true
         wkWebViewForTopPowerBar.uiDelegate = self
         wkWebViewForTopPowerBar.navigationDelegate = self
-        wkWebViewForTopPowerBar.scrollView.isScrollEnabled = false
+        wkWebViewForTopPowerBar.scrollView.isScrollEnabled = true
         
         if let url = URL(string: VUUKLE_POWERBAR) {
             wkWebViewForTopPowerBar.load(URLRequest(url: url))
