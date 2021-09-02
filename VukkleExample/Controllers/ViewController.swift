@@ -11,7 +11,7 @@ import AVFoundation
 import MessageUI
 import SafariServices
 
-final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate {
+final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate, UIScrollViewDelegate, SFSafariViewControllerDelegate, WKScriptMessageHandler, UINavigationControllerDelegate {
     
     @IBOutlet weak var containerwkWebViewWithScript: UIView!
     @IBOutlet weak var containerForTopPowerBar: UIView!
@@ -33,6 +33,9 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     //    let name = "Ross"
     //    let email = "email@sda"
     
+    public var picker = UIImagePickerController()
+    public weak var previousIPDelegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)?
+    
     private var isWkWebViewWithScriptCreated = false
     
     override func viewDidLoad() {
@@ -50,10 +53,10 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isWkWebViewWithScriptCreated {
-            wkWebViewForTopPowerBar.reload()
-            configureWKWebViewWithScript()
-        }
+//        if isWkWebViewWithScriptCreated {
+//            wkWebViewForTopPowerBar.reload()
+//            configureWKWebViewWithScript()
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -124,9 +127,11 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             "head.appendChild(meta);"
         
         let script: WKUserScript = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
         let userContentController: WKUserContentController = WKUserContentController()
         
         userContentController.addUserScript(script)
+        
         configuration.userContentController = userContentController
         configuration.processPool = WKProcessPool()
         let cookies = HTTPCookieStorage.shared.cookies ?? [HTTPCookie]()
@@ -173,14 +178,15 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         isKeyboardOpened = true
     }
     
-    
     // Ask permission to use camera For adding photo in the comment box
     func askCameraAccess() {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
             if response {
+                print("response = \(response)")
                 // access granted
             } else {
                 // access not granted
+                print("response = \(response)")
             }
         }
     }
@@ -193,6 +199,10 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         thePreferences.javaScriptEnabled = true
         configuration.preferences = thePreferences
         
+        let userContentController: WKUserContentController = WKUserContentController()
+        
+        configuration.userContentController = userContentController
+        userContentController.add(self, name: "MessageHandler")
         wkWebViewWithScript = WKWebView(frame: .zero, configuration: configuration)
         wkWebViewWithScript.customUserAgent = UserAgent.mobileUserAgent()
         wkWebViewWithScript.allowsLinkPreview = true
@@ -225,9 +235,10 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         }
         if let url = URL(string: urlString) {
             
-            let userAgent = UserAgent.mobileUserAgent()
+            let userAgent = UserAgent.desktopUserAgent()
             var myURLRequest = URLRequest(url: url)
             myURLRequest.setValue(userAgent, forHTTPHeaderField:"user-agent")
+            print(url)
             wkWebViewWithScript.load(myURLRequest)
         }
     }
@@ -323,6 +334,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     
     // MARK: - WKUIDelegate methods
     func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (String?) -> Void) {
+        print("Prompt = \(prompt)")
         let alertController = UIAlertController(title: prompt, message: defaultText, preferredStyle: .alert)
         present(alertController, animated: true)
         alertController.addTextField(configurationHandler: nil)
@@ -343,7 +355,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     @available(iOS 13.0, *)
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
         
-        print("URL :\(navigationAction.request.url?.absoluteString ?? "")")
+        print("URL in decisionHandler :\(navigationAction.request.url?.absoluteString ?? "")")
         if let url = navigationAction.request.url {
             if url.absoluteString == VUUKLE_SETTINGS {
                 self.openNewWindow(newURL: VUUKLE_SETTINGS, openWindow: true)
@@ -362,24 +374,33 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
     }
     
     private func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKContextMenuElementInfo) -> Bool {
+        print("Element info = \(elementInfo)")
         return true
     }
     
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
+        print("Message = \(message) in first")
         completionHandler()
     }
     
     func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping (Bool) -> Void) {
+        print("Message = \(message) in second")
         completionHandler(true)
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
         
+        print("Nav URL is \(navigationAction.request.url?.absoluteString ?? "")")
+        if navigationAction.targetFrame == nil || navigationAction.targetFrame?.isMainFrame == false {
+            if let urlToLoad = navigationAction.request.url {
+                //                handleWebViewLink?(urlToLoad.absoluteString)// this is a closure, which is handled in another class. Nayway... here you get the url of "broken" links
+                print(urlToLoad)
+            }
+        }
         webView.evaluateJavaScript("window.open = function(open) { return function (url, name, features) { window.location.href = url; return window; }; } (window.open);", completionHandler: nil)
         
         
         webView.evaluateJavaScript("window.close = function() { window.location.href = 'myapp://closewebview'; }", completionHandler: nil)
-        print( navigationAction.request.url?.absoluteString )
         
         if let url = navigationAction.request.url {
             print("New URL - \(url)")
@@ -394,8 +415,20 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         return nil
     }
     
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        print("Message = \(message) in script")
+        wkWebViewWithScript.evaluateJavaScript("window.settings.setImageBase64FromiOS()") { (result, error) in
+            if error != nil {
+                print("Success")
+            } else {
+                print("Failure")
+            }
+        }
+    }
+    
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         
+        print("Navigation action = \(navigationAction.request.url?.absoluteString ?? "")")
         //        self.heightWKWebViewWithScript.constant = scriptWebViewHeight
         if navigationAction.navigationType == .linkActivated {
             openNewWindow(newURL: navigationAction.request.url?.absoluteString ?? "", openWindow: true)
@@ -425,6 +458,7 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
             UserDefaults.standard.setValue(authModelData, forKey: "loginToken")
             let urlString = VUUKLE_IFRAME + "&sso=true&loginToken=" + (UserDefaults.standard.string(forKey: "loginToken") ?? "")
             if let url = URL(string: urlString) {
+                print("Login URL = \(url)")
                 wkWebViewWithScript.load(URLRequest(url: url))
             }
         } catch {
@@ -437,11 +471,51 @@ final class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate
         let safariVC = SFSafariViewController(url: url)
         safariVC.delegate = self
         present(safariVC, animated: true, completion: nil)
-        
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - UIImagePickerController Delegate
+extension ViewController: UIImagePickerControllerDelegate {
+    override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        if let imagePicker = viewControllerToPresent as? UIImagePickerController {
+            print("COmes here")
+            previousIPDelegate = imagePicker.delegate
+            picker = imagePicker
+            picker.sourceType = .photoLibrary
+            picker.allowsEditing = false
+            picker.delegate = self
+        }
+        print("Presenting Picker")
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+    }
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        if (self.presentedViewController != nil) {
+            super.dismiss(animated: flag, completion: completion)
+        }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let newInfo = info
+        let chosenImage = newInfo[UIImagePickerController.InfoKey.originalImage] as! UIImage //2
+        //        myImageView.contentMode = .scaleAspectFit //3
+        //        myImageView.image = chosenImage //4
+        picker.delegate = previousIPDelegate
+        previousIPDelegate?.imagePickerController!(picker, didFinishPickingMediaWithInfo: newInfo)
+        
+        //I want to do additional stuff here and send back as a base64 String
+//        dismiss(animated:true, completion: nil) //5
+        print("chosenImage = \(chosenImage)")
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        dismiss(animated: true, completion: nil)
+        picker.delegate = previousIPDelegate
+        previousIPDelegate?.imagePickerControllerDidCancel!(picker)
     }
 }
 
@@ -520,3 +594,4 @@ extension ViewController: MFMailComposeViewControllerDelegate {
 fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
     return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
+

@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import MessageUI
 
 class VuukleNewViewController: UIViewController {
     
@@ -32,13 +33,13 @@ class VuukleNewViewController: UIViewController {
         edgesForExtendedLayout = []
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        wkWebView.scrollView.removeObserver(self, forKeyPath: "contentSize", context: nil)
-//    }
+    //    override func viewWillDisappear(_ animated: Bool) {
+    //        wkWebView.scrollView.removeObserver(self, forKeyPath: "contentSize", context: nil)
+    //    }
     
-//    override func viewDidDisappear(_ animated: Bool) {
-//        NotificationCenter.default.post(name: NSNotification.Name("updateWebViews"), object: nil)
-//    }
+    //    override func viewDidDisappear(_ animated: Bool) {
+    //        NotificationCenter.default.post(name: NSNotification.Name("updateWebViews"), object: nil)
+    //    }
     
     func addNewButtonsOnNavigationBar() {
         
@@ -51,7 +52,7 @@ class VuukleNewViewController: UIViewController {
                 action: #selector(WKWebView.goBack))
             self.backButton = backButton
         } else {
-             let backButton = UIBarButtonItem(
+            let backButton = UIBarButtonItem(
                 image: UIImage(named: "arrow-left")?.withRenderingMode(.alwaysTemplate),
                 style: .plain,
                 target: self.wkWebView,
@@ -89,10 +90,10 @@ class VuukleNewViewController: UIViewController {
         cookies.forEach({ if #available(iOS 11.0, *) {
             config.websiteDataStore.httpCookieStore.setCookie($0, completionHandler: nil)
         } })
-//        config.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
+        //        config.applicationNameForUserAgent = "Version/8.0.2 Safari/600.2.5"
         
         let navBarHeight = UIApplication.shared.statusBarFrame.size.height +
-                 (navigationController?.navigationBar.frame.height ?? 0.0)
+            (navigationController?.navigationBar.frame.height ?? 0.0)
         let safeAreaHeight = self.view.frame.height - navBarHeight
         print(safeAreaHeight)
         
@@ -143,7 +144,8 @@ extension VuukleNewViewController:  WKNavigationDelegate, WKUIDelegate  {
     }
     
     func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
-    
+        
+        print("Nav URL is in Vuukle \(navigationAction.request.url?.absoluteString ?? "")")
         webView.load(navigationAction.request)
         webView.evaluateJavaScript("window.open = function(open) { return function (url, name, features) { window.location.href = url; return window; }; } (window.open);", completionHandler: nil)
         webView.evaluateJavaScript("window.close = function() { window.location.href = 'myapp://closewebview'; }", completionHandler: nil)
@@ -162,6 +164,17 @@ extension VuukleNewViewController:  WKNavigationDelegate, WKUIDelegate  {
         }))
     }
     
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, preferences: WKWebpagePreferences, decisionHandler: @escaping (WKNavigationActionPolicy, WKWebpagePreferences) -> Void) {
+        
+        print("URL in decisionHandler In Vuukle:\(navigationAction.request.url?.absoluteString ?? "")")
+        if let url = navigationAction.request.url {
+            if url.absoluteString == VUUKLE_SUPPORT_WITH_MAILTO {
+                self.sendEmail(subject: "", body: "")
+            }
+        }
+        decisionHandler(WKNavigationActionPolicy.allow, preferences)
+    }
+    
     public func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
         
         if navigationAction.navigationType == .other {
@@ -173,18 +186,18 @@ extension VuukleNewViewController:  WKNavigationDelegate, WKUIDelegate  {
                 }
             }
         }
-
+        
         decisionHandler(.allow)
         return
     }
     
     func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-            guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
-            let exceptions = SecTrustCopyExceptions(serverTrust)
-            SecTrustSetExceptions(serverTrust, exceptions)
-            completionHandler(.useCredential, URLCredential(trust: serverTrust))
-        }
-   
+        guard let serverTrust = challenge.protectionSpace.serverTrust else { return completionHandler(.useCredential, nil) }
+        let exceptions = SecTrustCopyExceptions(serverTrust)
+        SecTrustSetExceptions(serverTrust, exceptions)
+        completionHandler(.useCredential, URLCredential(trust: serverTrust))
+    }
+    
     private func webView(_ webView: WKWebView, shouldPreviewElement elementInfo: WKContextMenuElementInfo) -> Bool {
         return true
     }
@@ -195,5 +208,50 @@ extension VuukleNewViewController:  WKNavigationDelegate, WKUIDelegate  {
     }
 }
 
-
-
+// MARK: - SEND EMAIL Metods
+extension VuukleNewViewController: MFMailComposeViewControllerDelegate {
+    
+    func sendEmail(subject: String, body: String, email: String = VUUKLE_SUPPORT) {
+        let recipientEmail = email
+        // Show default mail composer
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([recipientEmail])
+            mail.setSubject(subject)
+            mail.setMessageBody(body, isHTML: false)
+            present(mail, animated: true)
+            
+        } else if let emailUrl = createEmailUrl(to: recipientEmail, subject: subject, body: body) {
+            let newMailto = (emailUrl.absoluteString).replacingOccurrences(of: "%20", with: "")
+            UIApplication.shared.open(URL(string: newMailto)!)
+        }
+    }
+    
+    private func createEmailUrl(to: String, subject: String, body: String) -> URL? {
+        let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        
+        let gmailUrl = URL(string: "googlegmail://co?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let outlookUrl = URL(string: "ms-outlook://compose?to=\(to)&subject=\(subjectEncoded)")
+        let yahooMail = URL(string: "ymail://mail/compose?to=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let sparkUrl = URL(string: "readdle-spark://compose?recipient=\(to)&subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        let defaultUrl = URL(string: "mailto:\(to)?subject=\(subjectEncoded)&body=\(bodyEncoded)")
+        
+        if let gmailUrl = gmailUrl, UIApplication.shared.canOpenURL(gmailUrl) {
+            return gmailUrl
+        } else if let outlookUrl = outlookUrl, UIApplication.shared.canOpenURL(outlookUrl) {
+            return outlookUrl
+        } else if let yahooMail = yahooMail, UIApplication.shared.canOpenURL(yahooMail) {
+            return yahooMail
+        } else if let sparkUrl = sparkUrl, UIApplication.shared.canOpenURL(sparkUrl) {
+            return sparkUrl
+        }
+        return defaultUrl
+    }
+    
+    // MARK: - MFMailComposeViewControllerDelegate
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+}
